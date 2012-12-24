@@ -11,8 +11,6 @@ import org.junit.Test;
 import utililies.sessionRemote.GestioneCollaborazioniRemote;
 import entityBeans.Utente;
 
-
-//non funziona :) va be domani ci guardo ancora.
 public class ColalborazioneTest {
 
 	private GestioneCollaborazioniRemote gestioneCollaborazioni;
@@ -22,7 +20,10 @@ public class ColalborazioneTest {
 		env.setProperty("java.naming.factory.initial","org.jnp.interfaces.NamingContextFactory");
 	 	env.setProperty("java.naming.provider.url", "localhost:1099");
 	 	env.setProperty("java.naming.factory.url.pkgs", "org.jboss.naming");
-	 	Object obj = (new InitialContext(env)).lookup("SWIMdbEar/GestioneCollaborazioni/remote-utililies.sessionRemote.GestioneCollaborazioniRemote");
+	 	
+	 	//non cancellarla, da tenere per quando sistemiamo i progetti e li mettiamo su google code
+//	 	Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneCollaborazioni/remote-utililies.sessionRemote.GestioneCollaborazioniRemote");
+	 	Object obj = (new InitialContext(env)).lookup("GestioneCollaborazioni/remote-utililies.sessionRemote.GestioneCollaborazioniRemote");
 	 	gestioneCollaborazioni = (GestioneCollaborazioniRemote) PortableRemoteObject.narrow(obj, GestioneCollaborazioniRemote.class);
 		
 	}
