@@ -1,46 +1,30 @@
 package utililies;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
-import exceptions.HashingException;
-
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
-
-
-///ATTENZIONE STA CLASSE SARA' RIMOSSA IN FUTURO. AVEVO TROVATO UN MODO PIU' FURBO PER FARLO IN UNA SOLA RIGA, CMQ
-//APPENA HO VOGLIA CERCO LA SOLUZIONE...QUESTA CMQ FUNZIONA PER ORA.
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
- * Classe usata per l'hashing di tipo SHA-256 di una password
+ * Classe che calcola l'hash di una password tramite algoritmo SHA-256 e permette anche di verificare l'uguaglianza
+ * tra una stringa "pura" e una hashata. L'hash generato e' esadecimale e non base64 perche' altrimenti sarebbe reversibile
  */
 public class PasswordHasher {
 
 	/**
-	 * Funzione di calcolo dell'hash con l'algoritmo SHA-256
+	 * Metodo per il calcolo dell'hash con l'algoritmo SHA-256
 	 * @param password e' la password di cui si vuole calcolare l'hash
-	 * @return la stringa contenente l'hash della password data in input 
-	 * @throws HashingException nel caso di problemi con il recupero dei metodi che implementano l'algoritmo SHA-256
+	 * @return una stringa contenente l'hash della password
 	 */
-	public static String hashPassword(String password) throws HashingException {
-		try {
-			byte[] passwordBytes=password.getBytes();
-			MessageDigest digest = MessageDigest.getInstance("SHA-256");
-			byte[] hashBytes = digest.digest(passwordBytes);
-			return Base64.encode(hashBytes);
-		} catch(NoSuchAlgorithmException e) {
-			throw new HashingException(e.getMessage());
-		}
+	public static String hashPassword(String password) {
+		System.out.println(DigestUtils.sha256Hex(password));
+		return DigestUtils.sha256Hex(password);
 	}
 
 	/**
-	 * Matodo per la verifica di corrispondenza tra due hash di due password
-	 * @param password e' la password di cui si vuole calcolare l'hash per il confronto
-	 * @param hashString e' l'hash della password conosciuta con cui confrontare 
-	 * @return true se i due hash coincidono quindi se le due password coincidono, false altrimenti
-	 * @throws HashingException nel caso ci siano problemi con la funzione di hash
+	 * Matodo per verificare se la password "pura" e quella hashata sono uguali
+	 * @param password e' la password di cui si vuole calcolare l'hash
+	 * @param hashPasswordDatabase e' l'hash della password conosciuta prelevata dal database
+	 * @return true se le password coindono, false altrimenti
 	 */
-	public static boolean verifyPassword(String password, String hashString) throws HashingException  {
-		return hashPassword(password).equals(hashString);
+	public static boolean verifyPassword(String password, String hashPasswordDatabase) {
+		return hashPassword(password).equals(hashPasswordDatabase);
 	}
 }

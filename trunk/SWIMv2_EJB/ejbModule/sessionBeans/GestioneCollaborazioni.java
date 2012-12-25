@@ -11,7 +11,6 @@ import javax.persistence.Query;
 import utililies.sessionRemote.GestioneCollaborazioniRemote;
 import entityBeans.Collaborazione;
 import entityBeans.Utente;
-import exceptions.UtenteNonTrovatoException;
 
 @Stateless
 public class GestioneCollaborazioni implements GestioneCollaborazioniRemote {
@@ -19,22 +18,41 @@ public class GestioneCollaborazioni implements GestioneCollaborazioniRemote {
 	@PersistenceContext(unitName = "SWIMdb")
 	private EntityManager entityManager;
 
-	public void richiediAiuto(String emailRichiedente, String emailRicevente, String nome, String descrizione) throws UtenteNonTrovatoException {
-		Utente utenteRichiedente = this.controllaEsistenzaEmailUtente(emailRichiedente);
-		Utente utenteRicevente = this.controllaEsistenzaEmailUtente(emailRicevente);
+	public Collaborazione getCollaborazione(int id, String emailRichiedente, String emailRicevente) {
+		Query query = entityManager.createNamedQuery("Collaborazione.getCollaborazioneByChiave");
+		query.setParameter("id", id);
+		query.setParameter("emailRichiedente", emailRichiedente);
+		query.setParameter("emailRicevente", emailRicevente);
+		return (Collaborazione)query.getSingleResult();
+	}
+	
+	public Collaborazione richiediAiuto(String emailRichiedente, String emailRicevente, String nome, String descrizione) {
+		Utente utenteRichiedente = this.getUtenteByEmail(emailRichiedente);
+		Utente utenteRicevente = this.getUtenteByEmail(emailRicevente);
 
+		System.out.println("sadasdas" + utenteRichiedente);
+
+		System.out.println("sadasdsafasfas" + utenteRicevente);
+
+		if(utenteRichiedente==null || utenteRicevente==null) {
+			return null;
+		}
+		
 		Collaborazione collaborazione = new Collaborazione();
 		collaborazione.setUtenteRichiedente(utenteRichiedente);
 		collaborazione.setUtenteRicevente(utenteRicevente);
 		collaborazione.setNome(nome);
 		collaborazione.setDescrizione(descrizione);
 
+		System.out.println(collaborazione);
+		
 		entityManager.persist(collaborazione);
 		entityManager.flush();
 		
+		return collaborazione;
 	}
 	
-	public boolean accettaCollaborazione(String id, String emailRichiedente, String emailRicevente) {
+	public void accettaCollaborazione(int id, String emailRichiedente, String emailRicevente) {
 		GregorianCalendar calendar = new GregorianCalendar();
 
 		Query query = entityManager.createNamedQuery("Collaborazione.accettaCollaborazione");
@@ -43,10 +61,24 @@ public class GestioneCollaborazioni implements GestioneCollaborazioniRemote {
 		query.setParameter("emailRichiedente", emailRichiedente);
 		query.setParameter("emailRicevente", emailRicevente);
 		
-		return (query.executeUpdate() > 0);
+//		Utente utenteRichiedente = this.getUtenteByEmail(emailRichiedente);
+//		Utente utenteRicevente = this.getUtenteByEmail(emailRicevente);
+//		
+//		CollaborazionePK collaborazionePK = new CollaborazionePK();
+//		collaborazionePK.setId(id);
+//		collaborazionePK.setUtenteRichiedente(utenteRichiedente);
+//		collaborazionePK.setUtenteRicevente(utenteRicevente);
+//		
+//		Collaborazione collaborazione = entityManager.find(Collaborazione.class, collaborazionePK);
+//		collaborazione.setDataStipula(calendar.getTime()); 
+//		
+//		entityManager.persist(collaborazione);
+//		entityManager.flush();
+		query.executeUpdate();
+//		return (query.executeUpdate() > 0);
 	}
 	
-	public boolean rilasciaFeedback(String id, String emailRichiedente, String emailRicevente, String punteggioFB, String commentoFB) {
+	public boolean rilasciaFeedback(int id, String emailRichiedente, String emailRicevente, String punteggioFB, String commentoFB) {
 		Query query = entityManager.createNamedQuery("Collaborazione.rilasciaFeedback");
 		query.setParameter("punteggioFeedback", punteggioFB);
 		query.setParameter("commentoFeedback", commentoFB);
@@ -57,13 +89,28 @@ public class GestioneCollaborazioni implements GestioneCollaborazioniRemote {
 		return (query.executeUpdate() > 0);
 	}
 	
-	public boolean rifiutaCollaborazione(String id, String emailRichiedente, String emailRicevente) {
+	public boolean rifiutaCollaborazione(int id, String emailRichiedente, String emailRicevente) {
+//		Utente utenteRichiedente = this.getUtenteByEmail(emailRichiedente);
+//		Utente utenteRicevente = this.getUtenteByEmail(emailRicevente);
+//		
+//		CollaborazionePK collaborazionePK = new CollaborazionePK();
+//		collaborazionePK.setId(id);
+//		collaborazionePK.setUtenteRichiedente(utenteRichiedente);
+//		collaborazionePK.setUtenteRicevente(utenteRicevente);
+//		
+//		Collaborazione collaborazione = entityManager.find(Collaborazione.class, collaborazionePK);
+//		collaborazione.setDataStipula(calendar.getTime()); 
+//		
+//		entityManager.remove(collaborazione);
+//		entityManager.flush();
+		
+		
 		Query query = entityManager.createNamedQuery("Collaborazione.rifiutaCollaborazione");
 		query.setParameter("id", id);
 		query.setParameter("emailRichiedente", emailRichiedente);
 		query.setParameter("emailRicevente", emailRicevente);
 
-		return (query.executeUpdate() > 0); //si usare executeUpdate anche per fare la DELETE
+		return (query.executeUpdate() > 0); //si puo' usare executeUpdate anche per fare la DELETE
 	}
 
 	public void getPunteggioFeedback() {
@@ -95,34 +142,13 @@ public class GestioneCollaborazioni implements GestioneCollaborazioniRemote {
 		return (List<Collaborazione>)query.getResultList();
 	}
 	
-	
 	/**
-	 * Metodo di verifica dell'esistenza dello studente
-	 * @param codStudente e' il codice persona dello studente di cui si vuole verificare l'esistenza
-	 * @return l'oggetto contenente lo studente
-	 * @throws StudenteInesistenteException nel caso in cui lo studente con codice studente specificato non esista
-	 * @author Ricky
+	 * Metodo per l'estrazione dell'utente dal database data la sua email
+	 * @param email e' l'email dell'amministratore
+	 * @return <b>l'utente</b> corrispondente all'email, se esiste, <b>null</b> altrimenti
 	 */
-	private Utente controllaEsistenzaEmailUtente(String email) throws UtenteNonTrovatoException {
-		Utente utente = this.getUtenteByEmail(email);
-		if (utente == null) {
-			throw new UtenteNonTrovatoException("Impossibile trovare l'utente con email: " + email);
-		}
-		return utente;
-	}
-
-
-	@SuppressWarnings("unchecked")
+	@Override
 	public Utente getUtenteByEmail(String email) {
-		Query query = entityManager.createNamedQuery("Utente.getUtenteByEmail");
-		query.setParameter("emailUtente", email);
-
-		List<Object> risultatoQuery = (List<Object>)query.getResultList();
-
-		if(risultatoQuery.isEmpty()) {
-			return null;
-		} else {
-			return (Utente)risultatoQuery.get(0);
-		}
+		return entityManager.find(Utente.class, email);
 	}
 }

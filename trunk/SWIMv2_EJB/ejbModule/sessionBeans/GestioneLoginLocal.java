@@ -4,7 +4,6 @@ import javax.ejb.Local;
 
 import entityBeans.Amministratore;
 import entityBeans.Utente;
-import exceptions.HashingException;
 
 @Local
 public interface GestioneLoginLocal {
@@ -18,8 +17,7 @@ public interface GestioneLoginLocal {
 	 *            e' la password inserita durante il login
 	 * @return true se un amministratore ha effettuato il login, false altrimenti
 	 */
-	public boolean eseguiLoginAmministratore(String email,
-			String passwordInserita) throws HashingException;
+	public boolean eseguiLoginAmministratore(String email,String passwordInserita);
 
 	/**
 	 * Metodo che controlla se il login e' stato effettuato da parte di un utente
@@ -30,8 +28,7 @@ public interface GestioneLoginLocal {
 	 *            e' la password inserita durante il login
 	 * @return true se un utente ha effettuato il login, false altrimenti
 	 */
-	public boolean esegueLoginUtente(String email, String passwordInserita)
-			throws HashingException;
+	public boolean esegueLoginUtente(String email, String passwordInserita);
 
 	/**
 	 * Metodo per l'estrazione dell'amministratore dal database data la sua email

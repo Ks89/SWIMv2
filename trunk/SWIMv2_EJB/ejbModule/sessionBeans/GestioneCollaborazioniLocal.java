@@ -6,33 +6,31 @@ import javax.ejb.Local;
 
 import entityBeans.Collaborazione;
 import entityBeans.Utente;
-import exceptions.UtenteNonTrovatoException;
 
 @Local
 public interface GestioneCollaborazioniLocal {
 
-	public void richiediAiuto(String emailRichiedente, String emailRicevente,
-			String nome, String descrizione) throws UtenteNonTrovatoException;
+	public Collaborazione getCollaborazione(int id, String emailRichiedente, String emailRicevente);
 
-	public boolean accettaCollaborazione(String id, String emailRichiedente,
+	public Collaborazione richiediAiuto(String emailRichiedente, String emailRicevente,
+			String nome, String descrizione);
+
+	public void accettaCollaborazione(int id, String emailRichiedente,
 			String emailRicevente);
 
-	public boolean rilasciaFeedback(String id, String emailRichiedente,
+	public boolean rilasciaFeedback(int id, String emailRichiedente,
 			String emailRicevente, String punteggioFB, String commentoFB);
 
-	public boolean rifiutaCollaborazione(String id, String emailRichiedente,
+	public boolean rifiutaCollaborazione(int id, String emailRichiedente,
 			String emailRicevente);
 
 	public void getPunteggioFeedback();
 
-	@SuppressWarnings("unchecked")
 	public List<Collaborazione> getCollaborazioniFeedbackNonRilasciato(
 			String emailRichiedente);
 
-	@SuppressWarnings("unchecked")
 	public List<Collaborazione> getCollaborazioniCreate(String emailRichiedente);
 
-	@SuppressWarnings("unchecked")
 	public List<Collaborazione> getCollaborazioniAccettate(String emailRicevente);
 
 	/**
@@ -40,7 +38,6 @@ public interface GestioneCollaborazioniLocal {
 	 * @param email e' l'email dell'amministratore
 	 * @return <b>l'amministratore</b> corrispondente all'email, se esiste, <b>null</b> altrimenti
 	 */
-	@SuppressWarnings("unchecked")
 	public Utente getUtenteByEmail(String email);
 
 }

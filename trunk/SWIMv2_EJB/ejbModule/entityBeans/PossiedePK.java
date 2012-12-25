@@ -2,6 +2,7 @@ package entityBeans;
 
 import java.io.Serializable;
 
+import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -10,6 +11,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(of={"utente","abilita"})
+@Embeddable
 public class PossiedePK  implements Serializable {
 
 	private static final long serialVersionUID = 6055787595255942281L;
