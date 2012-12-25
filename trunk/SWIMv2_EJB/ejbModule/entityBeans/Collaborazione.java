@@ -12,48 +12,37 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @NamedQueries({
-	@NamedQuery(name = "Collaborazione.getCollaborazioneByChiave", 
-			query = "SELECT c " +
-					"FROM Collaborazione c " +
-					"WHERE c.id = :id AND c.utenteRichiedente.email = :emailRichiedente AND " +
-					"c.utenteRicevente.email = :emailRicevente "),
 	@NamedQuery(name = "Collaborazione.getCollaborazioniCreateByEmail", 
 			query = "SELECT c " +
 					"FROM Collaborazione c " +
 					"WHERE c.utenteRichiedente.email = :emailRichiedente"),
+					
 	@NamedQuery(name = "Collaborazione.getCollaborazioniAccettateByEmail", 
 			query = "SELECT c " +
 					"FROM Collaborazione c " +
-					"WHERE c.utenteRicevente.email = :emailRicevente"),
-	@NamedQuery(name = "Collaborazione.getCollaborazioniFeedbackNonRilasciatoByEmail", 
+					"WHERE c.utenteRicevente.email = :emailRicevente AND c.dataStipula IS NOT NULL"),
+					
+	@NamedQuery(name = "Collaborazione.getCollaborazioniCreateFeedbackNonRilasciatoByEmail", 
 			query = "SELECT c " +
 					"FROM Collaborazione c " +
-					"WHERE c.utenteRichiedente.email = :emailRichiedente AND c.dataTermine IS NOT NULL AND c.punteggioFeedback IS NOT NULL"),
-	@NamedQuery(name = "Collaborazione.getPunteggioFeedback", 
+					"WHERE c.utenteRichiedente.email = :emailRichiedente AND c.dataTermine IS NOT NULL AND c.punteggioFeedback IS NULL"),
+					
+	@NamedQuery(name = "Collaborazione.getPunteggioFeedbackByEmail", 
 			query = "SELECT avg(c.punteggioFeedback) " +
 					"FROM Collaborazione c " +
-					"WHERE c.utenteRicevente.email = :emailRicevente"),
-	
-	@NamedQuery(name = "Collaborazione.accettaCollaborazione", 
-			query = "UPDATE Collaborazione c " +
-					"SET c.dataStipula = :dataStipula " +
-					"WHERE c.id = :id AND c.utenteRichiedente.email = :emailRichiedente AND " +
-					"c.utenteRicevente.email = :emailRicevente "),
-					
-	@NamedQuery(name = "Collaborazione.rifiutaCollaborazione", 
-			query = "DELETE FROM Collaborazione c " +
-					"WHERE c.id = :id AND c.utenteRichiedente.email = :emailRichiedente AND " +
-					"c.utenteRicevente.email = :emailRicevente ")
+					"WHERE c.utenteRicevente.email = :emailRicevente AND c.punteggioFeedback IS NOT NULL"),
 })
 
 @Data
 @EqualsAndHashCode(of={"id","utenteRicevente","utenteRichiedente"})
 @Entity
+@Table(name = "Collaborazione")
 public class Collaborazione implements Serializable {
 
 	private static final long serialVersionUID = 7778335853396334887L;
@@ -61,7 +50,7 @@ public class Collaborazione implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Id")
-	private Integer id;
+	private Long id;
 	
 	@ManyToOne
 	@JoinColumn(name = "EmailRicevente",referencedColumnName = "Email", nullable = false)
@@ -90,7 +79,7 @@ public class Collaborazione implements Serializable {
 	@Column(name = "PunteggioFeedback", nullable = true)
 //	@Min(value=1, message="Il punteggio deve essere superiore a 0")
 //	@Max(value=5, message="Il punteggio deve essere inferiore a 6")
-	private int punteggioFeedback;
+	private Integer punteggioFeedback;
 
 	@Column(name = "CommentoFeedback", nullable = true, length=250)
 	private String commentoFeedback;

@@ -39,13 +39,13 @@ public class LoginTest {
 		String passwordHashata = PasswordHasher.hashPassword("pippo");
 
 		//il metodo hasha la password e se trova quella hashata uguale nel db da true
-		Assert.assertTrue(gestioneLogin.eseguiLoginAmministratore("asas@aaa.it", "pippo"));
+		Assert.assertTrue(gestioneLogin.esegueLoginUtente("peppino@gmail.com", "pippo"));
 		
 		//ovviamente se rihashi una password non e' quella originale
-		Assert.assertFalse(gestioneLogin.esegueLoginUtente("asas@aaa.it", passwordHashata));
+		Assert.assertFalse(gestioneLogin.esegueLoginUtente("peppino@gmail.com", passwordHashata));
 		
 		//questo utente non e' presente e allora dice false
-		Assert.assertFalse(gestioneLogin.esegueLoginUtente("peppino@gmail.com", "blabla")); 
+		Assert.assertFalse(gestioneLogin.esegueLoginUtente("pippo@gmail.com", "blabla")); 
 	}
 	
 	@Test
@@ -57,12 +57,12 @@ public class LoginTest {
 		String passwordHashata = PasswordHasher.hashPassword("pippo");
 
 		//il metodo hasha la password e se trova quella hashata uguale nel db da true
-		Assert.assertTrue(gestioneLogin.eseguiLoginAmministratore("asas@aaa.it", "pippo"));
+		Assert.assertTrue(gestioneLogin.eseguiLoginAmministratore("peppino@gmail.com", "pippo"));
 		
 		//ovviamente se rihashi una password non e' quella originale
-		Assert.assertFalse(gestioneLogin.esegueLoginUtente("asas@aaa.it", passwordHashata));
+		Assert.assertFalse(gestioneLogin.esegueLoginUtente("peppino@gmail.com", passwordHashata));
 		
 		//questo utente non e' presente e allora dice false
-		Assert.assertFalse(gestioneLogin.esegueLoginUtente("peppino@gmail.com", "blabla")); 
+		Assert.assertFalse(gestioneLogin.esegueLoginUtente("pippo@gmail.com", "blabla")); 
 	}
 }

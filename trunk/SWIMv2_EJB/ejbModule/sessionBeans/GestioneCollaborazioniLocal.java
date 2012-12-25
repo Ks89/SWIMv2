@@ -10,23 +10,22 @@ import entityBeans.Utente;
 @Local
 public interface GestioneCollaborazioniLocal {
 
-	public Collaborazione getCollaborazione(int id, String emailRichiedente, String emailRicevente);
+	public Collaborazione getCollaborazione(Long id);
 
 	public Collaborazione richiediAiuto(String emailRichiedente, String emailRicevente,
 			String nome, String descrizione);
 
-	public void accettaCollaborazione(int id, String emailRichiedente,
-			String emailRicevente);
+	public void accettaCollaborazione(Long id);
+	
+	public void rifiutaCollaborazione(Long id);
+	
+	public void terminaCollaborazione(Long id);
 
-	public boolean rilasciaFeedback(int id, String emailRichiedente,
-			String emailRicevente, String punteggioFB, String commentoFB);
+	public void rilasciaFeedback(Long id, Integer punteggioFB, String commentoFB);
 
-	public boolean rifiutaCollaborazione(int id, String emailRichiedente,
-			String emailRicevente);
+	public Double getPunteggioFeedback(String emailRicevente);
 
-	public void getPunteggioFeedback();
-
-	public List<Collaborazione> getCollaborazioniFeedbackNonRilasciato(
+	public List<Collaborazione> getCollaborazioniCreateFeedbackNonRilasciato(
 			String emailRichiedente);
 
 	public List<Collaborazione> getCollaborazioniCreate(String emailRichiedente);
