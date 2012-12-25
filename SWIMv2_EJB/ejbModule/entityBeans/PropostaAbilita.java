@@ -11,6 +11,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(of={"id","utente"})
 @Entity
+@Table(name = "PropostaAbilita")
 public class PropostaAbilita implements Serializable {
 
 	private static final long serialVersionUID = -5483399693458810268L;
