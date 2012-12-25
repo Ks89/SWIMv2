@@ -7,11 +7,6 @@ import javax.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@NamedQueries({
-	@NamedQuery(name = "Amministratore.getAmministratoreByEmail", 
-			query = "SELECT a FROM Amministratore a WHERE a.email= :emailAdmin") 
-	})
-
 @Data
 @EqualsAndHashCode(of={"email"})
 @Entity
