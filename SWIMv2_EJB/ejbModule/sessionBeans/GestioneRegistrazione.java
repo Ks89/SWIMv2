@@ -34,7 +34,7 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 		Possiede possiede= new Possiede();
 		PossiedePK possiedepk= new PossiedePK();
 		//Mettere cognome e nome con l'iniziale maiuscola
-		if(emailCorretta(email) && emailNonAncoraUtilizzata(email) && nome!="" && cognome!="" && password!="" && abilita.size()>=1)//cognome e nome non nulli e abilita.size è un controllo che facciamo qua, o direttamente con javascript?
+		if(emailCorretta(email) && emailNonAncoraUtilizzata(email) && !nome.equals("") && !cognome.equals("") && !password.equals("") && abilita.size()>=1)//cognome e nome non nulli e abilita.size è un controllo che facciamo qua, o direttamente con javascript?
 		{
 				utente.setEmail(email);
 				utente.setNome(nome);
@@ -81,6 +81,13 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 		entityManager.persist(admin);
 		entityManager.flush();
 		return true;
+	}
+	
+	/**
+	 * Utile per il test, torna una abilita in base al nome passato come parametro
+	 */
+	public Abilita getAbilitaByNome(String nome){
+		return entityManager.find(Abilita.class, nome);
 	}
 	
 	/**

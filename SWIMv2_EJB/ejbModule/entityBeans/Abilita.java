@@ -5,13 +5,16 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
+@NamedQueries({
+	@NamedQuery(name = "Abilita.getInsiemeAbilitaGenerali", query = "SELECT a FROM Abilita a"), })
 @Data
 @EqualsAndHashCode(of={"nome"})
 @AllArgsConstructor

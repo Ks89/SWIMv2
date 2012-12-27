@@ -12,6 +12,8 @@ import org.hibernate.Criteria;
 
 import entityBeans.Abilita;
 import entityBeans.Collaborazione;
+import entityBeans.Possiede;
+import entityBeans.PossiedePK;
 import entityBeans.Utente;
 
 import sessionBeans.localInterfaces.GestioneRicercheLocal;
@@ -47,5 +49,19 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 		query.setParameter("cognomeUtente", cognome);
 		List<Utente> risultatoRicerca = (List<Utente>)query.getResultList();
 		return risultatoRicerca;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Abilita> insiemeAbilitaGenerali(){
+		Query query = entityManager.createNamedQuery("Abilita.getInsiemeAbilitaGenerali");
+		List<Abilita> insiemeAbilita = (List<Abilita>)query.getResultList();
+		return insiemeAbilita;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Abilita> insiemeAbilitaSpecificoUtente(String emailUtente){
+		Query query = entityManager.createNamedQuery("PossiedePK.getAbilitaByUtente");
+		List<Abilita> insiemeAbilitaUtente = (List<Abilita>)query.getResultList();
+		return insiemeAbilitaUtente;
 	}
 }
