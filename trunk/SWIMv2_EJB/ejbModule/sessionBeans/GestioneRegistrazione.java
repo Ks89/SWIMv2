@@ -10,7 +10,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import sessionBeans.localInterfaces.GestioneRegistrazioneLocal;
 import utililies.PasswordHasher;
+import utililies.sessionRemote.GestioneRegistrazioneRemote;
 
 import entityBeans.Abilita;
 import entityBeans.Possiede;
@@ -18,7 +20,7 @@ import entityBeans.PossiedePK;
 import entityBeans.Utente;
 
 @Stateless
-public class GestioneRegistrazione implements GestioneRegistrazioneLocal {
+public class GestioneRegistrazione implements GestioneRegistrazioneLocal, GestioneRegistrazioneRemote {
 
 	@PersistenceContext(unitName = "SWIMdb")
 	private EntityManager entityManager;
@@ -35,6 +37,8 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal {
 				utente.setPassword(PasswordHasher.hashPassword(password));
 				utente.setFotoProfilo(fotoProfilo);
 				entityManager.persist(utente);
+				entityManager.flush();
+				
 				for (Abilita a : abilita) {
 					possiedepk.setAbilita(a);
 					possiedepk.setUtente(utente);

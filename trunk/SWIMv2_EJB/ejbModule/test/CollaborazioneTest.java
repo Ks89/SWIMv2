@@ -9,6 +9,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.rmi.PortableRemoteObject;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import utililies.sessionRemote.GestioneCollaborazioniRemote;
@@ -16,19 +17,32 @@ import entityBeans.Collaborazione;
 
 public class CollaborazioneTest {
 
-	private GestioneCollaborazioniRemote gestioneCollaborazioni;
+	private static GestioneCollaborazioniRemote gestioneCollaborazioni;
 
-	public CollaborazioneTest() throws NamingException {
+	private static final String MAIL_PEPPINO = "peppino@gmail.com";
+	private static final String MAIL_GIOVANNINO = "giovannino@gmail.com";
+	private static final String MAIL_DAVIDE = "davide@gmail.com";
+
+	@BeforeClass
+	public static void setUpTestCollaborazione(){
 		Properties env = new Properties();
 		env.setProperty("java.naming.factory.initial","org.jnp.interfaces.NamingContextFactory");
 		env.setProperty("java.naming.provider.url", "localhost:1099");
 		env.setProperty("java.naming.factory.url.pkgs", "org.jboss.naming");
-
-		//non cancellarla, da tenere per quando sistemiamo i progetti e li mettiamo su google code
-		//	 	Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneCollaborazioni/remote-utililies.sessionRemote.GestioneCollaborazioniRemote");
-		Object obj = (new InitialContext(env)).lookup("GestioneCollaborazioni/remote-utililies.sessionRemote.GestioneCollaborazioniRemote");
-		gestioneCollaborazioni = (GestioneCollaborazioniRemote) PortableRemoteObject.narrow(obj, GestioneCollaborazioniRemote.class);
-
+		try {
+			Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneCollaborazioni/remote-utililies.sessionRemote.GestioneCollaborazioniRemote");
+			gestioneCollaborazioni = (GestioneCollaborazioniRemote) PortableRemoteObject.narrow(obj, GestioneCollaborazioniRemote.class);
+		} catch (NamingException e) {
+			System.out.println(e.toString());
+			return;
+		}
+		
+//		//prima svuoto il database
+//		TestUtils.svuotaDatabase();
+//		//inserisco alcuni utenti
+//		TestUtils.inserisciUtenti();
+//		//inserisco alcune collaborazioni
+//		TestUtils.inserisciCollaborazioni();
 	}
 
 	/**
@@ -36,8 +50,8 @@ public class CollaborazioneTest {
 	 */
 	@Test
 	public void testRichiediAiuto() {
-		Collaborazione collaborazioneAppenaInserita1 = gestioneCollaborazioni.richiediAiuto("peppino@gmail.com", "davide@gmail.com", "colNuova1", "collaborzione inserita in attesa di risposta1");
-		Collaborazione collaborazioneAppenaInserita2 = gestioneCollaborazioni.richiediAiuto("giovannino@gmail.com", "peppino@gmail.com", "colNuova2", "collaborzione inserita in attesa di risposta2");
+		Collaborazione collaborazioneAppenaInserita1 = gestioneCollaborazioni.richiediAiuto(MAIL_PEPPINO, MAIL_DAVIDE, "d44 sfsdfsd", "fdgdsgsdgsdd");
+		Collaborazione collaborazioneAppenaInserita2 = gestioneCollaborazioni.richiediAiuto(MAIL_GIOVANNINO, MAIL_PEPPINO, "colNuova2", "collaborzione inserita in attesa di risposta2");
 
 		Collaborazione collaborazioneDaDb1 = gestioneCollaborazioni.getCollaborazione(collaborazioneAppenaInserita1.getId());
 
@@ -50,7 +64,7 @@ public class CollaborazioneTest {
 	@Test
 	public void testAccettaCollaborazione() {
 		//inserisco una collaborazione
-		Collaborazione collaborazioneAppenaInserita1 = gestioneCollaborazioni.richiediAiuto("peppino@gmail.com", "davide@gmail.com", "dsfsdfsd", "fdgdsgsdgsdd");
+		Collaborazione collaborazioneAppenaInserita1 = gestioneCollaborazioni.richiediAiuto(MAIL_PEPPINO, MAIL_DAVIDE, "dsfsdfsd", "fdgdsgsdgsdd");
 
 		//rileggo inserimento
 		Collaborazione collaborazioneDaDb1 = gestioneCollaborazioni.getCollaborazione(collaborazioneAppenaInserita1.getId());
@@ -67,7 +81,7 @@ public class CollaborazioneTest {
 	@Test
 	public void testRilasciaFeedback() {
 		//inserisco una collaborazione
-		Collaborazione collaborazioneAppenaInserita1 = gestioneCollaborazioni.richiediAiuto("peppino@gmail.com", "davide@gmail.com", "dsfsdfsd", "fdgdsgsdgsdd");
+		Collaborazione collaborazioneAppenaInserita1 = gestioneCollaborazioni.richiediAiuto(MAIL_PEPPINO, MAIL_DAVIDE, "dsfsdfsd", "fdgdsgsdgsdd");
 
 		//rileggo inserimento
 		Collaborazione collaborazioneDaDb1 = gestioneCollaborazioni.getCollaborazione(collaborazioneAppenaInserita1.getId());
@@ -84,7 +98,7 @@ public class CollaborazioneTest {
 	@Test
 	public void testRifiutaCollaborazione() {
 		//inserisco una collaborazione
-		Collaborazione collaborazioneAppenaInserita1 = gestioneCollaborazioni.richiediAiuto("peppino@gmail.com", "davide@gmail.com", "dsfsdfsd", "fdgdsgsdgsdd");
+		Collaborazione collaborazioneAppenaInserita1 = gestioneCollaborazioni.richiediAiuto(MAIL_PEPPINO, MAIL_DAVIDE, "dsfsdfsd", "fdgdsgsdgsdd");
 
 		//rileggo inserimento
 		Collaborazione collaborazioneDaDb1 = gestioneCollaborazioni.getCollaborazione(collaborazioneAppenaInserita1.getId());
@@ -100,11 +114,11 @@ public class CollaborazioneTest {
 	@Test
 	public void testGetPunteggioFeedback() {
 		//inserisco delle collaborazioni di cui 4 accettate (ricevute) da peppino
-		Collaborazione collaborazione1 = gestioneCollaborazioni.richiediAiuto("davide@gmail.com","peppino@gmail.com", "vdbvsd", "ewgwe");
-		Collaborazione collaborazione2 = gestioneCollaborazioni.richiediAiuto("davide@gmail.com","giovannino@gmail.com", "bdb", "fgweg");
-		Collaborazione collaborazione3 = gestioneCollaborazioni.richiediAiuto("giovannino@gmail.com", "peppino@gmail.com", "rbrw", "ehweh");
-		gestioneCollaborazioni.richiediAiuto("giovannino@gmail.com", "davide@gmail.com", "vegq", "bsdg");
-		Collaborazione collaborazione5 = gestioneCollaborazioni.richiediAiuto("davide@gmail.com","peppino@gmail.com", "dsfsdfsd", "ewgwe");
+		Collaborazione collaborazione1 = gestioneCollaborazioni.richiediAiuto(MAIL_DAVIDE,MAIL_PEPPINO, "vdbvsd", "ewgwe");
+		Collaborazione collaborazione2 = gestioneCollaborazioni.richiediAiuto(MAIL_DAVIDE,MAIL_GIOVANNINO, "bdb", "fgweg");
+		Collaborazione collaborazione3 = gestioneCollaborazioni.richiediAiuto(MAIL_GIOVANNINO, MAIL_PEPPINO, "rbrw", "ehweh");
+		gestioneCollaborazioni.richiediAiuto(MAIL_GIOVANNINO, MAIL_DAVIDE, "vegq", "bsdg");
+		Collaborazione collaborazione5 = gestioneCollaborazioni.richiediAiuto(MAIL_DAVIDE,MAIL_PEPPINO, "dsfsdfsd", "ewgwe");
 
 		//vengono stipulate dagli utenti riceventi tutte le collaborazioni eccetto la 4 (per fare un esempio generico)
 		gestioneCollaborazioni.accettaCollaborazione(collaborazione1.getId());
@@ -124,21 +138,21 @@ public class CollaborazioneTest {
 		gestioneCollaborazioni.rilasciaFeedback(collaborazione3.getId(), 1, "gvrsgvs"); //e' quella che uso per fare la media del punteggioFB
 		gestioneCollaborazioni.rilasciaFeedback(collaborazione5.getId(), 4, "regh"); //e' quella che uso per fare la media del punteggioFB
 
-		Double punteggio = gestioneCollaborazioni.getPunteggioFeedback("peppino@gmail.com"); //usare il Double perche' avg nella query da un Double
+		Double punteggio = gestioneCollaborazioni.getPunteggioFeedback(MAIL_PEPPINO); //usare il Double perche' avg nella query da un Double
 
 		System.out.println("Punteggio feedback test= " + punteggio);
-		//quindi il punteggio dell'utente peppino@gmail.com dovrebbe risultare 3+1+4/3 = 2.6667
+		//quindi il punteggio dell'utente MAIL_PEPPINO dovrebbe risultare 3+1+4/3 = 2.6667
 		assertTrue(punteggio==2.6667);
 	}
 
 	@Test
 	public void testGetCollaborazioniFeedbackNonRilasciato() {
 		//inserisco delle collaborazioni
-		Collaborazione collaborazioneAppenaInserita1 = gestioneCollaborazioni.richiediAiuto("peppino@gmail.com", "davide@gmail.com", "vdbvsd", "ewgwe");
-		gestioneCollaborazioni.richiediAiuto("peppino@gmail.com", "davide@gmail.com", "bdb", "fgweg");
-		Collaborazione collaborazioneAppenaInserita3 = gestioneCollaborazioni.richiediAiuto("giovannino@gmail.com", "peppino@gmail.com", "rbrw", "ehweh");
-		gestioneCollaborazioni.richiediAiuto("giovannino@gmail.com", "davide@gmail.com", "vegq", "bsdg");
-		Collaborazione collaborazioneAppenaInserita5 = gestioneCollaborazioni.richiediAiuto("peppino@gmail.com", "davide@gmail.com", "dsfsdfsd", "ewgwe");
+		Collaborazione collaborazioneAppenaInserita1 = gestioneCollaborazioni.richiediAiuto(MAIL_PEPPINO, MAIL_DAVIDE, "vdbvsd", "ewgwe");
+		gestioneCollaborazioni.richiediAiuto(MAIL_PEPPINO, MAIL_DAVIDE, "bdb", "fgweg");
+		Collaborazione collaborazioneAppenaInserita3 = gestioneCollaborazioni.richiediAiuto(MAIL_GIOVANNINO, MAIL_PEPPINO, "rbrw", "ehweh");
+		gestioneCollaborazioni.richiediAiuto(MAIL_GIOVANNINO, MAIL_DAVIDE, "vegq", "bsdg");
+		Collaborazione collaborazioneAppenaInserita5 = gestioneCollaborazioni.richiediAiuto(MAIL_PEPPINO, MAIL_DAVIDE, "dsfsdfsd", "ewgwe");
 
 		//stipulo 3 collaborazioni
 		gestioneCollaborazioni.accettaCollaborazione(collaborazioneAppenaInserita1.getId());
@@ -150,8 +164,8 @@ public class CollaborazioneTest {
 		gestioneCollaborazioni.terminaCollaborazione(collaborazioneAppenaInserita3.getId());
 		gestioneCollaborazioni.terminaCollaborazione(collaborazioneAppenaInserita5.getId());
 
-		//ora ottengo le collaborazioni create da peppino@gmail.com di  per cui non e' ancora stato rilasciato il feedback
-		List<Collaborazione> collaborazioni = gestioneCollaborazioni.getCollaborazioniCreateFeedbackNonRilasciato("peppino@gmail.com");
+		//ora ottengo le collaborazioni create da MAIL_PEPPINO di  per cui non e' ancora stato rilasciato il feedback
+		List<Collaborazione> collaborazioni = gestioneCollaborazioni.getCollaborazioniCreateFeedbackNonRilasciato(MAIL_PEPPINO);
 
 		assertTrue(collaborazioni.size()>=2);
 	}
@@ -159,35 +173,35 @@ public class CollaborazioneTest {
 	@Test
 	public void testGetCollaborazioniCreate() {
 		//inserisco delle collaborazioni
-		gestioneCollaborazioni.richiediAiuto("peppino@gmail.com", "davide@gmail.com", "vdbvsd", "ewgwe");
-		gestioneCollaborazioni.richiediAiuto("peppino@gmail.com", "davide@gmail.com", "bdb", "fgweg");
-		gestioneCollaborazioni.richiediAiuto("giovannino@gmail.com", "peppino@gmail.com", "rbrw", "ehweh");
-		gestioneCollaborazioni.richiediAiuto("giovannino@gmail.com", "davide@gmail.com", "vegq", "bsdg");
-		gestioneCollaborazioni.richiediAiuto("peppino@gmail.com", "davide@gmail.com", "dsfsdfsd", "ewgwe");
+		gestioneCollaborazioni.richiediAiuto(MAIL_PEPPINO, MAIL_DAVIDE, "vdbvsd", "ewgwe");
+		gestioneCollaborazioni.richiediAiuto(MAIL_PEPPINO, MAIL_DAVIDE, "bdb", "fgweg");
+		gestioneCollaborazioni.richiediAiuto(MAIL_GIOVANNINO, MAIL_PEPPINO, "rbrw", "ehweh");
+		gestioneCollaborazioni.richiediAiuto(MAIL_GIOVANNINO, MAIL_DAVIDE, "vegq", "bsdg");
+		gestioneCollaborazioni.richiediAiuto(MAIL_PEPPINO, MAIL_DAVIDE, "dsfsdfsd", "ewgwe");
 
-		//ora ottengo le collaborazioni create da peppino@gmail.com indipendentemente se terminate, stipulate, in corso ecc...
-		List<Collaborazione> collaborazioni = gestioneCollaborazioni.getCollaborazioniCreate("peppino@gmail.com");
+		//ora ottengo le collaborazioni create da MAIL_PEPPINO indipendentemente se terminate, stipulate, in corso ecc...
+		List<Collaborazione> collaborazioni = gestioneCollaborazioni.getCollaborazioniCreate(MAIL_PEPPINO);
 		assertTrue(collaborazioni.size()>=2);
 	}
 
 	@Test
 	public void testGetCollaborazioniAccettate() {
 		//inserisco delle collaborazioni
-		Collaborazione collaborazioneAppenaInserita1 = gestioneCollaborazioni.richiediAiuto("peppino@gmail.com", "davide@gmail.com", "vdbvsd", "ewgwe");
-		gestioneCollaborazioni.richiediAiuto("peppino@gmail.com", "davide@gmail.com", "bdb", "fgweg");
-		Collaborazione collaborazioneAppenaInserita3 = gestioneCollaborazioni.richiediAiuto("giovannino@gmail.com", "peppino@gmail.com", "rbrw", "ehweh");
-		gestioneCollaborazioni.richiediAiuto("giovannino@gmail.com", "davide@gmail.com", "vegq", "bsdg");
-		gestioneCollaborazioni.richiediAiuto("davide@gmail.com", "peppino@gmail.com", "dsfsdfsd", "ewgwe");
+		Collaborazione collaborazioneAppenaInserita1 = gestioneCollaborazioni.richiediAiuto(MAIL_PEPPINO, MAIL_DAVIDE, "vdbvsd", "ewgwe");
+		gestioneCollaborazioni.richiediAiuto(MAIL_PEPPINO, MAIL_DAVIDE, "bdb", "fgweg");
+		Collaborazione collaborazioneAppenaInserita3 = gestioneCollaborazioni.richiediAiuto(MAIL_GIOVANNINO, MAIL_PEPPINO, "rbrw", "ehweh");
+		gestioneCollaborazioni.richiediAiuto(MAIL_GIOVANNINO, MAIL_DAVIDE, "vegq", "bsdg");
+		gestioneCollaborazioni.richiediAiuto(MAIL_DAVIDE, MAIL_PEPPINO, "dsfsdfsd", "ewgwe");
 
-		//poiche' 2 di esse sono ricevute da peppino@gmail.com, il risulato del metodo dovrebbe avere 2 collaborazioni che escono dalla query
+		//poiche' 2 di esse sono ricevute da MAIL_PEPPINO, il risulato del metodo dovrebbe avere 2 collaborazioni che escono dalla query
 
-		//stipulo 2 collaborazioni uno accettata da peppino@gmail.com e una da davide@gmail.com, quindi il risultato viene ridotto a una sola tupla
+		//stipulo 2 collaborazioni uno accettata da MAIL_PEPPINO e una da MAIL_DAVIDE, quindi il risultato viene ridotto a una sola tupla
 		gestioneCollaborazioni.accettaCollaborazione(collaborazioneAppenaInserita1.getId());
 		gestioneCollaborazioni.accettaCollaborazione(collaborazioneAppenaInserita3.getId());
 
-		//ora voglio ottenere le collaborazioni STIPULATE in cui l'utente ricevente e' peppino@gmail.com, cioe' quelle che lui ha accettato di fare
+		//ora voglio ottenere le collaborazioni STIPULATE in cui l'utente ricevente e' MAIL_PEPPINO, cioe' quelle che lui ha accettato di fare
 		//e visto che di quelle che ha stipulato ne ha accettata una sola avra' un solo elemento, cioe' la collaborazione di nome "rbrw".
-		List<Collaborazione> collaborazioni = gestioneCollaborazioni.getCollaborazioniAccettate("peppino@gmail.com");
+		List<Collaborazione> collaborazioni = gestioneCollaborazioni.getCollaborazioniAccettate(MAIL_PEPPINO);
 
 		System.out.println("Lista collaborazioni accettate (quindi stipulate) dal ricevente dataStipula");
 		for(Collaborazione collaborazione : collaborazioni) {

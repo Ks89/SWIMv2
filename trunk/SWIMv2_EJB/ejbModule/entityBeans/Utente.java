@@ -8,13 +8,17 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import org.hibernate.validator.Pattern;
 
 @Data
 @EqualsAndHashCode(of={"email"})
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Utente")
 public class Utente implements Serializable  {

@@ -5,11 +5,27 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+@NamedQueries({
+	@NamedQuery(name = "PropostaAbilita.getTutteProposteAbilitaNonConfermate", 
+			query = "SELECT p " +
+					"FROM PropostaAbilita p " +
+					"WHERE p.dataAccettazione IS NULL"),
+			
+	@NamedQuery(name = "PropostaAbilita.getTutteProposteAbilitaConfermate", 
+			query = "SELECT p " +
+					"FROM PropostaAbilita p " +
+					"WHERE p.dataAccettazione IS NOT NULL"),
+})
 
 @Data
 @EqualsAndHashCode(of={"id","utente"})
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "PropostaAbilita")
 public class PropostaAbilita implements Serializable {

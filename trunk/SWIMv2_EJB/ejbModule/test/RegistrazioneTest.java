@@ -1,5 +1,6 @@
 package test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -26,30 +27,29 @@ public class RegistrazioneTest {
 
 		//non cancellarla, da tenere per quando sistemiamo i progetti e li mettiamo su google code
 		//	 	Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneCollaborazioni/remote-utililies.sessionRemote.GestioneCollaborazioniRemote");
-		Object obj = (new InitialContext(env)).lookup("GestioneRegistrazione/remote-utililies.sessionRemote.GestioneRegistrazioneRemote");
+		Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneRegistrazione/remote-utililies.sessionRemote.GestioneRegistrazioneRemote");
 		gestioneRegistrazione = (GestioneRegistrazioneRemote) PortableRemoteObject.narrow(obj, GestioneRegistrazioneRemote.class);
 
 
 	}
 
-	@SuppressWarnings("null")//non so se serve, me lo consigliava eclipse
 	@Test
-	public void EseguiRegistrazioneUtente(){
-		List<Abilita> abilita = null;
-		Abilita temp=new Abilita();
-		//Non ci si può registrare senza almeno una abilità
+	public void eseguiRegistrazioneUtente(){
+		List<Abilita> abilita = new ArrayList<Abilita>();
+		Abilita temp = new Abilita();
+		//Non ci si puo' registrare senza almeno una abilita
 		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "password", "Enrico", "Rossi", null, abilita));
-		temp.setDescrizione("1° Abilità");
+		temp.setDescrizione("prima Abilita");
 		temp.setNome("1ab");
 		abilita.add(temp);
-		//Registrazione a buon fine con una abilità
+		//Registrazione a buon fine con una abilita
 		Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "password", "Jacopo", "Bulla", null, abilita));
 		//Non ci possono essere due utenti con la stessa mail
 		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "password", "Andrea", "Bazzi", null, abilita));
-		temp.setDescrizione("1° Abilità");
+		temp.setDescrizione("prima Abilita");
 		temp.setNome("1ab");
 		abilita.add(temp);
-		//Registrazione a buon fine con due abilità
+		//Registrazione a buon fine con due abilita
 		Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("tommaso.ganelli@gmail.com", "password", "Tommaso", "Ganelli", null, abilita));
 		
 	}

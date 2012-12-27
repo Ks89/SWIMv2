@@ -1,14 +1,11 @@
-package sessionBeans;
+package sessionBeans.interfaces;
 
 import java.util.List;
-
-import javax.ejb.Local;
 
 import entityBeans.Collaborazione;
 import entityBeans.Utente;
 
-@Local
-public interface GestioneCollaborazioniLocal {
+public interface GestioneCollaborazioniInterface {
 
 	public Collaborazione getCollaborazione(Long id);
 

@@ -1,12 +1,9 @@
-package sessionBeans;
-
-import javax.ejb.Local;
+package sessionBeans.interfaces;
 
 import entityBeans.Amministratore;
 import entityBeans.Utente;
 
-@Local
-public interface GestioneLoginLocal {
+public interface GestioneLoginInterface {
 
 	/**
 	 * Metodo che controlla se il login e' stato effettuato da parte di un amministratore

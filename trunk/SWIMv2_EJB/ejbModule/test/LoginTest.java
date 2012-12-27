@@ -15,6 +15,11 @@ import utililies.sessionRemote.GestioneLoginRemote;
 
 public class LoginTest {
 
+	private static final String MAIL_PEPPINO = "peppino@gmail.com";
+	private static final String PASSWORD = "pippo";
+	private static final String MAIL_UTENTE_INUTILE = "pippo@gmail.com";
+	private static final String PASSWORD_INUTILE = "blabla";
+	
 	private GestioneLoginRemote gestioneLogin;
 
 	public LoginTest() throws NamingException {
@@ -23,9 +28,7 @@ public class LoginTest {
 		env.setProperty("java.naming.provider.url", "localhost:1099");
 		env.setProperty("java.naming.factory.url.pkgs", "org.jboss.naming");
 
-		//non cancellarla, da tenere per quando sistemiamo i progetti e li mettiamo su google code
-		//Object obj = (new InitialContext(env)).lookup("SWIMdbEar/GestioneCollaborazioni/remote-utililies.sessionRemote.GestioneCollaborazioniRemote");
-		Object obj = (new InitialContext(env)).lookup("GestioneLogin/remote-utililies.sessionRemote.GestioneLoginRemote");
+		Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneLogin/remote-utililies.sessionRemote.GestioneLoginRemote");
 		gestioneLogin = (GestioneLoginRemote) PortableRemoteObject.narrow(obj, GestioneLoginRemote.class);
 
 	}
@@ -36,16 +39,16 @@ public class LoginTest {
 		//uso quei metodi per registrare un po' di utenti e usarli per testare
 		
 		//inserire nel db l'utente asas@aaa.it con password a2242ead55c94c3deb7cf2340bfef9d5bcaca22dfe66e646745ee4371c633fc8
-		String passwordHashata = PasswordHasher.hashPassword("pippo");
+		String passwordHashata = PasswordHasher.hashPassword(PASSWORD);
 
 		//il metodo hasha la password e se trova quella hashata uguale nel db da true
-		Assert.assertTrue(gestioneLogin.esegueLoginUtente("peppino@gmail.com", "pippo"));
+		Assert.assertTrue(gestioneLogin.esegueLoginUtente(MAIL_PEPPINO, PASSWORD));
 		
 		//ovviamente se rihashi una password non e' quella originale
-		Assert.assertFalse(gestioneLogin.esegueLoginUtente("peppino@gmail.com", passwordHashata));
+		Assert.assertFalse(gestioneLogin.esegueLoginUtente(MAIL_PEPPINO, passwordHashata));
 		
 		//questo utente non e' presente e allora dice false
-		Assert.assertFalse(gestioneLogin.esegueLoginUtente("pippo@gmail.com", "blabla")); 
+		Assert.assertFalse(gestioneLogin.esegueLoginUtente(MAIL_UTENTE_INUTILE, PASSWORD_INUTILE)); 
 	}
 	
 	@Test
@@ -54,15 +57,15 @@ public class LoginTest {
 		//uso quei metodi per registrare un po' di utenti e usarli per testare
 		
 		//inserire nel db l'admin asas@aaa.it con password a2242ead55c94c3deb7cf2340bfef9d5bcaca22dfe66e646745ee4371c633fc8
-		String passwordHashata = PasswordHasher.hashPassword("pippo");
+		String passwordHashata = PasswordHasher.hashPassword(PASSWORD);
 
 		//il metodo hasha la password e se trova quella hashata uguale nel db da true
-		Assert.assertTrue(gestioneLogin.eseguiLoginAmministratore("peppino@gmail.com", "pippo"));
+		Assert.assertTrue(gestioneLogin.eseguiLoginAmministratore(MAIL_PEPPINO, PASSWORD));
 		
 		//ovviamente se rihashi una password non e' quella originale
-		Assert.assertFalse(gestioneLogin.esegueLoginUtente("peppino@gmail.com", passwordHashata));
+		Assert.assertFalse(gestioneLogin.esegueLoginUtente(MAIL_PEPPINO, passwordHashata));
 		
 		//questo utente non e' presente e allora dice false
-		Assert.assertFalse(gestioneLogin.esegueLoginUtente("pippo@gmail.com", "blabla")); 
+		Assert.assertFalse(gestioneLogin.esegueLoginUtente(MAIL_UTENTE_INUTILE, PASSWORD_INUTILE)); 
 	}
 }
