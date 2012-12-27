@@ -12,6 +12,7 @@ import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 import utililies.sessionRemote.GestioneCollaborazioniRemote;
 import entityBeans.Collaborazione;
 import entityBeans.Utente;
+import exceptions.CollaborazioneException;
 
 @Stateless
 public class GestioneCollaborazioni implements GestioneCollaborazioniRemote, GestioneCollaborazioniLocal {
@@ -36,7 +37,12 @@ public class GestioneCollaborazioni implements GestioneCollaborazioniRemote, Ges
 	 * @param nome
 	 * @param descrizione
 	 */
-	public Collaborazione richiediAiuto(String emailRichiedente, String emailRicevente, String nome, String descrizione) {
+	public Collaborazione richiediAiuto(String emailRichiedente, String emailRicevente, String nome, String descrizione) throws CollaborazioneException {
+		
+		if(emailRichiedente==null || emailRichiedente.equals("") || emailRicevente==null || emailRicevente.equals("") ||
+				nome==null || nome.equals("")) {
+			throw new CollaborazioneException(CollaborazioneException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		}
 		
 		Utente utenteRichiedente = this.getUtenteByEmail(emailRichiedente);
 		Utente utenteRicevente = this.getUtenteByEmail(emailRicevente);

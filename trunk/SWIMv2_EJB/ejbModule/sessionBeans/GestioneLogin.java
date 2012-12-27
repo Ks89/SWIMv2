@@ -1,30 +1,24 @@
 package sessionBeans;
 
-import javax.annotation.PostConstruct; 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import lombok.extern.slf4j.Slf4j;
 import sessionBeans.localInterfaces.GestioneLoginLocal;
 import utililies.PasswordHasher;
 import utililies.sessionRemote.GestioneLoginRemote;
 import entityBeans.Amministratore;
 import entityBeans.Utente;
+import exceptions.HashingException;
+import exceptions.LoginException;
 
-@Slf4j
 @Stateless
 public class GestioneLogin implements GestioneLoginRemote, GestioneLoginLocal {
 
 	@PersistenceContext(unitName = "SWIMdb")
 	private EntityManager entityManager;
 
-	
-	@PostConstruct
-	public void postConstruct() {
-		log.info("Creato GestioneLogin");
-	}
-	
+
 	/**
 	 * Metodo che controlla se il login e' stato effettuato da parte di un amministratore
 	 * 
@@ -35,12 +29,16 @@ public class GestioneLogin implements GestioneLoginRemote, GestioneLoginLocal {
 	 * @return true se un amministratore ha effettuato il login, false altrimenti
 	 */
 	@Override
-	public boolean eseguiLoginAmministratore(String email, String passwordInserita) {
+	public boolean eseguiLoginAmministratore(String email, String passwordInserita) throws LoginException, HashingException {
+		if(email==null || email.equals("") || passwordInserita==null || passwordInserita.equals("")) {
+			throw new LoginException(LoginException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		}
+
 		Amministratore amministratore = this.getAmministratoreByEmail(email);
 		if (amministratore==null) {
 			return false;
 		} 
-		log.debug("pippo");
+
 		//se non e' null
 		String hashPassword = amministratore.getPassword();
 		return verificaPassword(passwordInserita, hashPassword);
@@ -55,9 +53,14 @@ public class GestioneLogin implements GestioneLoginRemote, GestioneLoginLocal {
 	 * @param passwordInserita
 	 *            e' la password inserita durante il login
 	 * @return true se un utente ha effettuato il login, false altrimenti
+	 * @throws HashingException 
 	 */
 	@Override
-	public boolean esegueLoginUtente(String email, String passwordInserita) {
+	public boolean esegueLoginUtente(String email, String passwordInserita) throws LoginException, HashingException {
+		if(email==null || email.equals("") || passwordInserita==null || passwordInserita.equals("")) {
+			throw new LoginException(LoginException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		}
+
 		Utente utente = this.getUtenteByEmail(email);
 		if (utente==null) {
 			return false;
@@ -74,8 +77,12 @@ public class GestioneLogin implements GestioneLoginRemote, GestioneLoginLocal {
 	 * @param passwordHashLetta
 	 *            e' la password hash letta dal databse
 	 * @return true se le password corrispondono
+	 * @throws HashingException 
 	 */
-	private boolean verificaPassword(String passwordInserita, String passwordHashLetta) {
+	private boolean verificaPassword(String passwordInserita, String passwordHashLetta) throws LoginException, HashingException {
+		if(passwordInserita==null || passwordInserita.equals("")) {
+			throw new LoginException(LoginException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		}
 		return PasswordHasher.verifyPassword(passwordInserita, passwordHashLetta);
 	}
 
@@ -89,7 +96,7 @@ public class GestioneLogin implements GestioneLoginRemote, GestioneLoginLocal {
 	public Amministratore getAmministratoreByEmail(String email) {
 		return entityManager.find(Amministratore.class, email);
 	}
-	
+
 	@Override
 	public Amministratore getAmministratoreUnico() {
 		return entityManager.find(Amministratore.class, "admin@swim.it");

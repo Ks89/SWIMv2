@@ -2,6 +2,8 @@ package sessionBeans.interfaces;
 
 import entityBeans.Amministratore;
 import entityBeans.Utente;
+import exceptions.HashingException;
+import exceptions.LoginException;
 
 public interface GestioneLoginInterface {
 
@@ -14,7 +16,7 @@ public interface GestioneLoginInterface {
 	 *            e' la password inserita durante il login
 	 * @return true se un amministratore ha effettuato il login, false altrimenti
 	 */
-	public boolean eseguiLoginAmministratore(String email,String passwordInserita);
+	public boolean eseguiLoginAmministratore(String email, String passwordInserita) throws LoginException, HashingException;
 
 	/**
 	 * Metodo che controlla se il login e' stato effettuato da parte di un utente
@@ -25,7 +27,7 @@ public interface GestioneLoginInterface {
 	 *            e' la password inserita durante il login
 	 * @return true se un utente ha effettuato il login, false altrimenti
 	 */
-	public boolean esegueLoginUtente(String email, String passwordInserita);
+	public boolean esegueLoginUtente(String email, String passwordInserita) throws LoginException, HashingException;
 
 	/**
 	 * Metodo per l'estrazione dell'amministratore dal database data la sua email

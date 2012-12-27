@@ -4,13 +4,13 @@ import java.util.List;
 
 import entityBeans.Collaborazione;
 import entityBeans.Utente;
+import exceptions.CollaborazioneException;
 
 public interface GestioneCollaborazioniInterface {
 
 	public Collaborazione getCollaborazione(Long id);
 
-	public Collaborazione richiediAiuto(String emailRichiedente, String emailRicevente,
-			String nome, String descrizione);
+	public Collaborazione richiediAiuto(String emailRichiedente, String emailRicevente, String nome, String descrizione) throws CollaborazioneException;
 
 	public void accettaCollaborazione(Long id);
 	

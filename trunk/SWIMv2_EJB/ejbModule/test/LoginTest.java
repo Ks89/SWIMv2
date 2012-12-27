@@ -1,5 +1,7 @@
 package test;
 
+import static org.junit.Assert.fail;
+
 import java.util.Properties;
 
 import javax.naming.InitialContext;
@@ -10,6 +12,9 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import exceptions.HashingException;
+import exceptions.LoginException;
 
 import utililies.PasswordHasher;
 import utililies.sessionRemote.GestioneLoginRemote;
@@ -24,8 +29,8 @@ public class LoginTest {
 	private static final String PASSWORD = "pippo";
 
 	private GestioneLoginRemote gestioneLogin;
-	private GestioneRegistrazioneRemote gestioneRegistrazione;
-	private static TestUtilsRemote testUtils;
+//	private GestioneRegistrazioneRemote gestioneRegistrazione;
+//	private static TestUtilsRemote testUtils;
 
 	public LoginTest() throws NamingException {
 		Properties env = new Properties();
@@ -36,11 +41,11 @@ public class LoginTest {
 		Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneLogin/remote-utililies.sessionRemote.GestioneLoginRemote");
 		gestioneLogin = (GestioneLoginRemote) PortableRemoteObject.narrow(obj, GestioneLoginRemote.class);
 
-		obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneRegistrazione/remote-utililies.sessionRemote.GestioneRegistrazioneRemote");
-		gestioneRegistrazione = (GestioneRegistrazioneRemote) PortableRemoteObject.narrow(obj, GestioneRegistrazioneRemote.class);
+//		obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneRegistrazione/remote-utililies.sessionRemote.GestioneRegistrazioneRemote");
+//		gestioneRegistrazione = (GestioneRegistrazioneRemote) PortableRemoteObject.narrow(obj, GestioneRegistrazioneRemote.class);
 
-		obj = (new InitialContext(env)).lookup("SWIMv2_EAR/TestUtils/remote-test.TestUtilsRemote");
-		testUtils = (TestUtilsRemote) PortableRemoteObject.narrow(obj, TestUtilsRemote.class);
+//		obj = (new InitialContext(env)).lookup("SWIMv2_EAR/TestUtils/remote-test.TestUtilsRemote");
+//		testUtils = (TestUtilsRemote) PortableRemoteObject.narrow(obj, TestUtilsRemote.class);
 	}
 
 //	@Before
@@ -54,6 +59,7 @@ public class LoginTest {
 
 	@Test
 	public void testEseguiLoginUtente() {
+		try {
 		//inserire nel db l'utente peppino@gmail.com con password a2242ead55c94c3deb7cf2340bfef9d5bcaca22dfe66e646745ee4371c633fc8
 		String passwordHashata = PasswordHasher.hashPassword(PASSWORD);
 
@@ -65,20 +71,31 @@ public class LoginTest {
 
 		//questo utente non e' presente e allora dice false
 		Assert.assertFalse(gestioneLogin.esegueLoginUtente(MAIL_UTENTE_INUTILE, PASSWORD_INUTILE)); 
+	} catch (LoginException e) {
+		fail("LoginException: " + e);
+	} catch (HashingException e) {
+		fail("HashingException: " + e);
+	}
 	}
 
 	@Test
 	public void testEseguiLoginAmministratore() {
-		//inserire nel db l'admin admin@swim.it con password a2242ead55c94c3deb7cf2340bfef9d5bcaca22dfe66e646745ee4371c633fc8
-		String passwordHashata = PasswordHasher.hashPassword(PASSWORD);
+		try {
+			//inserire nel db l'admin admin@swim.it con password a2242ead55c94c3deb7cf2340bfef9d5bcaca22dfe66e646745ee4371c633fc8
+			String passwordHashata = PasswordHasher.hashPassword(PASSWORD);
 
-		//il metodo hasha la password e se trova quella hashata uguale nel db da true
-		Assert.assertTrue(gestioneLogin.eseguiLoginAmministratore(MAIL_AMMINISTRATORE, PASSWORD));
+			//il metodo hasha la password e se trova quella hashata uguale nel db da true
+			Assert.assertTrue(gestioneLogin.eseguiLoginAmministratore(MAIL_AMMINISTRATORE, PASSWORD));
 
-		//ovviamente se rihashi una password non e' quella originale
-		Assert.assertFalse(gestioneLogin.eseguiLoginAmministratore(MAIL_AMMINISTRATORE, passwordHashata));
+			//ovviamente se rihashi una password non e' quella originale
+			Assert.assertFalse(gestioneLogin.eseguiLoginAmministratore(MAIL_AMMINISTRATORE, passwordHashata));
 
-		//questo admin non e' presente e allora dice false
-		Assert.assertFalse(gestioneLogin.eseguiLoginAmministratore(MAIL_UTENTE_INUTILE, PASSWORD_INUTILE)); 
+			//questo admin non e' presente e allora dice false
+			Assert.assertFalse(gestioneLogin.eseguiLoginAmministratore(MAIL_UTENTE_INUTILE, PASSWORD_INUTILE)); 
+		} catch (LoginException e) {
+			fail("LoginException: " + e);
+		} catch (HashingException e) {
+			fail("HashingException: " + e);
+		}
 	}
 }
