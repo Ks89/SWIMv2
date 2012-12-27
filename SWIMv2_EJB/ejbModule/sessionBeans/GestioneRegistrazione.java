@@ -34,7 +34,7 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 		Possiede possiede= new Possiede();
 		PossiedePK possiedepk= new PossiedePK();
 		//Mettere cognome e nome con l'iniziale maiuscola
-		if(emailCorretta(email) && emailNonAncoraUtilizzata(email) && nome!=null && cognome!=null && password!=null && abilita.size()>=1)//cognome e nome non nulli e abilita.size è un controllo che facciamo qua, o direttamente con javascript?
+		if(emailCorretta(email) && emailNonAncoraUtilizzata(email) && nome!="" && cognome!="" && password!="" && abilita.size()>=1)//cognome e nome non nulli e abilita.size è un controllo che facciamo qua, o direttamente con javascript?
 		{
 				utente.setEmail(email);
 				utente.setNome(nome);
@@ -77,7 +77,7 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 	public boolean registrazioneAdminTest(){
 		Amministratore admin= new Amministratore();
 		admin.setEmail("admin@swim.it");
-		admin.setPassword(PasswordHasher.hashPassword("a2242ead55c94c3deb7cf2340bfef9d5bcaca22dfe66e646745ee4371c633fc8"));
+		admin.setPassword("pippo");
 		entityManager.persist(admin);
 		entityManager.flush();
 		return true;
