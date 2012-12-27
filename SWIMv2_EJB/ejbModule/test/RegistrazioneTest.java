@@ -13,11 +13,13 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import entityBeans.Abilita;
+import utililies.sessionRemote.GestioneProposteRemote;
 import utililies.sessionRemote.GestioneRegistrazioneRemote;
 
 public class RegistrazioneTest {
 
 	private GestioneRegistrazioneRemote gestioneRegistrazione;
+	private GestioneProposteRemote gestioneProposte;
 	private static TestUtilsRemote testUtils;
 	
 	public RegistrazioneTest() throws NamingException {
@@ -39,12 +41,21 @@ public class RegistrazioneTest {
 			System.out.println(e.toString());
 			return;
 		}
+		//svuota DB
+		testUtils.svuotaDatabase();
+		//aggiunge amministratore
+		gestioneRegistrazione.registrazioneAdminTest();
+		//Inserisce due abilità nel DB
+		gestioneProposte.inserisciAbilitaAutonomamente("1ab","prima Abilita");
+		gestioneProposte.inserisciAbilitaAutonomamente("2ab","seconda Abilita");
+		//aggiunge due utenti nel DB
+		gestioneRegistrazione.registrazioneUtentePerTest("peppino@gmail.com", "a2242ead55c94c3deb7cf2340bfef9d5bcaca22dfe66e646745ee4371c633fc8", "peppino", "peppo");
+		gestioneRegistrazione.registrazioneUtentePerTest("davide@gmail.com", "a2242ead55c94c3deb7cf2340bfef9d5bcaca22dfe66e646745ee4371c633fc8", "davide", "caio");
+		
 	}
 
-	
 	@Test
 	public void eseguiRegistrazioneUtente(){
-		testUtils.svuotaTabellaDatabase("Utente");
 		List<Abilita> abilita = new ArrayList<Abilita>();
 		Abilita temp = new Abilita();
 		//Per eseguire questo test dovete inserire due abilita nel db. Una nome=1ab Descrizione=prima Abilita l'altra=2ab Descrizione=seconda Abilita 
