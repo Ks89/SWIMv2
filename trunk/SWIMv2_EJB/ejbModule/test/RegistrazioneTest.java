@@ -69,19 +69,19 @@ public class RegistrazioneTest {
 	@Test
 	public void eseguiRegistrazioneUtente(){
 		List<Abilita> abilita = new ArrayList<Abilita>();
-		Abilita temp = new Abilita();
 		//Per eseguire questo test dovete inserire due abilita nel db. Una nome=1ab Descrizione=prima Abilita l'altra=2ab Descrizione=seconda Abilita 
 		//Non ci si puo' registrare senza almeno una abilita
 		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Enrico", "Rossi", null, abilita));
+		abilita.add(gestioneRegistrazione.getAbilitaByNome("1ab"));
 //		temp.setDescrizione("prima Abilita");
 //		temp.setNome("1ab");
 //		abilita.add(temp);
 //		//Non ci si puo' registrare senza nome
-//		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "", "Rossi", null, abilita));
+		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, "cacca@i", "Enrico", "Rossi", null, abilita));
 //		//Non ci si puo' registrare senza cognome
-//		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "Enrico", "", null, abilita));
+//		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Enrico", "", null, abilita));
 //		//Non ci si puo' registrare senza password
-//		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "", "Enrico", "Rossi", null, abilita));
+//		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, "", "Enrico", "Rossi", null, abilita));
 //		//Registrazione a buon fine con una abilita
 //		Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "Jacopo", "Bulla", null, abilita));
 //		//Non ci possono essere due utenti con la stessa mail
