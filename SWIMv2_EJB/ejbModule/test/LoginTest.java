@@ -43,14 +43,14 @@ public class LoginTest {
 		testUtils = (TestUtilsRemote) PortableRemoteObject.narrow(obj, TestUtilsRemote.class);
 	}
 
-	@Before
-	public static void setUpLoginTest() {
-		//testUtils.svuotaTabellaDatabase("Utente"); perche' funzioni bisogna non avere nulla del db, altrimenti viola l'integrita' referenziale
-		//testUtils.svuotaDatabase(); nel caso si voglia svuotare tutto il db prima di fare i test
-
-		//gestioneRegistrazione.registraUtente(MAIL_PEPPINO,PASSWORD);
-		//gestioneRegistrazione.registraAmministratore(MAIL_AMMINISTRATORE, PASSWORD);
-	}
+//	@Before
+//	public void setUpLoginTest() {
+//		//testUtils.svuotaTabellaDatabase("Utente"); perche' funzioni bisogna non avere nulla del db, altrimenti viola l'integrita' referenziale
+//		//testUtils.svuotaDatabase(); nel caso si voglia svuotare tutto il db prima di fare i test
+//
+//		//gestioneRegistrazione.registraUtente(MAIL_PEPPINO,PASSWORD);
+//		//gestioneRegistrazione.registraAmministratore(MAIL_AMMINISTRATORE, PASSWORD);
+//	}
 
 	@Test
 	public void testEseguiLoginUtente() {
