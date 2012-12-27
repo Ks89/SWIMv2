@@ -7,5 +7,12 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="SWIMv2.jar" deploy-path="/" handle="module:/resource/SWIMv2_EJB/SWIMv2_EJB">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-codec-1.7.jar" deploy-path="/lib" handle="module:/classpath/lib/SWIMv2_EAR/lib/commons-codec-1.7.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
