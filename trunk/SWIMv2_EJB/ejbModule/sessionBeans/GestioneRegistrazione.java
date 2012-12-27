@@ -29,7 +29,7 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 		Utente utente= new Utente();
 		Possiede possiede= new Possiede();
 		PossiedePK possiedepk= new PossiedePK();
-		if(emailCorretta(email) && emailNonAncoraUtilizzata(email) && nome!=null && cognome!=null && abilita.size()>=1)//cognome e nome non nulli e abilita.size è un controllo che facciamo qua, o direttamente con javascript?
+		if(emailCorretta(email) && emailNonAncoraUtilizzata(email) && nome!=null && cognome!=null && password!=null && abilita.size()>=1)//cognome e nome non nulli e abilita.size è un controllo che facciamo qua, o direttamente con javascript?
 		{
 				utente.setEmail(email);
 				utente.setNome(nome);
