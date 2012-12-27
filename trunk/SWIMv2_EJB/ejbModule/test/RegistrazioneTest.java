@@ -77,7 +77,7 @@ public class RegistrazioneTest {
 //		temp.setNome("1ab");
 //		abilita.add(temp);
 //		//Non ci si puo' registrare senza nome
-		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, "cacca@i", "Enrico", "Rossi", null, abilita));
+		Assert.assertTrue(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "", "Rossi", null, abilita));
 //		//Non ci si puo' registrare senza cognome
 //		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Enrico", "", null, abilita));
 //		//Non ci si puo' registrare senza password
