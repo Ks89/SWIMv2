@@ -8,15 +8,13 @@ import entityBeans.Utente;
 
 public interface GestioneAmicizieInterface {
 
-	public abstract Collaborazione getCollaborazione(Long id);
-
 	public abstract Amicizia richiediAmicizia(String emailUtente1,
 			String emailUtente2, boolean diretta);
 
-	public abstract void accettaAmicizia(String emailUtente1,
+	public abstract boolean accettaAmicizia(String emailUtente1,
 			String emailUtente2);
 
-	public abstract void rifiutaAmicizia(String emailUtente1,
+	public abstract boolean rifiutaAmicizia(String emailUtente1,
 			String emailUtente2);
 
 	@SuppressWarnings("unchecked")
