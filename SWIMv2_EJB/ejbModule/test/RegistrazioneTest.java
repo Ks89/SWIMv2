@@ -34,7 +34,7 @@ public class RegistrazioneTest {
 	}
 
 	@Test
-	public void eseguiRegistrazioneUtente(){
+	public void eseguiRegistrazioneUtwente(){
 		List<Abilita> abilita = new ArrayList<Abilita>();
 		Abilita temp = new Abilita();
 		//Non ci si puo' registrare senza almeno una abilita

@@ -89,6 +89,11 @@ public class GestioneLogin implements GestioneLoginRemote, GestioneLoginLocal {
 	public Amministratore getAmministratoreByEmail(String email) {
 		return entityManager.find(Amministratore.class, email);
 	}
+	
+	@Override
+	public Amministratore getAmministratoreUnico() {
+		return entityManager.find(Amministratore.class, "admin@swim.it");
+	}
 
 	/**
 	 * Metodo per l'estrazione dell'utente dal database data la sua email

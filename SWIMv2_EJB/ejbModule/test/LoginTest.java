@@ -19,7 +19,8 @@ public class LoginTest {
 	private static final String PASSWORD = "pippo";
 	private static final String MAIL_UTENTE_INUTILE = "pippo@gmail.com";
 	private static final String PASSWORD_INUTILE = "blabla";
-	
+	private static final String MAIL_AMMINISTRATORE = "admin@swim.it";
+
 	private GestioneLoginRemote gestioneLogin;
 
 	public LoginTest() throws NamingException {
@@ -60,12 +61,12 @@ public class LoginTest {
 		String passwordHashata = PasswordHasher.hashPassword(PASSWORD);
 
 		//il metodo hasha la password e se trova quella hashata uguale nel db da true
-		Assert.assertTrue(gestioneLogin.eseguiLoginAmministratore(MAIL_PEPPINO, PASSWORD));
+		Assert.assertTrue(gestioneLogin.eseguiLoginAmministratore(MAIL_AMMINISTRATORE, PASSWORD));
 		
 		//ovviamente se rihashi una password non e' quella originale
-		Assert.assertFalse(gestioneLogin.esegueLoginUtente(MAIL_PEPPINO, passwordHashata));
+		Assert.assertFalse(gestioneLogin.eseguiLoginAmministratore(MAIL_AMMINISTRATORE, passwordHashata));
 		
 		//questo utente non e' presente e allora dice false
-		Assert.assertFalse(gestioneLogin.esegueLoginUtente(MAIL_UTENTE_INUTILE, PASSWORD_INUTILE)); 
+		Assert.assertFalse(gestioneLogin.eseguiLoginAmministratore(MAIL_UTENTE_INUTILE, PASSWORD_INUTILE)); 
 	}
 }
