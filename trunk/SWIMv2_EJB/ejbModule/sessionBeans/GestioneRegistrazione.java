@@ -77,7 +77,7 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 	public boolean registrazioneAdminTest(){
 		Amministratore admin= new Amministratore();
 		admin.setEmail("admin@swim.it");
-		admin.setPassword("pippo");
+		admin.setPassword(PasswordHasher.hashPassword("pippo"));
 		entityManager.persist(admin);
 		entityManager.flush();
 		return true;
