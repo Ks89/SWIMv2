@@ -46,7 +46,7 @@
 	<br> Cognome:
 	<c:out value="${cognomeUtenteCollegato}"></c:out>
 	<br> Punteggio feedback:
-	<c:out value="${punteggio}" />
+	<c:out value="${punteggioUtenteCollegato}" />
 
 	<br>Abilita' dell'utente:
 	<c:forEach items="${abilita}" var="item">
