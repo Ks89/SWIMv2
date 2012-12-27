@@ -18,7 +18,8 @@ import utililies.sessionRemote.GestioneRegistrazioneRemote;
 public class RegistrazioneTest {
 
 	private GestioneRegistrazioneRemote gestioneRegistrazione;
-
+	private static TestUtilsRemote testUtils;
+	
 	public RegistrazioneTest() throws NamingException {
 		Properties env = new Properties();
 		env.setProperty("java.naming.factory.initial","org.jnp.interfaces.NamingContextFactory");
@@ -27,23 +28,37 @@ public class RegistrazioneTest {
 
 		//non cancellarla, da tenere per quando sistemiamo i progetti e li mettiamo su google code
 		//	 	Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneCollaborazioni/remote-utililies.sessionRemote.GestioneCollaborazioniRemote");
+		try{
 		Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneRegistrazione/remote-utililies.sessionRemote.GestioneRegistrazioneRemote");
 		gestioneRegistrazione = (GestioneRegistrazioneRemote) PortableRemoteObject.narrow(obj, GestioneRegistrazioneRemote.class);
 
-
+		obj = (new InitialContext(env)).lookup("SWIMv2_EAR/TestUtils/remote-test.TestUtilsRemote");
+		testUtils = (TestUtilsRemote) PortableRemoteObject.narrow(obj, TestUtilsRemote.class);
+		}
+		catch (NamingException e) {
+			System.out.println(e.toString());
+			return;
+		}
 	}
 
 	
 	@Test
 	public void eseguiRegistrazioneUtente(){
+		testUtils.svuotaTabellaDatabase("Utente");
 		List<Abilita> abilita = new ArrayList<Abilita>();
 		Abilita temp = new Abilita();
-		//Non ci si puo' registrare senza almeno una abilita
 		//Per eseguire questo test dovete inserire due abilita nel db. Una nome=1ab Descrizione=prima Abilita l'altra=2ab Descrizione=seconda Abilita 
+		//Non ci si puo' registrare senza almeno una abilita
 		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "password", "Enrico", "Rossi", null, abilita));
 		temp.setDescrizione("prima Abilita");
 		temp.setNome("1ab");
 		abilita.add(temp);
+		//Non ci si puo' registrare senza nome
+		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "password", "", "Rossi", null, abilita));
+		//Non ci si puo' registrare senza cognome
+		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "password", "Enrico", "", null, abilita));
+		//Non ci si puo' registrare senza password
+		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "", "Enrico", "Rossi", null, abilita));
 		//Registrazione a buon fine con una abilita
 		Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "password", "Jacopo", "Bulla", null, abilita));
 		//Non ci possono essere due utenti con la stessa mail
