@@ -50,13 +50,13 @@
 		</c:forEach>
 	</table>
 	<div id="pageNavPosition"></div>
- 
-    <script type="text/javascript">
-        var pager = new Pager('resultsAbilit', 3); 
-        pager.init(); 
-        pager.showPageNav('pager', 'pageNavPosition'); 
-        pager.showPage(1);
-    </script>
+
+	<script type="text/javascript">
+		var pager = new Pager('resultsAbilit', 3);
+		pager.init();
+		pager.showPageNav('pager', 'pageNavPosition');
+		pager.showPage(1);
+	</script>
 
 	<br>
 	<br>Abilita' disponibili:
