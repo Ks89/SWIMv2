@@ -89,14 +89,12 @@
 
 	<br>
 	<br>Abilita' disponibili:
-	<select name="abilita">
-		<c:forEach items="${abilita}" var="item">
-			<option value="<c:out value="${item.nome}" />">
-				<c:out value="${item.descrizione}" />
-			</option>
-		</c:forEach>
-	</select>
-
+	<c:forEach items="${abilita}" var="item">
+		<input type="checkbox" name="abilita" value='<c:out value="${item.nome}"/>' />
+		<c:out value="${item.nome}" />
+		<br>
+	</c:forEach>
+				
 	<form action="Upload" method="POST" enctype="multipart/form-data">
 		<input name="file" type="file" /> <br> <input type="submit" />
 	</form>
