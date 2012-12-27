@@ -7,16 +7,22 @@
 <title>SWIM</title>
 </head>
 <body>
-	<c:if test="${!empty errorMessage}">
-	Si è verificato un errore: <c:out value="${errorMessage}"></c:out>
+	<!-- Ricevo l'attributo erroreLoginFallito dalla LoginServlet, se empty non c'e' errorem altrimenti lo mostro-->
+	<c:if test="${!empty erroreLoginFallito}">
+	Si è verificato un errore: <c:out value="${erroreLoginFallito}"></c:out>
+	</c:if>
+	<c:if test="${!empty registrazioneSuccesso}">
+	Registrazione eseguita con successo <c:out value="${registrazioneSuccesso}"></c:out>
 	</c:if>
 
-	Questa è la home
+	<br>
+	Homepage
 	<br>
 
+	<!--  uso una choose per stabilire quale form mostrare. Se l'utente e' collegato 
+	mostro le funzioni di ricerca ecc... altrimenti la form di login e registrazione -->
 	<c:choose>
 		<c:when test="${sessionScope.utenteCollegato != null}">
-
 			<form action="Ricerca" method="POST">
 				Cognome: <input type="text" name="cognome" /> <br> Abilita':<br>
 				<c:forEach items="${abilita}" var="item">
@@ -26,18 +32,14 @@
 				</c:forEach>
 				<br> <input type="submit" />
 			</form>
-
 		</c:when>
 		<c:otherwise>
 			<form action="Login" method="POST">
-				Username: <input type="text" name="username"></input> Password: <input type="password" name="password"></input> <input type="submit" /> <br>
+				Email: <input type="text" name="emailUtente"></input> Password: <input type="password" name="password"></input> <input type="submit" /> <br>
 				<a href="Registrazione">Registrazione</a>
 				<!-- Sarà una servlet dedicata -->
 			</form>
 		</c:otherwise>
 	</c:choose>
-
-
-
 </body>
 </html>
