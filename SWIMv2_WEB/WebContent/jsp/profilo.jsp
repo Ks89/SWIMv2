@@ -26,13 +26,42 @@
 
 </head>
 <body>
-	Questa è la pagina utente
+
+	<!-- Si usa sessionScope solo per ottenere l'email dell'utente collegato. 
+		Tutto il resto lo si ottiene semplicemente col nome dell'attributo settato nella servlet  -->
+
+	<br> Profilo di:
+	<c:out value="${nomeUtenteCollegato}">
+	</c:out>
+	<c:out value="${cognomeUtenteCollegato}"></c:out>
+	<br>
+	<br> Foto:
+	<br>
+	<img src="Foto" />
+	<br>
+	<br> Email:
 	<c:out value="${sessionScope.utenteCollegato}"></c:out>
-	<br>
-	<a href="../Home">Home</a>
-	<br>
-	<br> Il mio punteggio è:
+	<br> Nome:
+	<c:out value="${nomeUtenteCollegato}"></c:out>
+	<br> Cognome:
+	<c:out value="${cognomeUtenteCollegato}"></c:out>
+	<br> Punteggio feedback:
 	<c:out value="${punteggio}" />
+
+	<br>Abilita' dell'utente:
+	<c:forEach items="${abilita}" var="item">
+		<ul>
+			<li><c:out value="${item.descrizione}" />
+		</ul>
+		<!--  	<option value="<c:out value="${item.nome}" />">
+				<c:out value="${item.descrizione}" />
+			</option>-->
+	</c:forEach>
+
+
+	<a href="../Home">Torna alla Homepage</a>
+	<br>
+
 	<br>
 	<br> Collaborazioni create da me:
 	<table id="resultsAbilit" style="border-width: medium; border-style: solid;">
@@ -67,9 +96,6 @@
 			</option>
 		</c:forEach>
 	</select>
-
-	<br> Foto:
-	<img src="Foto" />
 
 	<form action="Upload" method="POST" enctype="multipart/form-data">
 		<input name="file" type="file" /> <br> <input type="submit" />

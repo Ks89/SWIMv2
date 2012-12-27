@@ -72,4 +72,14 @@
     <servlet-name>UploadServlet</servlet-name>
     <url-pattern>/Profilo/Upload</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UtenteCollegatoUtil</display-name>
+    <servlet-name>UtenteCollegatoUtil</servlet-name>
+    <servlet-class>it.swim.util.UtenteCollegatoUtil</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UtenteCollegatoUtil</servlet-name>
+    <url-pattern>/UtenteCollegatoUtil</url-pattern>
+  </servlet-mapping>
 </web-app>
