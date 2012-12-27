@@ -33,11 +33,13 @@ public class RegistrazioneTest {
 
 	}
 
+	
 	@Test
-	public void eseguiRegistrazioneUtwente(){
+	public void eseguiRegistrazioneUtente(){
 		List<Abilita> abilita = new ArrayList<Abilita>();
 		Abilita temp = new Abilita();
 		//Non ci si puo' registrare senza almeno una abilita
+		//Per eseguire questo test dovete inserire due abilita nel db. Una nome=1ab Descrizione=prima Abilita l'altra=2ab Descrizione=seconda Abilita 
 		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "password", "Enrico", "Rossi", null, abilita));
 		temp.setDescrizione("prima Abilita");
 		temp.setNome("1ab");
@@ -46,8 +48,8 @@ public class RegistrazioneTest {
 		Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "password", "Jacopo", "Bulla", null, abilita));
 		//Non ci possono essere due utenti con la stessa mail
 		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "password", "Andrea", "Bazzi", null, abilita));
-		temp.setDescrizione("prima Abilita");
-		temp.setNome("1ab");
+		temp.setDescrizione("seconda Abilita");
+		temp.setNome("2ab");
 		abilita.add(temp);
 		//Registrazione a buon fine con due abilita
 		Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("tommaso.ganelli@gmail.com", "password", "Tommaso", "Ganelli", null, abilita));
