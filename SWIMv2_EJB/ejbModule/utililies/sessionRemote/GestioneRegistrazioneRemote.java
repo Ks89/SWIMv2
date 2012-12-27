@@ -2,9 +2,9 @@ package utililies.sessionRemote;
 
 import javax.ejb.Remote;
 
-import sessionBeans.GestioneRegistrazioneLocal;
+import sessionBeans.interfaces.GestioneRegistrazioneInterface;
 
 @Remote
-public interface GestioneRegistrazioneRemote extends GestioneRegistrazioneLocal{
+public interface GestioneRegistrazioneRemote extends GestioneRegistrazioneInterface{
 
 }

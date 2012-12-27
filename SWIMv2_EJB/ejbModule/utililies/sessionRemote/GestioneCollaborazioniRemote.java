@@ -2,9 +2,9 @@ package utililies.sessionRemote;
 
 import javax.ejb.Remote;
 
-import sessionBeans.GestioneCollaborazioniLocal;
+import sessionBeans.interfaces.GestioneCollaborazioniInterface;
 
 @Remote
-public interface GestioneCollaborazioniRemote extends GestioneCollaborazioniLocal {
+public interface GestioneCollaborazioniRemote extends GestioneCollaborazioniInterface {
 
 }

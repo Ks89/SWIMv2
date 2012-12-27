@@ -6,11 +6,15 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @EqualsAndHashCode(of={"utente","abilita"})
+@AllArgsConstructor
+@NoArgsConstructor
 @Embeddable
 public class PossiedePK  implements Serializable {
 

@@ -4,11 +4,15 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @EqualsAndHashCode(of={"email"})
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Amministratore")
 public class Amministratore implements Serializable {

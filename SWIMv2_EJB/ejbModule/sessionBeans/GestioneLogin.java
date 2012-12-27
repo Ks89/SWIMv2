@@ -1,21 +1,30 @@
 package sessionBeans;
 
+import javax.annotation.PostConstruct; 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import lombok.extern.slf4j.Slf4j;
+import sessionBeans.localInterfaces.GestioneLoginLocal;
 import utililies.PasswordHasher;
 import utililies.sessionRemote.GestioneLoginRemote;
-
 import entityBeans.Amministratore;
 import entityBeans.Utente;
 
+@Slf4j
 @Stateless
-public class GestioneLogin implements GestioneLoginRemote {
+public class GestioneLogin implements GestioneLoginRemote, GestioneLoginLocal {
 
 	@PersistenceContext(unitName = "SWIMdb")
 	private EntityManager entityManager;
 
+	
+	@PostConstruct
+	public void postConstruct() {
+		log.info("Creato GestioneLogin");
+	}
+	
 	/**
 	 * Metodo che controlla se il login e' stato effettuato da parte di un amministratore
 	 * 
@@ -31,7 +40,7 @@ public class GestioneLogin implements GestioneLoginRemote {
 		if (amministratore==null) {
 			return false;
 		} 
-		
+		log.debug("pippo");
 		//se non e' null
 		String hashPassword = amministratore.getPassword();
 		return verificaPassword(passwordInserita, hashPassword);
