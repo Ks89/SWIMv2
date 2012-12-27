@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:application="http://java.sun.com/xml/ns/javaee/application_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd" version="5">
+  <display-name>SWIMv2_EAR</display-name>
+  <module>
+    <web>
+      <web-uri>SWIMv2_WEB.war</web-uri>
+      <context-root>SWIMv2_WEB</context-root>
+    </web>
+  </module>
+  <module>
+    <java>lombok.jar</java>
+  </module>
+  <module>
+    <ejb>SWIMv2.jar</ejb>
+  </module>
+</application>
