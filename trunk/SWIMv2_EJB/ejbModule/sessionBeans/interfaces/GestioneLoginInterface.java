@@ -41,4 +41,6 @@ public interface GestioneLoginInterface {
 	 */
 	public Utente getUtenteByEmail(String email);
 
+	public Amministratore getAmministratoreUnico();
+
 }
