@@ -12,22 +12,23 @@
 	<br>
 
 	<form action="Registrazione" method="POST">
-		Email: <input type="text" name="emailUtente"></input> 
+		Email: <input type="text" name="emailUtente"></input> <br> Password: <input type="password" name="password"></input> <br> Nome: <input
+			type="text" name="nome"></input> <br> Cognome: <input type="text" name="cognome"></input> <br> 
 		<br>
-		Password: <input type="password" name="password"></input>
+		Abilita' disponibili:
 		<br>
-		Nome: <input type="text" name="nome"></input> 
-		<br>
-		Cognome: <input type="text" name="cognome"></input> 
-		<br>
-		<br>Abilita' disponibili:
-		<select name="abilita">
-			<c:forEach items="${abilita}" var="item">
-				<option value="<c:out value="${item.nome}" />">
-					<c:out value="${item.descrizione}" />
-				</option>
-			</c:forEach>
-		</select>
+		<c:forEach items="${abilita}" var="item">
+			<input type="checkbox" name="abilita" value='<c:out value="${item.nome}"/>' />
+			<c:out value="${item.nome}" />
+			<br>
+		</c:forEach>
+		<!-- 		<select name="abilita"> -->
+		<%-- 			<c:forEach items="${abilita}" var="item"> --%>
+		<%-- 				<option value="<c:out value="${item.nome}" />"> --%>
+		<%-- 					<c:out value="${item.nome}" /> --%>
+		<!-- 				</option> -->
+		<%-- 			</c:forEach> --%>
+		<!-- 		</select> -->
 		<input type="submit" />
 	</form>
 

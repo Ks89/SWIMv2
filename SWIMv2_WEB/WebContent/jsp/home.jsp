@@ -8,13 +8,11 @@
 </head>
 <body>
 	<!-- Ricevo l'attributo erroreLoginFallito dalla LoginServlet, se empty non c'e' errorem altrimenti lo mostro-->
+
 	<c:if test="${!empty erroreLoginFallito}">
 	Si è verificato un errore: <c:out value="${erroreLoginFallito}"></c:out>
 	</c:if>
-	<c:if test="${!empty registrazioneSuccesso}">
-	Registrazione eseguita con successo <c:out value="${registrazioneSuccesso}"></c:out>
-	</c:if>
-
+	
 	<br>
 	Homepage
 	<br>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
+import sessionBeans.localInterfaces.GestioneRicercheLocal;
 
 import lombok.extern.slf4j.Slf4j;
 import entityBeans.Abilita;
@@ -29,7 +30,7 @@ public class ProfiloServlet extends HttpServlet {
 	@EJB
 	private GestioneCollaborazioniLocal gestCollaborazioni;
 
-	// private GestioneRicercheLocal ricerche;
+	 private GestioneRicercheLocal ricerche;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -70,6 +71,9 @@ public class ProfiloServlet extends HttpServlet {
 
 		// ottengo le abilita che possiede l'utente
 		// TODO per ora le inserisco finte poi le leggero' veramente
+		//quando dovro' leggererle dal db dovro' tenere le 2 righe sequenti commentate e cancellare l'altro
+//		List<Abilita> abilitaInsiemePersonale = ricerche.insiemeAbilitaPersonaliUtente(emailUtenteCollegato);
+//		request.setAttribute("abilita", abilitaInsiemePersonale);
 		List<Abilita> ab = new ArrayList<Abilita>();
 		ab.add(new Abilita("nomeA", "desc1"));
 		ab.add(new Abilita("nomeB", "desc2"));
