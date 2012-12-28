@@ -32,15 +32,13 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 	 */
 	public boolean registrazioneUtente(String email, String password, String nome, String cognome, Blob fotoProfilo, List<Abilita> abilita)  throws HashingException {
 		
-		//Mettere cognome e nome con l'iniziale maiuscola
-		
 		if(emailCorretta(email) && emailNonAncoraUtilizzata(email) && !nome.equals("") && !cognome.equals("") && !password.equals("") && abilita.size()>=1)//cognome e nome non nulli e abilita.size è un controllo che facciamo qua, o direttamente con javascript?
 		{
 			Utente utente= new Utente();
 			utente.setEmail(email);
-			utente.setNome(nome);
-			utente.setCognome(cognome);
-			utente.setPassword(PasswordHasher.hashPassword(password));
+			utente.setNome(nome.substring(0, 1).toUpperCase()+nome.substring(1, nome.length()).toLowerCase());
+			utente.setCognome(cognome.substring(0, 1).toUpperCase()+cognome.substring(1, cognome.length()).toLowerCase());
+			utente.setPassword(PasswordHasher.hashPassword(correggiSintassiPassword(password)));
 			utente.setFotoProfilo(fotoProfilo);
 			entityManager.persist(utente);
 			entityManager.flush();
@@ -134,6 +132,16 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 	 */
 	private boolean emailNonAncoraUtilizzata(String email){
 		return entityManager.find(Utente.class, email)==null;
+	}
+	
+	/**
+	 * Metodo per eliminare eventuali spazi vuoti all'inizio e fine della password
+	 * @param pswd
+	 * @return
+	 */
+	//dobbiamo anche controllare che non ce ne siano in mezzo?
+	private String correggiSintassiPassword(String pswd){
+		return pswd.trim();
 	}
 
 }
