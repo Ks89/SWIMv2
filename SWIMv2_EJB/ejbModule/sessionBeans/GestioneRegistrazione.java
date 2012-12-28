@@ -42,9 +42,13 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 				"nome: " + nome  + 
 				"cognome: " + cognome);
 		
+		if(nome.equals("")) { 
+			System.out.println("***************************************************************************porco dio metti sto cazzo di nome");
+		}
+		
 		if(emailCorretta(email) && emailNonAncoraUtilizzata(email) && !nome.equals("") && !cognome.equals("") && !password.equals("") && abilita.size()>=1)//cognome e nome non nulli e abilita.size è un controllo che facciamo qua, o direttamente con javascript?
 		{
-			System.out.println("___________________________________NON ENTRATO NELL'IF_______________________________");
+			System.out.println("___________________________________ENTRATO NELL'IF_______________________________");
 			
 			utente.setEmail(email);
 			utente.setNome(nome);
