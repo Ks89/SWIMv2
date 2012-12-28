@@ -24,178 +24,219 @@ import utililies.sessionRemote.GestioneAmicizieRemote;
 
 /**
  * @author Dave
- *
+ * 
  */
 @Stateless
-public class GestioneAmicizie implements GestioneAmicizieLocal, GestioneAmicizieRemote, GestioneAmicizieInterface {
+public class GestioneAmicizie implements GestioneAmicizieLocal,
+		GestioneAmicizieRemote, GestioneAmicizieInterface {
 
 	@PersistenceContext(unitName = "SWIMdb")
 	private EntityManager entityManager;
-	
 
 	/**
 	 * Metodo per creare una richiesta di Amicizia
-	 * @param emailUtente1 rappresenta la email del richiedente
-	 * @param emailUtente2 rappresenta la email dell'utente cui il richiedende vuole l'amicizia
-	 * @return <b>amicizia</b> se tutto è andato a buon fine,<b>null</b> altrimenti
+	 * 
+	 * @param emailUtente1
+	 *            rappresenta la email del richiedente
+	 * @param emailUtente2
+	 *            rappresenta la email dell'utente cui il richiedende vuole
+	 *            l'amicizia
+	 * @return <b>amicizia</b> se tutto è andato a buon fine,<b>null</b>
+	 *         altrimenti
 	 */
 	@Override
-	public Amicizia richiediAmicizia(String emailUtente1, String emailUtente2, boolean diretta) {
-		
+	public Amicizia richiediAmicizia(String emailUtente1, String emailUtente2,
+			boolean diretta) {
+
 		Utente utente1 = this.getUtenteByEmail(emailUtente1);
 		Utente utente2 = this.getUtenteByEmail(emailUtente2);
 
-		if(utente1==null || utente2==null) {
+		if (utente1 == null || utente2 == null) {
 			return null;
 		}
-		
-		AmiciziaPK amiciziaPK=new AmiciziaPK();
+
+		AmiciziaPK amiciziaPK = new AmiciziaPK();
 		Amicizia amicizia = new Amicizia();
-		
+
 		amiciziaPK.setUtente1(utente1);
 		amiciziaPK.setUtente2(utente2);
-		
+
 		amicizia.setAmiciziaPK(amiciziaPK);
 		amicizia.setDiretta(diretta);
-		
-		
+
 		entityManager.persist(amicizia);
 		entityManager.flush();
-		
+
 		return amicizia;
 	}
-	
-	
+
 	/**
 	 * Metodo per confermare una richiesta di Amicizia
-	 * @param emailUtente1 rappresenta la email del richiedente
-	 * @param emailUtente2 rappresenta la email dell'utente che sta accettando la richiesta di amicizia
+	 * 
+	 * @param emailUtente1
+	 *            rappresenta la email del richiedente
+	 * @param emailUtente2
+	 *            rappresenta la email dell'utente che sta accettando la
+	 *            richiesta di amicizia
 	 * @return <b>true</b> se tutto è andato a buon fine,<b>false</b> altrimenti
 	 */
 	@Override
 	public boolean accettaAmicizia(String emailUtente1, String emailUtente2) {
-		
+
 		GregorianCalendar calendar = new GregorianCalendar();
 		Utente utente1 = this.getUtenteByEmail(emailUtente1);
 		Utente utente2 = this.getUtenteByEmail(emailUtente2);
-		
-		if (utente1==null ||utente2==null){
+
+		if (utente1 == null || utente2 == null) {
 			return false;
 		}
-		
-		
-		AmiciziaPK amiciziaPK=new AmiciziaPK();
-		
+
+		AmiciziaPK amiciziaPK = new AmiciziaPK();
+
 		amiciziaPK.setUtente1(utente1);
 		amiciziaPK.setUtente2(utente2);
-		
-		
+
 		Amicizia amicizia = entityManager.find(Amicizia.class, amiciziaPK);
 		amicizia.setDataAccettazione(calendar.getTime());
-		
-		entityManager.persist(amicizia); //non obbligatori, funziona senza sia questo che il flush SOLO per l'update
+
+		entityManager.persist(amicizia); // non obbligatori, funziona senza sia
+											// questo che il flush SOLO per
+											// l'update
 		entityManager.flush();
-		
+
 		return true;
 	}
-	
-	
+
 	/**
 	 * Metodo per rifiutare una richiesta di Amicizia
-	 * @param emailUtente1 rappresenta la email del richiedente
-	 * @param emailUtente2 rappresenta la email dell'utente che sta rifiutando la richiesta di amicizia
+	 * 
+	 * @param emailUtente1
+	 *            rappresenta la email del richiedente
+	 * @param emailUtente2
+	 *            rappresenta la email dell'utente che sta rifiutando la
+	 *            richiesta di amicizia
 	 * @return <b>true</b> se tutto è andato a buon fine,<b>false</b> altrimenti
 	 */
 	@Override
 	public boolean rifiutaAmicizia(String emailUtente1, String emailUtente2) {
-		
+
 		Utente utente1 = this.getUtenteByEmail(emailUtente1);
 		Utente utente2 = this.getUtenteByEmail(emailUtente2);
-		
-		if (utente1==null ||utente2==null){
+
+		if (utente1 == null || utente2 == null) {
 			return false;
 		}
-		
-		
-		AmiciziaPK amiciziaPK=new AmiciziaPK();
-		
+
+		AmiciziaPK amiciziaPK = new AmiciziaPK();
+
 		amiciziaPK.setUtente1(utente1);
 		amiciziaPK.setUtente2(utente2);
-		
-		Amicizia amicizia=entityManager.find(Amicizia.class, amiciziaPK);
+
+		Amicizia amicizia = entityManager.find(Amicizia.class, amiciziaPK);
 		entityManager.remove(amicizia);
-		
+
 		return true;
 	}
-	
-	
-	
-	
-	
+
 	/**
 	 * Metodo che ritorna la lista degli amici di un utente
-	 * @param emailUtente rappresenta la email dell'utente di cui si vuole conoscere la lista degli amici
-	 * @return <b>amici</b> che rappresenta la lista degli amici dell'utente,<b>null</b> se l'utente non ha amici
+	 * 
+	 * @param emailUtente
+	 *            rappresenta la email dell'utente di cui si vuole conoscere la
+	 *            lista degli amici
+	 * @return <b>amici</b> che rappresenta la lista degli amici
+	 *         dell'utente,<b>null</b> se l'utente non ha amici
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Utente> getAmici(String emailUtente) {
 		Query query = entityManager.createNamedQuery("Amicizia.getUtentAmici1");
 		query.setParameter("emailUtente", emailUtente);
-		List<Utente> amici = (List<Utente>)query.getResultList();
-		query=entityManager.createNamedQuery("Amicizia.getUtentAmici2");
+		List<Utente> amici = (List<Utente>) query.getResultList();
+		query = entityManager.createNamedQuery("Amicizia.getUtentAmici2");
 		query.setParameter("emailUtente", emailUtente);
-		amici.addAll((List<Utente>)query.getResultList());
+		amici.addAll((List<Utente>) query.getResultList());
 		return amici;
 	}
-	
+
 	/**
-	 * Metodo che ritorna una lista di suggerimenti di amicizia per un utente di amici appartenenti al nuovo amico
-	 * @param emailUtenteAppenaAmico rappresenta la email dell'utente da cui prendere i suggerimenti
-	 * @param emailUtente rappresenta la email dell'utente a cui si vogliono suggerire amici
-	 * @return <b>suggerimenti</b> che rappresenta la lista degli amici da suggerire,<b>null</b> se non si trovano suggerimenti per l'Utente
+	 * Metodo che ritorna true se un l'utente1 e l'utente2 sono amici
+	 * 
+	 * @param emailUtente1
+	 * @param emailUtente2
+	 * @return <b>true</b> se sono amici,<b>false</b> altrimenti
 	 */
 	@Override
-	public List<Utente> getSuggerimenti(String emailUtenteAppenaAmico, String emailUtente){ //questo metodo verrà chiamato due volte, una volta per ogni utente, con le mail scambiate
-		
-		int numeroDiSuggerimenti=3;
-		int i=0;
-		Random rnd=new Random();
-		Utente utenteDaConsigliare= this.getUtenteByEmail(emailUtente);
-		List<Utente> amiciDiAmico= this.getAmici(emailUtenteAppenaAmico);
-		List<Utente> amici=this.getAmici(emailUtente);
+	public boolean sonoAmici(String emailUtente1, String emailUtente2) {
+		Utente utente1 = this.getUtenteByEmail(emailUtente1);
+		Utente utente2 = this.getUtenteByEmail(emailUtente2);
+		if (this.getAmici(emailUtente1).contains(utente2)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Metodo che ritorna una lista di suggerimenti di amicizia per un utente di
+	 * amici appartenenti al nuovo amico
+	 * 
+	 * @param emailUtenteAppenaAmico
+	 *            rappresenta la email dell'utente da cui prendere i
+	 *            suggerimenti
+	 * @param emailUtente
+	 *            rappresenta la email dell'utente a cui si vogliono suggerire
+	 *            amici
+	 * @return <b>suggerimenti</b> che rappresenta la lista degli amici da
+	 *         suggerire,<b>null</b> se l'Utente da qui si vogliono suggerimenti
+	 *         ha solo l'amico dell'amicizia appena stipulata,
+	 *         <b>suggerimenti</b> vuoto (attenzione non null) se l'altro utente
+	 *         possiede solo amici che anche tu possiedi.
+	 */
+	@Override
+	public List<Utente> getSuggerimenti(String emailUtenteAppenaAmico,
+			String emailUtente) { // questo metodo verrà chiamato due volte, una
+									// volta per ogni utente, con le mail
+									// scambiate
+
+		int numeroDiSuggerimenti = 3;
+		int i = 0;
+		int x;
+		Random rnd = new Random();
+		Utente utenteDaConsigliare = this.getUtenteByEmail(emailUtente);
+		List<Utente> amiciDiAmico = this.getAmici(emailUtenteAppenaAmico);
+		List<Utente> amici = this.getAmici(emailUtente);
 		List<Utente> suggerimenti = new ArrayList<Utente>();
-			
-			
-		
-		if(amiciDiAmico.size()<=1){//l'amico ha solo lui come amico
+
+		if (amiciDiAmico.size() <= 1) {// l'amico ha solo lui come amico
 			return null;
 		}
-		do
-		{
-			int x= rnd.nextInt(amiciDiAmico.size());
-			if ((amiciDiAmico.get(x).equals(utenteDaConsigliare))&&(amici.contains(amiciDiAmico.get(x)))){
+		do {
+			x = rnd.nextInt(amiciDiAmico.size());
+			if ((amiciDiAmico.get(x).equals(utenteDaConsigliare))
+					|| (amici.contains(amiciDiAmico.get(x)))) {
 				amiciDiAmico.remove(x);
-			}
-			else{
+			} else {
 				suggerimenti.add(amiciDiAmico.get(x));
 				amiciDiAmico.remove(x);
+				i++;
 			}
-		} while(i==3 ||amiciDiAmico.isEmpty());
+		} while (i < numeroDiSuggerimenti && amiciDiAmico.size() > 0);
 		return suggerimenti;
 	}
-	
-	
+
 	/**
 	 * Metodo per l'estrazione dell'utente dal database data la sua email
-	 * @param email = l'email dell'amministratore
-	 * @return <b>utente</b> corrispondente all'email, se esiste, <b>null</b> altrimenti
+	 * 
+	 * @param email
+	 *            = l'email dell'amministratore
+	 * @return <b>utente</b> corrispondente all'email, se esiste, <b>null</b>
+	 *         altrimenti
 	 */
 	@Override
 	public Utente getUtenteByEmail(String email) {
 		Utente utente = entityManager.find(Utente.class, email);
 		return utente;
 	}
-	
-	
+
 }
