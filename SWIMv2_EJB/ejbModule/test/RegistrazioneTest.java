@@ -80,6 +80,9 @@ public class RegistrazioneTest {
 			List<Abilita> abilita = new ArrayList<Abilita>();
 			//Per eseguire questo test dovete inserire due abilita nel db. Una nome=1ab Descrizione=prima Abilita l'altra=2ab Descrizione=seconda Abilita 
 			//Non ci si puo' registrare senza almeno una abilita
+			
+			gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Enrico", "Rossi", null, abilita);
+			
 			Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Enrico", "Rossi", null, abilita));
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("1ab"));
 			//		temp.setDescrizione("prima Abilita");

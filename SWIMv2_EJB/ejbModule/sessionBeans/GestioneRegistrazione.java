@@ -35,8 +35,17 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 		Possiede possiede= new Possiede();
 		PossiedePK possiedepk= new PossiedePK();
 		//Mettere cognome e nome con l'iniziale maiuscola
+		
+		System.out.println("----->>>>>>>>>>>>--------->>>>>>>>>>>>--------->>>>>>>>>>>>----" +
+				"email: " + email + 
+				"password: " + password + 
+				"nome: " + nome  + 
+				"cognome: " + cognome);
+		
 		if(emailCorretta(email) && emailNonAncoraUtilizzata(email) && !nome.equals("") && !cognome.equals("") && !password.equals("") && abilita.size()>=1)//cognome e nome non nulli e abilita.size è un controllo che facciamo qua, o direttamente con javascript?
 		{
+			System.out.println("___________________________________NON ENTRATO NELL'IF_______________________________");
+			
 			utente.setEmail(email);
 			utente.setNome(nome);
 			utente.setCognome(cognome);
