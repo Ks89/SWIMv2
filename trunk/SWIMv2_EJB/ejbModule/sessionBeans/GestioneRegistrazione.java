@@ -38,7 +38,7 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 			utente.setEmail(email);
 			utente.setNome(nome.substring(0, 1).toUpperCase()+nome.substring(1, nome.length()).toLowerCase());
 			utente.setCognome(cognome.substring(0, 1).toUpperCase()+cognome.substring(1, cognome.length()).toLowerCase());
-			utente.setPassword(PasswordHasher.hashPassword(correggiSintassiPassword(password)));
+			utente.setPassword(PasswordHasher.hashPassword(password));
 			utente.setFotoProfilo(fotoProfilo);
 			entityManager.persist(utente);
 			entityManager.flush();
@@ -132,16 +132,6 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 	 */
 	private boolean emailNonAncoraUtilizzata(String email){
 		return entityManager.find(Utente.class, email)==null;
-	}
-	
-	/**
-	 * Metodo per eliminare eventuali spazi vuoti all'inizio e fine della password
-	 * @param pswd
-	 * @return
-	 */
-	//dobbiamo anche controllare che non ce ne siano in mezzo?
-	private String correggiSintassiPassword(String pswd){
-		return pswd.trim();
 	}
 
 }

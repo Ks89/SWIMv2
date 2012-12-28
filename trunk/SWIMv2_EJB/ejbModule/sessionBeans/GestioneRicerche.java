@@ -9,6 +9,8 @@ import javax.persistence.Query;
 
 import entityBeans.Abilita;
 import entityBeans.Utente;
+import exceptions.LoginException;
+import exceptions.RicercheException;
 
 import sessionBeans.localInterfaces.GestioneRicercheLocal;
 import utililies.sessionRemote.GestioneRicercheRemote;
@@ -24,7 +26,9 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Utente> ricercaAiuto(List<Abilita> abilita){
+	public List<Utente> ricercaAiuto(List<Abilita> abilita)throws RicercheException{
+		if(abilita == null || abilita.size()<1)
+			throw new RicercheException(RicercheException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
 		Query query = entityManager.createNamedQuery("PossiedePK.getUtenteByAbilita");
 		query.setParameter("insiemeAbilita", abilita);
 		query.setParameter("numAbilita", abilita.size());
@@ -37,7 +41,9 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Utente> ricercaUtenti(String nome, String cognome){
+	public List<Utente> ricercaUtenti(String nome, String cognome)throws RicercheException{
+		if(nome == null || cognome==null || nome.length()==0 || cognome.length()==0)
+			throw new RicercheException(RicercheException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
 		Query query = entityManager.createNamedQuery("Utente.getUtentiByNomeCognome");
 		query.setParameter("nomeUtente", nome);
 		query.setParameter("cognomeUtente", cognome);
@@ -53,7 +59,9 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Abilita> insiemeAbilitaPersonaliUtente(String emailUtente){
+	public List<Abilita> insiemeAbilitaPersonaliUtente(String emailUtente)throws RicercheException{
+		if(emailUtente==null || emailUtente.length()==0)
+			throw new RicercheException(RicercheException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
 		Query query = entityManager.createNamedQuery("PossiedePK.getAbilitaByUtente");
 		List<Abilita> insiemeAbilitaUtente = (List<Abilita>)query.getResultList();
 		return insiemeAbilitaUtente;
