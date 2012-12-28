@@ -80,34 +80,24 @@ public class RegistrazioneTest {
 			List<Abilita> abilita = new ArrayList<Abilita>();
 			//Per eseguire questo test dovete inserire due abilita nel db. Una nome=1ab Descrizione=prima Abilita l'altra=2ab Descrizione=seconda Abilita 
 			//Non ci si puo' registrare senza almeno una abilita
-			
-			System.out.println("size size --- - - - - -- - - - - - - - : " + abilita.size());
-			
-			gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Enrico", "Rossi", null, abilita);
-			
 			Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Enrico", "Rossi", null, abilita));
+
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("1ab"));
-			//		temp.setDescrizione("prima Abilita");
-			//		temp.setNome("1ab");
-			//		abilita.add(temp);
-			//		//Non ci si puo' registrare senza nome
-			
-			
-			
+
+			//Non ci si puo' registrare senza nome
 			Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "", "Rossi", null, abilita));
-			//		//Non ci si puo' registrare senza cognome
-			//		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Enrico", "", null, abilita));
-			//		//Non ci si puo' registrare senza password
-			//		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, "", "Enrico", "Rossi", null, abilita));
-			//		//Registrazione a buon fine con una abilita
-			//		Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "Jacopo", "Bulla", null, abilita));
-			//		//Non ci possono essere due utenti con la stessa mail
-			//		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "Andrea", "Bazzi", null, abilita));
-			//		temp.setDescrizione("seconda Abilita");
-			//		temp.setNome("2ab");
-			//		abilita.add(temp);
-			//		//Registrazione a buon fine con due abilita
-			//		Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("tommaso.ganelli@gmail.com", "pippo", "Tommaso", "Ganelli", null, abilita));
+			//Non ci si puo' registrare senza cognome
+			Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Enrico", "", null, abilita));
+			//Non ci si puo' registrare senza password
+			Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, "", "Enrico", "Rossi", null, abilita));
+			//Registrazione a buon fine con una abilita
+			Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "Jacopo", "Bulla", null, abilita));
+			//Non ci possono essere due utenti con la stessa mail
+//			Assert.assertFalse(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "Andrea", "Bazzi", null, abilita));
+
+			//Registrazione a buon fine con due abilita
+			abilita.add(gestioneRegistrazione.getAbilitaByNome("2ab"));
+			Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("tommaso.ganelli@gmail.com", "pippo", "Tommaso", "Ganelli", null, abilita));
 		} catch (HashingException e) {
 			fail("HashingException: " + e);
 		}

@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class TestUtils implements TestUtilsRemote {
 
-	private static final String entityBeans[] = { "Abilita", "Amicizia", "Amministratore", "Collaborazione", "Possiede", "PropostaAbilita", "Utente"};
+	private static final String entityBeans[] = {"Possiede", "Abilita", "Amicizia", "Amministratore", "Collaborazione", "PropostaAbilita", "Utente"};
 
 	@PersistenceContext(unitName = "SWIMdb")
 	private static EntityManager entityManager;

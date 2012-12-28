@@ -31,25 +31,12 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 	 * Registra un utente con i dati pssati come parametro. Per il momento torna true se la registrazione va a buon fine.
 	 */
 	public boolean registrazioneUtente(String email, String password, String nome, String cognome, Blob fotoProfilo, List<Abilita> abilita)  throws HashingException {
-		Utente utente= new Utente();
-		Possiede possiede= new Possiede();
-		PossiedePK possiedepk= new PossiedePK();
+		
 		//Mettere cognome e nome con l'iniziale maiuscola
-		
-		System.out.println("----->>>>>>>>>>>>--------->>>>>>>>>>>>--------->>>>>>>>>>>>----" +
-				"email: " + email + 
-				"password: " + password + 
-				"nome: " + nome  + 
-				"cognome: " + cognome);
-		
-		if(nome.equals("")) { 
-			System.out.println("***************************************************************************porco dio metti sto cazzo di nome");
-		}
 		
 		if(emailCorretta(email) && emailNonAncoraUtilizzata(email) && !nome.equals("") && !cognome.equals("") && !password.equals("") && abilita.size()>=1)//cognome e nome non nulli e abilita.size è un controllo che facciamo qua, o direttamente con javascript?
 		{
-			System.out.println("___________________________________ENTRATO NELL'IF_______________________________");
-			
+			Utente utente= new Utente();
 			utente.setEmail(email);
 			utente.setNome(nome);
 			utente.setCognome(cognome);
@@ -58,11 +45,17 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 			entityManager.persist(utente);
 			entityManager.flush();
 
+			
+
 			for (Abilita a : abilita) {
+				Possiede possiede= new Possiede();
+				PossiedePK possiedepk = new PossiedePK();
 				possiedepk.setAbilita(a);
 				possiedepk.setUtente(utente);
 				possiede.setPossiedePK(possiedepk);
+				
 				entityManager.persist(possiede);
+				entityManager.flush();
 			}
 			entityManager.flush();
 			return true;
