@@ -1,8 +1,10 @@
 package it.swim.servlet.profilo;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -10,7 +12,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import sessionBeans.localInterfaces.GestioneRegistrazioneLocal;
 import sessionBeans.localInterfaces.GestioneRicercheLocal;
 
@@ -31,7 +39,7 @@ public class RegistrazioneServlet extends HttpServlet {
 
 	@EJB
 	private GestioneRicercheLocal ricerche;
-	
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -52,7 +60,7 @@ public class RegistrazioneServlet extends HttpServlet {
 		request.setAttribute("abilita", abilitaInsiemeGenerale);
 
 		log.debug("Lista abilita insieme generale : " + abilitaInsiemeGenerale.toString());
-		
+
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/registrazione.jsp").forward(request, response);
 	}
 
@@ -62,37 +70,82 @@ public class RegistrazioneServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String email = request.getParameter("emailUtente");
-		String password = request.getParameter("password");
-		String nome = request.getParameter("nome");
-		String cognome = request.getParameter("cognome");
+		List<FileItem> items;
+		Blob blob = null;
+		String email = new String();
+		String password = new String();
+		String nome = new String();
+		String cognome = new String();
 
-
-		log.debug("email: " + email );
-		log.debug("password: " + password );
-		log.debug("nome: " + nome );
-		log.debug("cognome: " + cognome );
-
-		String[] abilitaArray = request.getParameterValues("abilita");
 		List<Abilita> abilitaPersonaliRegistrazione = new ArrayList<Abilita>();
 
-		log.debug("Lista abilita passate in registrazione: " +  Arrays.toString(abilitaArray));
+		try {
+			items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 
-		
-		for(String abilitaString : abilitaArray) {
-			abilitaPersonaliRegistrazione.add(registrazione.getAbilitaByNome(abilitaString));
+			for (FileItem item : items) {
+				if (item.isFormField()) {
+					// Process regular form field (input
+					// type="text|radio|checkbox|etc", select, etc).
+					// ... (do your job here)
+
+					System.out.println("Field name:  " + item.getFieldName());
+					System.out.println("Altro nome:  " + item.getName());
+					System.out.println("Altro nome:  " + item.getString());
+
+					if(item.getFieldName().equals("emailUtente")){
+						//ottengo il valore del form field
+						email=item.getString(); 
+					}
+					if(item.getFieldName().equals("password")){
+						password=item.getString();
+					}
+					if(item.getFieldName().equals("nome")){
+						nome=item.getString();
+					}
+					if(item.getFieldName().equals("cognome")){
+						cognome=item.getString();
+					}
+					if(item.getFieldName().equals("abilita")){
+						abilitaPersonaliRegistrazione.add(registrazione.getAbilitaByNome(item.getString()));
+						log.debug("Lista abilita passate in registrazione: " +  item.getString());
+					}
+				} else {
+					// Process form file field (input type="file").
+					String fieldname = item.getFieldName();
+					String filename = item.getName();
+					InputStream filecontent = item.getInputStream();
+					log.debug("name: " + filename);
+					byte[] b = new byte[filecontent.available()];
+					filecontent.read(b);
+
+					blob=new SerialBlob(b);
+					log.debug("size:" + b.length);
+
+					log.debug("------> " + blob.length());
+				}
+			}
+
+			log.debug("email: " + email );
+			log.debug("password: " + password );
+			log.debug("nome: " + nome );
+			log.debug("cognome: " + cognome );
+
+		} catch (FileUploadException e) {
+			log.error(e.getMessage(), e);
+		} catch (SerialException e) {
+			log.error(e.getMessage(), e);
+		} catch (SQLException e) {
+			log.error(e.getMessage(), e);
 		}
-				
-		log.debug("Lista abilita passate in registrazione: " + abilitaPersonaliRegistrazione.toString());
 
-		
+
 		boolean risultatoRegistrazione = false;
 		try {
-			risultatoRegistrazione = registrazione.registrazioneUtente(email, password, nome, cognome, null, abilitaPersonaliRegistrazione);
+			risultatoRegistrazione = registrazione.registrazioneUtente(email, password, nome, cognome, blob, abilitaPersonaliRegistrazione);
 		} catch (HashingException e) {
 			log.error(e.getMessage(), e);
 		}
-		
+
 		log.debug("risultatoRegistrazione: " + risultatoRegistrazione );
 
 		if(risultatoRegistrazione) {
