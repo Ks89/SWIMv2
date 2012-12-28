@@ -30,4 +30,6 @@ public interface GestioneAmicizieInterface {
 	 */
 	public abstract Utente getUtenteByEmail(String email);
 
+	boolean sonoAmici(String emailUtente1, String emailUtente2);
+
 }
