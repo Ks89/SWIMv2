@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -59,8 +60,6 @@ public class RegistrazioneServlet extends HttpServlet {
 		List<Abilita> abilitaInsiemeGenerale = ricerche.insiemeAbilitaGenerali();
 		request.setAttribute("abilita", abilitaInsiemeGenerale);
 
-		log.debug("Lista abilita insieme generale : " + abilitaInsiemeGenerale.toString());
-
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/registrazione.jsp").forward(request, response);
 	}
 
@@ -87,11 +86,6 @@ public class RegistrazioneServlet extends HttpServlet {
 					// Process regular form field (input
 					// type="text|radio|checkbox|etc", select, etc).
 					// ... (do your job here)
-
-					System.out.println("Field name:  " + item.getFieldName());
-					System.out.println("Altro nome:  " + item.getName());
-					System.out.println("Altro nome:  " + item.getString());
-
 					if(item.getFieldName().equals("emailUtente")){
 						//ottengo il valore del form field
 						email=item.getString(); 
@@ -107,21 +101,15 @@ public class RegistrazioneServlet extends HttpServlet {
 					}
 					if(item.getFieldName().equals("abilita")){
 						abilitaPersonaliRegistrazione.add(registrazione.getAbilitaByNome(item.getString()));
-						log.debug("Lista abilita passate in registrazione: " +  item.getString());
 					}
 				} else {
 					// Process form file field (input type="file").
 					String fieldname = item.getFieldName();
 					String filename = item.getName();
 					InputStream filecontent = item.getInputStream();
-					log.debug("name: " + filename);
 					byte[] b = new byte[filecontent.available()];
 					filecontent.read(b);
-
 					blob=new SerialBlob(b);
-					log.debug("size:" + b.length);
-
-					log.debug("------> " + blob.length());
 				}
 			}
 
@@ -129,6 +117,7 @@ public class RegistrazioneServlet extends HttpServlet {
 			log.debug("password: " + password );
 			log.debug("nome: " + nome );
 			log.debug("cognome: " + cognome );
+			log.debug("Lista abilita passate in registrazione: " +  Arrays.toString(abilitaPersonaliRegistrazione.toArray()));
 
 		} catch (FileUploadException e) {
 			log.error(e.getMessage(), e);
