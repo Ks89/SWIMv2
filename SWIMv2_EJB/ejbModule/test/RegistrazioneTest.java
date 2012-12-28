@@ -91,9 +91,9 @@ public class RegistrazioneTest {
 			//Non ci si puo' registrare senza password
 			Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, "", "Enrico", "Rossi", null, abilita));
 			//Registrazione a buon fine con una abilita
-			Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "Jacopo", "Bulla", null, abilita));
+			Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "jacopo", "Bulla", null, abilita));
 			//Non ci possono essere due utenti con la stessa mail
-//			Assert.assertFalse(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "Andrea", "Bazzi", null, abilita));
+			Assert.assertFalse(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "Andrea", "Bazzi", null, abilita));
 
 			//Registrazione a buon fine con due abilita
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("2ab"));
