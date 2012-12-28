@@ -1,6 +1,5 @@
 package sessionBeans;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -8,12 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.hibernate.Criteria;
-
 import entityBeans.Abilita;
-import entityBeans.Collaborazione;
-import entityBeans.Possiede;
-import entityBeans.PossiedePK;
 import entityBeans.Utente;
 
 import sessionBeans.localInterfaces.GestioneRicercheLocal;
@@ -59,7 +53,7 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Abilita> insiemeAbilitaSpecificoUtente(String emailUtente){
+	public List<Abilita> insiemeAbilitaPersonaliUtente(String emailUtente){
 		Query query = entityManager.createNamedQuery("PossiedePK.getAbilitaByUtente");
 		List<Abilita> insiemeAbilitaUtente = (List<Abilita>)query.getResultList();
 		return insiemeAbilitaUtente;
