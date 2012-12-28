@@ -81,6 +81,8 @@ public class RegistrazioneTest {
 			//Per eseguire questo test dovete inserire due abilita nel db. Una nome=1ab Descrizione=prima Abilita l'altra=2ab Descrizione=seconda Abilita 
 			//Non ci si puo' registrare senza almeno una abilita
 			
+			System.out.println("size size --- - - - - -- - - - - - - - : " + abilita.size());
+			
 			gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Enrico", "Rossi", null, abilita);
 			
 			Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Enrico", "Rossi", null, abilita));
@@ -89,6 +91,9 @@ public class RegistrazioneTest {
 			//		temp.setNome("1ab");
 			//		abilita.add(temp);
 			//		//Non ci si puo' registrare senza nome
+			
+			
+			
 			Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "", "Rossi", null, abilita));
 			//		//Non ci si puo' registrare senza cognome
 			//		Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Enrico", "", null, abilita));
