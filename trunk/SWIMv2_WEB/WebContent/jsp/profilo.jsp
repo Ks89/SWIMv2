@@ -51,7 +51,7 @@
 	<br>Abilita' dell'utente:
 	<c:forEach items="${abilita}" var="item">
 		<ul>
-			<li><c:out value="${item.descrizione}" />
+			<li><c:out value="${item.nome}" />
 		</ul>
 		<!--  	<option value="<c:out value="${item.nome}" />">
 				<c:out value="${item.descrizione}" />

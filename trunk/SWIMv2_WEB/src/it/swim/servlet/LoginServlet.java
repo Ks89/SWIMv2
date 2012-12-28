@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import exceptions.HashingException;
+import exceptions.LoginException;
+
 import sessionBeans.localInterfaces.GestioneLoginLocal;
 
 import lombok.extern.slf4j.Slf4j;
@@ -68,20 +71,48 @@ public class LoginServlet extends HttpServlet {
 		log.debug(emailUtente + " - " + password);
 
 		// esego il login e vedo il risultato
-		boolean ok = login.esegueLoginUtente(emailUtente, password);
-		log.debug("Esito: " + ok);
-		if (ok) {
-			// se il login riesce setto nella sessione l'email dell'utente che
-			// si e' loggato
-			request.getSession().setAttribute("utenteCollegato", emailUtente);
-			// processata la request, uso la response per fare il redirect alla pagina del profilo dell'utente
-			response.sendRedirect("Profilo/Profilo");
-		} else {
-			//se il login fallisce, metto le request un messaggio di errore sotto il nome di erroreLoginFallito
-			request.setAttribute("erroreLoginFallito", "Email o password non riconosciute");
+		boolean logineEseguitoCorrettamente = false;
+		try {
+			logineEseguitoCorrettamente = login.esegueLoginUtente(emailUtente, password);
+			log.debug("Esito: " + logineEseguitoCorrettamente);
+
+			if (logineEseguitoCorrettamente) {
+				// se il login riesce setto nella sessione l'email dell'utente che
+				// si e' loggato
+				request.getSession().setAttribute("utenteCollegato", emailUtente);
+				// processata la request, uso la response per fare il redirect alla pagina del profilo dell'utente
+				response.sendRedirect("Profilo/Profilo");
+			} else {
+				//se il login fallisce, metto le request un messaggio di errore sotto il nome di erroreLoginFallito
+				request.setAttribute("erroreLoginFallito", "Email o password non riconosciute");
+				getServletConfig().getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(request, response);
+			}
+
+		} catch (LoginException e) {
+			log.error(e.getMessage(), e);
+			if(e.getCausa()==LoginException.Causa.ALCUNIPARAMETRINULLIOVUOTI) {
+				request.setAttribute("erroreLoginFallito", "LoginException: Email o password non riconosciute");
+			} else {
+				if(e.getCausa()==LoginException.Causa.ERRORESCONOSCIUTO) {
+					request.setAttribute("erroreLoginFallito", "LoginException: Errore durante il login - causa sconosciuta");
+				} else {
+					request.setAttribute("erroreLoginFallito", "LoginException: Errore durante il login - causa sconosciuta");
+				}
+			}
+			getServletConfig().getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(request, response);
+		} catch (HashingException e) {
+			log.error(e.getMessage(), e);
+			if(e.getCausa()==HashingException.Causa.ALCUNIPARAMETRINULLIOVUOTI) {
+				request.setAttribute("erroreLoginFallito", "HashingException: Errore passaggio parametri");
+			} else {
+				if(e.getCausa()==HashingException.Causa.ERRORESCONOSCIUTO) {
+					request.setAttribute("erroreLoginFallito", "HashingException: causa sconosciuta");
+				} else {
+					request.setAttribute("erroreLoginFallito", "HashingException: ausa sconosciuta");
+				}
+			}
 			getServletConfig().getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(request, response);
 		}
-
 	}
 
 }
