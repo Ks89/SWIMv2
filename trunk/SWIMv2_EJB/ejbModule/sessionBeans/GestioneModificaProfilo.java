@@ -57,7 +57,6 @@ public class GestioneModificaProfilo implements GestioneModificaProfiloLocal, Ge
 			entityManager.persist(possiede);
 			entityManager.flush();
 		}
-		entityManager.flush();
 		return true;
 		
 	}
