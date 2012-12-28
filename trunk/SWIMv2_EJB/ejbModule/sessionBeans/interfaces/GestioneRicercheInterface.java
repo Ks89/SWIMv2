@@ -7,7 +7,9 @@ import entityBeans.Utente;
 
 public interface GestioneRicercheInterface {
 	
-	public abstract List<Utente> ricercaAiuto(List<Abilita> abilita);
-
-	public abstract List<Utente> ricercaUtenti(String nome, String cognome);
+	public List<Utente> ricercaAiuto(List<Abilita> abilita);
+	public List<Utente> ricercaUtenti(String nome, String cognome);
+	public List<Abilita> insiemeAbilitaGenerali();
+	public List<Abilita> insiemeAbilitaPersonaliUtente(String emailUtente);
+	
 }
