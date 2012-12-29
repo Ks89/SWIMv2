@@ -30,7 +30,7 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 			throw new RicercheException(RicercheException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
 		Query query = entityManager.createNamedQuery("PossiedePK.getUtenteByAbilita");
 		query.setParameter("insiemeAbilita", abilita);
-		query.setParameter("numAbilita", abilita.size());
+		//query.setParameter("numAbilita", abilita.size());
 		List<Utente> risultatoRicerca = (List<Utente>)query.getResultList();
 		return risultatoRicerca;
 	}
@@ -66,5 +66,10 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 		List<Abilita> insiemeAbilitaUtente = (List<Abilita>)query.getResultList();
 		return insiemeAbilitaUtente;
 
+	}
+	
+	
+	public Utente getUtenteByEmail(String email){
+		return entityManager.find(Utente.class, email);
 	}
 }

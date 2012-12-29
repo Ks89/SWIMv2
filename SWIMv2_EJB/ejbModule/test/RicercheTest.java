@@ -15,6 +15,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import entityBeans.Abilita;
+import entityBeans.Utente;
 import exceptions.HashingException;
 import exceptions.RicercheException;
 
@@ -114,6 +115,37 @@ public class RicercheTest {
 	}
 	
 	@Test
+	public void ricercaUtenti() throws RicercheException
+	{
+		Utente u=gestioneRicerche.getUtenteByEmail("bulla.jacopo@gmail.com");
+		Assert.assertTrue(gestioneRicerche.ricercaUtenti("Jacopo", "Bulla").contains(u));
+		try{
+			gestioneRicerche.ricercaUtenti("", "Bulla");
+			Assert.assertTrue(false);
+		}
+		catch(RicercheException ex)
+		{
+			Assert.assertTrue(true);
+		}
+		try{
+			gestioneRicerche.ricercaUtenti("Jacopo", "");
+			Assert.assertTrue(false);
+		}
+		catch(RicercheException ex)
+		{
+			Assert.assertTrue(true);
+		}
+		try{
+			gestioneRicerche.ricercaUtenti("", "");
+			Assert.assertTrue(false);
+		}
+		catch(RicercheException ex)
+		{
+			Assert.assertTrue(true);
+		}
+	}
+	
+	@Test
 	public void elencoAbilitaPersonaliUtente() throws RicercheException
 	{
 		List<Abilita> ab = new ArrayList<Abilita>();
@@ -122,7 +154,5 @@ public class RicercheTest {
 		Assert.assertTrue(gestioneRicerche.insiemeAbilitaPersonaliUtente("tommaso.ganelli@gmail.com").contains(ab.get(0)));
 		Assert.assertTrue(gestioneRicerche.insiemeAbilitaPersonaliUtente("tommaso.ganelli@gmail.com").contains(ab.get(1)));
 	}
-	
-	
 	
 }

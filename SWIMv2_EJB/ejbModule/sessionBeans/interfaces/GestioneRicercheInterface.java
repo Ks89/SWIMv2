@@ -12,5 +12,5 @@ public interface GestioneRicercheInterface {
 	public List<Utente> ricercaUtenti(String nome, String cognome) throws RicercheException;
 	public List<Abilita> insiemeAbilitaGenerali();
 	public List<Abilita> insiemeAbilitaPersonaliUtente(String emailUtente) throws RicercheException;
-	
+	public Utente getUtenteByEmail(String email);
 }
