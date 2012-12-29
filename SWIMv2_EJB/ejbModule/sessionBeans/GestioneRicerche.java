@@ -28,7 +28,7 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 	public List<Utente> ricercaAiuto(List<Abilita> abilita)throws RicercheException{
 		if(abilita == null || abilita.size()<1)
 			throw new RicercheException(RicercheException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
-		Query query = entityManager.createNamedQuery("PossiedePK.getUtenteByAbilita");
+		Query query = entityManager.createNamedQuery("Possiede.getUtenteByAbilita");
 		query.setParameter("insiemeAbilita", abilita);
 		//query.setParameter("numAbilita", abilita.size());
 		List<Utente> risultatoRicerca = (List<Utente>)query.getResultList();
@@ -61,7 +61,7 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 	public List<Abilita> insiemeAbilitaPersonaliUtente(String emailUtente)throws RicercheException{
 		if(emailUtente==null || emailUtente.length()==0)
 			throw new RicercheException(RicercheException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
-		Query query = entityManager.createNamedQuery("PossiedePK.getAbilitaByUtente");
+		Query query = entityManager.createNamedQuery("Possiede.getAbilitaByUtente");
 		query.setParameter("emailUtente", emailUtente);
 		List<Abilita> insiemeAbilitaUtente = (List<Abilita>)query.getResultList();
 		return insiemeAbilitaUtente;
