@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import entityBeans.Abilita;
 import exceptions.HashingException;
+import exceptions.RicercheException;
 
 import utililies.sessionRemote.GestioneProposteRemote;
 import utililies.sessionRemote.GestioneRegistrazioneRemote;
@@ -31,18 +32,19 @@ public class RicercheTest {
 	private static TestUtilsRemote testUtils;
 	private GestioneProposteRemote gestioneProposte;
 	private GestioneRegistrazioneRemote gestioneRegistrazione;
+	private List<Abilita> abilita = new ArrayList<Abilita>();
 	
 	public RicercheTest() throws NamingException {
 		Properties env = new Properties();
 		env.setProperty("java.naming.factory.initial","org.jnp.interfaces.NamingContextFactory");
 		env.setProperty("java.naming.provider.url", "localhost:1099");
 		env.setProperty("java.naming.factory.url.pkgs", "org.jboss.naming");
-		List<Abilita> abilita = new ArrayList<Abilita>();
+		
 
 		//non cancellarla, da tenere per quando sistemiamo i progetti e li mettiamo su google code
 		//	 	Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneCollaborazioni/remote-utililies.sessionRemote.GestioneCollaborazioniRemote");
 		try{
-			Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneRegistrazione/remote-utililies.sessionRemote.GestioneRegistrazioneRemote");
+			Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneRicerche/remote-utililies.sessionRemote.GestioneRicercheRemote");
 			gestioneRicerche = (GestioneRicercheRemote) PortableRemoteObject.narrow(obj, GestioneRicercheRemote.class);
 
 			obj = (new InitialContext(env)).lookup("SWIMv2_EAR/TestUtils/remote-test.TestUtilsRemote");
@@ -94,8 +96,31 @@ public class RicercheTest {
 	}
 	
 	@Test
-	public void prova(){
-		Assert.assertTrue(true);
+	public void elencoAbilitaGenerali(){
+		List<Abilita> ab = new ArrayList<Abilita>();
+		ab.add(new Abilita("1ab","Descrizione"));
+		ab.add(new Abilita("2ab","Descrizione"));
+		ab.add(new Abilita("3ab","Descrizione"));
+		ab.add(new Abilita("4ab","Descrizione"));
+		ab.add(new Abilita("5ab","Descrizione"));
+		ab.add(new Abilita("6ab","Descrizione"));
+		ab.add(new Abilita("7ab","Descrizione"));
+		ab.add(new Abilita("8ab","Descrizione"));
+		for (Abilita abilita : ab) {
+			Assert.assertTrue(gestioneRicerche.insiemeAbilitaGenerali().contains(abilita));
+		}
+		Assert.assertTrue(gestioneRicerche.insiemeAbilitaGenerali().size()==ab.size());
+		
+	}
+	
+	@Test
+	public void elencoAbilitaPersonaliUtente() throws RicercheException
+	{
+		List<Abilita> ab = new ArrayList<Abilita>();
+		ab.add(new Abilita("1ab","Descrizione"));
+		ab.add(new Abilita("2ab","Descrizione"));
+		Assert.assertTrue(gestioneRicerche.insiemeAbilitaPersonaliUtente("tommaso.ganelli@gmail.com").contains(ab.get(0)));
+		Assert.assertTrue(gestioneRicerche.insiemeAbilitaPersonaliUtente("tommaso.ganelli@gmail.com").contains(ab.get(1)));
 	}
 	
 	
