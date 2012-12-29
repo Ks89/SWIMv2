@@ -9,7 +9,6 @@ import javax.persistence.Query;
 
 import entityBeans.Abilita;
 import entityBeans.Utente;
-import exceptions.LoginException;
 import exceptions.RicercheException;
 
 import sessionBeans.localInterfaces.GestioneRicercheLocal;
@@ -63,7 +62,9 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 		if(emailUtente==null || emailUtente.length()==0)
 			throw new RicercheException(RicercheException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
 		Query query = entityManager.createNamedQuery("PossiedePK.getAbilitaByUtente");
+		query.setParameter("emailUtente", emailUtente);
 		List<Abilita> insiemeAbilitaUtente = (List<Abilita>)query.getResultList();
 		return insiemeAbilitaUtente;
+
 	}
 }
