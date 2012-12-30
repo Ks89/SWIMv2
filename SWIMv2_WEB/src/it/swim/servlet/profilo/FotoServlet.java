@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import exceptions.LoginException;
+
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 
 /**
@@ -42,10 +44,14 @@ public class FotoServlet extends HttpServlet {
 		}
 		try {
 			Blob blob = gestioneCollaborazioni.getUtenteByEmail(emailUtenteCollegato).getFotoProfilo();
-			byte[] foto = blob.getBytes(1, (int)blob.length());
-			response.setContentType("image/jpg");
-			response.getOutputStream().write(foto);
+			if(blob!=null) {
+				byte[] foto = blob.getBytes(1, (int)blob.length());
+				response.setContentType("image/jpg");
+				response.getOutputStream().write(foto);
+			}
 		} catch(SQLException e) {
+
+		} catch (LoginException e) {
 
 		}
 	}

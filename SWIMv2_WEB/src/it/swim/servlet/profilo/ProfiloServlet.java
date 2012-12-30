@@ -19,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 import entityBeans.Abilita;
 import entityBeans.Collaborazione;
 import entityBeans.Utente;
+import exceptions.LoginException;
+import exceptions.RicercheException;
 
 /**
  * Servlet implementation class ProfiloServlet
@@ -29,7 +31,7 @@ public class ProfiloServlet extends HttpServlet {
 
 	@EJB
 	private GestioneCollaborazioniLocal gestCollaborazioni;
-	
+
 	@EJB
 	private GestioneRicercheLocal ricerche;
 
@@ -58,37 +60,40 @@ public class ProfiloServlet extends HttpServlet {
 		}
 
 		// ottengo utente collegato con riferimento al vero oggetto Utente
-		Utente utenteCollegato = gestCollaborazioni.getUtenteByEmail(emailUtenteCollegato);
+		Utente utenteCollegato;
+		try {
+			utenteCollegato = gestCollaborazioni.getUtenteByEmail(emailUtenteCollegato);
+			// mando sulla request i dati dell'utente tramite il setAttribute, e li
+			// contraddistinguo dai 2 parametri passati come string
+			request.setAttribute("cognomeUtenteCollegato", utenteCollegato.getCognome());
+			request.setAttribute("nomeUtenteCollegato", utenteCollegato.getNome());
 
-		// mando sulla request i dati dell'utente tramite il setAttribute, e li
-		// contraddistinguo dai 2 parametri passati come string
-		request.setAttribute("cognomeUtenteCollegato", utenteCollegato.getCognome());
-		request.setAttribute("nomeUtenteCollegato", utenteCollegato.getNome());
+			// ottengo punteggio di feedback dell'utente
+			Double punteggio = gestCollaborazioni.getPunteggioFeedback(emailUtenteCollegato);
+			log.debug("punteggioUtenteCollegato:" + punteggio);
+			request.setAttribute("punteggioUtenteCollegato", punteggio);
 
-		// ottengo punteggio di feedback dell'utente
-		Double punteggio = gestCollaborazioni.getPunteggioFeedback(emailUtenteCollegato);
-		log.debug("punteggioUtenteCollegato:" + punteggio);
-		request.setAttribute("punteggioUtenteCollegato", punteggio);
+			// Collaborazioni
+			List<Collaborazione> collabora = gestCollaborazioni.getCollaborazioniCreate(emailUtenteCollegato);
+			request.setAttribute("collabCreate", collabora);
+		} catch (LoginException e) {
+			log.error(e.getMessage(), e);
+		}
 
 		// ottengo le abilita che possiede l'utente
 		// TODO per ora le inserisco finte poi le leggero' veramente
 		//quando dovro' leggererle dal db dovro' tenere le 2 righe sequenti commentate e cancellare l'altro
-//		List<Abilita> abilitaInsiemePersonale = ricerche.insiemeAbilitaPersonaliUtente(emailUtenteCollegato);
-//		request.setAttribute("abilita", abilitaInsiemePersonale);
-		List<Abilita> ab = new ArrayList<Abilita>();
-		ab.add(new Abilita("nomeA", "desc1"));
-		ab.add(new Abilita("nomeB", "desc2"));
-		ab.add(new Abilita("nomeC", "desc3"));
-		ab.add(new Abilita("nomeD", "desc4"));
-		ab.add(new Abilita("nomeE", "desc5"));
-		ab.add(new Abilita("nomeF", "desc6"));
-		request.setAttribute("abilita", ab);
-
-		// Collaborazioni
-		List<Collaborazione> collabora = gestCollaborazioni.getCollaborazioniCreate(emailUtenteCollegato);
-		request.setAttribute("collabCreate", collabora);
-
-		getServletConfig().getServletContext().getRequestDispatcher("/jsp/profilo.jsp").forward(request, response);
+//			List<Abilita> abilitaInsiemePersonale = ricerche.insiemeAbilitaPersonaliUtente(emailUtenteCollegato);
+			List<Abilita> abilitaInsiemePersonale = new ArrayList<Abilita>();
+			abilitaInsiemePersonale.add(new Abilita("nomeA", "desc1"));
+			abilitaInsiemePersonale.add(new Abilita("nomeB", "desc2"));
+			abilitaInsiemePersonale.add(new Abilita("nomeC", "desc3"));
+			abilitaInsiemePersonale.add(new Abilita("nomeD", "desc4"));
+			abilitaInsiemePersonale.add(new Abilita("nomeE", "desc5"));
+			abilitaInsiemePersonale.add(new Abilita("nomeF", "desc6"));
+			request.setAttribute("abilita", abilitaInsiemePersonale);
+		
+			getServletConfig().getServletContext().getRequestDispatcher("/jsp/profilo.jsp").forward(request, response);
 	}
 
 	/**
