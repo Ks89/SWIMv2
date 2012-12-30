@@ -37,7 +37,7 @@
 	<br>
 	<br> Foto:
 	<br>
-	<img src="Foto" />
+	<img src="foto" />
 	<br>
 	<br> Email:
 	<c:out value="${sessionScope.utenteCollegato}"></c:out>
@@ -59,7 +59,7 @@
 	</c:forEach>
 
 
-	<a href="../Home">Torna alla Homepage</a>
+	<a href="../home">Torna alla Homepage</a>
 	<br>
 
 	<br>
@@ -73,7 +73,7 @@
 		<c:forEach items="${collabCreate}" var="item">
 			<tr>
 				<td><c:out value="${item.utenteRicevente.cognome}" />&nbsp;<c:out value="${item.utenteRicevente.nome}" /></td>
-				<td><a href="../Collaborazione/DettaglioCollaborazione?id=<c:out value="${item.id}" />"><c:out value="${item.nome}" /></a></td>
+				<td><a href="../collaborazione/dettaglioCollaborazione?id=<c:out value="${item.id}" />"><c:out value="${item.nome}" /></a></td>
 				<td><c:out value="${item.punteggioFeedback}" /></td>
 			</tr>
 		</c:forEach>
@@ -95,11 +95,11 @@
 		<br>
 	</c:forEach>
 				
-	<form action="Upload" method="POST" enctype="multipart/form-data">
+	<form action="upload" method="POST" enctype="multipart/form-data">
 		<input name="file" type="file" /> <br> <input type="submit" />
 	</form>
 
-	<a href="../Login?esci=true">Logout</a>
+	<a href="../login?esci=true">Logout</a>
 	<!-- Sarà una servlet dedicata -->
 </body>
 </html>

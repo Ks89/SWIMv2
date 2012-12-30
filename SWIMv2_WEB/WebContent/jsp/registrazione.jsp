@@ -11,7 +11,7 @@
 	Homepage
 	<br>
 
-	<form action="Registrazione" method="POST" enctype="multipart/form-data">
+	<form action="registrazione" method="POST" enctype="multipart/form-data">
 		Email: <input type="text" name="emailUtente"></input> <br> Password: <input type="password" name="password"></input> <br> Nome: <input
 			type="text" name="nome"></input> <br> Cognome: <input type="text" name="cognome"></input> <br> 
 		<br>

@@ -142,7 +142,7 @@ public class RegistrazioneServlet extends HttpServlet {
 
 			request.getSession().setAttribute("utenteCollegato", email);
 
-			response.sendRedirect("Profilo/Profilo");
+			response.sendRedirect("profilo/profilo");
 		} else {
 			log.debug("Errore registrazione");
 			getServletConfig().getServletContext().getRequestDispatcher("/jsp/registrazione.jsp").forward(request, response);

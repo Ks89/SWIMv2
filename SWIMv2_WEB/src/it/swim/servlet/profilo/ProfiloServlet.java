@@ -29,8 +29,9 @@ public class ProfiloServlet extends HttpServlet {
 
 	@EJB
 	private GestioneCollaborazioniLocal gestCollaborazioni;
-
-	 private GestioneRicercheLocal ricerche;
+	
+	@EJB
+	private GestioneRicercheLocal ricerche;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -52,7 +53,7 @@ public class ProfiloServlet extends HttpServlet {
 		// se e' null e' perche' l'utente non e' collegato e allora devo fare il
 		// redirect alla home
 		if (emailUtenteCollegato == null) {
-			response.sendRedirect("../Home");
+			response.sendRedirect("../home");
 			return;
 		}
 

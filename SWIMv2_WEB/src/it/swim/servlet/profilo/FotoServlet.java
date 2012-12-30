@@ -37,7 +37,7 @@ public class FotoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String emailUtenteCollegato = (String) UtenteCollegatoUtil.getEmailUtenteCollegato(request);
 		if (emailUtenteCollegato == null) {
-			response.sendRedirect("Home");
+			response.sendRedirect("home");
 			return;
 		}
 		try {
