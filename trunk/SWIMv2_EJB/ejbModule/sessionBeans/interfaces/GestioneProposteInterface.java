@@ -9,6 +9,9 @@ import entityBeans.Utente;
 
 public interface GestioneProposteInterface {
 
+	public Abilita getAbilitaByNome(String nome);
+
+	
 	/**
 	 * Metodo con cui l'Amministratore vede tutte le proposte abilita' ANCORA
 	 * NON GESTITE, indipendentemente dall'utente che l'ha fatta
@@ -41,6 +44,9 @@ public interface GestioneProposteInterface {
 
 	public Abilita inserisciAbilitaAutonomamente(String nomeNuovaAbilita, String descrizione);
 
+	public Abilita confermaPropostaAbilitaSpecificandoAttributi(Long idPropostaAbilita, String nomeNuovaAbilita, String descrizione);
+
+	
 	/**
 	 * Metodo per l'estrazione dell'utente dal database data la sua email
 	 * 

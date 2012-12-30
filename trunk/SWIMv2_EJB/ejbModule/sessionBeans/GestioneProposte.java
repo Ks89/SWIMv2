@@ -22,6 +22,11 @@ public class GestioneProposte implements GestioneProposteLocal, GestioneProposte
 	@PersistenceContext(unitName = "SWIMdb")
 	private EntityManager entityManager;
 
+	
+	public Abilita getAbilitaByNome(String nome) {
+		return entityManager.find(Abilita.class, nome);
+	}
+	
 	/**
 	 * Metodo con cui l'Amministratore vede tutte le proposte abilita' ANCORA
 	 * NON GESTITE, indipendentemente dall'utente che l'ha fatta
@@ -128,6 +133,36 @@ public class GestioneProposte implements GestioneProposteLocal, GestioneProposte
 		}
 	}
 
+	
+	
+	//TODO METODO ANCORA DA TESTARE
+	@Override
+	public Abilita confermaPropostaAbilitaSpecificandoAttributi(Long idPropostaAbilita, String nomeNuovaAbilita, String descrizione) {
+		GregorianCalendar calendar = new GregorianCalendar();
+
+		Amministratore amministratore = this.getAmministratoreUnico();
+		if (amministratore != null) {
+
+			//ora confermo la proposta precedente
+			PropostaAbilita propostaAbilita = this.getPropostaAbilitaById(idPropostaAbilita);
+			propostaAbilita.setDataAccettazione(calendar.getTime());
+			entityManager.persist(propostaAbilita);
+			entityManager.flush();
+			
+			Abilita abilita = new Abilita();
+			abilita.setNome(nomeNuovaAbilita);
+			abilita.setDescrizione(descrizione);
+
+			entityManager.persist(abilita);
+			entityManager.flush();
+			return abilita;
+		} else {
+			return null;
+		}
+	}
+	
+	
+	
 	/**
 	 * Metodo per l'estrazione dell'utente dal database data la sua email
 	 * 

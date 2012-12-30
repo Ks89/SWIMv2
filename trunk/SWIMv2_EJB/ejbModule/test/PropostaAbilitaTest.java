@@ -1,5 +1,6 @@
 package test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -146,10 +147,15 @@ public class PropostaAbilitaTest {
 
 		Abilita abilitaInserita = gestioneProposte.inserisciAbilitaAutonomamente(NOME_ABILITA1, "fsdsgsd");
 
-		//TODO ancora da finire, perche' manca metodo per leggere abilita dal db
+		Abilita abilitaAppenaInseritaRiletta = gestioneProposte.getAbilitaByNome(NOME_ABILITA1);
 
-		//		Abilita abilitaAppenaInseritaRiletta = gestioneProposte.getAbilitaByNome(NOME_ABILITA);
-
-		//		assertEquals(abilitaInserita,abilitaAppenaInseritaRiletta);
+		assertEquals(abilitaInserita,abilitaAppenaInseritaRiletta);
 	}
+	
+	
+	@Test
+	public void testConfermaPropostaAbilitaSpecificandoAttributi() {
+		//TODO METTERE QUI IL TEST DEL METODO confermaPropostaAbilitaSpecificandoAttributi
+	}
+
 }
