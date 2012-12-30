@@ -17,6 +17,7 @@ import org.junit.Test;
 import entityBeans.Abilita;
 import entityBeans.Utente;
 import exceptions.HashingException;
+import exceptions.ProposteException;
 import exceptions.RegistrazioneException;
 import exceptions.RicercheException;
 
@@ -29,7 +30,9 @@ public class RicercheTest {
 	private static final String MAIL_GIOVANNINO = "giovannino@gmail.com";
 	private static final String MAIL_DAVIDE = "davide@gmail.com";
 	private static final String MAIL_JACOPO = "bulla.jacopo@gmail.com";
+	private static final String MAIL_ADMIN = "admin@swim.it";
 	private static final String PASSWORD = "pippo";
+
 	private GestioneRicercheRemote gestioneRicerche;
 	private static TestUtilsRemote testUtils;
 	private GestioneProposteRemote gestioneProposte;
@@ -70,14 +73,14 @@ public class RicercheTest {
 			//aggiunge amministratore
 			gestioneRegistrazione.registrazioneAdminTest();
 			//Inserisce due abilità nel DB
-			gestioneProposte.inserisciAbilitaAutonomamente("1ab","Descrizione");
-			gestioneProposte.inserisciAbilitaAutonomamente("2ab","Descrizione");
-			gestioneProposte.inserisciAbilitaAutonomamente("3ab","Descrizione");
-			gestioneProposte.inserisciAbilitaAutonomamente("4ab","Descrizione");
-			gestioneProposte.inserisciAbilitaAutonomamente("5ab","Descrizione");
-			gestioneProposte.inserisciAbilitaAutonomamente("6ab","Descrizione");
-			gestioneProposte.inserisciAbilitaAutonomamente("7ab","Descrizione");
-			gestioneProposte.inserisciAbilitaAutonomamente("8ab","Descrizione");
+			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN, "1ab","Descrizione");
+			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN,"2ab","Descrizione");
+			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN,"3ab","Descrizione");
+			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN,"4ab","Descrizione");
+			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN,"5ab","Descrizione");
+			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN,"6ab","Descrizione");
+			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN,"7ab","Descrizione");
+			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN,"8ab","Descrizione");
 			//aggiunge due utenti nel DB
 			gestioneRegistrazione.registrazioneUtentePerTest(MAIL_PEPPINO, PASSWORD , "peppino", "peppo");
 			gestioneRegistrazione.registrazioneUtentePerTest(MAIL_GIOVANNINO, PASSWORD, "davide", "caio");
@@ -93,8 +96,9 @@ public class RicercheTest {
 			
 		} catch (HashingException e) {
 			fail("HashingException: " + e);
+		} catch (ProposteException e) {
+			fail("ProposteException: " + e);
 		}
-
 	}
 	
 	@Test

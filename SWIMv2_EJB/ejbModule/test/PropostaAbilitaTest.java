@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 import java.util.Properties;
@@ -15,6 +16,7 @@ import org.junit.Test;
 
 import entityBeans.Abilita;
 import entityBeans.PropostaAbilita;
+import exceptions.ProposteException;
 
 import utililies.sessionRemote.GestioneProposteRemote;
 
@@ -23,6 +25,7 @@ public class PropostaAbilitaTest {
 	private static final String MAIL_PEPPINO = "peppino@gmail.com";
 	private static final String MAIL_GIOVANNINO = "giovannino@gmail.com";
 	private static final String MAIL_DAVIDE = "davide@gmail.com";
+	private static final String MAIL_ADMIN = "admin@swim.it";
 	private static final String NOME_ABILITA1 = "nomeAbilita1";
 	private static final String NOME_ABILITA2 = "nomeAbilita2";
 	private static final String NOME_ABILITA3 = "nomeAbilita3";
@@ -43,7 +46,7 @@ public class PropostaAbilitaTest {
 		try {
 			Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneProposte/remote-utililies.sessionRemote.GestioneProposteRemote");
 			gestioneProposte = (GestioneProposteRemote) PortableRemoteObject.narrow(obj, GestioneProposteRemote.class);
-			
+
 			obj = (new InitialContext(env)).lookup("SWIMv2_EAR/TestUtils/remote-test.TestUtilsRemote");
 			testUtils = (TestUtilsRemote) PortableRemoteObject.narrow(obj, TestUtilsRemote.class);
 		} catch (NamingException e) {
@@ -58,28 +61,26 @@ public class PropostaAbilitaTest {
 		testUtils.svuotaTabellaDatabase("Possiede");
 		testUtils.svuotaTabellaDatabase("Abilita");
 
-		//inserisco delle proposteabilita
-		PropostaAbilita propostaAppenaInserita1 = gestioneProposte.inserisciPropostaUtente(MAIL_PEPPINO, NOME_ABILITA1, "sadada");
-		gestioneProposte.inserisciPropostaUtente(MAIL_PEPPINO, NOME_ABILITA2, "bdb");
-		PropostaAbilita propostaAppenaInserita3 = gestioneProposte.inserisciPropostaUtente(MAIL_GIOVANNINO, NOME_ABILITA3, "rbrw");
-		PropostaAbilita propostaAppenaInserita4 = gestioneProposte.inserisciPropostaUtente(MAIL_GIOVANNINO, NOME_ABILITA4, "vegq");
-		gestioneProposte.inserisciPropostaUtente(MAIL_DAVIDE, NOME_ABILITA5, "dsfsdfsd");
+		try {
+			//inserisco delle proposteabilita
+			PropostaAbilita propostaAppenaInserita1 = gestioneProposte.inserisciPropostaUtente(MAIL_PEPPINO, NOME_ABILITA1, "sadada");
+			gestioneProposte.inserisciPropostaUtente(MAIL_PEPPINO, NOME_ABILITA2, "bdb");
+			PropostaAbilita propostaAppenaInserita3 = gestioneProposte.inserisciPropostaUtente(MAIL_GIOVANNINO, NOME_ABILITA3, "rbrw");
+			PropostaAbilita propostaAppenaInserita4 = gestioneProposte.inserisciPropostaUtente(MAIL_GIOVANNINO, NOME_ABILITA4, "vegq");
+			gestioneProposte.inserisciPropostaUtente(MAIL_DAVIDE, NOME_ABILITA5, "dsfsdfsd");
 
-		//l'admin conferma 3 proposte
-		gestioneProposte.approvaPropostaAbilita(propostaAppenaInserita1.getId(), "descrizioneAbilita");
-		gestioneProposte.approvaPropostaAbilita(propostaAppenaInserita3.getId(), "descrizioneasdasAbilita");
-		gestioneProposte.approvaPropostaAbilita(propostaAppenaInserita4.getId(), "descriziosadneAbilita");
+			//l'admin conferma 3 proposte
+			gestioneProposte.approvaPropostaAbilita(propostaAppenaInserita1.getId(), "descrizioneAbilita");
+			gestioneProposte.approvaPropostaAbilita(propostaAppenaInserita3.getId(), "descrizioneasdasAbilita");
+			gestioneProposte.approvaPropostaAbilita(propostaAppenaInserita4.getId(), "descriziosadneAbilita");
 
-		//ottengo lista delle proposte (tra tutte quella mandate e non solo di uno specifico utente) ancora non approvate, cioe' la 2 e la 5
-		List<PropostaAbilita> proposte = gestioneProposte.getProposteAbilitaNonConfermate();
+			//ottengo lista delle proposte (tra tutte quella mandate e non solo di uno specifico utente) ancora non approvate, cioe' la 2 e la 5
+			List<PropostaAbilita> proposte = gestioneProposte.getProposteAbilitaNonConfermate();
 
-		//stampo la lists delle proposte non approvate, cioe' la 2 e la 5
-		System.out.println("Lista proposte non confermate dall'amministratore");
-		for(PropostaAbilita proposta : proposte) {
-			System.out.println(proposta.toString());
+			assertTrue(proposte.size()==2);
+		} catch (ProposteException e) {
+			fail("ProposteException: " + e);
 		}
-
-		assertTrue(proposte.size()==2);
 	}
 
 	@Test
@@ -88,24 +89,22 @@ public class PropostaAbilitaTest {
 		testUtils.svuotaTabellaDatabase("Possiede");
 		testUtils.svuotaTabellaDatabase("Abilita");
 
-		//inserisco delle proposteabilita
-		PropostaAbilita propostaAppenaInserita1 = gestioneProposte.inserisciPropostaUtente(MAIL_PEPPINO, NOME_ABILITA1, "sadada");
-		gestioneProposte.inserisciPropostaUtente(MAIL_PEPPINO, NOME_ABILITA2, "bdb");
-		gestioneProposte.inserisciPropostaUtente(MAIL_GIOVANNINO, NOME_ABILITA3, "rbrw");
+		try {
+			//inserisco delle proposteabilita
+			PropostaAbilita propostaAppenaInserita1 = gestioneProposte.inserisciPropostaUtente(MAIL_PEPPINO, NOME_ABILITA1, "sadada");
+			gestioneProposte.inserisciPropostaUtente(MAIL_PEPPINO, NOME_ABILITA2, "bdb");
+			gestioneProposte.inserisciPropostaUtente(MAIL_GIOVANNINO, NOME_ABILITA3, "rbrw");
 
-		//l'admin conferma solo una proposta
-		gestioneProposte.approvaPropostaAbilita(propostaAppenaInserita1.getId(), "descrizioneAbilita");
+			//l'admin conferma solo una proposta
+			gestioneProposte.approvaPropostaAbilita(propostaAppenaInserita1.getId(), "descrizioneAbilita");
 
-		//ottengo lista delle proposte (tra tutte quella mandate e non solo di uno specifico utente) gia' approvate, cioe' la 1
-		List<PropostaAbilita> proposte = gestioneProposte.getProposteAbilitaConfermate();
+			//ottengo lista delle proposte (tra tutte quella mandate e non solo di uno specifico utente) gia' approvate, cioe' la 1
+			List<PropostaAbilita> proposte = gestioneProposte.getProposteAbilitaConfermate();
 
-		//stampo la lista delle proposte gia' approvate, cioe' la 1
-		System.out.println("Lista proposte confermate dall'amministratore");
-		for(PropostaAbilita proposta : proposte) {
-			System.out.println(proposta.toString());
+			assertTrue(proposte.size()==1);
+		} catch (ProposteException e) {
+			fail("ProposteException: " + e);
 		}
-
-		assertTrue(proposte.size()==1);
 
 	}
 
@@ -115,12 +114,16 @@ public class PropostaAbilitaTest {
 		testUtils.svuotaTabellaDatabase("Possiede");
 		testUtils.svuotaTabellaDatabase("Abilita");
 
-		PropostaAbilita propostaAppenaInserita1 = gestioneProposte.inserisciPropostaUtente(MAIL_PEPPINO, NOME_ABILITA1, "fsdsgsd");
-		gestioneProposte.approvaPropostaAbilita(propostaAppenaInserita1.getId(), "abilita nuova appena inserita");
+		try {
+			PropostaAbilita propostaAppenaInserita1 = gestioneProposte.inserisciPropostaUtente(MAIL_PEPPINO, NOME_ABILITA1, "fsdsgsd");
+			gestioneProposte.approvaPropostaAbilita(propostaAppenaInserita1.getId(), "abilita nuova appena inserita");
 
-		PropostaAbilita propostaRiletta = gestioneProposte.getPropostaAbilitaById(propostaAppenaInserita1.getId());
+			PropostaAbilita propostaRiletta = gestioneProposte.getPropostaAbilitaById(propostaAppenaInserita1.getId());
 
-		assertTrue(propostaRiletta.getDataAccettazione()!=null);
+			assertTrue(propostaRiletta.getDataAccettazione()!=null);
+		} catch (ProposteException e) {
+			fail("ProposteException: " + e);
+		}
 	}
 
 
@@ -130,12 +133,16 @@ public class PropostaAbilitaTest {
 		testUtils.svuotaTabellaDatabase("Possiede");
 		testUtils.svuotaTabellaDatabase("Abilita");
 
-		PropostaAbilita propostaAppenaInserita1 = gestioneProposte.inserisciPropostaUtente(MAIL_GIOVANNINO, NOME_ABILITA1, "ssafaf");
-		gestioneProposte.rifiutaPropostaAbilita(propostaAppenaInserita1.getId());
+		try {
+			PropostaAbilita propostaAppenaInserita1 = gestioneProposte.inserisciPropostaUtente(MAIL_GIOVANNINO, NOME_ABILITA1, "ssafaf");
+			gestioneProposte.rifiutaPropostaAbilita(propostaAppenaInserita1.getId());
 
-		PropostaAbilita propostaRiletta = gestioneProposte.getPropostaAbilitaById(propostaAppenaInserita1.getId());
+			PropostaAbilita propostaRiletta = gestioneProposte.getPropostaAbilitaById(propostaAppenaInserita1.getId());
 
-		assertTrue(propostaRiletta==null);
+			assertTrue(propostaRiletta==null);
+		} catch (ProposteException e) {
+			fail("ProposteException: " + e);
+		}
 	}
 
 
@@ -145,14 +152,18 @@ public class PropostaAbilitaTest {
 		testUtils.svuotaTabellaDatabase("Possiede");
 		testUtils.svuotaTabellaDatabase("Abilita");
 
-		Abilita abilitaInserita = gestioneProposte.inserisciAbilitaAutonomamente(NOME_ABILITA1, "fsdsgsd");
+		try {
+			Abilita abilitaInserita = gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN, NOME_ABILITA1, "fsdsgsd");
 
-		Abilita abilitaAppenaInseritaRiletta = gestioneProposte.getAbilitaByNome(NOME_ABILITA1);
+			Abilita abilitaAppenaInseritaRiletta = gestioneProposte.getAbilitaByNome(NOME_ABILITA1);
 
-		assertEquals(abilitaInserita,abilitaAppenaInseritaRiletta);
+			assertEquals(abilitaInserita,abilitaAppenaInseritaRiletta);
+		} catch (ProposteException e) {
+			fail("ProposteException: " + e);
+		}
 	}
-	
-	
+
+
 	@Test
 	public void testConfermaPropostaAbilitaSpecificandoAttributi() {
 		//TODO METTERE QUI IL TEST DEL METODO confermaPropostaAbilitaSpecificandoAttributi

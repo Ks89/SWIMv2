@@ -1,12 +1,15 @@
 package exceptions;
 
+/**
+ * Classe che rappresenta l'eccezione lancia dal session bean GestioneCollaborazione
+ */
 public class CollaborazioneException extends Exception {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static enum Causa {ALCUNIPARAMETRINULLIOVUOTI,ERRORESCONOSCIUTO}; 
+	public static enum Causa {ALCUNIPARAMETRINULLIOVUOTI,UPDATECOLLABFALLITO,ERRORESCONOSCIUTO}; 
 	private Causa causa;
 
 	/**

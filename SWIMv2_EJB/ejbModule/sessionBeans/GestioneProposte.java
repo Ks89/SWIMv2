@@ -15,23 +15,32 @@ import entityBeans.Abilita;
 import entityBeans.Amministratore;
 import entityBeans.PropostaAbilita;
 import entityBeans.Utente;
+import exceptions.ProposteException;
 
+/**
+ * Classe che rappresenta il session bean GestioneProposte.
+ */
 @Stateless
-public class GestioneProposte implements GestioneProposteLocal, GestioneProposteRemote {
+public class GestioneProposte implements GestioneProposteRemote, GestioneProposteLocal{
 
 	@PersistenceContext(unitName = "SWIMdb")
 	private EntityManager entityManager;
 
-	
-	public Abilita getAbilitaByNome(String nome) {
-		return entityManager.find(Abilita.class, nome);
+
+	/* (non-Javadoc)
+	 * @see sessionBeans.GestioneProposteInterface#getAbilitaByNome(java.lang.String)
+	 */
+	@Override
+	public Abilita getAbilitaByNome(String nome) throws ProposteException {
+		if(nome==null || nome.equals("")) {
+			throw new ProposteException(ProposteException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		} else {
+			return entityManager.find(Abilita.class, nome);
+		}
 	}
-	
-	/**
-	 * Metodo con cui l'Amministratore vede tutte le proposte abilita' ANCORA
-	 * NON GESTITE, indipendentemente dall'utente che l'ha fatta
-	 * 
-	 * @return
+
+	/* (non-Javadoc)
+	 * @see sessionBeans.GestioneProposteInterface#getProposteAbilitaNonConfermate()
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -40,11 +49,8 @@ public class GestioneProposte implements GestioneProposteLocal, GestioneProposte
 		return (List<PropostaAbilita>) query.getResultList();
 	}
 
-	/**
-	 * Metodo con cui l'Amministratore vede tutte le proposte abilita' GIA'
-	 * APPROVATE, indipendentemente dall'utente che l'ha fatta
-	 * 
-	 * @return
+	/* (non-Javadoc)
+	 * @see sessionBeans.GestioneProposteInterface#getProposteAbilitaConfermate()
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -53,43 +59,70 @@ public class GestioneProposte implements GestioneProposteLocal, GestioneProposte
 		return (List<PropostaAbilita>) query.getResultList();
 	}
 
-	@Override
-	public PropostaAbilita getPropostaAbilitaById(Long id) {
-		return entityManager.find(PropostaAbilita.class, id);
-	}
-
-	@Override
-	public void approvaPropostaAbilita(Long id, String descrizione) {
-		GregorianCalendar calendar = new GregorianCalendar();
-
-		PropostaAbilita propostaAbilita = this.getPropostaAbilitaById(id);
-		propostaAbilita.setDataAccettazione(calendar.getTime());
-		entityManager.persist(propostaAbilita);
-		entityManager.flush();
-
-		Abilita abilita = new Abilita();
-		abilita.setNome(propostaAbilita.getAbilitaProposta());
-		abilita.setDescrizione(descrizione);
-		entityManager.persist(abilita);
-		entityManager.flush();
-	}
-
-	@Override
-	public void rifiutaPropostaAbilita(Long id) {
-		PropostaAbilita propostaAbilita = entityManager.find(PropostaAbilita.class, id);
-		entityManager.remove(propostaAbilita);
-	}
-
-	/**
-	 * Metodo per proporre un'abilita'
-	 * 
-	 * @param emailUtenteChePropone
-	 * @param nomeAbilitaProposta
-	 * @param motivazione
-	 * @return
+	/* (non-Javadoc)
+	 * @see sessionBeans.GestioneProposteInterface#getPropostaAbilitaById(java.lang.Long)
 	 */
 	@Override
-	public PropostaAbilita inserisciPropostaUtente(String emailUtenteChePropone, String nomeAbilitaProposta, String motivazione) {
+	public PropostaAbilita getPropostaAbilitaById(Long id) throws ProposteException {
+		if(id==null) {
+			throw new ProposteException(ProposteException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		} else {
+			return entityManager.find(PropostaAbilita.class, id);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see sessionBeans.GestioneProposteInterface#approvaPropostaAbilita(java.lang.Long, java.lang.String)
+	 */
+	@Override
+	public PropostaAbilita approvaPropostaAbilita(Long id, String descrizione) throws ProposteException {
+		GregorianCalendar calendar = new GregorianCalendar();
+		
+		if(id==null) {
+			throw new ProposteException(ProposteException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		}
+		
+		PropostaAbilita propostaAbilita = this.getPropostaAbilitaById(id);
+		if(propostaAbilita!=null) {
+			propostaAbilita.setDataAccettazione(calendar.getTime());
+			entityManager.persist(propostaAbilita);
+			entityManager.flush();
+
+			Abilita abilita = new Abilita();
+			abilita.setNome(propostaAbilita.getAbilitaProposta());
+			abilita.setDescrizione(descrizione);
+			entityManager.persist(abilita);
+			entityManager.flush();
+		}
+		return propostaAbilita;
+	}
+
+	/* (non-Javadoc)
+	 * @see sessionBeans.GestioneProposteInterface#rifiutaPropostaAbilita(java.lang.Long)
+	 */
+	@Override
+	public PropostaAbilita rifiutaPropostaAbilita(Long id) throws ProposteException {
+		if(id==null) {
+			throw new ProposteException(ProposteException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		}
+		
+		PropostaAbilita propostaAbilita = entityManager.find(PropostaAbilita.class, id);
+		if(propostaAbilita!=null) {
+			entityManager.remove(propostaAbilita);
+		}
+		return propostaAbilita;
+	}
+
+	
+	/* (non-Javadoc)
+	 * @see sessionBeans.GestioneProposteInterface#inserisciPropostaUtente(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public PropostaAbilita inserisciPropostaUtente(String emailUtenteChePropone, String nomeAbilitaProposta, String motivazione) throws ProposteException {
+		if(emailUtenteChePropone==null || emailUtenteChePropone.equals("") || nomeAbilitaProposta==null || nomeAbilitaProposta.equals("")) {
+			throw new ProposteException(ProposteException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		}
+		
 		Utente utenteCheProponeAbilita = this.getUtenteByEmail(emailUtenteChePropone);
 
 		if (utenteCheProponeAbilita == null) {
@@ -107,20 +140,18 @@ public class GestioneProposte implements GestioneProposteLocal, GestioneProposte
 		return propostaAbilita;
 	}
 
-	/**
-	 * Metodo con cui l'amministratore inserisce una proposta autonomamente e la
-	 * approva automaticamente. Al posto di emailutente vi sara' l'email
-	 * dell'amministratore
-	 * 
-	 * @param emailUtenteChePropone
-	 * @param nomeAbilitaProposta
-	 * @param motivazione
+	
+	/* (non-Javadoc)
+	 * @see sessionBeans.GestioneProposteInterface#inserisciAbilitaAutonomamente(java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Abilita inserisciAbilitaAutonomamente(String nomeNuovaAbilita, String descrizione) {
-		Amministratore amministratore = this.getAmministratoreUnico();
+	public Abilita inserisciAbilitaAutonomamente(String emailAmministratore, String nomeNuovaAbilita, String descrizione) throws ProposteException {
+		if(emailAmministratore==null || emailAmministratore.equals("") || nomeNuovaAbilita==null || nomeNuovaAbilita.equals("")) {
+			throw new ProposteException(ProposteException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		}
+		
+		Amministratore amministratore = this.getAmministratoreByEmail(emailAmministratore);
 		if (amministratore != null) {
-
 			Abilita abilita = new Abilita();
 			abilita.setNome(nomeNuovaAbilita);
 			abilita.setDescrizione(descrizione);
@@ -133,22 +164,29 @@ public class GestioneProposte implements GestioneProposteLocal, GestioneProposte
 		}
 	}
 
-	
-	
-	//TODO METODO ANCORA DA TESTARE
+
+
+	/* (non-Javadoc)
+	 * @see sessionBeans.GestioneProposteInterface#confermaPropostaAbilitaSpecificandoAttributi(java.lang.String, java.lang.Long, java.lang.String, java.lang.String)
+	 */
 	@Override
-	public Abilita confermaPropostaAbilitaSpecificandoAttributi(Long idPropostaAbilita, String nomeNuovaAbilita, String descrizione) {
+	public Abilita confermaPropostaAbilitaSpecificandoAttributi(String emailAmministratore, Long idPropostaAbilita, String nomeNuovaAbilita, String descrizione) throws ProposteException {
 		GregorianCalendar calendar = new GregorianCalendar();
 
-		Amministratore amministratore = this.getAmministratoreUnico();
-		if (amministratore != null) {
+		if(emailAmministratore==null || emailAmministratore.equals("") || idPropostaAbilita == null || nomeNuovaAbilita==null || nomeNuovaAbilita.equals("")) {
+			throw new ProposteException(ProposteException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		}
+		
+		Amministratore amministratore = this.getAmministratoreByEmail(emailAmministratore);
+		PropostaAbilita propostaAbilita = this.getPropostaAbilitaById(idPropostaAbilita);
+
+		if (amministratore!=null && propostaAbilita!=null) {
 
 			//ora confermo la proposta precedente
-			PropostaAbilita propostaAbilita = this.getPropostaAbilitaById(idPropostaAbilita);
 			propostaAbilita.setDataAccettazione(calendar.getTime());
 			entityManager.persist(propostaAbilita);
 			entityManager.flush();
-			
+
 			Abilita abilita = new Abilita();
 			abilita.setNome(nomeNuovaAbilita);
 			abilita.setDescrizione(descrizione);
@@ -160,25 +198,32 @@ public class GestioneProposte implements GestioneProposteLocal, GestioneProposte
 			return null;
 		}
 	}
-	
-	
-	
-	/**
-	 * Metodo per l'estrazione dell'utente dal database data la sua email
-	 * 
-	 * @param email
-	 *            = l'email dell'amministratore
-	 * @return <b>utente</b> corrispondente all'email, se esiste, <b>null</b>
-	 *         altrimenti
+
+
+
+	/* (non-Javadoc)
+	 * @see sessionBeans.GestioneProposteInterface#getUtenteByEmail(java.lang.String)
 	 */
 	@Override
-	public Utente getUtenteByEmail(String email) {
-		return entityManager.find(Utente.class, email);
+	public Utente getUtenteByEmail(String email) throws ProposteException {
+		if(email==null || email.equals("")) {
+			throw new ProposteException(ProposteException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		} else {
+			return entityManager.find(Utente.class, email);
+		}
 	}
+	
 
+	/* (non-Javadoc)
+	 * @see sessionBeans.GestioneProposteInterface#getAmministratoreByEmail(java.lang.String)
+	 */
 	@Override
-	public Amministratore getAmministratoreUnico() {
-		return entityManager.find(Amministratore.class, "admin@swim.it");
+	public Amministratore getAmministratoreByEmail(String email) throws ProposteException {
+		if(email==null || email.equals("")) {
+			throw new ProposteException(ProposteException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		} else {
+			return entityManager.find(Amministratore.class, email);
+		}
 	}
 
 }
