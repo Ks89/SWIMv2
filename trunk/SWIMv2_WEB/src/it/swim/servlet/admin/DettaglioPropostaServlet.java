@@ -17,6 +17,7 @@ import sessionBeans.localInterfaces.GestioneProposteLocal;
 
 import entityBeans.Abilita;
 import entityBeans.PropostaAbilita;
+import exceptions.ProposteException;
 
 /**
  * Servlet implementation class DettaglioPropostaServlet
@@ -40,11 +41,11 @@ public class DettaglioPropostaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		log.debug("Entrato in dettaglio proposta abilita");
 
 		Long idProposta = Long.parseLong(request.getParameter("idProposta"));
-		
+
 		log.debug("Entrato in dettaglio proposta abilita con id: " + idProposta);
 
 		// ottengo l'email dell'admin collegato dalla sessione, appoggiandomi
@@ -58,17 +59,21 @@ public class DettaglioPropostaServlet extends HttpServlet {
 			return;
 		}
 
-		PropostaAbilita propostaAbilita = gestioneProposte.getPropostaAbilitaById(idProposta);
 
-		if(propostaAbilita!=null) {
-			request.setAttribute("idProposta", propostaAbilita.getId());
-			request.setAttribute("emailProposta", propostaAbilita.getUtente().getEmail());
-			request.setAttribute("abilitaProposta", propostaAbilita.getAbilitaProposta());
-			request.setAttribute("motivazioneProposta", propostaAbilita.getMotivazione());
-			getServletConfig().getServletContext().getRequestDispatcher("/jsp/dettaglioProposta.jsp").forward(request, response);
-			return;
-		} else {
+		try {
+			PropostaAbilita propostaAbilita = gestioneProposte.getPropostaAbilitaById(idProposta);
+			if(propostaAbilita!=null) {
+				request.setAttribute("idProposta", propostaAbilita.getId());
+				request.setAttribute("emailProposta", propostaAbilita.getUtente().getEmail());
+				request.setAttribute("abilitaProposta", propostaAbilita.getAbilitaProposta());
+				request.setAttribute("motivazioneProposta", propostaAbilita.getMotivazione());
+				getServletConfig().getServletContext().getRequestDispatcher("/jsp/dettaglioProposta.jsp").forward(request, response);
+				return;
+			} else {
 
+			}
+		} catch (ProposteException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -76,23 +81,28 @@ public class DettaglioPropostaServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		log.debug("doPost del dettaglio proposta");
-		
+
+		String emailAdminCollegato = (String) AdminCollegatoUtil.getEmailAdminCollegato(request);
+
 		Long idPropostaAbilita = Long.parseLong(request.getParameter("idProposta"));
 		String nuovoNomeAbilitaProposta = request.getParameter("nuovoNomeAbilitaProposta");
 		String descrizioneAbilita = request.getParameter("descrizioneAbilitaProposta");
 
-		Abilita abilitaInserita = gestioneProposte.confermaPropostaAbilitaSpecificandoAttributi(idPropostaAbilita, nuovoNomeAbilitaProposta, descrizioneAbilita);
+		Abilita abilitaInserita;
+		try {
+			abilitaInserita = gestioneProposte.confermaPropostaAbilitaSpecificandoAttributi(emailAdminCollegato, idPropostaAbilita, nuovoNomeAbilitaProposta, descrizioneAbilita);
+			if(abilitaInserita!=null) {
+				log.debug("nuova abilita inserita correttamente: " + abilitaInserita.getNome());
+			} else {
+				request.setAttribute("erroreInserimentoPropostaFallito", "Errore inserimento nuova abilita con nome: " + nuovoNomeAbilitaProposta);
+			}
 
-		if(abilitaInserita!=null) {
-			log.debug("nuova abilita inserita correttamente: " + abilitaInserita.getNome());
-		} else {
-			request.setAttribute("erroreInserimentoPropostaFallito", "Errore inserimento nuova abilita con nome: " + nuovoNomeAbilitaProposta);
+			List<PropostaAbilita> proposteAbilita = gestioneProposte.getProposteAbilitaNonConfermate();
+			request.setAttribute("proposte", proposteAbilita);
+			getServletConfig().getServletContext().getRequestDispatcher("/jsp/adminpanelproposte.jsp").forward(request, response);
+		} catch (ProposteException e) {
+			e.printStackTrace();
 		}
-		
-		List<PropostaAbilita> proposteAbilita = gestioneProposte.getProposteAbilitaNonConfermate();
-		request.setAttribute("proposte", proposteAbilita);
-		getServletConfig().getServletContext().getRequestDispatcher("/jsp/adminpanelproposte.jsp").forward(request, response);
 	}
 }

@@ -1,4 +1,4 @@
-package it.swim.servlet.profilo;
+	package it.swim.servlet.profilo;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +24,9 @@ import sessionBeans.localInterfaces.GestioneRegistrazioneLocal;
 import sessionBeans.localInterfaces.GestioneRicercheLocal;
 
 import entityBeans.Abilita;
+import entityBeans.Utente;
 import exceptions.HashingException;
+import exceptions.RegistrazioneException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -128,26 +130,26 @@ public class RegistrazioneServlet extends HttpServlet {
 		}
 
 
-		boolean risultatoRegistrazione = false;
+		Utente utenteRegistrato;
 		try {
-			risultatoRegistrazione = registrazione.registrazioneUtente(email, password, nome, cognome, blob, abilitaPersonaliRegistrazione);
+			utenteRegistrato = registrazione.registrazioneUtente(email, password, nome, cognome, blob, abilitaPersonaliRegistrazione);
+			
+			log.debug("utenteRegistrato: " + utenteRegistrato );
+
+			if(utenteRegistrato!=null) {
+				log.debug("Registrazione avvenuta correttamente registrazione");
+
+				request.getSession().setAttribute("utenteCollegato", email);
+
+				response.sendRedirect("profilo/profilo");
+			} else {
+				log.debug("Errore registrazione");
+				getServletConfig().getServletContext().getRequestDispatcher("/jsp/registrazione.jsp").forward(request, response);
+			}
 		} catch (HashingException e) {
 			log.error(e.getMessage(), e);
+		} catch (RegistrazioneException e) {
+			log.error(e.getMessage(), e);
 		}
-
-		log.debug("risultatoRegistrazione: " + risultatoRegistrazione );
-
-		if(risultatoRegistrazione) {
-			log.debug("Registrazione avvenuta correttamente registrazione");
-
-			request.getSession().setAttribute("utenteCollegato", email);
-
-			response.sendRedirect("profilo/profilo");
-		} else {
-			log.debug("Errore registrazione");
-			getServletConfig().getServletContext().getRequestDispatcher("/jsp/registrazione.jsp").forward(request, response);
-		}
-
 	}
-
 }
