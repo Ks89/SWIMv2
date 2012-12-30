@@ -29,7 +29,7 @@ public class AdminServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.debug("Visualizza admin page");
 		
-		getServletConfig().getServletContext().getRequestDispatcher("/jsp/homeadmin.jsp").forward(request, response);
+		getServletConfig().getServletContext().getRequestDispatcher("/jsp/homeAdmin.jsp").forward(request, response);
 	}
 
 	/**
