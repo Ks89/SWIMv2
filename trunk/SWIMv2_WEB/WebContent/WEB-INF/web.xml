@@ -11,7 +11,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/Login</url-pattern>
+    <url-pattern>/login</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -19,6 +19,10 @@
     <servlet-name>HomeServlet</servlet-name>
     <servlet-class>it.swim.servlet.HomeServlet</servlet-class>
   </servlet>
+  <servlet-mapping>
+    <servlet-name>HomeServlet</servlet-name>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>HomeServlet</servlet-name>
     <url-pattern>/Home</url-pattern>
@@ -31,7 +35,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ProfiloServlet</servlet-name>
-    <url-pattern>/Profilo/Profilo</url-pattern>
+    <url-pattern>/profilo/profilo</url-pattern>
   </servlet-mapping>
   <filter>
     <display-name>CacheFilter</display-name>
@@ -50,7 +54,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>FotoServlet</servlet-name>
-    <url-pattern>/Profilo/Foto</url-pattern>
+    <url-pattern>/profilo/foto</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -60,7 +64,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>RicercaServlet</servlet-name>
-    <url-pattern>/Ricerca</url-pattern>
+    <url-pattern>/ricerca</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -70,7 +74,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>UploadServlet</servlet-name>
-    <url-pattern>/Profilo/Upload</url-pattern>
+    <url-pattern>/profilo/upload</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -80,7 +84,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>UtenteCollegatoUtil</servlet-name>
-    <url-pattern>/UtenteCollegatoUtil</url-pattern>
+    <url-pattern>/utenteCollegatoUtil</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -90,6 +94,50 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>RegistrazioneServlet</servlet-name>
-    <url-pattern>/Registrazione</url-pattern>
+    <url-pattern>/registrazione</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminServlet</display-name>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>it.swim.servlet.admin.AdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/admin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/Admin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminLoginServlet</display-name>
+    <servlet-name>AdminLoginServlet</servlet-name>
+    <servlet-class>it.swim.servlet.admin.AdminLoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminLoginServlet</servlet-name>
+    <url-pattern>/admin/adminLogin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminPanelServlet</display-name>
+    <servlet-name>AdminPanelServlet</servlet-name>
+    <servlet-class>it.swim.servlet.admin.AdminPanelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminPanelServlet</servlet-name>
+    <url-pattern>/admin/adminPanel</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DettaglioPropostaServlet</display-name>
+    <servlet-name>DettaglioPropostaServlet</servlet-name>
+    <servlet-class>it.swim.servlet.admin.DettaglioPropostaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DettaglioPropostaServlet</servlet-name>
+    <url-pattern>/admin/dettaglioProposta</url-pattern>
   </servlet-mapping>
 </web-app>

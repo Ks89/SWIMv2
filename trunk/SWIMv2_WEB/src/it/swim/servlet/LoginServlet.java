@@ -45,16 +45,16 @@ public class LoginServlet extends HttpServlet {
 		// il login autoamtico
 		if ("12345".equals(request.getParameter("secretlogin"))) {
 			request.getSession().setAttribute("utenteCollegato", "peppino@gmail.com");
-			response.sendRedirect("Profilo/Profilo");
+			response.sendRedirect("profilo/profilo");
 		}
 		// se il parametro che ricevo tramite get e' esci e vale = true eseguo
 		// il logout
 		// questa condizione if sara' da tenere anche dopo perche' e' quella che
 		// permette il logout, sia di un utente vero che con login automatico
 		else if ("true".equals(request.getParameter("esci"))) {
-			log.debug("Logout");
+			log.debug("logout");
 			request.getSession().invalidate();
-			response.sendRedirect("Home");
+			response.sendRedirect("home");
 		}
 
 	}
@@ -81,7 +81,7 @@ public class LoginServlet extends HttpServlet {
 				// si e' loggato
 				request.getSession().setAttribute("utenteCollegato", emailUtente);
 				// processata la request, uso la response per fare il redirect alla pagina del profilo dell'utente
-				response.sendRedirect("Profilo/Profilo");
+				response.sendRedirect("profilo/profilo");
 			} else {
 				//se il login fallisce, metto le request un messaggio di errore sotto il nome di erroreLoginFallito
 				request.setAttribute("erroreLoginFallito", "Email o password non riconosciute");

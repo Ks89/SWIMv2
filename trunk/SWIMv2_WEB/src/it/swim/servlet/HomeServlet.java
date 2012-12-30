@@ -35,7 +35,6 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.debug("Visualizza home page");
 
-		// Abilita
 		List<Abilita> ab = new ArrayList<Abilita>();
 		ab.add(new Abilita("nomeA", "desc1"));
 		ab.add(new Abilita("nomeB", "desc2"));

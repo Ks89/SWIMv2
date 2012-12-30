@@ -14,14 +14,14 @@
 	</c:if>
 	
 	<br>
-	Homepage
+	Homepage utente
 	<br>
 
 	<!--  uso una choose per stabilire quale form mostrare. Se l'utente e' collegato 
 	mostro le funzioni di ricerca ecc... altrimenti la form di login e registrazione -->
 	<c:choose>
 		<c:when test="${sessionScope.utenteCollegato != null}">
-			<form action="Ricerca" method="POST">
+			<form action="ricerca" method="POST">
 				Cognome: <input type="text" name="cognome" /> <br> Abilita':<br>
 				<c:forEach items="${abilita}" var="item">
 					<input type="checkbox" name="abilita" value='<c:out value="${item.nome}"/>' />
@@ -32,10 +32,9 @@
 			</form>
 		</c:when>
 		<c:otherwise>
-			<form action="Login" method="POST">
+			<form action="login" method="POST">
 				Email: <input type="text" name="emailUtente"></input> Password: <input type="password" name="password"></input> <input type="submit" /> <br>
-				<a href="Registrazione">Registrazione</a>
-				<!-- Sarà una servlet dedicata -->
+				<a href="registrazione">Registrazione</a>
 			</form>
 		</c:otherwise>
 	</c:choose>
