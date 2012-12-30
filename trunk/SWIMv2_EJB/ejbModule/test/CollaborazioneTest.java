@@ -16,6 +16,7 @@ import org.junit.Test;
 import utililies.sessionRemote.GestioneCollaborazioniRemote;
 import entityBeans.Collaborazione;
 import exceptions.CollaborazioneException;
+import exceptions.LoginException;
 
 public class CollaborazioneTest {
 
@@ -38,19 +39,8 @@ public class CollaborazioneTest {
 			System.out.println(e.toString());
 			return;
 		}
-
-		// //prima svuoto il database
-		// TestUtils.svuotaDatabase();
-		// //inserisco alcuni utenti
-		// TestUtils.inserisciUtenti();
-		// //inserisco alcune collaborazioni
-		// TestUtils.inserisciCollaborazioni();
 	}
 
-	/**
-	 * Test che inserisce 2 collaborazioni e poi verifica se nel db esse siano
-	 * state effettivamente aggiunte.
-	 */
 	@Test
 	public void testRichiediAiuto() {
 		try {
@@ -65,6 +55,8 @@ public class CollaborazioneTest {
 			assertTrue(collaborazioneDaDb1.toString().equals(collaborazioneAppenaInserita1.toString()));
 			assertTrue(collaborazioneDaDb2.toString().equals(collaborazioneAppenaInserita2.toString()));
 		} catch (CollaborazioneException e) {
+			fail(e.getCausa().name());
+		} catch (LoginException e) {
 			fail(e.getCausa().name());
 		}
 	}
@@ -87,6 +79,8 @@ public class CollaborazioneTest {
 			assertTrue(collaborazioneDaDbAccettata.getDataStipula() != null);
 		} catch (CollaborazioneException e) {
 			fail(e.getCausa().name());
+		} catch (LoginException e) {
+			fail(e.getCausa().name());
 		}
 	}
 
@@ -95,18 +89,31 @@ public class CollaborazioneTest {
 		try {
 			// inserisco una collaborazione
 			Collaborazione collaborazioneAppenaInserita1 = gestioneCollaborazioni.richiediAiuto(MAIL_PEPPINO, MAIL_DAVIDE, "dsfsdfsd", "fdgdsgsdgsdd");
-
+			assertTrue(collaborazioneAppenaInserita1!=null);
+			
 			// rileggo inserimento
 			Collaborazione collaborazioneDaDb1 = gestioneCollaborazioni.getCollaborazione(collaborazioneAppenaInserita1.getId());
-
+			assertTrue(collaborazioneDaDb1!=null);
+			
+			//stipolo e poi termino una collaborazione, altrimenti non potrei rilasciare il feedback
+			Collaborazione collaborazioneAccettata = gestioneCollaborazioni.accettaCollaborazione(collaborazioneDaDb1.getId());
+			Collaborazione collaborazioneTerminata = gestioneCollaborazioni.terminaCollaborazione(collaborazioneDaDb1.getId());
+			assertTrue(collaborazioneAccettata!=null && collaborazioneTerminata!=null);
+			
 			// rilascio il feedback
-			gestioneCollaborazioni.rilasciaFeedback(collaborazioneDaDb1.getId(), 3, "bravo bravo, very good");
+			Collaborazione collaborazioneFbRilasciato = gestioneCollaborazioni.rilasciaFeedback(collaborazioneDaDb1.getId(), 3, "bravo bravo, very good");
+			assertTrue(collaborazioneFbRilasciato!=null);
 
 			// rileggo feedback rilasciato
 			Collaborazione collaborazioneDaDb2 = gestioneCollaborazioni.getCollaborazione(collaborazioneAppenaInserita1.getId());
+			assertTrue(collaborazioneDaDb2!=null);
 
-			assertTrue(collaborazioneDaDb2.getPunteggioFeedback() == 3 && collaborazioneDaDb2.getCommentoFeedback() != null);
+			//nota bene il commento feedback puo' anche essere null, non e' obbligatiorio, ma in questo test, provo il caso in cui sia stato inserito
+			//quindi nell'assert devo verificare che sia stato inserito davvero
+			assertTrue(collaborazioneDaDb2.getCommentoFeedback() != null && collaborazioneDaDb2.getPunteggioFeedback() == 3);
 		} catch (CollaborazioneException e) {
+			fail(e.getCausa().name());
+		} catch (LoginException e) {
 			fail(e.getCausa().name());
 		}
 	}
@@ -128,6 +135,8 @@ public class CollaborazioneTest {
 
 			assertTrue(rimossa == null);
 		} catch (CollaborazioneException e) {
+			fail(e.getCausa().name());
+		} catch (LoginException e) {
 			fail(e.getCausa().name());
 		}
 	}
@@ -171,6 +180,8 @@ public class CollaborazioneTest {
 			assertTrue(punteggio == 2.6667);
 		} catch (CollaborazioneException e) {
 			fail(e.getCausa().name());
+		} catch (LoginException e) {
+			fail(e.getCausa().name());
 		}
 	}
 
@@ -202,6 +213,8 @@ public class CollaborazioneTest {
 			assertTrue(collaborazioni.size() >= 2);
 		} catch (CollaborazioneException e) {
 			fail(e.getCausa().name());
+		} catch (LoginException e) {
+			fail(e.getCausa().name());
 		}
 	}
 
@@ -220,6 +233,8 @@ public class CollaborazioneTest {
 			List<Collaborazione> collaborazioni = gestioneCollaborazioni.getCollaborazioniCreate(MAIL_PEPPINO);
 			assertTrue(collaborazioni.size() >= 2);
 		} catch (CollaborazioneException e) {
+			fail(e.getCausa().name());
+		} catch (LoginException e) {
 			fail(e.getCausa().name());
 		}
 	}
@@ -250,14 +265,11 @@ public class CollaborazioneTest {
 			// un solo elemento, cioe' la collaborazione di nome "rbrw".
 			List<Collaborazione> collaborazioni = gestioneCollaborazioni.getCollaborazioniAccettate(MAIL_PEPPINO);
 
-			System.out.println("Lista collaborazioni accettate (quindi stipulate) dal ricevente dataStipula");
-			for (Collaborazione collaborazione : collaborazioni) {
-				System.out.println(collaborazione); 
-			}
-			
 			// perche' la query dara' un solo elemento (o piu' nel caso esegua piu' volte i test)
 			assertTrue(collaborazioni.size() >= 1); 
 		} catch (CollaborazioneException e) {
+			fail(e.getCausa().name());
+		} catch (LoginException e) {
 			fail(e.getCausa().name());
 		}
 	}

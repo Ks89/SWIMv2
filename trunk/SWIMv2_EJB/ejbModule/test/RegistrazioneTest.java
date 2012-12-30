@@ -17,6 +17,7 @@ import org.junit.Test;
 import entityBeans.Abilita;
 import entityBeans.Utente;
 import exceptions.HashingException;
+import exceptions.ProposteException;
 import exceptions.RegistrazioneException;
 import utililies.sessionRemote.GestioneProposteRemote;
 import utililies.sessionRemote.GestioneRegistrazioneRemote;
@@ -29,7 +30,7 @@ public class RegistrazioneTest {
 	private static final String MAIL_DAVIDE = "davide@gmail.com";
 	private static final String MAIL_JACOPO = "bulla.jacopo@gmail.com";
 	private static final String PASSWORD = "pippo";
-
+	private static final String MAIL_ADMIN = "admin@swim.it";
 
 	private GestioneRegistrazioneRemote gestioneRegistrazione;
 	private GestioneProposteRemote gestioneProposte;
@@ -69,14 +70,16 @@ public class RegistrazioneTest {
 			//aggiunge amministratore
 			gestioneRegistrazione.registrazioneAdminTest();
 			//Inserisce due abilità nel DB
-			gestioneProposte.inserisciAbilitaAutonomamente("1ab","prima Abilita");
-			gestioneProposte.inserisciAbilitaAutonomamente("2ab","seconda Abilita");
+			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN, "1ab","prima Abilita");
+			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN, "2ab","seconda Abilita");
 			//aggiunge due utenti nel DB
 			gestioneRegistrazione.registrazioneUtentePerTest(MAIL_PEPPINO, PASSWORD , "peppino", "peppo");
 			gestioneRegistrazione.registrazioneUtentePerTest(MAIL_GIOVANNINO, PASSWORD, "davide", "caio");
 			gestioneRegistrazione.registrazioneUtentePerTest(MAIL_DAVIDE, PASSWORD, "davide", "caio");
 		} catch (HashingException e) {
 			fail("HashingException: " + e);
+		} catch (ProposteException e) {
+			fail("ProposteException: " + e);
 		}
 
 	}

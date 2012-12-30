@@ -1,9 +1,9 @@
 package exceptions;
 
 /**
- * Classe che rappresenta l'eccezione lancia dlla classe di utilita PasswordHasher
- */ 
-public class HashingException extends Exception {
+ * Classe che rappresenta l'eccezione lancia dal session bean GestioneProposte
+ */
+public class ProposteException extends Exception {
 	/**
 	 * 
 	 */
@@ -15,7 +15,7 @@ public class HashingException extends Exception {
 	/**
 	 * Richiama la superclasse.
 	 */
-	public HashingException() {
+	public ProposteException() {
 		super();
 	}
 
@@ -24,7 +24,7 @@ public class HashingException extends Exception {
 	 * @param message
 	 * @param cause
 	 */
-	public HashingException(String message, Throwable cause) {
+	public ProposteException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
@@ -32,7 +32,7 @@ public class HashingException extends Exception {
 	 * Richiama la superclasse.
 	 * @param message
 	 */
-	public HashingException(String message) {
+	public ProposteException(String message) {
 		super(message);
 	}
 
@@ -40,7 +40,7 @@ public class HashingException extends Exception {
 	 * Richiama la superclasse.
 	 * @param cause
 	 */
-	public HashingException(Throwable cause) {
+	public ProposteException(Throwable cause) {
 		super(cause);
 	}
 
@@ -48,7 +48,7 @@ public class HashingException extends Exception {
 	 * Costruttore della classe che inizializza la causa che ha sollevato l'eccezione.
 	 * @param causa Tipo enumerativo che rappresenta la causa che ha sollevato l'eccezione.
 	 */
-	public HashingException(Causa causa) {
+	public ProposteException(Causa causa) {
 		this.causa = causa;
 	}
 

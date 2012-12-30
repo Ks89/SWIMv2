@@ -10,7 +10,6 @@ import javax.rmi.PortableRemoteObject;
 
 import junit.framework.Assert;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import exceptions.HashingException;
@@ -18,7 +17,6 @@ import exceptions.LoginException;
 
 import utililies.PasswordHasher;
 import utililies.sessionRemote.GestioneLoginRemote;
-import utililies.sessionRemote.GestioneRegistrazioneRemote;
 
 public class LoginTest {
 
@@ -29,8 +27,6 @@ public class LoginTest {
 	private static final String PASSWORD = "pippo";
 
 	private GestioneLoginRemote gestioneLogin;
-//	private GestioneRegistrazioneRemote gestioneRegistrazione;
-//	private static TestUtilsRemote testUtils;
 
 	public LoginTest() throws NamingException {
 		Properties env = new Properties();
@@ -40,22 +36,7 @@ public class LoginTest {
 
 		Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneLogin/remote-utililies.sessionRemote.GestioneLoginRemote");
 		gestioneLogin = (GestioneLoginRemote) PortableRemoteObject.narrow(obj, GestioneLoginRemote.class);
-
-//		obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneRegistrazione/remote-utililies.sessionRemote.GestioneRegistrazioneRemote");
-//		gestioneRegistrazione = (GestioneRegistrazioneRemote) PortableRemoteObject.narrow(obj, GestioneRegistrazioneRemote.class);
-
-//		obj = (new InitialContext(env)).lookup("SWIMv2_EAR/TestUtils/remote-test.TestUtilsRemote");
-//		testUtils = (TestUtilsRemote) PortableRemoteObject.narrow(obj, TestUtilsRemote.class);
 	}
-
-//	@Before
-//	public void setUpLoginTest() {
-//		//testUtils.svuotaTabellaDatabase("Utente"); perche' funzioni bisogna non avere nulla del db, altrimenti viola l'integrita' referenziale
-//		//testUtils.svuotaDatabase(); nel caso si voglia svuotare tutto il db prima di fare i test
-//
-//		//gestioneRegistrazione.registraUtente(MAIL_PEPPINO,PASSWORD);
-//		//gestioneRegistrazione.registraAmministratore(MAIL_AMMINISTRATORE, PASSWORD);
-//	}
 
 	@Test
 	public void testEseguiLoginUtente() {

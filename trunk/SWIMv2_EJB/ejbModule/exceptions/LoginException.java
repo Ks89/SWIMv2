@@ -1,5 +1,8 @@
 package exceptions;
 
+/**
+ * Classe che rappresenta l'eccezione lancia dal session bean GestioneLogin
+ */
 public class LoginException extends Exception {
 	/**
 	 * 
