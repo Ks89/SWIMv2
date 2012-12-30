@@ -48,6 +48,6 @@ public class Utente implements Serializable  {
 	@Pattern(regex="[a-zA-z ]*", message="Il nome contiene caratteri non validi")
 	private String nome;
 
-	@Column(name = "FofoProfilo", nullable = true)
+	@Column(name = "FotoProfilo", nullable = true)
 	private Blob fotoProfilo;		
 }
