@@ -153,6 +153,46 @@ public class RicercheTest {
 		ab.add(new Abilita("2ab","Descrizione"));
 		Assert.assertTrue(gestioneRicerche.insiemeAbilitaPersonaliUtente("tommaso.ganelli@gmail.com").contains(ab.get(0)));
 		Assert.assertTrue(gestioneRicerche.insiemeAbilitaPersonaliUtente("tommaso.ganelli@gmail.com").contains(ab.get(1)));
+		try{
+			gestioneRicerche.insiemeAbilitaPersonaliUtente("");
+			Assert.assertTrue(false);
+		}
+		catch(RicercheException ex)
+		{
+			Assert.assertTrue(true);
+		}
+	}
+	
+	@Test
+	public void elencoUtentiByAbilita() throws RicercheException
+	{
+		List<Abilita> ab = new ArrayList<Abilita>();
+		ab.add(new Abilita("1ab","Descrizione"));
+		ab.add(new Abilita("2ab","Descrizione"));
+		List<Utente> utenti= new ArrayList<Utente>();
+		utenti.add(gestioneRicerche.getUtenteByEmail("tommaso.ganelli@gmail.com"));
+		utenti.add(gestioneRicerche.getUtenteByEmail("tommaso.ficcanaso@gmail.com"));
+		utenti.add(gestioneRicerche.getUtenteByEmail("cip.ciop@gmail.com"));
+		Assert.assertTrue(gestioneRicerche.ricercaAiuto(ab).contains(utenti.get(0)));
+		Assert.assertTrue(gestioneRicerche.ricercaAiuto(ab).contains(utenti.get(1)));
+		Assert.assertTrue(gestioneRicerche.ricercaAiuto(ab).contains(utenti.get(2)));
+		ab.add(new Abilita("3ab","Descrizione"));
+		ab.add(new Abilita("5ab","Descrizione"));
+		Assert.assertFalse(gestioneRicerche.ricercaAiuto(ab).contains(utenti.get(0)));
+		Assert.assertFalse(gestioneRicerche.ricercaAiuto(ab).contains(utenti.get(1)));
+		Assert.assertTrue(gestioneRicerche.ricercaAiuto(ab).contains(utenti.get(2)));
+		Assert.assertTrue(gestioneRicerche.ricercaAiuto(ab).size()==1);
+		ab.add(new Abilita("8ab","Descrizione"));
+		Assert.assertTrue(gestioneRicerche.ricercaAiuto(ab).size()==0);
+		List<Abilita> abilita = new ArrayList<Abilita>();
+		try{
+			gestioneRicerche.ricercaAiuto(abilita);
+			Assert.assertTrue(false);
+		}
+		catch(RicercheException ex)
+		{
+			Assert.assertTrue(true);
+		}
 	}
 	
 }

@@ -2,10 +2,15 @@ package sessionBeans;
 
 import java.util.List;
 
+import javassist.expr.Cast;
+
 import javax.ejb.Stateless;
+import javax.faces.convert.IntegerConverter;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+import org.jboss.security.xacml.sunxacml.attr.IntegerAttribute;
 
 import entityBeans.Abilita;
 import entityBeans.Utente;
@@ -30,7 +35,7 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 			throw new RicercheException(RicercheException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
 		Query query = entityManager.createNamedQuery("Possiede.getUtenteByAbilita");
 		query.setParameter("insiemeAbilita", abilita);
-		//query.setParameter("numAbilita", abilita.size());
+		query.setParameter("numAbilita", Long.valueOf(abilita.size()));
 		List<Utente> risultatoRicerca = (List<Utente>)query.getResultList();
 		return risultatoRicerca;
 	}

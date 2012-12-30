@@ -19,7 +19,9 @@ import lombok.NoArgsConstructor;
 											"FROM PossiedePK pk " +
 											"WHERE pk.abilita IN :insiemeAbilita and pk.utente=p.utente) = :numAbilita )"),*/
 			@NamedQuery(name = "Possiede.getUtenteByAbilita",
-					query = "SELECT p.possiedePK.utente FROM Possiede p WHERE p.possiedePK.abilita IN (:insiemeAbilita)"),
+					query = "SELECT DISTINCT p.possiedePK.utente FROM Possiede p WHERE p.possiedePK.abilita IN (:insiemeAbilita) and " +
+							"(SELECT COUNT(pk.possiedePK.utente) FROM Possiede pk " +
+							"WHERE pk.possiedePK.abilita IN (:insiemeAbilita) and pk.possiedePK.utente=p.possiedePK.utente) = :numAbilita"),
 
 			@NamedQuery(name = "Possiede.getAbilitaByUtente",
 					query = "SELECT p.possiedePK.abilita FROM Possiede p WHERE p.possiedePK.utente.email = :emailUtente")
