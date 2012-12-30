@@ -17,6 +17,7 @@ import org.junit.Test;
 import entityBeans.Abilita;
 import entityBeans.Utente;
 import exceptions.HashingException;
+import exceptions.RegistrazioneException;
 import exceptions.RicercheException;
 
 import utililies.sessionRemote.GestioneProposteRemote;
@@ -35,7 +36,7 @@ public class RicercheTest {
 	private GestioneRegistrazioneRemote gestioneRegistrazione;
 	private List<Abilita> abilita = new ArrayList<Abilita>();
 	
-	public RicercheTest() throws NamingException {
+	public RicercheTest() throws NamingException, RegistrazioneException {
 		Properties env = new Properties();
 		env.setProperty("java.naming.factory.initial","org.jnp.interfaces.NamingContextFactory");
 		env.setProperty("java.naming.provider.url", "localhost:1099");

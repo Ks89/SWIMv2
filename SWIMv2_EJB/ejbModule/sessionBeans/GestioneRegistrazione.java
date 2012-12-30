@@ -10,6 +10,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.hibernate.loader.custom.Return;
+
 import sessionBeans.localInterfaces.GestioneRegistrazioneLocal;
 import utililies.PasswordHasher;
 import utililies.sessionRemote.GestioneRegistrazioneRemote;
@@ -20,6 +22,7 @@ import entityBeans.Possiede;
 import entityBeans.PossiedePK;
 import entityBeans.Utente;
 import exceptions.HashingException;
+import exceptions.RegistrazioneException;
 
 @Stateless
 public class GestioneRegistrazione implements GestioneRegistrazioneLocal, GestioneRegistrazioneRemote {
@@ -28,13 +31,15 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 	private EntityManager entityManager;
 
 	/**
-	 * Registra un utente con i dati pssati come parametro. Per il momento torna true se la registrazione va a buon fine.
+	 * Registra un utente con i dati passati come parametro. 
+	 * @throws RegistrazioneException 
+	 * @return Nela caso la registrazione sia andata a buon fine, torna l'utente appena registrato, altrimenti torna un utente null  
 	 */
-	public boolean registrazioneUtente(String email, String password, String nome, String cognome, Blob fotoProfilo, List<Abilita> abilita)  throws HashingException {
-		
-		if(emailCorretta(email) && emailNonAncoraUtilizzata(email) && !nome.equals("") && !cognome.equals("") && !password.equals("") && abilita.size()>=1)//cognome e nome non nulli e abilita.size è un controllo che facciamo qua, o direttamente con javascript?
+	public Utente registrazioneUtente(String email, String password, String nome, String cognome, Blob fotoProfilo, List<Abilita> abilita)  throws HashingException, RegistrazioneException {
+		Utente utente;
+		if(emailCorretta(email) && emailNonAncoraUtilizzata(email) && !nome.equals("") && !cognome.equals("") && !password.equals("") && abilita.size()>=1)
 		{
-			Utente utente= new Utente();
+			utente=new Utente();
 			utente.setEmail(email);
 			utente.setNome(nome.substring(0, 1).toUpperCase()+nome.substring(1, nome.length()).toLowerCase());
 			utente.setCognome(cognome.substring(0, 1).toUpperCase()+cognome.substring(1, cognome.length()).toLowerCase());
@@ -56,9 +61,14 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 				entityManager.flush();
 			}
 			entityManager.flush();
-			return true;
 		}
-		return false;
+		else if(!emailCorretta(email))
+			throw new RegistrazioneException(RegistrazioneException.Causa.SINTASSIEMAILNONCORRETTA);
+		else if(!emailNonAncoraUtilizzata(email))
+			throw new RegistrazioneException(RegistrazioneException.Causa.EMAILGIAUTILIZZATA);
+		else
+			throw new RegistrazioneException(RegistrazioneException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		return utente;
 	}
 
 	/**
@@ -77,7 +87,8 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 	}
 
 	/**
-	 * Metodo utile per fase di test allo scopo di creare l'amministratore
+	 * Metodo utile in fase di test, perchè certe operazioni richiedono la presenza dell'amministratore.
+	 * Crea un amministratore con email=admin@swim.it e password=pippo
 	 */
 	public boolean registrazioneAdminTest()  throws HashingException {
 		Amministratore admin= new Amministratore();
@@ -89,7 +100,9 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 	}
 
 	/**
-	 * Utile per il test, torna una abilita in base al nome passato come parametro
+	 * Utile per il test. Torna una abilita in base al nome passato come parametro
+	 * @param Nome dell'abilita richiesta
+	 * @return l'abilita, o null se non si è trovata nessuna abilita con questo nome
 	 */
 	public Abilita getAbilitaByNome(String nome){
 		return entityManager.find(Abilita.class, nome);
@@ -97,8 +110,8 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 
 	/**
 	 * Controlla la sintassi dell'indirizzo email passato come parametro
-	 * @param email
-	 * @return
+	 * @param email da verificare
+	 * @return true se l'email è sintatticamente corretta, false altrimenti
 	 */
 	private boolean emailCorretta(String email){
 		//Settiamo il pattern per il confronto
@@ -126,7 +139,7 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 	}
 
 	/**
-	 * Controlla che la mail passata come parametro non sia già usata da un altro utente
+	 * Controlla che la mail passata come parametro non sia già stata usata per un'altra registrazione
 	 * @param email
 	 * @return true se la mail non è già stata utilizzata da un altro utente, false altrimenti
 	 */

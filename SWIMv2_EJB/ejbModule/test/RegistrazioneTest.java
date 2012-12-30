@@ -15,9 +15,12 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import entityBeans.Abilita;
+import entityBeans.Utente;
 import exceptions.HashingException;
+import exceptions.RegistrazioneException;
 import utililies.sessionRemote.GestioneProposteRemote;
 import utililies.sessionRemote.GestioneRegistrazioneRemote;
+import utililies.sessionRemote.GestioneRicercheRemote;
 
 public class RegistrazioneTest {
 
@@ -30,6 +33,7 @@ public class RegistrazioneTest {
 
 	private GestioneRegistrazioneRemote gestioneRegistrazione;
 	private GestioneProposteRemote gestioneProposte;
+	private GestioneRicercheRemote gestioneRicerche;
 	private static TestUtilsRemote testUtils;
 
 	public RegistrazioneTest() throws NamingException {
@@ -49,6 +53,9 @@ public class RegistrazioneTest {
 
 			obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneProposte/remote-utililies.sessionRemote.GestioneProposteRemote");
 			gestioneProposte = (GestioneProposteRemote) PortableRemoteObject.narrow(obj, GestioneProposteRemote.class);
+			
+			obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneRicerche/remote-utililies.sessionRemote.GestioneRicercheRemote");
+			gestioneRicerche = (GestioneRicercheRemote) PortableRemoteObject.narrow(obj, GestioneRicercheRemote.class);
 
 		}
 		catch (NamingException e) {
@@ -77,29 +84,69 @@ public class RegistrazioneTest {
 	@Test
 	public void eseguiRegistrazioneUtente(){
 		try {
+			Utente utente=new Utente();
 			List<Abilita> abilita = new ArrayList<Abilita>();
 			//Per eseguire questo test dovete inserire due abilita nel db. Una nome=1ab Descrizione=prima Abilita l'altra=2ab Descrizione=seconda Abilita 
 			//Non ci si puo' registrare senza almeno una abilita
-			Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Enrico", "Rossi", null, abilita));
-
+			try{
+				gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Enrico", "Rossi", null, abilita);
+				fail();
+			}
+			catch(RegistrazioneException ex)
+			{
+				Assert.assertTrue(true);
+			}
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("1ab"));
 
 			//Non ci si puo' registrare senza nome
-			Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "", "Rossi", null, abilita));
+			try{
+				gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "", "Rossi", null, abilita);
+				fail();
+			}
+			catch(RegistrazioneException ex)
+			{
+				Assert.assertTrue(true);
+			}
 			//Non ci si puo' registrare senza cognome
-			Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Enrico", "", null, abilita));
+			try{
+				gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Enrico", "", null, abilita);
+				fail();
+			}
+			catch(RegistrazioneException ex)
+			{
+				Assert.assertTrue(true);
+			}
 			//Non ci si puo' registrare senza password
-			Assert.assertFalse(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, "", "Enrico", "Rossi", null, abilita));
+			try{
+				gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, "", "Enrico", "Rossi", null, abilita);
+				fail();
+			}
+			catch(RegistrazioneException ex)
+			{
+				Assert.assertTrue(true);
+			}
 			//Registrazione a buon fine con una abilita
-			Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "jacopo", "Bulla", null, abilita));
+			Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "jacopo", "Bulla", null, abilita).equals(gestioneRicerche.getUtenteByEmail("bulla.jacopo@gmail.com")));
 			//Non ci possono essere due utenti con la stessa mail
-			Assert.assertFalse(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "Andrea", "Bazzi", null, abilita));
+			try{
+				gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "Andrea", "Bazzi", null, abilita);
+				fail();
+			}
+			catch(RegistrazioneException ex)
+			{
+				Assert.assertTrue(true);
+			}
 
 			//Registrazione a buon fine con due abilita
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("2ab"));
-			Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("tommaso.ganelli@gmail.com", "pippo", "Tommaso", "Ganelli", null, abilita));
+			Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("tommaso.ganelli@gmail.com", "pippo", "Tommaso", "Ganelli", null, abilita).equals(gestioneRicerche.getUtenteByEmail("tommaso.ganelli@gmail.com")));
 		} catch (HashingException e) {
+			
 			fail("HashingException: " + e);
+		}
+		catch(RegistrazioneException ex)
+		{
+			fail("RegistrazioneException: " +ex);
 		}
 	} 
 }
