@@ -16,13 +16,13 @@
 	</c:if>
 
 	Inserisci la nuova abilità
-	<form action="aggiuntaAbilita" method="POST">
+	<form id="aggiuntaAbilitaForm" action="aggiuntaAbilita" method="POST">
 		<br>Nome abilità: 
-		<input type="text" name="nuovoNomeAbilitaAggiunta"></input>
+		<input id="nuovoNomeAbilitaAggiunta" type="text" name="nuovoNomeAbilitaAggiunta"></input>
 		<br>Descrizione abilità: 
-		<input type="text" name="descrizioneAbilitaAggiunta"></input>
+		<input id="descrizioneAbilitaAggiunta" type="text" name="descrizioneAbilitaAggiunta"></input>
 		<br>
-		<input type="submit" /><br>
+		<input id="submit" type="submit" /><br>
 	</form>
 	
 	<br><br>

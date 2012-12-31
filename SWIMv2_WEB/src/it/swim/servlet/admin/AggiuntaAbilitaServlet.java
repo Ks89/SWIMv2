@@ -18,10 +18,10 @@ import entityBeans.Abilita;
 import exceptions.ProposteException;
 
 /**
- * Servlet implementation class AggiuntaAbilita
+ * Servlet implementation class AggiuntaAbilitaServlet
  */
 @Slf4j
-public class AggiuntaAbilita extends HttpServlet {
+public class AggiuntaAbilitaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
@@ -30,7 +30,7 @@ public class AggiuntaAbilita extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AggiuntaAbilita() {
+	public AggiuntaAbilitaServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

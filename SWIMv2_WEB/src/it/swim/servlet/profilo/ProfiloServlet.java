@@ -80,20 +80,14 @@ public class ProfiloServlet extends HttpServlet {
 			log.error(e.getMessage(), e);
 		}
 
-		// ottengo le abilita che possiede l'utente
-		// TODO per ora le inserisco finte poi le leggero' veramente
-		//quando dovro' leggererle dal db dovro' tenere le 2 righe sequenti commentate e cancellare l'altro
-//			List<Abilita> abilitaInsiemePersonale = ricerche.insiemeAbilitaPersonaliUtente(emailUtenteCollegato);
-			List<Abilita> abilitaInsiemePersonale = new ArrayList<Abilita>();
-			abilitaInsiemePersonale.add(new Abilita("nomeA", "desc1"));
-			abilitaInsiemePersonale.add(new Abilita("nomeB", "desc2"));
-			abilitaInsiemePersonale.add(new Abilita("nomeC", "desc3"));
-			abilitaInsiemePersonale.add(new Abilita("nomeD", "desc4"));
-			abilitaInsiemePersonale.add(new Abilita("nomeE", "desc5"));
-			abilitaInsiemePersonale.add(new Abilita("nomeF", "desc6"));
+		List<Abilita> abilitaInsiemePersonale;
+		try {
+			abilitaInsiemePersonale = ricerche.insiemeAbilitaPersonaliUtente(emailUtenteCollegato);
 			request.setAttribute("abilita", abilitaInsiemePersonale);
-		
-			getServletConfig().getServletContext().getRequestDispatcher("/jsp/profilo.jsp").forward(request, response);
+		} catch (RicercheException e) {
+			e.printStackTrace();
+		}
+		getServletConfig().getServletContext().getRequestDispatcher("/jsp/profilo.jsp").forward(request, response);
 	}
 
 	/**
