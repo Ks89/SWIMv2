@@ -15,7 +15,6 @@ public interface GestioneProposteInterface {
 	 * @param nome = String che rappresenta il nome univoco dell'abilita'
 	 * @return <b>abilita</b> con il nome specificato, se esiste, <b>null</b> altrimenti
 	 * @throws ProposteException con causa ALCUNIPARAMETRINULLIOVUOTI
-	 *
 	 */
 	public Abilita getAbilitaByNome(String nome) throws ProposteException;
 
@@ -25,7 +24,6 @@ public interface GestioneProposteInterface {
 	 * @return <b>lista delle proposte</b>, cioe' una List<PropostaAbilita> che rappresenta le proposte non confermate. 
 	 * Se non e' possibile ottenere tale lista, reistituisce <b>null</b>.
 	 */
-	@SuppressWarnings("unchecked")
 	public List<PropostaAbilita> getProposteAbilitaNonConfermate();
 
 	/**
@@ -34,7 +32,6 @@ public interface GestioneProposteInterface {
 	 * @return <b>lista delle proposte</b>, cioe' una List<PropostaAbilita> che rappresenta le proposte gia' confermate. 
 	 * Se non e' possibile ottenere tale lista, reistituisce <b>null</b>.
 	 */
-	@SuppressWarnings("unchecked")
 	public List<PropostaAbilita> getProposteAbilitaConfermate();
 
 	/**
@@ -51,7 +48,7 @@ public interface GestioneProposteInterface {
 	 * @param id = Long che rappresenta l'id univoco della proposta
 	 * @param descrizione = String che rappresenta la descrizione della nuova abilita'. Puo' essere null.
 	 * @return <b>proposta</b> con l'id specificato, se approvata correttamente, <b>null</b> altrimenti
-	 * @throws ProposteException con causa ALCUNIPARAMETRINULLIOVUOTI
+	 * @throws ProposteException con causa ALCUNIPARAMETRINULLIOVUOTI o ABILITAGIAPRESENTE
 	 */
 	public PropostaAbilita approvaPropostaAbilita(Long id, String descrizione) throws ProposteException;
 
@@ -81,7 +78,7 @@ public interface GestioneProposteInterface {
 	 * @param nomeNuovaAbilita = String che rappresenta il nome dell'abilita scelto dall'amministratore
 	 * @param descrizione = String che rappresenta la descrizione dell'abilita' da inserire. Puo' essere null.
 	 * @return <b>abilita</b> inserita autonomamente dall'amministratore, <b>null</b> altrimenti
-	 * @throws ProposteException con causa ALCUNIPARAMETRINULLIOVUOTI
+	 * @throws ProposteException con causa ALCUNIPARAMETRINULLIOVUOTI o ABILITAGIAPRESENTE
 	 */
 	public Abilita inserisciAbilitaAutonomamente(String emailAmministratore, String nomeNuovaAbilita, String descrizione) throws ProposteException;
 
@@ -94,7 +91,7 @@ public interface GestioneProposteInterface {
 	 * @param descrizione = String che rappresenta la descrizione dell'abilita' da inserire. Puo' essere null.
 	 * @return <b>abilita</b> inserita dall'amministratore dopo aver confermato la proposta di abilita', ma inserendo dati differenti 
 	 * da quelli proposti dall'utente, <b>null</b> altrimenti
-	 * @throws ProposteException con causa ALCUNIPARAMETRINULLIOVUOTI
+	 * @throws ProposteException con causa ALCUNIPARAMETRINULLIOVUOTI o ABILITAGIAPRESENTE
 	 */
 	public Abilita confermaPropostaAbilitaSpecificandoAttributi(String emailAmministratore, Long idPropostaAbilita, String nomeNuovaAbilita, String descrizione) throws ProposteException;
 

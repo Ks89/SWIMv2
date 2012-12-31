@@ -9,7 +9,7 @@ public class ProposteException extends Exception {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static enum Causa {ALCUNIPARAMETRINULLIOVUOTI,ERRORESCONOSCIUTO}; 
+	public static enum Causa {ALCUNIPARAMETRINULLIOVUOTI,ERRORESCONOSCIUTO, ABILITAGIAPRESENTE}; 
 	private Causa causa;
 
 	/**
