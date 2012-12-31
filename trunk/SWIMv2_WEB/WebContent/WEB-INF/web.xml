@@ -140,4 +140,14 @@
     <servlet-name>DettaglioPropostaServlet</servlet-name>
     <url-pattern>/admin/dettaglioProposta</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AggiuntaAbilita</display-name>
+    <servlet-name>AggiuntaAbilita</servlet-name>
+    <servlet-class>it.swim.servlet.admin.AggiuntaAbilita</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AggiuntaAbilita</servlet-name>
+    <url-pattern>/admin/aggiuntaAbilita</url-pattern>
+  </servlet-mapping>
 </web-app>

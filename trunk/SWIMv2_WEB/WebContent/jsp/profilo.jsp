@@ -100,6 +100,5 @@
 	</form>
 
 	<a href="../login?esci=true">Logout</a>
-	<!-- Sarà una servlet dedicata -->
 </body>
 </html>

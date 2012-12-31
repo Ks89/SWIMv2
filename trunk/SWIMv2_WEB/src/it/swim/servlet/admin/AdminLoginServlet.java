@@ -41,7 +41,7 @@ public class AdminLoginServlet extends HttpServlet {
 		if ("true".equals(request.getParameter("adminesci"))) {
 			log.debug("Logout admin");
 			request.getSession().invalidate();
-			response.sendRedirect("../admin/adminLogin");
+			response.sendRedirect("../admin");
 		}
 	}
 
