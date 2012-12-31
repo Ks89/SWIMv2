@@ -73,7 +73,7 @@ public class DettaglioPropostaServlet extends HttpServlet {
 
 			}
 		} catch (ProposteException e) {
-			e.printStackTrace();
+			log.error(e.toString(), e);
 		}
 	}
 
@@ -94,15 +94,16 @@ public class DettaglioPropostaServlet extends HttpServlet {
 			abilitaInserita = gestioneProposte.confermaPropostaAbilitaSpecificandoAttributi(emailAdminCollegato, idPropostaAbilita, nuovoNomeAbilitaProposta, descrizioneAbilita);
 			if(abilitaInserita!=null) {
 				log.debug("nuova abilita inserita correttamente: " + abilitaInserita.getNome());
+				request.setAttribute("inserimentoPropostaCorretto", "Inserimento abilita " + abilitaInserita.getNome() + " avvenuto con successo!");
 			} else {
 				request.setAttribute("erroreInserimentoPropostaFallito", "Errore inserimento nuova abilita con nome: " + nuovoNomeAbilitaProposta);
 			}
 
 			List<PropostaAbilita> proposteAbilita = gestioneProposte.getProposteAbilitaNonConfermate();
 			request.setAttribute("proposte", proposteAbilita);
-			getServletConfig().getServletContext().getRequestDispatcher("/jsp/adminpanelproposte.jsp").forward(request, response);
 		} catch (ProposteException e) {
 			e.printStackTrace();
 		}
+		getServletConfig().getServletContext().getRequestDispatcher("/jsp/adminpanelproposte.jsp").forward(request, response);
 	}
 }

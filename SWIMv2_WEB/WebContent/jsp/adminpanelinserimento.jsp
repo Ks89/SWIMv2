@@ -5,9 +5,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>SWIM - Amministrazione inserimento abilita</title>
 </head>
 <body>
+	<c:if test="${!empty erroreInserimentoAbilitaFallito}">
+	Si è verificato un errore: <c:out value="${erroreInserimentoAbilitaFallito}"></c:out><br>
+	</c:if>
+	<c:if test="${!empty inserimentoAbilitaAvvenuto}">
+	<c:out value="${inserimentoAbilitaAvvenuto}"></c:out><br>
+	</c:if>
 
+	Inserisci la nuova abilità
+	<form action="aggiuntaAbilita" method="POST">
+		<br>Nome abilità: 
+		<input type="text" name="nuovoNomeAbilitaAggiunta"></input>
+		<br>Descrizione abilità: 
+		<input type="text" name="descrizioneAbilitaAggiunta"></input>
+		<br>
+		<input type="submit" /><br>
+	</form>
+	
+	<br><br>
+	<a href="../admin">Torna al pannello di amministrazione</a>
 </body>
 </html>
