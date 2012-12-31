@@ -12,9 +12,8 @@
 	<c:if test="${!empty erroreLoginFallito}">
 	Si è verificato un errore: <c:out value="${erroreLoginFallito}"></c:out>
 	</c:if>
-	
-	<br>
-	Homepage utente
+
+	<br> Homepage utente
 	<br>
 
 	<!--  uso una choose per stabilire quale form mostrare. Se l'utente e' collegato 
@@ -30,12 +29,29 @@
 				</c:forEach>
 				<br> <input type="submit" />
 			</form>
+			<br><br>
+			<a href="profilo/azioni/ricerche?utenti=perregistrati">Ricerca utenti</a>
+			<br><br>
+			<a href="profilo/azioni/ricerche?aiuto=true">Ricerca aiuto</a>
+			<br><br>
+			<a href="profilo/azioni/collaborazioni">Visualizza collaborazioni</a>
+			<br><br>
+			<a href="profilo/azioni/notifiche">Visualizza notifiche</a>
+			<br><br>
+			<a href="profilo/azioni/proposteAbilita">Proponi una nuova abilita</a>
+			<br><br>
+			<a href="profilo/profilo">Torna al profilo</a>
+			<br><br>
+			<a href="login?esci=true">Logout</a>
 		</c:when>
 		<c:otherwise>
-			<form action="login" method="POST">
-				Email: <input type="text" name="emailUtente"></input> Password: <input type="password" name="password"></input> <input type="submit" /> <br>
-				<a href="registrazione">Registrazione</a>
+			<form id="loginForm" action="login" method="POST">
+				Email: <input id="emailUtente" type="text" name="emailUtente"></input> Password: <input id="password" type="password" name="password"></input> <input
+					id="submit" type="submit" /> <br> <a href="registrazione">Registrazione</a>
 			</form>
+			
+			<br><br>
+			<a href="profilo/azioni/ricerche?utenti=pervisitatori">Ricerca utenti per visitatori</a>
 		</c:otherwise>
 	</c:choose>
 </body>

@@ -20,13 +20,13 @@
 	<br>
 	<br>Inserisci la nuova abilità
 	<br>
-	<form action="dettaglioProposta" method="POST">
+	<form id="dettaglioPropostaForm" action="dettaglioProposta" method="POST">
 		<input type="hidden" name="idProposta" value="${idProposta}"></input>
-		<input type="text" name="nuovoNomeAbilitaProposta"></input><br>
+		<input id="nuovoNomeAbilitaProposta" type="text" name="nuovoNomeAbilitaProposta"></input><br>
 		<br>
-		<input type="text" name="descrizioneAbilitaProposta"></input>
+		<input id="descrizioneAbilitaProposta" type="text" name="descrizioneAbilitaProposta"></input>
 		<br>
-		<input type="submit" /><br>
+		<input id="submit" type="submit" /><br>
 	</form>
 </body>
 </html>

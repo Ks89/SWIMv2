@@ -31,11 +31,11 @@
 		<%-- 			</c:forEach> --%>
 		<!-- 		</select> -->
 		
-		<input name="file" type="file" />
+		<input id="file" name="file" type="file" />
 <!-- 		<input type="hidden" name="MAX_FILE_SIZE" value="500" /> -->
 		<br>
 		
-		<input type="submit" />
+		<input id="submit" type="submit" />
 	</form>
 	
 <!-- 	<form action="Upload" method="POST" enctype="multipart/form-data"> -->

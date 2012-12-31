@@ -24,8 +24,9 @@
 		</c:when>
 		<c:otherwise>
 			<br>Pagina di login per l'amministratore<br>
-			<form action="admin/adminLogin" method="POST">
-				Email: <input type="text" name="emailAdmin"></input> Password: <input type="password" name="passwordAdmin"></input> <input type="submit" /> <br>
+			<form id="adminLoginForm" action="admin/adminLogin" method="POST">
+				Email: <input id="emailAdmin" type="text" name="emailAdmin"></input> Password: 
+				<input id="passwordAdmin"  type="password" name="passwordAdmin"></input> <input id="submit"  type="submit" /> <br>
 			</form>
 		</c:otherwise>
 	</c:choose>
