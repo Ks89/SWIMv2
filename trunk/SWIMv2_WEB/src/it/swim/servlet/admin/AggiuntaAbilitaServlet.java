@@ -59,16 +59,18 @@ public class AggiuntaAbilitaServlet extends HttpServlet {
 
 		String nuovoNomeAbilitaAggiunta = request.getParameter("nuovoNomeAbilitaAggiunta");
 		String descrizioneAbilita = request.getParameter("descrizioneAbilitaAggiunta");
-
+ 
 		try {
 			Abilita abilitaAggiunta = gestioneProposte.inserisciAbilitaAutonomamente(emailAdminCollegato, nuovoNomeAbilitaAggiunta, descrizioneAbilita);
 			if(abilitaAggiunta!=null) {
 				log.debug("nuova abilita inserita correttamente: " + abilitaAggiunta.getNome());
 				request.setAttribute("inserimentoAbilitaAvvenuto", "Inserimento abilita " + nuovoNomeAbilitaAggiunta + " avvenuto con successo!");
 			} else {
+				log.debug("erroreInserimentoAbilitaFallito : " + nuovoNomeAbilitaAggiunta);
 				request.setAttribute("erroreInserimentoAbilitaFallito", "Errore aggiunta nuova abilita con nome: " + nuovoNomeAbilitaAggiunta);
 			}
 		} catch (ProposteException e) {
+			log.error(e.getMessage(), e);
 			request.setAttribute("erroreInserimentoAbilitaFallito", "Errore aggiunta nuova abilita con nome: " + nuovoNomeAbilitaAggiunta);
 		}
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/adminpanelinserimento.jsp").forward(request, response);

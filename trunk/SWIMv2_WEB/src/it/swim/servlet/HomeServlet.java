@@ -1,5 +1,7 @@
 package it.swim.servlet;
 
+import it.swim.util.UtenteCollegatoUtil;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class HomeServlet extends HttpServlet {
 
 	@EJB
 	private GestioneRicercheLocal ricerche;
-	
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -39,10 +41,17 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.debug("Visualizza home page");
+		
+		// ottengo l'email dell'utente collegato dalla sessione, appoggiandomi
+		// ad una classe di utilita'
+		String emailUtenteCollegato = (String) UtenteCollegatoUtil.getEmailUtenteCollegato(request);
 
-		List<Abilita> ab = ricerche.insiemeAbilitaGenerali();
-		request.setAttribute("abilita", ab);
-
+		// se e' diverso da null e' perche' l'utente e' collegato e allora fare il redirect al suo profilo
+		if (emailUtenteCollegato != null) {
+			response.sendRedirect("profilo/profilo");
+			return;
+		}
+		
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(request, response);
 
 	}

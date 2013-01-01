@@ -102,7 +102,7 @@ public class DettaglioPropostaServlet extends HttpServlet {
 			List<PropostaAbilita> proposteAbilita = gestioneProposte.getProposteAbilitaNonConfermate();
 			request.setAttribute("proposte", proposteAbilita);
 		} catch (ProposteException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/adminpanelproposte.jsp").forward(request, response);
 	}
