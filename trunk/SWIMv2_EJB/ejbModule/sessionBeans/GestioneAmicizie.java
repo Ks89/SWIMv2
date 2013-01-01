@@ -95,13 +95,15 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 
 		amiciziaPK.setUtente1(utente1);
 		amiciziaPK.setUtente2(utente2);
-
+		try{
 		Amicizia amicizia = entityManager.find(Amicizia.class, amiciziaPK);
 		amicizia.setDataAccettazione(calendar.getTime());
-
 		entityManager.persist(amicizia); // non obbligatori, funziona senza sia
 											// questo che il flush SOLO per
 											// l'update
+		} catch (IllegalArgumentException e) {
+			return false;
+		}
 		entityManager.flush();
 
 		return true;
@@ -131,10 +133,13 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 
 		amiciziaPK.setUtente1(utente1);
 		amiciziaPK.setUtente2(utente2);
-
+		try{
 		Amicizia amicizia = entityManager.find(Amicizia.class, amiciziaPK);
 		entityManager.remove(amicizia);
-
+		} catch (IllegalArgumentException e) {
+			return false;
+		}
+		entityManager.flush();
 		return true;
 	}
 
@@ -157,6 +162,24 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 		query.setParameter("emailUtente", emailUtente);
 		amici.addAll((List<Utente>) query.getResultList());
 		return amici;
+	}
+	
+	
+	/**
+	 * Metodo che ritorna la lista degli utenti che vogliono diventare amici dell'utente che ha l'emailUtente passata come parametro
+	 * 
+	 * @param emailUtente
+	 *            rappresenta la email dell'utente di cui si vuole conoscere la
+	 *            lista degli utenti che gli hanno richiesto l'amicizia
+	 * @return <b>utentiChevoglionoDiventareAmici</b> che rappresenta la lista degli amici
+	 *         dell'utente,<b>null</b> se l'utente non ha richieste di amicizia
+	 */
+	@Override
+	public List<Utente> getUtentiCheVoglionoAmicizia(String emailUtente) {
+		Query query = entityManager.createNamedQuery("Amicizia.getUtentCheTiHannoPropostoAmicizia");
+		query.setParameter("emailUtente", emailUtente);
+		List<Utente> utentiCheVoglionoDiventareAmici = (List<Utente>) query.getResultList();
+		return utentiCheVoglionoDiventareAmici;
 	}
 
 	/**

@@ -16,15 +16,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NamedQueries({ @NamedQuery(name = "Amicizia.getUtentAmici1", query = "SELECT a.amiciziaPK.utente1 "
-		+ "FROM Amicizia a "
-		+ "WHERE a.amiciziaPK.utente2.email = :emailUtente"),
+@NamedQueries({
+		@NamedQuery(name = "Amicizia.getUtentAmici1", query = "SELECT a.amiciziaPK.utente1 "
+				+ "FROM Amicizia a "
+				+ "WHERE a.amiciziaPK.utente2.email = :emailUtente AND a.dataAccettazione IS NOT NULL"),
 		@NamedQuery(name = "Amicizia.getUtentAmici2", query = "SELECT a.amiciziaPK.utente2 "
 				+ "FROM Amicizia a "
-				+ "WHERE a.amiciziaPK.utente1.email = :emailUtente")
+				+ "WHERE a.amiciziaPK.utente1.email = :emailUtente AND a.dataAccettazione IS NOT NULL"),
+		@NamedQuery(name = "Amicizia.getUtentCheTiHannoPropostoAmicizia", query = "SELECT a.amiciziaPK.utente1 "
+				+ "FROM Amicizia a "
+				+ "WHERE a.amiciziaPK.utente2.email = :emailUtente AND a.dataAccettazione IS NULL"),
 })
-
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
