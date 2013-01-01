@@ -65,7 +65,6 @@ public class AdminPanelServlet extends HttpServlet {
 				return;
 			} else {
 				response.sendRedirect("../admin/adminPanel");
-				getServletConfig().getServletContext().getRequestDispatcher("/jsp/homeadmin.jsp").forward(request, response);
 				return;
 			}
 		}

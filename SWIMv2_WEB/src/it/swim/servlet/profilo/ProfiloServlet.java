@@ -70,8 +70,14 @@ public class ProfiloServlet extends HttpServlet {
 
 			// ottengo punteggio di feedback dell'utente
 			Double punteggio = gestCollaborazioni.getPunteggioFeedback(emailUtenteCollegato);
-			log.debug("punteggioUtenteCollegato:" + punteggio);
-			request.setAttribute("punteggioUtenteCollegato", punteggio);
+			String feedback;
+			if(punteggio==null) {
+				feedback = new String("Non disponibile");
+			} else {
+				feedback = Double.toString(punteggio);
+			}
+			log.debug("punteggioUtenteCollegato:" + feedback);
+			request.setAttribute("punteggioUtenteCollegato", feedback);
 
 			// Collaborazioni
 			List<Collaborazione> collabora = gestCollaborazioni.getCollaborazioniCreate(emailUtenteCollegato);
@@ -85,7 +91,7 @@ public class ProfiloServlet extends HttpServlet {
 			abilitaInsiemePersonale = ricerche.insiemeAbilitaPersonaliUtente(emailUtenteCollegato);
 			request.setAttribute("abilita", abilitaInsiemePersonale);
 		} catch (RicercheException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/profilo.jsp").forward(request, response);
 	}

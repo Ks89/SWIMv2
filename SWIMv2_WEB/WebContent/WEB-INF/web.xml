@@ -142,23 +142,23 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>AggiuntaAbilita</display-name>
-    <servlet-name>AggiuntaAbilita</servlet-name>
-    <servlet-class>it.swim.servlet.admin.AggiuntaAbilita</servlet-class>
+    <display-name>AggiuntaAbilitaServlet</display-name>
+    <servlet-name>AggiuntaAbilitaServlet</servlet-name>
+    <servlet-class>it.swim.servlet.admin.AggiuntaAbilitaServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AggiuntaAbilita</servlet-name>
+    <servlet-name>AggiuntaAbilitaServlet</servlet-name>
     <url-pattern>/admin/aggiuntaAbilita</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>RicercheServlet</display-name>
-    <servlet-name>RicercheServlet</servlet-name>
-    <servlet-class>it.swim.servlet.profilo.azioni.RicercheServlet</servlet-class>
+    <display-name>RicerchePerUtentiLoggatiServlet</display-name>
+    <servlet-name>RicerchePerUtentiLoggatiServlet</servlet-name>
+    <servlet-class>it.swim.servlet.profilo.azioni.RicerchePerUtentiLoggatiServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>RicercheServlet</servlet-name>
-    <url-pattern>/profilo/azioni/ricerche</url-pattern>
+    <servlet-name>RicerchePerUtentiLoggatiServlet</servlet-name>
+    <url-pattern>/profilo/azioni/ricerchePerUtentiLoggati</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

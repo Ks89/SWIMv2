@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lombok.extern.slf4j.Slf4j;
+
 import exceptions.LoginException;
 
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
@@ -19,6 +21,7 @@ import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 /**
  * Servlet implementation class FotoServlet
  */
+@Slf4j
 public class FotoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -50,9 +53,9 @@ public class FotoServlet extends HttpServlet {
 				response.getOutputStream().write(foto);
 			}
 		} catch(SQLException e) {
-
+			log.error(e.getMessage(), e);
 		} catch (LoginException e) {
-
+			log.error(e.getMessage(), e);
 		}
 	}
 

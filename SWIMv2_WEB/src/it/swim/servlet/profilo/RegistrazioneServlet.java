@@ -1,4 +1,4 @@
-	package it.swim.servlet.profilo;
+package it.swim.servlet.profilo;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,19 +16,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 import sessionBeans.localInterfaces.GestioneRegistrazioneLocal;
 import sessionBeans.localInterfaces.GestioneRicercheLocal;
-
 import entityBeans.Abilita;
 import entityBeans.Utente;
 import exceptions.HashingException;
 import exceptions.RegistrazioneException;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Servlet implementation class RegistrazioneServlet
@@ -69,6 +69,7 @@ public class RegistrazioneServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		List<FileItem> items;
@@ -106,12 +107,17 @@ public class RegistrazioneServlet extends HttpServlet {
 					}
 				} else {
 					// Process form file field (input type="file").
-					String fieldname = item.getFieldName();
-					String filename = item.getName();
+					// String fieldname = item.getFieldName();
+					// String filename = item.getName();
 					InputStream filecontent = item.getInputStream();
 					byte[] b = new byte[filecontent.available()];
-					filecontent.read(b);
-					blob=new SerialBlob(b);
+					log.debug("inputstream blob: " + filecontent.available());
+					if(filecontent.available()>0) {
+						filecontent.read(b);
+						blob = new SerialBlob(b);
+					}
+					filecontent.close();
+//					blob = ConvertitoreFotoInBlob.getBlobFromFileItem(item, LUNGHEZZA, ALTEZZA);
 				}
 			}
 
@@ -133,7 +139,7 @@ public class RegistrazioneServlet extends HttpServlet {
 		Utente utenteRegistrato;
 		try {
 			utenteRegistrato = registrazione.registrazioneUtente(email, password, nome, cognome, blob, abilitaPersonaliRegistrazione);
-			
+
 			log.debug("utenteRegistrato: " + utenteRegistrato );
 
 			if(utenteRegistrato!=null) {

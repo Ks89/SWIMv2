@@ -7,15 +7,18 @@
 <title>SWIM - Amministrazione</title>
 </head>
 <body>
+	<%-- if che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
 	<c:if test="${!empty erroreLoginAdminFallito}">
 	Si è verificato un errore: <c:out value="${erroreLoginAdminFallito}"></c:out>
 	</c:if>
 	
+	<%-- il choose e' come lo switch-case-default di java dove il case e' il when e il default e' l'otherwise --%>
 	<c:choose>
 		<c:when test="${sessionScope.adminCollegato != null}">
 			<!-- Link per accedere alle varie funzionalita' di amministrazione -->
 			<br>Pagina di amministrazione
 			<br><br>
+			<%-- Nota il passaggio di parametri con ? tramite una get --%>
 			<a href="admin/adminPanel?operazione=1">Aggiungi abilita</a>
 			<br><br>
 			<a href="admin/adminPanel?operazione=2">Visualizza proposte abilita</a>
@@ -30,6 +33,5 @@
 			</form>
 		</c:otherwise>
 	</c:choose>
-	
 </body>
 </html>

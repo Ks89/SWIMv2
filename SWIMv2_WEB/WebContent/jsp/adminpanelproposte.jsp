@@ -7,7 +7,7 @@
 <title>SWIM - Amministrazione proposte abilita</title>
 </head>
 <body>
-
+	<%-- if che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
 	<c:if test="${!empty erroreInserimentoPropostaFallito}">
 	Si è verificato un errore: <c:out value="${erroreInserimentoPropostaFallito}"></c:out>
 		<br>

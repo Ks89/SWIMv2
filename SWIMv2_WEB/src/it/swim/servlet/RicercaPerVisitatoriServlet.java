@@ -6,12 +6,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * Servlet implementation class RicercaPerVisitatoriServlet
  */
-@Slf4j
 public class RicercaPerVisitatoriServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
