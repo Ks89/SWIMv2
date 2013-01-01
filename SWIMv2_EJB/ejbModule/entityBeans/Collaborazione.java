@@ -24,16 +24,21 @@ import org.hibernate.validator.Min;
 import org.hibernate.validator.Pattern;
 
 @NamedQueries({
-		@NamedQuery(name = "Collaborazione.getCollaborazioniCreateByEmail", query = "SELECT c " + "FROM Collaborazione c " + "WHERE c.utenteRichiedente.email = :emailRichiedente"),
-
+		@NamedQuery(name = "Collaborazione.getCollaborazioniCreateByEmail", query = "SELECT c " + "FROM Collaborazione c "
+				+ "WHERE c.utenteRichiedente.email = :emailRichiedente"),
+				
 		@NamedQuery(name = "Collaborazione.getCollaborazioniAccettateByEmail", query = "SELECT c " + "FROM Collaborazione c "
 				+ "WHERE c.utenteRicevente.email = :emailRicevente AND c.dataStipula IS NOT NULL"),
+				
+		@NamedQuery(name = "Collaborazione.getNotificheRichiesteAiuto", query = "SELECT c " + "FROM Collaborazione c "
+				+ "WHERE c.utenteRicevente.email = :emailRicevente AND c.dataStipula IS NULL"),
 
 		@NamedQuery(name = "Collaborazione.getCollaborazioniCreateFeedbackNonRilasciatoByEmail", query = "SELECT c " + "FROM Collaborazione c "
 				+ "WHERE c.utenteRichiedente.email = :emailRichiedente AND c.dataTermine IS NOT NULL AND c.punteggioFeedback IS NULL"),
 
 		@NamedQuery(name = "Collaborazione.getPunteggioFeedbackByEmail", query = "SELECT avg(c.punteggioFeedback) " + "FROM Collaborazione c "
-				+ "WHERE c.utenteRicevente.email = :emailRicevente AND c.punteggioFeedback IS NOT NULL"), })
+				+ "WHERE c.utenteRicevente.email = :emailRicevente AND c.punteggioFeedback IS NOT NULL")
+})
 @Data
 @EqualsAndHashCode(of = { "id", "utenteRicevente", "utenteRichiedente" })
 @Entity
