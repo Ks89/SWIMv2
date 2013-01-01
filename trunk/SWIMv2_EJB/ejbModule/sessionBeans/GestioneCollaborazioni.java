@@ -253,6 +253,27 @@ public class GestioneCollaborazioni implements GestioneCollaborazioniRemote, Ges
 		return (List<Collaborazione>)query.getResultList();	
 	}
 
+	
+	/**
+	 * Metodo che fornisce la lista delle richieste di aiuto verso l'utente ricevente, ancora non accettate.
+	 * @param emailRicevente = String che rappresenta l'email dell'utente ricevente della richiesta di aiuto (collaborazione)
+	 * @return <b>lista delle collaborazioni</b>, ovvero una List<Collaborazione> che rappresenta le 
+	 * collaborazioni accettate dall'utente ricevente. Se non e' possibile ottenere tale lista, reistituisce <b>null</b>.
+	 * @throws LoginException con causa ALCUNIPARAMETRINULLIOVUOTI
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Collaborazione> getNotificheRichiesteAiuto(String emailRicevente) throws LoginException {
+		if(emailRicevente==null || emailRicevente.equals("")) {
+			throw new LoginException(LoginException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		}
+		
+		Query query = entityManager.createNamedQuery("Collaborazione.getNotificheRichiesteAiuto");
+		query.setParameter("emailRicevente", emailRicevente);
+		return (List<Collaborazione>)query.getResultList();	
+	}
+	
+	
 	/**
 	 * Metodo per l'estrazione dell'utente dal database data la sua email
 	 * @param email = String che rappresente l'email dell'utente

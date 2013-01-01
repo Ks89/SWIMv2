@@ -30,7 +30,7 @@ public class GestioneModificaProfilo implements GestioneModificaProfiloLocal, Ge
 		if(utente==null){
 			return false;
 		}
-		utente.setNome(emailUtente);
+		utente.setFotoProfilo(fotoProfilo);
 		
 		entityManager.persist(utente);
 		entityManager.flush();
