@@ -72,6 +72,10 @@ public class RegistrazioneTest {
 			//Inserisce due abilità nel DB
 			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN, "1ab","prima Abilita");
 			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN, "2ab","seconda Abilita");
+			List<Abilita> abilita = new ArrayList<Abilita>();
+			abilita.add(gestioneRegistrazione.getAbilitaByNome("1ab"));
+			gestioneRegistrazione.registrazioneUtente("peppino@gmail.com", "a2242ead55c94c3deb7cf2340bfef9d5bcaca22dfe66e646745ee4371c633fc8", "peppino", "peppo", null, abilita);
+			gestioneRegistrazione.registrazioneUtente("davide@gmail.com", "a2242ead55c94c3deb7cf2340bfef9d5bcaca22dfe66e646745ee4371c633fc8", "Davide", "Caio", null, abilita);
 		} catch (HashingException e) {
 			fail("HashingException: " + e);
 		} catch (ProposteException e) {
