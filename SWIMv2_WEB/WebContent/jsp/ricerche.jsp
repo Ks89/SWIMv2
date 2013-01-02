@@ -9,8 +9,16 @@
 </head>
 <body>
 
-
+<c:out value="${prova}"></c:out> 
 <%-- Questa jsp conterra' con un choose 3 casi possibili, cioe' ricerca per visitatori, ricerca aiuto e ricerca utenti --%>
-
+<!-- 
+<c:choose>
+	<c:when >
+	</c:when>
+	<c:when >
+	</c:when>
+	<c:otherwise>
+	</c:otherwise>
+		</c:choose> -->
 </body>
 </html>
