@@ -25,6 +25,8 @@ public class CollaborazioneTest {
 	private static final String MAIL_PEPPINO = "peppino@gmail.com";
 	private static final String MAIL_GIOVANNINO = "giovannino@gmail.com";
 	private static final String MAIL_DAVIDE = "davide@gmail.com";
+	
+	private static TestUtilsRemote testUtils;
 
 	@BeforeClass
 	public static void setUpTestCollaborazione() {
@@ -35,6 +37,12 @@ public class CollaborazioneTest {
 		try {
 			Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneCollaborazioni/remote-utililies.sessionRemote.GestioneCollaborazioniRemote");
 			gestioneCollaborazioni = (GestioneCollaborazioniRemote) PortableRemoteObject.narrow(obj, GestioneCollaborazioniRemote.class);
+		
+			obj = (new InitialContext(env)).lookup("SWIMv2_EAR/TestUtils/remote-test.TestUtilsRemote");
+			testUtils = (TestUtilsRemote) PortableRemoteObject.narrow(obj, TestUtilsRemote.class);
+			
+			testUtils.svuotaTabellaDatabase("Collaborazione");
+			
 		} catch (NamingException e) {
 			System.out.println(e.toString());
 			return;
@@ -52,8 +60,12 @@ public class CollaborazioneTest {
 
 			Collaborazione collaborazioneDaDb2 = gestioneCollaborazioni.getCollaborazione(collaborazioneAppenaInserita2.getId());
 
-			assertTrue(collaborazioneDaDb1.toString().equals(collaborazioneAppenaInserita1.toString()));
-			assertTrue(collaborazioneDaDb2.toString().equals(collaborazioneAppenaInserita2.toString()));
+			System.out.println(collaborazioneAppenaInserita1 + " \n " + collaborazioneDaDb1);
+			
+			assertTrue(collaborazioneDaDb1.getId().equals(collaborazioneAppenaInserita1.getId()) && collaborazioneDaDb1.getUtenteRicevente().getEmail().equals(collaborazioneAppenaInserita1.getUtenteRicevente().getEmail())
+					&& collaborazioneDaDb1.getUtenteRichiedente().getEmail().equals(collaborazioneAppenaInserita1.getUtenteRichiedente().getEmail()));
+			assertTrue(collaborazioneDaDb2.getId().equals(collaborazioneAppenaInserita2.getId()) && collaborazioneDaDb2.getUtenteRicevente().getEmail().equals(collaborazioneAppenaInserita2.getUtenteRicevente().getEmail())
+					&& collaborazioneDaDb2.getUtenteRichiedente().getEmail().equals(collaborazioneAppenaInserita2.getUtenteRichiedente().getEmail()));
 		} catch (CollaborazioneException e) {
 			fail(e.getCausa().name());
 		} catch (LoginException e) {
