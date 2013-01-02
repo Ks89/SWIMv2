@@ -71,7 +71,7 @@ public class RicercheTest {
 			//svuota DB
 			testUtils.svuotaDatabase();
 			//aggiunge amministratore
-			gestioneRegistrazione.registrazioneAdminTest();
+			gestioneRegistrazione.registrazioneAmministratore("admin@swim.it","pippo");
 			//Inserisce due abilità nel DB
 			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN, "1ab","Descrizione");
 			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN,"2ab","Descrizione");
@@ -82,9 +82,6 @@ public class RicercheTest {
 			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN,"7ab","Descrizione");
 			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN,"8ab","Descrizione");
 			//aggiunge due utenti nel DB
-			gestioneRegistrazione.registrazioneUtentePerTest(MAIL_PEPPINO, PASSWORD , "peppino", "peppo");
-			gestioneRegistrazione.registrazioneUtentePerTest(MAIL_GIOVANNINO, PASSWORD, "davide", "caio");
-			gestioneRegistrazione.registrazioneUtentePerTest(MAIL_DAVIDE, PASSWORD, "davide", "caio");
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("1ab"));
 			gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "jacopo", "Bulla", null, abilita);
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("2ab"));

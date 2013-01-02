@@ -72,31 +72,25 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 	}
 
 	/**
-	 * Metodo per creare utenti fittizzi per test
-	 */
-	public boolean registrazioneUtentePerTest(String email, String password, String nome, String cognome) throws HashingException{
-		Utente utente= new Utente();
-		utente.setEmail(email);
-		utente.setNome(nome);
-		utente.setCognome(cognome);
-		utente.setPassword(PasswordHasher.hashPassword(password));
-		utente.setFotoProfilo(null);
-		entityManager.persist(utente);
-		entityManager.flush();
-		return true;
-	}
-
-	/**
 	 * Metodo utile in fase di test, perchè certe operazioni richiedono la presenza dell'amministratore.
 	 * Crea un amministratore con email=admin@swim.it e password=pippo
+	 * @throws RegistrazioneException 
 	 */
-	public boolean registrazioneAdminTest()  throws HashingException {
+	public boolean registrazioneAmministratore(String email, String password)  throws HashingException, RegistrazioneException {
 		Amministratore admin= new Amministratore();
-		admin.setEmail("admin@swim.it");
-		admin.setPassword(PasswordHasher.hashPassword("pippo"));
-		entityManager.persist(admin);
-		entityManager.flush();
-		return true;
+		if(emailCorretta(email) && !password.equals(""))
+		{
+			admin.setEmail(email);
+			admin.setPassword(PasswordHasher.hashPassword(password));
+			entityManager.persist(admin);
+			entityManager.flush();
+			return true;
+		}
+		else if(!emailCorretta(email))
+			throw new RegistrazioneException(RegistrazioneException.Causa.SINTASSIEMAILNONCORRETTA);
+		else
+			throw new RegistrazioneException(RegistrazioneException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		
 	}
 
 	/**
