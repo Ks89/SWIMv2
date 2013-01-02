@@ -37,7 +37,7 @@ public class RegistrazioneTest {
 	private GestioneRicercheRemote gestioneRicerche;
 	private static TestUtilsRemote testUtils;
 
-	public RegistrazioneTest() throws NamingException {
+	public RegistrazioneTest() throws NamingException, RegistrazioneException {
 		Properties env = new Properties();
 		env.setProperty("java.naming.factory.initial","org.jnp.interfaces.NamingContextFactory");
 		env.setProperty("java.naming.provider.url", "localhost:1099");
@@ -68,14 +68,10 @@ public class RegistrazioneTest {
 			//svuota DB
 			testUtils.svuotaDatabase();
 			//aggiunge amministratore
-			gestioneRegistrazione.registrazioneAdminTest();
+			gestioneRegistrazione.registrazioneAmministratore("admin@swim.it","pippo");
 			//Inserisce due abilità nel DB
 			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN, "1ab","prima Abilita");
 			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN, "2ab","seconda Abilita");
-			//aggiunge due utenti nel DB
-			gestioneRegistrazione.registrazioneUtentePerTest(MAIL_PEPPINO, PASSWORD , "peppino", "peppo");
-			gestioneRegistrazione.registrazioneUtentePerTest(MAIL_GIOVANNINO, PASSWORD, "davide", "caio");
-			gestioneRegistrazione.registrazioneUtentePerTest(MAIL_DAVIDE, PASSWORD, "davide", "caio");
 		} catch (HashingException e) {
 			fail("HashingException: " + e);
 		} catch (ProposteException e) {

@@ -10,7 +10,6 @@ import exceptions.RegistrazioneException;
 
 public interface GestioneRegistrazioneInterface {
 	public Utente registrazioneUtente(String email, String password, String nome, String cognome, Blob fotoProfilo, List<Abilita> abilita)  throws HashingException, RegistrazioneException;
-	public boolean registrazioneUtentePerTest(String email, String password, String nome, String cognome) throws HashingException;
-	public boolean registrazioneAdminTest()  throws HashingException;
+	public boolean registrazioneAmministratore(String email, String password)  throws HashingException, RegistrazioneException;
 	public Abilita getAbilitaByNome(String nome);
 }
