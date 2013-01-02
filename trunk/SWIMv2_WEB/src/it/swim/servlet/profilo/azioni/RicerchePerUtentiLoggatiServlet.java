@@ -33,13 +33,16 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 		// ottengo l'email dell'utente collegato dalla sessione, appoggiandomi
 		// ad una classe di utilita'
 		String emailUtenteCollegato = (String) UtenteCollegatoUtil.getEmailUtenteCollegato(request);
-
+		String prova=request.getParameter("utenti");
+		log.debug("<---------------- PORCO DIO ----------------->");
 		// se e' null e' perche' l'utente non e' collegato e allora devo fare il
 		// redirect alla home
 		if (emailUtenteCollegato == null) {
 			response.sendRedirect("../home");
 			return;
 		}
+		request.setAttribute("prova", prova);
+		getServletConfig().getServletContext().getRequestDispatcher("/jsp/ricerche.jsp").forward(request, response);
 	}
 
 	/**
