@@ -1,4 +1,4 @@
-package it.swim.servlet.profilo;
+package it.swim.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -62,7 +62,7 @@ public class RegistrazioneServlet extends HttpServlet {
 		List<Abilita> abilitaInsiemeGenerale = ricerche.insiemeAbilitaGenerali();
 		request.setAttribute("abilita", abilitaInsiemeGenerale);
 
-		getServletConfig().getServletContext().getRequestDispatcher("/jsp/registrazione.jsp").forward(request, response);
+		getServletConfig().getServletContext().getRequestDispatcher("/jsp/visitatore/registrazione.jsp").forward(request, response);
 	}
 
 	/**
@@ -150,7 +150,7 @@ public class RegistrazioneServlet extends HttpServlet {
 				response.sendRedirect("profilo/profilo");
 			} else {
 				log.debug("Errore registrazione");
-				getServletConfig().getServletContext().getRequestDispatcher("/jsp/registrazione.jsp").forward(request, response);
+				getServletConfig().getServletContext().getRequestDispatcher("/jsp/visitatore/registrazione.jsp").forward(request, response);
 			}
 		} catch (HashingException e) {
 			log.error(e.getMessage(), e);

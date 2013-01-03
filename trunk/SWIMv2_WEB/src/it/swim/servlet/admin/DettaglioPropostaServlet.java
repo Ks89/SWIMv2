@@ -67,7 +67,7 @@ public class DettaglioPropostaServlet extends HttpServlet {
 				request.setAttribute("emailProposta", propostaAbilita.getUtente().getEmail());
 				request.setAttribute("abilitaProposta", propostaAbilita.getAbilitaProposta());
 				request.setAttribute("motivazioneProposta", propostaAbilita.getMotivazione());
-				getServletConfig().getServletContext().getRequestDispatcher("/jsp/dettaglioProposta.jsp").forward(request, response);
+				getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/dettaglioProposta.jsp").forward(request, response);
 				return;
 			} else {
 
@@ -104,6 +104,6 @@ public class DettaglioPropostaServlet extends HttpServlet {
 		} catch (ProposteException e) {
 			log.error(e.getMessage(), e);
 		}
-		getServletConfig().getServletContext().getRequestDispatcher("/jsp/adminpanelproposte.jsp").forward(request, response);
+		getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/adminpanelproposte.jsp").forward(request, response);
 	}
 }

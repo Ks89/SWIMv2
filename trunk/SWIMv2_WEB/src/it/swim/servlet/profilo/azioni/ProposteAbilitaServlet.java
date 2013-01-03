@@ -50,7 +50,7 @@ public class ProposteAbilitaServlet extends HttpServlet {
 		if (emailUtenteCollegato == null) {
 			response.sendRedirect("../home");
 		}
-		getServletConfig().getServletContext().getRequestDispatcher("/jsp/proposteabilita.jsp").forward(request, response);
+		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/proposteabilita.jsp").forward(request, response);
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class ProposteAbilitaServlet extends HttpServlet {
 			log.error(e.getMessage(), e);
 			request.setAttribute("erroreInserimentoProposta", "Errore inserimento proposta di abilita");
 		}
-		getServletConfig().getServletContext().getRequestDispatcher("/jsp/proposteabilita.jsp").forward(request, response);
+		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/proposteabilita.jsp").forward(request, response);
 	}
 
 }

@@ -73,6 +73,6 @@ public class AggiuntaAbilitaServlet extends HttpServlet {
 			log.error(e.getMessage(), e);
 			request.setAttribute("erroreInserimentoAbilitaFallito", "Errore aggiunta nuova abilita con nome: " + nuovoNomeAbilitaAggiunta);
 		}
-		getServletConfig().getServletContext().getRequestDispatcher("/jsp/adminpanelinserimento.jsp").forward(request, response);
+		getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/adminpanelinserimento.jsp").forward(request, response);
 	}
 }
