@@ -8,17 +8,78 @@
 <title>SWIM - Profilo - Ricerche</title>
 </head>
 <body>
-
-<c:out value="${prova}"></c:out> 
 <%-- Questa jsp conterra' con un choose 3 casi possibili, cioe' ricerca per visitatori, ricerca aiuto e ricerca utenti --%>
-<%-- 
-<c:choose>
-	<c:when >
-	</c:when>
-	<c:when >
-	</c:when>
-	<c:otherwise>
-	</c:otherwise>
-		</c:choose> --%>
+<form action="ricerchePerUtentiLoggati" method="POST" enctype="multipart/form-data">
+	<c:choose>
+		<c:when test="${tipoRicerca=='aiuto'}">
+			<%--<c:out value="Aiuto per utenti loggati"></c:out>--%>
+			<c:forEach items="${abilita}" var="item">
+				<input type="checkbox" name="abilita" value='<c:out value="${item.nome}"/>' />
+				<c:out value="${item.nome}" />
+				<br>
+			</c:forEach>
+			 <input id="Cerca" type="submit" />
+			 <c:if test="${risultatoRicerca}">
+			 	<table id="tabellaRichiesteAiuto" style="border-width: medium; border-style: solid;">
+					<tr>
+						<th>Nome</th>
+						<th>Cognome</th>
+						<th>Indirizzo Email</th>
+					</tr>
+					<c:forEach items="${utenti}" var="utente">
+						<tr>
+							<td><c:out value="${utente.nome}" /></td>
+							<td><c:out value="${utente.cognome}" /></td>
+							<td><c:out value="${utente.email}" /></td>
+						</tr>
+					</c:forEach>
+				</table>
+			 </c:if>
+		</c:when>
+		<c:when test="${tipoRicerca=='aiutoVisitatore'}">
+			<c:forEach items="${abilita}" var="item">
+				<input type="checkbox" name="abilita" value='<c:out value="${item.nome}"/>' />
+				<c:out value="${item.nome}" />
+				<br>
+			</c:forEach>
+			 <input id="Cerca" type="submit" />
+			  <c:if test="${risultatoRicerca}">
+			 	<table id="tabellaRichiesteAiuto" style="border-width: medium; border-style: solid;">
+					<tr>
+						<th>Nome</th>
+						<th>Cognome</th>
+					</tr>
+					<c:forEach items="${utenti}" var="utente">
+						<tr>
+							<td><c:out value="${utente.nome}" /></td>
+							<td><c:out value="${utente.cognome}" /></td>
+						</tr>
+					</c:forEach>
+				</table>
+			 </c:if>
+		</c:when>
+		<c:otherwise>
+			Nome:<input type="text" name="nomeUtente"></input>
+			Cognome:<input type="text" name="cognomeUtente"></input>
+			<input id="Cerca" type="submit" />
+			<c:if test="${risultatoRicerca}">
+			 	<table id="tabellaRichiesteAiuto" style="border-width: medium; border-style: solid;">
+					<tr>
+						<th>Nome</th>
+						<th>Cognome</th>
+						<th>Indirizzo Email</th>
+					</tr>
+					<c:forEach items="${utenti}" var="utente">
+						<tr>
+							<td><c:out value="${utente.nome}" /></td>
+							<td><c:out value="${utente.cognome}" /></td>
+							<td><c:out value="${utente.email}" /></td>
+						</tr>
+					</c:forEach>
+				</table>
+			 </c:if>
+		</c:otherwise>
+	</c:choose>
+</form>
 </body>
 </html>
