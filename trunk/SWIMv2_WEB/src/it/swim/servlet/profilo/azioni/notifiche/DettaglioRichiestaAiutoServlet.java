@@ -88,15 +88,15 @@ public class DettaglioRichiestaAiutoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.debug("doPost del dettaglio richiesta aiuto");
 		String emailUtenteCollegato = (String) UtenteCollegatoUtil.getEmailUtenteCollegato(request);
-
+ 
 		
-		if(request.getParameter("idCollaborazioneConfermata")!=null) {
+		if(request.getParameter("tipo").equals("CONFERMA")) {
 			log.debug("accettare la collaborazione");
-			this.accettaCollaborazione(request, response, Long.parseLong(request.getParameter("idCollaborazioneConfermata")));
+			this.accettaCollaborazione(request, response, Long.parseLong(request.getParameter("idCollaborazione")));
 		} else {
-			if(request.getParameter("idCollaborazioneRifiutata")!=null) {
+			if(request.getParameter("tipo").equals("RIFIUTA")) {
 				log.debug("rifutare la collaborazione");
-				this.rifiutaCollaborazione(request, response, Long.parseLong(request.getParameter("idCollaborazioneRifiutata")));
+				this.rifiutaCollaborazione(request, response, Long.parseLong(request.getParameter("idCollaborazione")));
 			}
 		}
 		

@@ -16,8 +16,8 @@
 		<br>
 	</c:if>
 
-	<br>Richiesta d'aiuto:
-	<br> Utente:
+	<br>Richiesta d'aiuto: 
+	<br> Utente: 
 	<c:out value="${nomeRichiedeAiuto}"></c:out>
 	<c:out value="${cognomeRichiedeAiuto}"></c:out>
 	<br> Nome collaborazione:
@@ -25,12 +25,12 @@
 	<br> Descrizione:
 	<c:out value="${descrizioneCollaborazione}"></c:out>
 
-
 	<c:if test="${empty confermaRichiestaAiuto and empty erroreConfermaRichiestaAiuto}">
-		<form id="confermaRichiestaAiutoForm" action="dettaglioRichiestaAiuto" method="POST">
-			<input type="hidden" name="idCollaborazioneConfermata" value="${idCollaborazione}"></input> <input id="conferma" type="submit"/>&nbsp;
-		</form> <form id="rifiutaRichiestaAiutoForm" action="dettaglioRichiestaAiuto" method="POST">
-			<input type="hidden" name="idCollaborazioneRifiutata" value="${idCollaborazione}"></input> <input id="rifiuta" type="submit"/>
+		<form id="dettaglioRichiestaAiuto" action="dettaglioRichiestaAiuto" method="POST">
+			<input type="hidden" name="tipo" /> 
+			<input type="hidden" name="idCollaborazione" value="${idCollaborazione}">
+			<input type="button" value="conferma" onclick="dettaglioRichiestaAiuto.elements['tipo'].value='CONFERMA'; dettaglioRichiestaAiuto.submit();" /> <input 
+				type="button" value="rifiuta" onclick="dettaglioRichiestaAiuto.elements['tipo'].value='RIFIUTA'; dettaglioRichiestaAiuto.submit();" />
 		</form>
 	</c:if>
 
