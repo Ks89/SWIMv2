@@ -73,7 +73,7 @@ public class AdminLoginServlet extends HttpServlet {
 				// se il login fallisce, metto le request un messaggio di errore
 				// sotto il nome di erroreLoginFallito
 				request.setAttribute("erroreLoginAdminFallito", "Email o password non riconosciute");
-				getServletConfig().getServletContext().getRequestDispatcher("/jsp/homeAdmin.jsp").forward(request, response);
+				getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/homeAdmin.jsp").forward(request, response);
 			}
 
 		} catch (LoginException e) {
@@ -87,7 +87,7 @@ public class AdminLoginServlet extends HttpServlet {
 					request.setAttribute("erroreLoginAdminFallito", "LoginException: Errore durante il login - causa sconosciuta");
 				}
 			}
-			getServletConfig().getServletContext().getRequestDispatcher("/jsp/homeAdmin.jsp").forward(request, response);
+			getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/homeAdmin.jsp").forward(request, response);
 		} catch (HashingException e) {
 			log.error(e.getMessage(), e);
 			if (e.getCausa() == HashingException.Causa.ALCUNIPARAMETRINULLIOVUOTI) {
@@ -99,7 +99,7 @@ public class AdminLoginServlet extends HttpServlet {
 					request.setAttribute("erroreLoginAdminFallito", "HashingException: ausa sconosciuta");
 				}
 			}
-			getServletConfig().getServletContext().getRequestDispatcher("/jsp/homeAdmin.jsp").forward(request, response);
+			getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/homeAdmin.jsp").forward(request, response);
 		}
 	}
 

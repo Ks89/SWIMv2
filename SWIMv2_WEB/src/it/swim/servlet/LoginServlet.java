@@ -85,7 +85,7 @@ public class LoginServlet extends HttpServlet {
 			} else {
 				//se il login fallisce, metto le request un messaggio di errore sotto il nome di erroreLoginFallito
 				request.setAttribute("erroreLoginFallito", "Email o password non riconosciute");
-				getServletConfig().getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(request, response);
+				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/home.jsp").forward(request, response);
 			}
 
 		} catch (LoginException e) {
@@ -99,7 +99,7 @@ public class LoginServlet extends HttpServlet {
 					request.setAttribute("erroreLoginFallito", "LoginException: Errore durante il login - causa sconosciuta");
 				}
 			}
-			getServletConfig().getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(request, response);
+			getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/home.jsp").forward(request, response);
 		} catch (HashingException e) {
 			log.error(e.getMessage(), e);
 			if(e.getCausa()==HashingException.Causa.ALCUNIPARAMETRINULLIOVUOTI) {
@@ -111,7 +111,7 @@ public class LoginServlet extends HttpServlet {
 					request.setAttribute("erroreLoginFallito", "HashingException: ausa sconosciuta");
 				}
 			}
-			getServletConfig().getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(request, response);
+			getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/home.jsp").forward(request, response);
 		}
 	}
 

@@ -90,7 +90,7 @@
     <description></description>
     <display-name>RegistrazioneServlet</display-name>
     <servlet-name>RegistrazioneServlet</servlet-name>
-    <servlet-class>it.swim.servlet.profilo.RegistrazioneServlet</servlet-class>
+    <servlet-class>it.swim.servlet.RegistrazioneServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RegistrazioneServlet</servlet-name>
@@ -209,5 +209,25 @@
   <servlet-mapping>
     <servlet-name>RicercaPerVisitatoriServlet</servlet-name>
     <url-pattern>/ricercaPerVisitatori</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DettaglioRichiestaAiutoServlet</display-name>
+    <servlet-name>DettaglioRichiestaAiutoServlet</servlet-name>
+    <servlet-class>it.swim.servlet.profilo.azioni.notifiche.DettaglioRichiestaAiutoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DettaglioRichiestaAiutoServlet</servlet-name>
+    <url-pattern>/profilo/azioni/dettaglioRichiestaAiuto</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProfiloAltroUtenteServlet</display-name>
+    <servlet-name>ProfiloAltroUtenteServlet</servlet-name>
+    <servlet-class>it.swim.servlet.profilo.azioni.notifiche.ProfiloAltroUtenteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProfiloAltroUtenteServlet</servlet-name>
+    <url-pattern>/profilo/azioni/profiloAltroUtente</url-pattern>
   </servlet-mapping>
 </web-app>

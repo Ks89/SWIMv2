@@ -77,7 +77,7 @@ public class ModificaProfiloServlet extends HttpServlet {
 			log.error(e.getMessage(), e);
 		}
 
-		getServletConfig().getServletContext().getRequestDispatcher("/jsp/modificaProfilo.jsp").forward(request, response);
+		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/modificaProfilo.jsp").forward(request, response);
 	}
 
 	/**
@@ -185,7 +185,7 @@ public class ModificaProfiloServlet extends HttpServlet {
 			log.error(e.getMessage(), e);
 		}
 		
-		getServletConfig().getServletContext().getRequestDispatcher("/jsp/modificaProfilo.jsp").forward(request, response);
+		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/modificaProfilo.jsp").forward(request, response);
 	}
 
 	private List<Abilita> getListaAbilitaAggiungibili(String emailUtenteCollegato) throws RicercheException {

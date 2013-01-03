@@ -25,7 +25,7 @@
 
 </head>
 <body>
-
+	
 	<%-- Si usa sessionScope solo per ottenere l'email dell'utente collegato. 
 		Tutto il resto lo si ottiene semplicemente col nome dell'attributo settato nella servlet  --%>
 
@@ -58,7 +58,7 @@
 	<br>
 	<br>
 	<a href="azioni/ricerchePerUtentiLoggati?utenti=true">Ricerca utenti</a>
-	<br>
+	<br>	
 	<br>
 	<a href="azioni/ricerchePerUtentiLoggati?aiuto=true">Ricerca aiuto</a>
 	<br>

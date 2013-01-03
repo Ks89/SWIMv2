@@ -55,13 +55,13 @@ public class AdminPanelServlet extends HttpServlet {
 		}
 
 		if ("1".equals(request.getParameter("operazione"))) {
-			getServletConfig().getServletContext().getRequestDispatcher("/jsp/adminpanelinserimento.jsp").forward(request, response);
+			getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/adminpanelinserimento.jsp").forward(request, response);
 			return;
 		} else {
 			if ("2".equals(request.getParameter("operazione"))) {
 				List<PropostaAbilita> proposteAbilita = gestioneProposte.getProposteAbilitaNonConfermate();
 				request.setAttribute("proposte", proposteAbilita);
-				getServletConfig().getServletContext().getRequestDispatcher("/jsp/adminpanelproposte.jsp").forward(request, response);
+				getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/adminpanelproposte.jsp").forward(request, response);
 				return;
 			} else {
 				response.sendRedirect("../admin/adminPanel");

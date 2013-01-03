@@ -93,7 +93,7 @@ public class ProfiloServlet extends HttpServlet {
 		} catch (RicercheException e) {
 			log.error(e.getMessage(), e);
 		}
-		getServletConfig().getServletContext().getRequestDispatcher("/jsp/profilo.jsp").forward(request, response);
+		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/profilo.jsp").forward(request, response);
 	}
 
 	/**
