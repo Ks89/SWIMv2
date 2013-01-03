@@ -230,4 +230,14 @@
     <servlet-name>ProfiloAltroUtenteServlet</servlet-name>
     <url-pattern>/profilo/azioni/profiloAltroUtente</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DettagliAltroUtenteServlet</display-name>
+    <servlet-name>DettagliAltroUtenteServlet</servlet-name>
+    <servlet-class>it.swim.servlet.profilo.azioni.notifiche.DettagliAltroUtenteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DettagliAltroUtenteServlet</servlet-name>
+    <url-pattern>/profilo/azioni/dettagliAltroUtente</url-pattern>
+  </servlet-mapping>
 </web-app>

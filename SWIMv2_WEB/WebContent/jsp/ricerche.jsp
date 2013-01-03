@@ -30,7 +30,7 @@
 						<tr>
 							<td><c:out value="${utente.nome}" /></td>
 							<td><c:out value="${utente.cognome}" /></td>
-							<td><c:out value="${utente.email}" /></td>
+							<td><a href="../azioni/dettagliAltroUtente?utente=${utente.email}"><c:out value="${utente.email}" /></a></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -73,7 +73,7 @@
 						<tr>
 							<td><c:out value="${utente.nome}" /></td>
 							<td><c:out value="${utente.cognome}" /></td>
-							<td><c:out value="${utente.email}" /></td>
+							<td><a href="../azioni/dettagliAltroUtente?utente=${utente.email}"><c:out value="${utente.email}" /></a></td>
 						</tr>
 					</c:forEach>
 				</table>
