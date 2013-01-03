@@ -57,10 +57,10 @@
 
 	<br>
 	<br>
-	<a href="azioni/ricerchePerUtentiLoggati?utenti=true">Ricerca utenti</a>
-	<br>	
+	<a href="azioni/ricerchePerUtentiLoggati?tipoRicerca=utente">Ricerca utenti</a>
 	<br>
-	<a href="azioni/ricerchePerUtentiLoggati?aiuto=true">Ricerca aiuto</a>
+	<br>
+	<a href="azioni/ricerchePerUtentiLoggati?tipoRicerca=aiuto">Ricerca aiuto</a>
 	<br>
 	<br>
 	<a href="azioni/collaborazioni">Visualizza collaborazioni</a>

@@ -25,7 +25,7 @@
 			
 			<br><br>
 			<%-- href fa sempre riferimento alla servlet in modo relativo, mai con link assoluti --%>
-			<a href="ricercaPerVisitatori">Ricerca utenti per visitatori</a>
+			<a href="profilo/azioni/ricerchePerUtentiLoggati?tipoRicerca=aiuto">Ricerca utenti per visitatori</a>
 	</c:if>
 	
 	<%-- Esempio che mostra come mostrare dei pezzi di pagina quando l'utente e' connesso oppure non lo e' --%>
