@@ -177,6 +177,29 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 	// metodo che ti ritorna gli uttenti che hanno accettato la tua amicizia
 	// diretta
 
+
+	/**
+	 * Metodo che ritorna la lista degli utenti che hanno appena accettato la
+	 * tua amicizia, chiesta in modo indiretto
+	 * 
+	 * @param emailUtente
+	 *            rappresenta la email dell'utente di cui si vuole sapere la
+	 *            lista
+	 * @return <b>utenti</b> se esistono utenti che hanno appena accettato
+	 *         l'amicizia,<b>NULL</b> altrimenti
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Utente> getUtentiCheHannoAccettatoLaRichiestaDiretti(
+			String emailUtente) {
+		Query query = entityManager
+				.createNamedQuery("Amicizia.getUtentCheHannoAppenaAccettatoLaTuaRichiestaDiretta");
+		query.setParameter("emailUtente", emailUtente);
+		List<Utente> utenti = (List<Utente>) query.getResultList();
+		return utenti;
+	}
+	
+	
 	/**
 	 * Metodo per rifiutare una richiesta di Amicizia
 	 * 

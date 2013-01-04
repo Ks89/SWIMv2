@@ -41,4 +41,6 @@ public interface GestioneAmicizieInterface {
 
 	public boolean amiciziaInoltrata(String emailUtente1, String emailUtente2);
 
+	List<Utente> getUtentiCheHannoAccettatoLaRichiestaDiretti(String emailUtente);
+
 }
