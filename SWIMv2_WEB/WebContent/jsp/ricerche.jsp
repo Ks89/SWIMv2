@@ -18,7 +18,7 @@
 				<c:out value="${item.nome}" />
 				<br>
 			</c:forEach>
-			 <input id="Cerca" type="submit" />
+			 <input id="Cerca" type="submit" value="Cerca"/>
 			 <c:if test="${risultatoRicerca}">
 			 	<table id="tabellaRichiesteAiuto" style="border-width: medium; border-style: solid;">
 					<tr>
@@ -30,7 +30,7 @@
 						<tr>
 							<td><c:out value="${utente.nome}" /></td>
 							<td><c:out value="${utente.cognome}" /></td>
-							<td><a href="../azioni/dettagliAltroUtente?utente=${utente.email}"><c:out value="${utente.email}" /></a></td>
+							<td><a href="../azioni/dettagliAltroUtente?utente=${utente.email}&tipoRicerca=aiuto"><c:out value="${utente.email}" /></a></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -42,7 +42,7 @@
 				<c:out value="${item.nome}" />
 				<br>
 			</c:forEach>
-			 <input id="Cerca" type="submit" />
+			 <input id="Cerca" type="submit" value="Cerca"/>
 			  <c:if test="${risultatoRicerca}">
 			 	<table id="tabellaRichiesteAiuto" style="border-width: medium; border-style: solid;">
 					<tr>
@@ -57,11 +57,12 @@
 					</c:forEach>
 				</table>
 			 </c:if>
+			 <a href="../../home">Torna alla home</a>
 		</c:when>
 		<c:otherwise>
 			Nome:<input type="text" name="nomeUtente"></input>
 			Cognome:<input type="text" name="cognomeUtente"></input>
-			<input id="Cerca" type="submit" />
+			<input id="Cerca" type="submit" value="Cerca"/>
 			<c:if test="${risultatoRicerca}">
 			 	<table id="tabellaRichiesteAiuto" style="border-width: medium; border-style: solid;">
 					<tr>
@@ -73,7 +74,7 @@
 						<tr>
 							<td><c:out value="${utente.nome}" /></td>
 							<td><c:out value="${utente.cognome}" /></td>
-							<td><a href="../azioni/dettagliAltroUtente?utente=${utente.email}"><c:out value="${utente.email}" /></a></td>
+							<td><a href="../azioni/dettagliAltroUtente?utente=${utente.email}&tipoRicerca=utente"><c:out value="${utente.email}" /></a></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -81,5 +82,6 @@
 		</c:otherwise>
 	</c:choose>
 </form>
+<a href="../profilo">Torna al profilo</a>
 </body>
 </html>
