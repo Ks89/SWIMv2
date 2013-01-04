@@ -13,10 +13,10 @@ import org.junit.runners.Suite;
 		{
 			RegistrazioneTest.class,
 			LoginTest.class,
-			RicercheTest.class,
 			AmiciziaTest.class,
 			CollaborazioneTest.class,
-			PropostaAbilitaTest.class
+			PropostaAbilitaTest.class,
+			RicercheTest.class
 		})
 
 public class TestCompleto {}
