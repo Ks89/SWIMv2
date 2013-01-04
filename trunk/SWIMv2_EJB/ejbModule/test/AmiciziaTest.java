@@ -86,6 +86,9 @@ public class AmiciziaTest {
 		assertNull(gestioneAmicizie.getSuggerimenti(MAIL_PEPPINO, MAIL_GIOVANNINO));
 		assertTrue(gestioneAmicizie.sonoAmici(MAIL_GIOVANNINO, MAIL_DAVIDE));
 		assertTrue(gestioneAmicizie.sonoAmici(MAIL_DAVIDE, MAIL_GIOVANNINO));
+		assertEquals(2,gestioneAmicizie.getUtentiCheHannoAccettatoLaRichiestaDiretti(MAIL_GIOVANNINO).size());
+		assertTrue(gestioneAmicizie.setAmiciziaNotificata(MAIL_GIOVANNINO, MAIL_JACOPO));
+		assertEquals(1,gestioneAmicizie.getUtentiCheHannoAccettatoLaRichiestaDiretti(MAIL_GIOVANNINO).size());
 	}
 
 }
