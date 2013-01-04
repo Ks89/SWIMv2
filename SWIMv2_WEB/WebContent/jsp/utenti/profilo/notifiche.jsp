@@ -8,6 +8,7 @@
 </head>
 <body>
 	<%-- if che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
+	<%-- Richieste aiuto --%>
 	<c:if test="${!empty erroreGetNotificheRichiesteAiuto}">
 		<c:out value="${erroreGetNotificheRichiesteAiuto}"></c:out>
 		<br>
@@ -22,6 +23,23 @@
 	</c:if>
 	<c:if test="${!empty nonCiSonoRichiesteAiuto}">
 		<c:out value="${nonCiSonoRichiesteAiuto}"></c:out>
+		<br>
+	</c:if>
+	<%-- Richieste amicizia --%>
+	<c:if test="${!empty erroreGetNotificheRichiesteAmicizia}">
+		<c:out value="${erroreGetNotificheRichiesteAmicizia}"></c:out>
+		<br>
+	</c:if>
+	<c:if test="${!empty okProfiloAltroUtente}">
+		<c:out value="${okProfiloAltroUtente}"></c:out>
+		<br>
+	</c:if>
+	<c:if test="${!empty erroreProfiloAltroUtente}">
+		<c:out value="${erroreProfiloAltroUtente}"></c:out>
+		<br>
+	</c:if>
+	<c:if test="${!empty nonCiSonoRichiesteAmicizia}">
+		<c:out value="${nonCiSonoRichiesteAmicizia}"></c:out>
 		<br>
 	</c:if>
 
@@ -54,27 +72,30 @@
 	</c:if>
 
 	<br>
-	<br>
-	<br> Richieste di amicizia:
+	
+	<c:if test="${empty nonCiSonoRichiesteAmicizia}">
+		<br>
+		<br> Richieste di amicizia:
 	<table id="tabellaRichiesteAmicizia" style="border-width: medium; border-style: solid;">
-		<tr>
-			<th>Utente richiedente</th>
-		</tr>
-		<c:forEach items="${richiesteAmicizia}" var="richiesteAmicizia">
 			<tr>
-				<td><a href="../azioni/profiloAltroUtente?emailUtenteRichiedente=<c:out value="${richiesteAmicizia.email}" />"> <c:out
-							value="${richiesteAmicizia.nome}" />&nbsp;<c:out value="${richiesteAmicizia.cognome}" /></a></td>
+				<th>Utente richiedente</th>
 			</tr>
-		</c:forEach>
-	</table>
-	<div id="pageNavPosition2"></div>
+			<c:forEach items="${utentiCheRichidonoAmicizia}" var="utenteCheRichiedeAmicizia">
+				<tr>
+					<td><a href="../azioni/profiloAltroUtente?emailUtenteRichiedente=<c:out value="${utenteCheRichiedeAmicizia.email}" />"> <c:out
+								value="${utenteCheRichiedeAmicizia.nome}" />&nbsp;<c:out value="${utenteCheRichiedeAmicizia.cognome}" /></a></td>
+				</tr>
+			</c:forEach>
+		</table>
+		<div id="pageNavPosition2"></div>
 
-	<script type="text/javascript">
-		var pager = new Pager('tabellaRichiesteAmicizia', 5);
-		pager.init();
-		pager.showPageNav('pager', 'pageNavPosition2');
-		pager.showPage(1);
-	</script>
+		<script type="text/javascript">
+			var pager = new Pager('tabellaRichiesteAmicizia', 5);
+			pager.init();
+			pager.showPageNav('pager', 'pageNavPosition2');
+			pager.showPage(1);
+		</script>
+	</c:if>
 
 	<br>
 	<a href="../profilo">Torna al profilo</a>

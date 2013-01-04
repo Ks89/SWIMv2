@@ -90,7 +90,7 @@ public class NotificheServlet extends HttpServlet {
 			}
 		} catch (LoginException e) {
 			log.error(e.getMessage(), e);
-			request.setAttribute("erroreGetNotificheRichiesteAiuto", "Impossibile ottenere le richieste di amicizia");
+			request.setAttribute("erroreGetNotificheRichiesteAiuto", "Impossibile ottenere le richieste di aiuto");
 		}
 	}
 
@@ -103,9 +103,9 @@ public class NotificheServlet extends HttpServlet {
 			return;
 		}
 		if(utentiCheRichiedonoAmicizia.size()>=1) {
-			request.setAttribute("richiesteAmicizia", utentiCheRichiedonoAmicizia);
+			request.setAttribute("utentiCheRichidonoAmicizia", utentiCheRichiedonoAmicizia);
 		} else {
-			request.setAttribute("richiesteAmicizia", utentiCheRichiedonoAmicizia);
+			request.setAttribute("utentiCheRichidonoAmicizia", utentiCheRichiedonoAmicizia);
 			request.setAttribute("nonCiSonoRichiesteAmicizia", "Non ci sono nuove richieste di amicizia");
 		}
 	}
