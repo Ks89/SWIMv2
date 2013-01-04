@@ -83,8 +83,9 @@ public class RicercheTest {
 			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN,"8ab","Descrizione");
 			//aggiunge due utenti nel DB
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("1ab"));
-			gestioneRegistrazione.registrazioneUtente("peppino@gmail.com", "a2242ead55c94c3deb7cf2340bfef9d5bcaca22dfe66e646745ee4371c633fc8", "peppino", "peppo", null, abilita);
-			gestioneRegistrazione.registrazioneUtente("davide@gmail.com", "a2242ead55c94c3deb7cf2340bfef9d5bcaca22dfe66e646745ee4371c633fc8", "Davide", "Caio", null, abilita);
+			gestioneRegistrazione.registrazioneUtente("peppino@gmail.com", "pippo", "peppino", "peppo", null, abilita);
+			gestioneRegistrazione.registrazioneUtente("davide@gmail.com", "pippo", "Davide", "Caio", null, abilita);
+			gestioneRegistrazione.registrazioneUtente("giovannino@gmail.com", "pippo", "Giovanni", "gio", null, abilita);
 			gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "jacopo", "Bulla", null, abilita);
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("2ab"));
 			gestioneRegistrazione.registrazioneUtente("tommaso.ganelli@gmail.com", "pippo", "Tommaso", "Ganelli", null, abilita);
