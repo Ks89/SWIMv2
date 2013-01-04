@@ -11,11 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sessionBeans.localInterfaces.GestioneAmicizieLocal;
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 
 import entityBeans.Collaborazione;
-import entityBeans.Utente;
 import exceptions.LoginException;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,9 +28,6 @@ public class DettaglioRichiestaAiutoServlet extends HttpServlet {
 	
 	@EJB
 	private GestioneCollaborazioniLocal gestioneCollab;
-
-	@EJB
-	private GestioneAmicizieLocal gestioneAmicizie;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -101,7 +96,6 @@ public class DettaglioRichiestaAiutoServlet extends HttpServlet {
 		}
 		
 		this.gestisciNotificheRichiesteAiuto(request, response, emailUtenteCollegato);
-		this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
 		
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
 	}
@@ -141,7 +135,7 @@ public class DettaglioRichiestaAiutoServlet extends HttpServlet {
 		try {
 			List<Collaborazione> collaborazioni = gestioneCollab.getNotificheRichiesteAiuto(emailUtenteCollegato);
 
-			if(collaborazioni==null) { //TODO attenzione PERCHE' l'ho scritto qui????????????????????????????????????
+			if(collaborazioni==null) { //TODO attenzione, PERCHE' l'ho scritto qui il TODO, cosa doveva indicare????????????????????????????????????
 				request.setAttribute("erroreGetNotificheRichiesteAiuto", "Impossibile ottenere le richieste di aiuto");
 				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
 				return;
@@ -157,21 +151,4 @@ public class DettaglioRichiestaAiutoServlet extends HttpServlet {
 			request.setAttribute("erroreGetNotificheRichiesteAiuto", "Impossibile ottenere le richieste di amicizia");
 		}
 	}
-
-
-	private void gestisciNotificheRichiesteAmicizia (HttpServletRequest request, HttpServletResponse response, String emailUtenteCollegato) throws ServletException, IOException {
-		List<Utente> utentiCheRichiedonoAmicizia = gestioneAmicizie.getUtentiCheVoglionoAmicizia(emailUtenteCollegato);
-		if(utentiCheRichiedonoAmicizia==null) {
-			request.setAttribute("erroreGetNotificheRichiesteAmicizia", "Impossibile ottenere le richieste di amicizia");
-			getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
-			return;
-		}
-		if(utentiCheRichiedonoAmicizia.size()>=1) {
-			request.setAttribute("richiesteAmicizia", utentiCheRichiedonoAmicizia);
-		} else {
-			request.setAttribute("richiesteAmicizia", utentiCheRichiedonoAmicizia);
-			request.setAttribute("nonCiSonoRichiesteAmicizia", "Non ci sono nuove richieste di amicizia");
-		}
-	}
-
 }

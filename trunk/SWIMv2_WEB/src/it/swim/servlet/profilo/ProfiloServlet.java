@@ -78,10 +78,6 @@ public class ProfiloServlet extends HttpServlet {
 			}
 			log.debug("punteggioUtenteCollegato:" + feedback);
 			request.setAttribute("punteggioUtenteCollegato", feedback);
-
-			// Collaborazioni
-			List<Collaborazione> collabora = gestCollaborazioni.getCollaborazioniCreate(emailUtenteCollegato);
-			request.setAttribute("collabCreate", collabora);
 		} catch (LoginException e) {
 			log.error(e.getMessage(), e);
 		}
