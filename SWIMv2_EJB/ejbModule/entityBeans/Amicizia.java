@@ -26,6 +26,12 @@ import lombok.NoArgsConstructor;
 		@NamedQuery(name = "Amicizia.getUtentCheTiHannoPropostoAmicizia", query = "SELECT a.amiciziaPK.utente1 "
 				+ "FROM Amicizia a "
 				+ "WHERE a.amiciziaPK.utente2.email = :emailUtente AND a.dataAccettazione IS NULL"),
+		@NamedQuery(name = "Amicizia.getUtentCheHannoAppenaAccettatoLaTuaRichiestaIndiretta", query = "SELECT a.amiciziaPK.utente2 "
+						+ "FROM Amicizia a "
+						+ "WHERE a.amiciziaPK.utente1.email = :emailUtente AND a.dataAccettazione IS NOT NULL AND a.diretta =:FALSE AND a.notificaAlRichiedente =:FALSE"),
+		@NamedQuery(name = "Amicizia.getUtentCheHannoAppenaAccettatoLaTuaRichiestaDiretta", query = "SELECT a.amiciziaPK.utente2 "
+								+ "FROM Amicizia a "
+								+ "WHERE a.amiciziaPK.utente1.email = :emailUtente AND a.dataAccettazione IS NOT NULL AND a.diretta =:TRUE AND a.notificaAlRichiedente =:FALSE"),
 })
 @Data
 @AllArgsConstructor
