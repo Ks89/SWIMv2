@@ -59,12 +59,15 @@ public class AmiciziaTest {
 
 		assertNotNull(amicizia1);
 		assertNotNull(amicizia2);
+		assertFalse(gestioneAmicizie.amiciziaInoltrata(MAIL_JACOPO, MAIL_DAVIDE));
 		assertEquals(0, gestioneAmicizie.getAmici(MAIL_JACOPO).size());
 		assertTrue(gestioneAmicizie.accettaAmicizia(MAIL_GIOVANNINO, MAIL_DAVIDE));
 		assertEquals(1,gestioneAmicizie.getAmici(MAIL_GIOVANNINO).size());
 		assertTrue(gestioneAmicizie.getAmici(MAIL_GIOVANNINO).contains(utenteDave));
 		assertEquals(1,gestioneAmicizie.getUtentiCheVoglionoAmicizia(MAIL_PEPPINO).size());
 		assertTrue(gestioneAmicizie.getUtentiCheVoglionoAmicizia(MAIL_PEPPINO).contains(utenteJova));
+		assertTrue(gestioneAmicizie.amiciziaInoltrata(MAIL_PEPPINO, MAIL_GIOVANNINO));
+		assertTrue(gestioneAmicizie.amiciziaInoltrata(MAIL_GIOVANNINO, MAIL_PEPPINO));
 		assertFalse(gestioneAmicizie.rifiutaAmicizia(MAIL_PEPPINO, MAIL_GIOVANNINO));
 		assertTrue(gestioneAmicizie.rifiutaAmicizia(MAIL_GIOVANNINO, MAIL_PEPPINO));
 

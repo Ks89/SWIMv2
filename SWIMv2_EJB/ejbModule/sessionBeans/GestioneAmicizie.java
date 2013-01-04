@@ -279,12 +279,19 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 
 		amiciziaPK.setUtente1(utente1);
 		amiciziaPK.setUtente2(utente2);
-		try {
-			Amicizia amicizia = entityManager.find(Amicizia.class, amiciziaPK);
+		Amicizia amicizia = entityManager.find(Amicizia.class, amiciziaPK);
+		if (amicizia != null) {
 			return true;
-		} catch (IllegalArgumentException e) {
-			return false;
 		}
+		else {
+			amiciziaPK.setUtente1(utente2);
+			amiciziaPK.setUtente2(utente1);
+			amicizia = entityManager.find(Amicizia.class, amiciziaPK);
+			if(amicizia!=null){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
