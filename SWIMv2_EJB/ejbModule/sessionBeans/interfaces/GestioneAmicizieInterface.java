@@ -34,4 +34,6 @@ public interface GestioneAmicizieInterface {
 
 	public abstract List<Utente> getUtentiCheVoglionoAmicizia(String emailUtente);
 
+	boolean setAmiciziaNotificata(String emailUtente1, String emailUtente2);
+
 }

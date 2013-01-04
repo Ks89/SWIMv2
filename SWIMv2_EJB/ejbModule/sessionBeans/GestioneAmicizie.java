@@ -63,6 +63,7 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 
 		amicizia.setAmiciziaPK(amiciziaPK);
 		amicizia.setDiretta(diretta);
+		amicizia.setNotificaAlRichiedente(false);
 
 		entityManager.persist(amicizia);
 		entityManager.flush();
@@ -108,6 +109,38 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 
 		return true;
 	}
+	
+	@Override
+	public boolean setAmiciziaNotificata(String emailUtente1, String emailUtente2) {
+
+		Utente utente1 = this.getUtenteByEmail(emailUtente1);
+		Utente utente2 = this.getUtenteByEmail(emailUtente2);
+
+		if (utente1 == null || utente2 == null) {
+			return false;
+		}
+
+		AmiciziaPK amiciziaPK = new AmiciziaPK();
+
+		amiciziaPK.setUtente1(utente1);
+		amiciziaPK.setUtente2(utente2);
+		try{
+		Amicizia amicizia = entityManager.find(Amicizia.class, amiciziaPK);
+		amicizia.setNotificaAlRichiedente(true);
+		entityManager.persist(amicizia); // non obbligatori, funziona senza sia
+											// questo che il flush SOLO per
+											// l'update
+		} catch (IllegalArgumentException e) {
+			return false;
+		}
+		entityManager.flush();
+
+		return true;
+	}
+	
+	//metodo che ti ritorna gli utenti che hanno accettato la tua amicizia indiretta
+	
+	//metodo che ti ritorna gli uttenti che hanno accettato la tua amicizia diretta
 
 	/**
 	 * Metodo per rifiutare una richiesta di Amicizia
