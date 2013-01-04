@@ -46,6 +46,6 @@ public class Amicizia implements Serializable {
 	@Column(name = "Diretta", nullable = false)
 	private boolean diretta;
 	
-	@Column(name = "Stato", nullable = false) 
-	private int stato;
+	@Column(name = "NotificaAlRichiedente", nullable = false) 
+	private boolean notificaAlRichiedente;
 }
