@@ -74,8 +74,8 @@ public class RegistrazioneTest {
 			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN, "2ab","seconda Abilita");
 			List<Abilita> abilita = new ArrayList<Abilita>();
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("1ab"));
-			gestioneRegistrazione.registrazioneUtente("peppino@gmail.com", "a2242ead55c94c3deb7cf2340bfef9d5bcaca22dfe66e646745ee4371c633fc8", "peppino", "peppo", null, abilita);
-			gestioneRegistrazione.registrazioneUtente("davide@gmail.com", "a2242ead55c94c3deb7cf2340bfef9d5bcaca22dfe66e646745ee4371c633fc8", "Davide", "Caio", null, abilita);
+			gestioneRegistrazione.registrazioneUtente("peppino@gmail.com", "pippo", "peppino", "peppo", null, abilita);
+			gestioneRegistrazione.registrazioneUtente("davide@gmail.com", "pippo", "Davide", "Caio", null, abilita);
 		} catch (HashingException e) {
 			fail("HashingException: " + e);
 		} catch (ProposteException e) {
