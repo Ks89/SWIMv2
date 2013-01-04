@@ -76,6 +76,7 @@ public class RegistrazioneTest {
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("1ab"));
 			gestioneRegistrazione.registrazioneUtente("peppino@gmail.com", "pippo", "peppino", "peppo", null, abilita);
 			gestioneRegistrazione.registrazioneUtente("davide@gmail.com", "pippo", "Davide", "Caio", null, abilita);
+			gestioneRegistrazione.registrazioneUtente("giovannino@gmail.com", "pippo", "Giovanni", "gio", null, abilita);
 		} catch (HashingException e) {
 			fail("HashingException: " + e);
 		} catch (ProposteException e) {
