@@ -96,12 +96,13 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 
 		amiciziaPK.setUtente1(utente1);
 		amiciziaPK.setUtente2(utente2);
-		try{
-		Amicizia amicizia = entityManager.find(Amicizia.class, amiciziaPK);
-		amicizia.setDataAccettazione(calendar.getTime());
-		entityManager.persist(amicizia); // non obbligatori, funziona senza sia
-											// questo che il flush SOLO per
-											// l'update
+		try {
+			Amicizia amicizia = entityManager.find(Amicizia.class, amiciziaPK);
+			amicizia.setDataAccettazione(calendar.getTime());
+			entityManager.persist(amicizia); // non obbligatori, funziona senza
+												// sia
+												// questo che il flush SOLO per
+												// l'update
 		} catch (IllegalArgumentException e) {
 			return false;
 		}
@@ -109,9 +110,22 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 
 		return true;
 	}
-	
+
+	/**
+	 * Metodo che setta l'amiciza come notificata, ovviamente al richiedente
+	 * perchè al richiesto uscirà quando accetta la richiesta
+	 * 
+	 * @param emailUtente1
+	 *            rappresenta la email del richiedente (cioè quello che è stato
+	 *            notificato per porre a true questo valore)
+	 * @param emailUtente2
+	 *            rappresenta la email dell'utente che sta accettando la
+	 *            richiesta di amicizia
+	 * @return <b>true</b> se tutto è andato a buon fine,<b>false</b> altrimenti
+	 */
 	@Override
-	public boolean setAmiciziaNotificata(String emailUtente1, String emailUtente2) {
+	public boolean setAmiciziaNotificata(String emailUtente1,
+			String emailUtente2) {
 
 		Utente utente1 = this.getUtenteByEmail(emailUtente1);
 		Utente utente2 = this.getUtenteByEmail(emailUtente2);
@@ -124,12 +138,13 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 
 		amiciziaPK.setUtente1(utente1);
 		amiciziaPK.setUtente2(utente2);
-		try{
-		Amicizia amicizia = entityManager.find(Amicizia.class, amiciziaPK);
-		amicizia.setNotificaAlRichiedente(true);
-		entityManager.persist(amicizia); // non obbligatori, funziona senza sia
-											// questo che il flush SOLO per
-											// l'update
+		try {
+			Amicizia amicizia = entityManager.find(Amicizia.class, amiciziaPK);
+			amicizia.setNotificaAlRichiedente(true);
+			entityManager.persist(amicizia); // non obbligatori, funziona senza
+												// sia
+												// questo che il flush SOLO per
+												// l'update
 		} catch (IllegalArgumentException e) {
 			return false;
 		}
@@ -137,10 +152,30 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 
 		return true;
 	}
-	
-	//metodo che ti ritorna gli utenti che hanno accettato la tua amicizia indiretta
-	
-	//metodo che ti ritorna gli uttenti che hanno accettato la tua amicizia diretta
+
+	/**
+	 * Metodo che ritorna la lista degli utenti che hanno appena accettato la
+	 * tua amicizia, chiesta in modo indiretto
+	 * 
+	 * @param emailUtente
+	 *            rappresenta la email dell'utente di cui si vuole sapere la
+	 *            lista
+	 * @return <b>utenti</b> se esistono utenti che hanno appena accettato
+	 *         l'amicizia,<b>NULL</b> altrimenti
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Utente> getUtentiCheHannoAccettatoLaRichiestaIndiretti(
+			String emailUtente) {
+		Query query = entityManager
+				.createNamedQuery("Amicizia.getUtentCheHannoAppenaAccettatoLaTuaRichiestaIndiretta");
+		query.setParameter("emailUtente", emailUtente);
+		List<Utente> utenti = (List<Utente>) query.getResultList();
+		return utenti;
+	}
+
+	// metodo che ti ritorna gli uttenti che hanno accettato la tua amicizia
+	// diretta
 
 	/**
 	 * Metodo per rifiutare una richiesta di Amicizia
@@ -166,9 +201,9 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 
 		amiciziaPK.setUtente1(utente1);
 		amiciziaPK.setUtente2(utente2);
-		try{
-		Amicizia amicizia = entityManager.find(Amicizia.class, amiciziaPK);
-		entityManager.remove(amicizia);
+		try {
+			Amicizia amicizia = entityManager.find(Amicizia.class, amiciziaPK);
+			entityManager.remove(amicizia);
 		} catch (IllegalArgumentException e) {
 			return false;
 		}
@@ -196,22 +231,25 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 		amici.addAll((List<Utente>) query.getResultList());
 		return amici;
 	}
-	
-	
+
 	/**
-	 * Metodo che ritorna la lista degli utenti che vogliono diventare amici dell'utente che ha l'emailUtente passata come parametro
+	 * Metodo che ritorna la lista degli utenti che vogliono diventare amici
+	 * dell'utente che ha l'emailUtente passata come parametro
 	 * 
 	 * @param emailUtente
 	 *            rappresenta la email dell'utente di cui si vuole conoscere la
 	 *            lista degli utenti che gli hanno richiesto l'amicizia
-	 * @return <b>utentiChevoglionoDiventareAmici</b> che rappresenta la lista degli amici
-	 *         dell'utente,<b>null</b> se l'utente non ha richieste di amicizia
+	 * @return <b>utentiChevoglionoDiventareAmici</b> che rappresenta la lista
+	 *         degli amici dell'utente,<b>null</b> se l'utente non ha richieste
+	 *         di amicizia
 	 */
 	@Override
 	public List<Utente> getUtentiCheVoglionoAmicizia(String emailUtente) {
-		Query query = entityManager.createNamedQuery("Amicizia.getUtentCheTiHannoPropostoAmicizia");
+		Query query = entityManager
+				.createNamedQuery("Amicizia.getUtentCheTiHannoPropostoAmicizia");
 		query.setParameter("emailUtente", emailUtente);
-		List<Utente> utentiCheVoglionoDiventareAmici = (List<Utente>) query.getResultList();
+		List<Utente> utentiCheVoglionoDiventareAmici = (List<Utente>) query
+				.getResultList();
 		return utentiCheVoglionoDiventareAmici;
 	}
 
@@ -229,6 +267,22 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 		if (this.getAmici(emailUtente1).contains(utente2)) {
 			return true;
 		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean amiciziaInoltrata(String emailUtente1, String emailUtente2) {
+		Utente utente1 = this.getUtenteByEmail(emailUtente1);
+		Utente utente2 = this.getUtenteByEmail(emailUtente2);
+		AmiciziaPK amiciziaPK = new AmiciziaPK();
+
+		amiciziaPK.setUtente1(utente1);
+		amiciziaPK.setUtente2(utente2);
+		try {
+			Amicizia amicizia = entityManager.find(Amicizia.class, amiciziaPK);
+			return true;
+		} catch (IllegalArgumentException e) {
 			return false;
 		}
 	}

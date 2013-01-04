@@ -34,6 +34,11 @@ public interface GestioneAmicizieInterface {
 
 	public abstract List<Utente> getUtentiCheVoglionoAmicizia(String emailUtente);
 
-	boolean setAmiciziaNotificata(String emailUtente1, String emailUtente2);
+	public boolean setAmiciziaNotificata(String emailUtente1, String emailUtente2);
+
+	public List<Utente> getUtentiCheHannoAccettatoLaRichiestaIndiretti(
+			String emailUtente);
+
+	public boolean amiciziaInoltrata(String emailUtente1, String emailUtente2);
 
 }
