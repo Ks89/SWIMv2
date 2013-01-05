@@ -4,10 +4,18 @@ import it.swim.servlet.RicercaPerVisitatoriServlet;
 import it.swim.util.UtenteCollegatoUtil;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
+
+import entityBeans.Collaborazione;
+import exceptions.LoginException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +26,8 @@ import lombok.extern.slf4j.Slf4j;
 public class CollaborazioniServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@EJB
+	private GestioneCollaborazioniLocal gestioneCollab;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -40,6 +50,47 @@ public class CollaborazioniServlet extends HttpServlet {
 			response.sendRedirect("../home");
 			return;
 		}
+		
+		try {
+			List<Collaborazione> collaborazioniDaTerminare = gestioneCollab.getCollaborazioniDaTerminare(emailUtenteCollegato);
+
+			if(collaborazioniDaTerminare==null) { //TODO attenzione PERCHE' l'ho scritto qui????????????????????????????????????
+				request.setAttribute("erroreGetCollaborazioniDaTerminare", "Impossibile ottenere le richieste di aiuto");
+				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/collaborazioni.jsp").forward(request, response);
+				return;
+			}
+			if(collaborazioniDaTerminare.size()>=1) {
+				request.setAttribute("collaborazionDaTerminare", collaborazioniDaTerminare);
+			} else {
+				request.setAttribute("collaborazioniDaTerminare", collaborazioniDaTerminare);
+				request.setAttribute("nonCiSonoCollaborazioniDaTerminare", "Non ci sono collaborazioni in corso");
+			}
+		} catch (LoginException e) {
+			log.error(e.getMessage(), e);
+			request.setAttribute("erroreGetCollaborazioniDaTerminare", "Impossibile ottenere le collaborazioni in corso");
+		}
+		
+		try {
+			List<Collaborazione> collaborazioniDaRilasciareFeedBack = gestioneCollab.getCollaborazioniCreateFeedbackNonRilasciato(emailUtenteCollegato);
+
+			if(collaborazioniDaRilasciareFeedBack==null) { //TODO attenzione PERCHE' l'ho scritto qui????????????????????????????????????
+				request.setAttribute("erroreGetCollaborazioniSenzaFeedback", "Impossibile ottenere le richieste di aiuto");
+				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/collaborazioni.jsp").forward(request, response);
+				return;
+			}
+			if(collaborazioniDaRilasciareFeedBack.size()>=1) {
+				request.setAttribute("collaborazioniDaRilasciareFeedBack", collaborazioniDaRilasciareFeedBack);
+			} else {
+				request.setAttribute("collaborazioniDaRilasciareFeedBack", collaborazioniDaRilasciareFeedBack);
+				request.setAttribute("nonCiSonoCollaborazioniSenzaFeedback", "Non ci sono collaborazioni senza feedback");
+			}
+		} catch (LoginException e) {
+			log.error(e.getMessage(), e);
+			request.setAttribute("erroreGetCollaborazioniSenzaFeedback", "Impossibile ottenere le collaborazioni senza feedback");
+		}
+	
+		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/collaborazioni.jsp").forward(request, response);
+		
 	}
 
 	/**

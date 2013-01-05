@@ -250,4 +250,14 @@
     <servlet-name>DettaglioServlet</servlet-name>
     <url-pattern>/profilo/azioni/notifiche/dettaglio</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CollborazioneDettagliata</display-name>
+    <servlet-name>CollborazioneDettagliata</servlet-name>
+    <servlet-class>it.swim.servlet.profilo.azioni.CollborazioneDettagliata</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CollborazioneDettagliata</servlet-name>
+    <url-pattern>/CollborazioneDettagliata</url-pattern>
+  </servlet-mapping>
 </web-app>
