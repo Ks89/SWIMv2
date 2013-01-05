@@ -3,24 +3,22 @@ package sessionBeans.interfaces;
 import java.util.List;
 
 import entityBeans.Amicizia;
-import entityBeans.Collaborazione;
 import entityBeans.Utente;
+import exceptions.AmiciziaException;
 
 public interface GestioneAmicizieInterface {
 
-	public abstract Amicizia richiediAmicizia(String emailUtente1,
+	public Amicizia richiediAmicizia(String emailUtente1,
 			String emailUtente2, boolean diretta);
 
-	public abstract Amicizia accettaAmicizia(String emailUtente1,
+	public Amicizia accettaAmicizia(String emailUtente1, String emailUtente2) throws AmiciziaException;
+
+	public boolean rifiutaAmicizia(String emailUtente1,
 			String emailUtente2);
 
-	public abstract boolean rifiutaAmicizia(String emailUtente1,
-			String emailUtente2);
+	public List<Utente> getAmici(String emailUtente);
 
-	@SuppressWarnings("unchecked")
-	public abstract List<Utente> getAmici(String emailUtente);
-
-	public abstract List<Utente> getSuggerimenti(String emailUtenteAppenaAmico,
+	public List<Utente> getSuggerimenti(String emailUtenteAppenaAmico,
 			String emailUtente);
 
 	/**
@@ -28,11 +26,11 @@ public interface GestioneAmicizieInterface {
 	 * @param email = l'email dell'amministratore
 	 * @return <b>utente</b> corrispondente all'email, se esiste, <b>null</b> altrimenti
 	 */
-	public abstract Utente getUtenteByEmail(String email);
+	public Utente getUtenteByEmail(String email);
 
 	public boolean sonoAmici(String emailUtente1, String emailUtente2);
 
-	public abstract List<Utente> getUtentiCheVoglionoAmicizia(String emailUtente);
+	public List<Utente> getUtentiCheVoglionoAmicizia(String emailUtente);
 
 	public boolean setAmiciziaNotificata(String emailUtente1, String emailUtente2);
 
