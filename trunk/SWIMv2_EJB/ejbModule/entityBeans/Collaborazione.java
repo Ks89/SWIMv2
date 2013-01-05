@@ -32,6 +32,9 @@ import org.hibernate.validator.Pattern;
 				
 		@NamedQuery(name = "Collaborazione.getNotificheRichiesteAiuto", query = "SELECT c " + "FROM Collaborazione c "
 				+ "WHERE c.utenteRicevente.email = :emailRicevente AND c.dataStipula IS NULL"),
+				
+		@NamedQuery(name = "Collaborazione.getCollaborazioniDaTerminare", query = "SELECT c " + "FROM Collaborazione c "
+						+ "WHERE c.utenteRichiedente.email = :emailRichiedente AND c.dataStipula IS NOT NULL AND c.dataTermine 	IS NULL"),
 
 		@NamedQuery(name = "Collaborazione.getCollaborazioniCreateFeedbackNonRilasciatoByEmail", query = "SELECT c " + "FROM Collaborazione c "
 				+ "WHERE c.utenteRichiedente.email = :emailRichiedente AND c.dataTermine IS NOT NULL AND c.punteggioFeedback IS NULL"),
