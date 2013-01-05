@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import sessionBeans.localInterfaces.GestioneAmicizieLocal;
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 
+import entityBeans.Amicizia;
 import entityBeans.Utente;
 import exceptions.LoginException;
 
@@ -98,15 +99,35 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 
 		String emailRichiedente = request.getParameter("emailRichiedente");
 
+		if(request.getParameter("emailSuggAccettato")!=null) {
+			Amicizia amicizia = gestioneAmicizie.richiediAmicizia(emailUtenteCollegato, request.getParameter("emailSuggAccettato"), false );
+			if(amicizia!=null) {
+				request.setAttribute("suggAccettato","Hai stretto amicizia con l'utente suggerito");
+			}
+			this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
+			getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
+			return;
+		}
+
 		if(request.getParameter("tipo").equals("CONFERMA")) {
 			log.debug("accettata la richiesta");
 
-			boolean accettata = gestioneAmicizie.accettaAmicizia(emailRichiedente, emailUtenteCollegato);
-			if(accettata) {
-				//				request.setAttribute("okProfiloAltroUtente", "Hai accettato la richiesta d'aiuto di amicizia");
+			Amicizia amiciziaAccettata = gestioneAmicizie.accettaAmicizia(emailRichiedente, emailUtenteCollegato);
+			if(amiciziaAccettata!=null) {
 
-				//qui dovrei chiamare un metodo per vedere se la richiesta di amicizia era diretta o indiretta
-				//se era indiretta vuol dire che non devo fare le righe sotto, altrimenti lo devo fare e mandare a suggerimenti.jsp
+				log.debug("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{ : " +
+						"" + amiciziaAccettata);
+				
+				
+				log.debug("######################################################################################################################## : " +
+						"" + amiciziaAccettata.isDiretta());
+				
+				// se l'amicizia accettata e' indiretta perche' nata da un suggerimento da parte dell'utente richiedente (emailutente1), allora
+				// non deve mostrare suggerimenti ma tornare subito alla pagina delle notifiche.
+				if(!amiciziaAccettata.isDiretta()) {
+					response.sendRedirect("notifiche");
+					return;
+				}
 				
 				//---se e' diretta faccio cio' che segue
 				//Visto che ho accettato la richiesta di amicizia visualizzo i suggerimenti di amicizia
@@ -116,16 +137,17 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 				for(Utente u : suggeriti) {
 					log.debug("----------:::::::;;;;:_:;_;_:;_:;:_;_:;_:;_:;:_:_;_:;_:;:_;:_;:_;_;:*********;;;:  " + u);
 				}
+
 				
 				if(suggeriti.size()>=1) {
 					request.setAttribute("amiciSuggeriti", suggeriti);
-					
-//					this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
+
+					//					this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
 				} else {
-					request.setAttribute("noSuggerimentiDisponibili", "Non ci sono suggerimenti disponibili");
+					//se non ci sono suggerimenti disponibili setto un messaggio d'avvio
+					request.setAttribute("noSuggDisponibili", "Non ci sono suggerimenti d'amicizia");
 				}
-				
-				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/suggerimento.jsp").forward(request, response);
+				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/profiloAltroUtente.jsp").forward(request, response);
 				return;
 			} else {
 				request.setAttribute("erroreProfiloAltroUtente", "Errore nella conferma della richiesta di amicizia");
@@ -136,7 +158,7 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 				this.rifiutaAmicizia(request, response, emailUtenteCollegato, emailRichiedente);
 			}
 		}
-		
+
 		this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
 	}

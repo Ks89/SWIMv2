@@ -19,7 +19,7 @@
 	<c:out value="${emailSuggerito}"></c:out>
 	<br>
 
-	<form id="profiloSuggerito" action="profiloSuggerito" method="POST">
+	<form id="profiloSuggeritoForm" action="profiloSuggerito" method="POST">
 		<input type="hidden" name="tipo" /> <input type="hidden" name="emailSuggerito" value="${emailSuggerito}"> <input type="button"
 			value="conferma" onclick="profiloSuggerito.elements['tipo'].value='CONFERMA'; profiloSuggerito.submit();" /> <input type="button"
 			value="rifiuta" onclick="profiloSuggerito.elements['tipo'].value='RIFIUTA'; profiloSuggerito.submit();" />
