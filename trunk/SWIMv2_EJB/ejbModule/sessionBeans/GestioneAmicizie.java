@@ -1,11 +1,8 @@
 package sessionBeans;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Random;
 
 import javax.ejb.Stateless;
@@ -15,7 +12,6 @@ import javax.persistence.Query;
 
 import entityBeans.Amicizia;
 import entityBeans.AmiciziaPK;
-import entityBeans.Collaborazione;
 import entityBeans.Utente;
 
 import sessionBeans.interfaces.GestioneAmicizieInterface;
@@ -79,17 +75,17 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 	 * @param emailUtente2
 	 *            rappresenta la email dell'utente che sta accettando la
 	 *            richiesta di amicizia
-	 * @return <b>true</b> se tutto è andato a buon fine,<b>false</b> altrimenti
+	 * @return <b>amicizia</b> se tutto e' andato a buon fine,<b>null</b> altrimenti
 	 */
 	@Override
-	public boolean accettaAmicizia(String emailUtente1, String emailUtente2) {
-
+	public Amicizia accettaAmicizia(String emailUtente1, String emailUtente2) {
+		Amicizia amicizia;
 		GregorianCalendar calendar = new GregorianCalendar();
 		Utente utente1 = this.getUtenteByEmail(emailUtente1);
 		Utente utente2 = this.getUtenteByEmail(emailUtente2);
 
 		if (utente1 == null || utente2 == null) {
-			return false;
+			return null;
 		}
 
 		AmiciziaPK amiciziaPK = new AmiciziaPK();
@@ -97,18 +93,18 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 		amiciziaPK.setUtente1(utente1);
 		amiciziaPK.setUtente2(utente2);
 		try {
-			Amicizia amicizia = entityManager.find(Amicizia.class, amiciziaPK);
+			amicizia = entityManager.find(Amicizia.class, amiciziaPK);
 			amicizia.setDataAccettazione(calendar.getTime());
 			entityManager.persist(amicizia); // non obbligatori, funziona senza
 												// sia
 												// questo che il flush SOLO per
 												// l'update
 		} catch (IllegalArgumentException e) {
-			return false;
+			return null;
 		}
 		entityManager.flush();
 
-		return true;
+		return amicizia;
 	}
 
 	/**
@@ -266,13 +262,13 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 	 *         degli amici dell'utente,<b>null</b> se l'utente non ha richieste
 	 *         di amicizia
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Utente> getUtentiCheVoglionoAmicizia(String emailUtente) {
 		Query query = entityManager
 				.createNamedQuery("Amicizia.getUtentCheTiHannoPropostoAmicizia");
 		query.setParameter("emailUtente", emailUtente);
-		List<Utente> utentiCheVoglionoDiventareAmici = (List<Utente>) query
-				.getResultList();
+		List<Utente> utentiCheVoglionoDiventareAmici = (List<Utente>) query.getResultList();
 		return utentiCheVoglionoDiventareAmici;
 	}
 

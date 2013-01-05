@@ -11,7 +11,7 @@ public interface GestioneAmicizieInterface {
 	public abstract Amicizia richiediAmicizia(String emailUtente1,
 			String emailUtente2, boolean diretta);
 
-	public abstract boolean accettaAmicizia(String emailUtente1,
+	public abstract Amicizia accettaAmicizia(String emailUtente1,
 			String emailUtente2);
 
 	public abstract boolean rifiutaAmicizia(String emailUtente1,

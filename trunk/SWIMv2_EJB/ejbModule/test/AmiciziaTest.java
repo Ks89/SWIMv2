@@ -61,7 +61,7 @@ public class AmiciziaTest {
 		assertNotNull(amicizia2);
 		assertFalse(gestioneAmicizie.amiciziaInoltrata(MAIL_JACOPO, MAIL_DAVIDE));
 		assertEquals(0, gestioneAmicizie.getAmici(MAIL_JACOPO).size());
-		assertTrue(gestioneAmicizie.accettaAmicizia(MAIL_GIOVANNINO, MAIL_DAVIDE));
+		assertTrue(gestioneAmicizie.accettaAmicizia(MAIL_GIOVANNINO, MAIL_DAVIDE)!=null);
 		assertEquals(1,gestioneAmicizie.getAmici(MAIL_GIOVANNINO).size());
 		assertTrue(gestioneAmicizie.getAmici(MAIL_GIOVANNINO).contains(utenteDave));
 		assertEquals(1,gestioneAmicizie.getUtentiCheVoglionoAmicizia(MAIL_PEPPINO).size());
@@ -72,12 +72,12 @@ public class AmiciziaTest {
 		assertTrue(gestioneAmicizie.rifiutaAmicizia(MAIL_GIOVANNINO, MAIL_PEPPINO));
 
 		amicizia2=gestioneAmicizie.richiediAmicizia(MAIL_GIOVANNINO, MAIL_JACOPO, true);
-		assertTrue(gestioneAmicizie.accettaAmicizia(MAIL_GIOVANNINO, MAIL_JACOPO));		
+		assertTrue(gestioneAmicizie.accettaAmicizia(MAIL_GIOVANNINO, MAIL_JACOPO)!=null);		
 		assertEquals(utenteJova, gestioneAmicizie.getAmici(MAIL_JACOPO).get(0));
 		assertEquals(2, gestioneAmicizie.getAmici(MAIL_GIOVANNINO).size());
 		assertFalse(gestioneAmicizie.getAmici(MAIL_GIOVANNINO).contains(utenteJova));
 		amicizia2=gestioneAmicizie.richiediAmicizia(MAIL_PEPPINO, MAIL_GIOVANNINO, true);
-		assertTrue(gestioneAmicizie.accettaAmicizia(MAIL_PEPPINO, MAIL_GIOVANNINO));
+		assertTrue(gestioneAmicizie.accettaAmicizia(MAIL_PEPPINO, MAIL_GIOVANNINO)!=null);
 		assertEquals(3,gestioneAmicizie.getAmici(MAIL_GIOVANNINO).size());
 		assertTrue(gestioneAmicizie.getAmici(MAIL_GIOVANNINO).contains(utenteJaco));
 		assertTrue(gestioneAmicizie.getAmici(MAIL_GIOVANNINO).contains(utentePeppi));
