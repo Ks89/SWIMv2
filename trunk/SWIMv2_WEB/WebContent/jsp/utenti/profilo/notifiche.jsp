@@ -42,7 +42,10 @@
 		<c:out value="${nonCiSonoRichiesteAmicizia}"></c:out>
 		<br>
 	</c:if>
-
+	<c:if test="${!empty suggAccettato}">
+		<c:out value="${suggAccettato}"></c:out>
+		<br>
+	</c:if>
 
 
 	<c:if test="${empty nonCiSonoRichiesteAiuto}">

@@ -39,11 +39,17 @@
 				<table id="tabellaSuggerimenti" style="border-width: medium; border-style: solid;">
 				<tr>
 					<th>Nome e cognome</th>
+					<th>Accetta suggerimento*</th>
 				</tr>
 				<c:forEach items="${amiciSuggeriti}" var="utenteSuggerito">
 					<tr>
-						<td><a href="../azioni/dettaglioSuggerimento?emailUtenteSuggerito=<c:out value="${utenteSuggerito.email}" />"> <c:out
-									value="${utenteSuggerito.nome}" />&nbsp;<c:out value="${utenteSuggerito.cognome}" /></a></td>
+						<%-- 						<td><a href="../azioni/dettaglioSuggerimento?emailUtenteSuggerito=<c:out value="${utenteSuggerito.email}" />"> <c:out --%>
+						<%-- 									value="${utenteSuggerito.nome}" />&nbsp;<c:out value="${utenteSuggerito.cognome}" /></a></td> --%>
+						<td><c:out value="${utenteSuggerito.nome}" />&nbsp;<c:out value="${utenteSuggerito.cognome}" /></td>
+						<td><form id="accettaSuggerimentoForm" action="profiloAltroUtente" method="POST">
+								<input type="hidden" name="emailSuggAccettato" value="${utenteSuggerito.email}"></input> 
+								<input id="submit" type="submit" />
+							</form></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -55,8 +61,9 @@
 				pager.showPageNav('pager', 'pageNavPosition2');
 				pager.showPage(1);
 			</script>
+			<br> *e' possibile accettare solo un dei suggerimenti
 			<br>
-			<a href="../../notifiche">Torna indietro</a>
+			<a href="../azioni/notifiche">Torna indietro</a>
 		</c:otherwise>
 	</c:choose>
 </body>
