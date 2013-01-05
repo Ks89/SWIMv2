@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import entityBeans.Amicizia;
 import entityBeans.AmiciziaPK;
 import entityBeans.Utente;
+import exceptions.AmiciziaException;
 
 import sessionBeans.interfaces.GestioneAmicizieInterface;
 import sessionBeans.localInterfaces.GestioneAmicizieLocal;
@@ -24,7 +25,7 @@ import utililies.sessionRemote.GestioneAmicizieRemote;
  */
 @Stateless
 public class GestioneAmicizie implements GestioneAmicizieLocal,
-		GestioneAmicizieRemote, GestioneAmicizieInterface {
+GestioneAmicizieRemote, GestioneAmicizieInterface {
 
 	@PersistenceContext(unitName = "SWIMdb")
 	private EntityManager entityManager;
@@ -76,34 +77,38 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 	 *            rappresenta la email dell'utente che sta accettando la
 	 *            richiesta di amicizia
 	 * @return <b>amicizia</b> se tutto e' andato a buon fine,<b>null</b> altrimenti
+	 * @throws AmiciziaException con cause: ALCUNIPARAMETRINULLIOVUOTI, UTENTINONTROVATI, UPDATEAMICIZIAFALLITO
 	 */
 	@Override
-	public Amicizia accettaAmicizia(String emailUtente1, String emailUtente2) {
+	public Amicizia accettaAmicizia(String emailUtente1, String emailUtente2) throws AmiciziaException {
 		Amicizia amicizia;
 		GregorianCalendar calendar = new GregorianCalendar();
+
+		if(emailUtente1==null || emailUtente1.equals("") || emailUtente2==null || emailUtente2.equals("")) {
+			throw new AmiciziaException(AmiciziaException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		}
+
 		Utente utente1 = this.getUtenteByEmail(emailUtente1);
 		Utente utente2 = this.getUtenteByEmail(emailUtente2);
 
 		if (utente1 == null || utente2 == null) {
-			return null;
+			throw new AmiciziaException(AmiciziaException.Causa.UTENTINONTROVATI);
 		}
 
 		AmiciziaPK amiciziaPK = new AmiciziaPK();
-
 		amiciziaPK.setUtente1(utente1);
 		amiciziaPK.setUtente2(utente2);
-		try {
-			amicizia = entityManager.find(Amicizia.class, amiciziaPK);
-			amicizia.setDataAccettazione(calendar.getTime());
-			entityManager.persist(amicizia); // non obbligatori, funziona senza
-												// sia
-												// questo che il flush SOLO per
-												// l'update
-		} catch (IllegalArgumentException e) {
-			return null;
-		}
-		entityManager.flush();
+		amicizia = entityManager.find(Amicizia.class, amiciziaPK);
 
+		if(amicizia==null) {
+			throw new AmiciziaException(AmiciziaException.Causa.UPDATEAMICIZIAFALLITO);
+		}
+
+		amicizia.setDataAccettazione(calendar.getTime());
+		
+		entityManager.persist(amicizia);
+		entityManager.flush();
+		
 		return amicizia;
 	}
 
@@ -138,9 +143,9 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 			Amicizia amicizia = entityManager.find(Amicizia.class, amiciziaPK);
 			amicizia.setNotificaAlRichiedente(true);
 			entityManager.persist(amicizia); // non obbligatori, funziona senza
-												// sia
-												// questo che il flush SOLO per
-												// l'update
+			// sia
+			// questo che il flush SOLO per
+			// l'update
 		} catch (IllegalArgumentException e) {
 			return false;
 		}
@@ -194,8 +199,8 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 		List<Utente> utenti = (List<Utente>) query.getResultList();
 		return utenti;
 	}
-	
-	
+
+
 	/**
 	 * Metodo per rifiutare una richiesta di Amicizia
 	 * 
@@ -281,7 +286,7 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 	 */
 	@Override
 	public boolean sonoAmici(String emailUtente1, String emailUtente2) {
-		Utente utente1 = this.getUtenteByEmail(emailUtente1);
+		this.getUtenteByEmail(emailUtente1);
 		Utente utente2 = this.getUtenteByEmail(emailUtente2);
 		if (this.getAmici(emailUtente1).contains(utente2)) {
 			return true;
@@ -332,8 +337,8 @@ public class GestioneAmicizie implements GestioneAmicizieLocal,
 	@Override
 	public List<Utente> getSuggerimenti(String emailUtenteAppenaAmico,
 			String emailUtente) { // questo metodo verrà chiamato due volte, una
-									// volta per ogni utente, con le mail
-									// scambiate
+		// volta per ogni utente, con le mail
+		// scambiate
 
 		int numeroDiSuggerimenti = 3;
 		int i = 0;

@@ -15,6 +15,7 @@ import utililies.sessionRemote.GestioneAmicizieRemote;
 
 import entityBeans.Amicizia;
 import entityBeans.Utente;
+import exceptions.AmiciziaException;
 
 public class AmiciziaTest {
 
@@ -61,23 +62,29 @@ public class AmiciziaTest {
 		assertNotNull(amicizia2);
 		assertFalse(gestioneAmicizie.amiciziaInoltrata(MAIL_JACOPO, MAIL_DAVIDE));
 		assertEquals(0, gestioneAmicizie.getAmici(MAIL_JACOPO).size());
-		assertTrue(gestioneAmicizie.accettaAmicizia(MAIL_GIOVANNINO, MAIL_DAVIDE)!=null);
-		assertEquals(1,gestioneAmicizie.getAmici(MAIL_GIOVANNINO).size());
-		assertTrue(gestioneAmicizie.getAmici(MAIL_GIOVANNINO).contains(utenteDave));
-		assertEquals(1,gestioneAmicizie.getUtentiCheVoglionoAmicizia(MAIL_PEPPINO).size());
-		assertTrue(gestioneAmicizie.getUtentiCheVoglionoAmicizia(MAIL_PEPPINO).contains(utenteJova));
-		assertTrue(gestioneAmicizie.amiciziaInoltrata(MAIL_PEPPINO, MAIL_GIOVANNINO));
-		assertTrue(gestioneAmicizie.amiciziaInoltrata(MAIL_GIOVANNINO, MAIL_PEPPINO));
-		assertFalse(gestioneAmicizie.rifiutaAmicizia(MAIL_PEPPINO, MAIL_GIOVANNINO));
-		assertTrue(gestioneAmicizie.rifiutaAmicizia(MAIL_GIOVANNINO, MAIL_PEPPINO));
 
-		amicizia2=gestioneAmicizie.richiediAmicizia(MAIL_GIOVANNINO, MAIL_JACOPO, true);
-		assertTrue(gestioneAmicizie.accettaAmicizia(MAIL_GIOVANNINO, MAIL_JACOPO)!=null);		
-		assertEquals(utenteJova, gestioneAmicizie.getAmici(MAIL_JACOPO).get(0));
-		assertEquals(2, gestioneAmicizie.getAmici(MAIL_GIOVANNINO).size());
-		assertFalse(gestioneAmicizie.getAmici(MAIL_GIOVANNINO).contains(utenteJova));
-		amicizia2=gestioneAmicizie.richiediAmicizia(MAIL_PEPPINO, MAIL_GIOVANNINO, true);
-		assertTrue(gestioneAmicizie.accettaAmicizia(MAIL_PEPPINO, MAIL_GIOVANNINO)!=null);
+		try{
+			assertTrue(gestioneAmicizie.accettaAmicizia(MAIL_GIOVANNINO, MAIL_DAVIDE)!=null);
+			assertEquals(1,gestioneAmicizie.getAmici(MAIL_GIOVANNINO).size());
+			assertTrue(gestioneAmicizie.getAmici(MAIL_GIOVANNINO).contains(utenteDave));
+			assertEquals(1,gestioneAmicizie.getUtentiCheVoglionoAmicizia(MAIL_PEPPINO).size());
+			assertTrue(gestioneAmicizie.getUtentiCheVoglionoAmicizia(MAIL_PEPPINO).contains(utenteJova));
+			assertTrue(gestioneAmicizie.amiciziaInoltrata(MAIL_PEPPINO, MAIL_GIOVANNINO));
+			assertTrue(gestioneAmicizie.amiciziaInoltrata(MAIL_GIOVANNINO, MAIL_PEPPINO));
+			assertFalse(gestioneAmicizie.rifiutaAmicizia(MAIL_PEPPINO, MAIL_GIOVANNINO));
+			assertTrue(gestioneAmicizie.rifiutaAmicizia(MAIL_GIOVANNINO, MAIL_PEPPINO));
+
+			amicizia2=gestioneAmicizie.richiediAmicizia(MAIL_GIOVANNINO, MAIL_JACOPO, true);
+			assertTrue(gestioneAmicizie.accettaAmicizia(MAIL_GIOVANNINO, MAIL_JACOPO)!=null);		
+			assertEquals(utenteJova, gestioneAmicizie.getAmici(MAIL_JACOPO).get(0));
+			assertEquals(2, gestioneAmicizie.getAmici(MAIL_GIOVANNINO).size());
+			assertFalse(gestioneAmicizie.getAmici(MAIL_GIOVANNINO).contains(utenteJova));
+			amicizia2=gestioneAmicizie.richiediAmicizia(MAIL_PEPPINO, MAIL_GIOVANNINO, true);
+			assertTrue(gestioneAmicizie.accettaAmicizia(MAIL_PEPPINO, MAIL_GIOVANNINO)!=null);
+		} catch (AmiciziaException e) {
+			fail(e.getCausa().name());
+		}
+
 		assertEquals(3,gestioneAmicizie.getAmici(MAIL_GIOVANNINO).size());
 		assertTrue(gestioneAmicizie.getAmici(MAIL_GIOVANNINO).contains(utenteJaco));
 		assertTrue(gestioneAmicizie.getAmici(MAIL_GIOVANNINO).contains(utentePeppi));
