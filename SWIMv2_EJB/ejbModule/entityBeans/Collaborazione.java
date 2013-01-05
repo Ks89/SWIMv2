@@ -83,4 +83,7 @@ public class Collaborazione implements Serializable {
 
 	@Column(name = "CommentoFeedback", nullable = true, length = 250)
 	private String commentoFeedback;
+	
+	@Column(name = "NotificaAlRichiedente", nullable = false) 
+	private boolean notificaAlRichiedente;
 }
