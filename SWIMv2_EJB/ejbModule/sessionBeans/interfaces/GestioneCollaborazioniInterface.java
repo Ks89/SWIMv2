@@ -124,4 +124,7 @@ public interface GestioneCollaborazioniInterface {
 	 */
 	public Utente getUtenteByEmail(String email) throws LoginException;
 
+	public List<Collaborazione> getCollaborazioniDaTerminare(String emailRichiedente)
+			throws LoginException;
+
 }
