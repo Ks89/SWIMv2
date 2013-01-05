@@ -18,6 +18,7 @@ import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 
 import entityBeans.Amicizia;
 import entityBeans.Utente;
+import exceptions.AmiciziaException;
 import exceptions.LoginException;
 
 /**
@@ -112,23 +113,23 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 		if(request.getParameter("tipo").equals("CONFERMA")) {
 			log.debug("accettata la richiesta");
 
-			Amicizia amiciziaAccettata = gestioneAmicizie.accettaAmicizia(emailRichiedente, emailUtenteCollegato);
-			if(amiciziaAccettata!=null) {
-
+			try {
+				Amicizia amiciziaAccettata = gestioneAmicizie.accettaAmicizia(emailRichiedente, emailUtenteCollegato);
+				
 				log.debug("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{ : " +
 						"" + amiciziaAccettata);
-				
-				
+
+
 				log.debug("######################################################################################################################## : " +
 						"" + amiciziaAccettata.isDiretta());
-				
+
 				// se l'amicizia accettata e' indiretta perche' nata da un suggerimento da parte dell'utente richiedente (emailutente1), allora
 				// non deve mostrare suggerimenti ma tornare subito alla pagina delle notifiche.
 				if(!amiciziaAccettata.isDiretta()) {
 					response.sendRedirect("notifiche");
 					return;
 				}
-				
+
 				//---se e' diretta faccio cio' che segue
 				//Visto che ho accettato la richiesta di amicizia visualizzo i suggerimenti di amicizia
 				List<Utente> suggeriti = gestioneAmicizie.getSuggerimenti(emailRichiedente, emailUtenteCollegato);
@@ -138,7 +139,7 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 					log.debug("----------:::::::;;;;:_:;_;_:;_:;:_;_:;_:;_:;:_:_;_:;_:;:_;:_;:_;_;:*********;;;:  " + u);
 				}
 
-				
+
 				if(suggeriti.size()>=1) {
 					request.setAttribute("amiciSuggeriti", suggeriti);
 
@@ -149,7 +150,9 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 				}
 				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/profiloAltroUtente.jsp").forward(request, response);
 				return;
-			} else {
+			} catch (AmiciziaException e) {
+				//gestire l'eccezione come si deve
+				log.error(e.getMessage(), e);
 				request.setAttribute("erroreProfiloAltroUtente", "Errore nella conferma della richiesta di amicizia");
 			}
 		} else {
