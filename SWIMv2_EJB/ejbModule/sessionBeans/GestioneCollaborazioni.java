@@ -275,10 +275,10 @@ public class GestioneCollaborazioni implements GestioneCollaborazioniRemote, Ges
 	
 	
 	/**
-	 * Metodo che fornisce la lista delle richieste di aiuto verso l'utente ricevente, ancora non accettate.
-	 * @param emailRichiedente = String che rappresenta l'email dell'utente ricevente della richiesta di aiuto (collaborazione)
+	 * Metodo che fornisce la lista delle collaborazioni non ancora terminate.
+	 * @param emailRichiedente = String che rappresenta l'email dell'utente di cui si vuole ottenere le collaborazioni
 	 * @return <b>lista delle collaborazioni</b>, ovvero una List<Collaborazione> che rappresenta le 
-	 * collaborazioni accettate dall'utente ricevente. Se non e' possibile ottenere tale lista, reistituisce <b>null</b>.
+	 * collaborazioni non ancora terminate. Se non e' possibile ottenere tale lista, reistituisce <b>null</b>.
 	 * @throws LoginException con causa ALCUNIPARAMETRINULLIOVUOTI
 	 */
 	@Override
@@ -293,6 +293,24 @@ public class GestioneCollaborazioni implements GestioneCollaborazioniRemote, Ges
 		return (List<Collaborazione>)query.getResultList();	
 	}
 	
+	/**
+	 * Metodo che fornisce la lista delle collaborazioni terminate con il feedback rilasciato
+	 * @param emailRichiedente = String che rappresenta l'email dell'utente di cui si vuole ottenere le collaborazioni
+	 * @return <b>lista delle collaborazioni</b>, ovvero una List<Collaborazione> che rappresenta le 
+	 * collaborazioni non ancora terminate. Se non e' possibile ottenere tale lista, reistituisce <b>null</b>.
+	 * @throws LoginException con causa ALCUNIPARAMETRINULLIOVUOTI
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Collaborazione> getCollaborazioniTerminateConFeedBack(String emailRichiedente) throws LoginException {
+		//if(emailRichiedente==null || emailRichiedente.equals("")) {
+		//	throw new LoginException(LoginException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		//}
+		
+		Query query = entityManager.createNamedQuery("Collaborazione.getCollaborazioniTerminateConFeedBack");
+		query.setParameter("emailRichiedente", emailRichiedente);
+		return (List<Collaborazione>)query.getResultList();	
+	}
 	
 	/**
 	 * Metodo per l'estrazione dell'utente dal database data la sua email
