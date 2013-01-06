@@ -35,7 +35,7 @@
 						<td><c:out value="${collaborazione.utenteRicevente.nome}" />&nbsp;<c:out
 								value="${collaborazione.utenteRicevente.cognome}" /></td>
 						<td><a
-							href="../azioni/CollaborazioneDettagliata?idCollaborazione=<c:out value="${collaborazione.id}" />"><c:out
+							href="../azioni/dettaglioCollaborazione?idCollaborazione=<c:out value="${collaborazione.id}" />"><c:out
 									value="${collaborazione.nome}" /></a></td>
 						<td><input type="button" value="Termina"
 							onclick="collaborazioniInCorso.elements['tipo'].value=${collaborazione.id}; collaborazioniInCorso.submit();" />
@@ -70,9 +70,41 @@
 							value="${collaborazioneFeedBack.utenteRicevente.nome}" />&nbsp;<c:out
 							value="${collaborazioneFeedBack.utenteRicevente.cognome}" /></td>
 					<td><a
-						href="../azioni/CollaborazioneDettagliata?idCollaborazione=<c:out value="${collaborazioneFeedBack.id}" />"><c:out
+						href="../azioni/dettaglioCollaborazione?idCollaborazione=<c:out value="${collaborazioneFeedBack.id}" />"><c:out
 								value="${collaborazioneFeedBack.nome}" /></a></td>
 					<td><c:out value="Aggiungi FeedBack"></c:out>
+				</tr>
+			</c:forEach>
+		</table>
+	</c:if>
+	
+	<c:if test="${!empty erroreGetCollaborazioniTerminateConFeedBack}">
+			<c:out value="${erroreGetCollaborazioniTerminateConFeedBack}"></c:out>
+			<br>
+		</c:if>
+		<c:if test="${!empty nonCiSonoCollaborazioniTerminateConFeedBack}">
+			<c:out value="${nonCiSonoCollaborazioniTerminateConFeedBack}"></c:out>
+			<br>
+		</c:if>
+	<c:if test="${empty nonCiSonoCollaborazioniTerminateConFeedBack}">
+		<c:out value="Storico collaborazioni:"></c:out>
+		<br>
+		<br>
+		<table id="tabellaStoricoCollaborazioni"
+			style="border-width: medium; border-style: solid;">
+			<tr>
+				<th>Utente Collaborante</th>
+				<th>Nome Collaborazione</th>
+			</tr>
+			<c:forEach items="${collaborazioniTerminateConFeedBack}"
+				var="collaborazioneTerminateConFeedBack">
+				<tr>
+					<td><c:out
+							value="${collaborazioneTerminateConFeedBack.utenteRicevente.nome}" />&nbsp;<c:out
+							value="${collaborazioneTerminateConFeedBack.utenteRicevente.cognome}" /></td>
+					<td><a
+						href="../azioni/dettaglioCollaborazione?idCollaborazione=<c:out value="${collaborazioneTerminateConFeedBack.id}" />"><c:out
+								value="${collaborazioneTerminateConFeedBack.nome}" /></a></td>
 				</tr>
 			</c:forEach>
 		</table>
