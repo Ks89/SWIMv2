@@ -30,10 +30,26 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Utente> ricercaAiuto(List<Abilita> abilita)throws RicercheException{
+	public List<Utente> ricercaAiuto(List<Abilita> abilita, String email)throws RicercheException{
 		if(abilita == null || abilita.size()<1)
 			throw new RicercheException(RicercheException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
 		Query query = entityManager.createNamedQuery("Possiede.getUtenteByAbilita");
+		query.setParameter("insiemeAbilita", abilita);
+		query.setParameter("numAbilita", Long.valueOf(abilita.size()));
+		query.setParameter("emailUtente", email);
+		List<Utente> risultatoRicerca = (List<Utente>)query.getResultList();
+		return risultatoRicerca;
+	}
+	
+	/* (non-Javadoc)
+	 * @see sessionBeans.GestioneRicercheInterface#ricercaAiuto(java.util.List)
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Utente> ricercaAiutoVisitatore(List<Abilita> abilita)throws RicercheException{
+		if(abilita == null || abilita.size()<1)
+			throw new RicercheException(RicercheException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		Query query = entityManager.createNamedQuery("Possiede.getUtenteByAbilitaVisitatore");
 		query.setParameter("insiemeAbilita", abilita);
 		query.setParameter("numAbilita", Long.valueOf(abilita.size()));
 		List<Utente> risultatoRicerca = (List<Utente>)query.getResultList();
@@ -45,12 +61,13 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Utente> ricercaUtenti(String nome, String cognome)throws RicercheException{
+	public List<Utente> ricercaUtenti(String nome, String cognome, String email)throws RicercheException{
 		if(nome == null || cognome==null || nome.length()==0 || cognome.length()==0)
 			throw new RicercheException(RicercheException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
 		Query query = entityManager.createNamedQuery("Utente.getUtentiByNomeCognome");
 		query.setParameter("nomeUtente", nome);
 		query.setParameter("cognomeUtente", cognome);
+		query.setParameter("emailUtente", email);
 		List<Utente> risultatoRicerca = (List<Utente>)query.getResultList();
 		return risultatoRicerca;
 	}
