@@ -85,6 +85,25 @@ public class CollaborazioniServlet extends HttpServlet {
 			log.error(e.getMessage(), e);
 			request.setAttribute("erroreGetCollaborazioniSenzaFeedback", "Impossibile ottenere le collaborazioni senza feedback");
 		}
+		
+		try {
+			List<Collaborazione> collaborazioniTerminateConFeedBack = gestioneCollab.getCollaborazioniTerminateConFeedBack(emailUtenteCollegato);
+
+			if(collaborazioniTerminateConFeedBack==null) { //TODO attenzione PERCHE' l'ho scritto qui????????????????????????????????????
+				request.setAttribute("erroreGetCollaborazioniTerminateConFeedBack", "Impossibile ottenere le collaborazioni terminate con feedback");
+				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/collaborazioni.jsp").forward(request, response);
+				return;
+			}
+			if(collaborazioniTerminateConFeedBack.size()>=1) {
+				request.setAttribute("collaborazioniTerminateConFeedBack", collaborazioniTerminateConFeedBack);
+			} else {
+				request.setAttribute("collaborazioniTerminateConFeedBack", collaborazioniTerminateConFeedBack);
+				request.setAttribute("nonCiSonoCollaborazioniTerminateConFeedBack", "Non ci sono collaborazioni terminate con feedback");
+			}
+		} catch (LoginException e) {
+			log.error(e.getMessage(), e);
+			request.setAttribute("erroreGetCollaborazioniSenzaFeedback", "Impossibile ottenere le collaborazioni terminate con feedback");
+		}
 	
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/collaborazioni.jsp").forward(request, response);
 		
