@@ -141,7 +141,8 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 			if(tipoRicerca.equals("aiuto"))
 			{
 				try {
-					risultatoRicerca=gestioneRicerche.ricercaAiuto(abilitaRicercate);
+					log.info("<---------------------------"+(String) UtenteCollegatoUtil.getEmailUtenteCollegato(request)+"----------------------------->");
+					risultatoRicerca=gestioneRicerche.ricercaAiuto(abilitaRicercate,(String) UtenteCollegatoUtil.getEmailUtenteCollegato(request));
 				} catch (RicercheException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -154,7 +155,7 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 			else if(tipoRicerca.equals("aiutoVisitatore"))
 			{
 				try {
-					risultatoRicerca=gestioneRicerche.ricercaAiuto(abilitaRicercate);
+					risultatoRicerca=gestioneRicerche.ricercaAiutoVisitatore(abilitaRicercate);
 				} catch (RicercheException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -167,7 +168,7 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 			else
 			{
 				try {
-					risultatoRicerca=gestioneRicerche.ricercaUtenti(nome, cognome);
+					risultatoRicerca=gestioneRicerche.ricercaUtenti(nome, cognome,(String) UtenteCollegatoUtil.getEmailUtenteCollegato(request));
 				} catch (RicercheException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
