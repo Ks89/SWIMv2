@@ -23,6 +23,7 @@ import entityBeans.PossiedePK;
 import entityBeans.Utente;
 import exceptions.HashingException;
 import exceptions.RegistrazioneException;
+import exceptions.RicercheException;
 
 @Stateless
 public class GestioneRegistrazione implements GestioneRegistrazioneLocal, GestioneRegistrazioneRemote {
@@ -31,9 +32,16 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 	private EntityManager entityManager;
 
 	/**
-	 * Registra un utente con i dati passati come parametro. 
-	 * @throws RegistrazioneException 
-	 * @return Nela caso la registrazione sia andata a buon fine, torna l'utente appena registrato, altrimenti torna un utente null  
+	 * Metodo che registra un utente con i dati passati come parametro. 
+	 * @param String email, l'email dell'utente
+	 * @param String password, la password scelta dall'utente
+	 * @param String nome, il nome dell'utente
+	 * @param String cognome, il cognome dell'utentenu
+	 * @param Blob fotoProfilo, la foto del profilo scelta dall'utente
+	 * @param List<Abilita>, l'insieme delle abilita selezionate dall'utente all'atto della registrazione
+	 * @return <b>utente</b> appena creato, <b>null</b> nel caso l'operazione non vada a buon fine
+	 * @throws RegistrazioneException   
+	 * @throws HashingException
 	 */
 	public Utente registrazioneUtente(String email, String password, String nome, String cognome, Blob fotoProfilo, List<Abilita> abilita)  throws HashingException, RegistrazioneException {
 		Utente utente;
@@ -72,9 +80,12 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 	}
 
 	/**
-	 * Metodo utile in fase di test, perchè certe operazioni richiedono la presenza dell'amministratore.
-	 * Crea un amministratore con email=admin@swim.it e password=pippo
-	 * @throws RegistrazioneException 
+	 * Metodo che registra l'amministratore con i dati passati come parametro. 
+	 * @param String email, l'email dell'amministratore
+	 * @param String password, la password dell'amministratore
+	 * @return <b>true</b> se la registrazione è andata a buon fine, <b>false</b> altrimenti
+	 * @throws RegistrazioneException   
+	 * @throws HashingException
 	 */
 	public boolean registrazioneAmministratore(String email, String password)  throws HashingException, RegistrazioneException {
 		Amministratore admin= new Amministratore();
@@ -93,19 +104,19 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 		
 	}
 
-	/**
-	 * Utile per il test. Torna una abilita in base al nome passato come parametro
-	 * @param Nome dell'abilita richiesta
-	 * @return l'abilita, o null se non si è trovata nessuna abilita con questo nome
+	 /**
+	 * Metodo per ottenere l'abilita in base al nome passato come parametro
+	 * @param String nome, il nome dell'abilita cercata
+	 * @return l'abilita cercata, <b>null</b> nel caso non esistano abilita con quel nome
 	 */
 	public Abilita getAbilitaByNome(String nome){
 		return entityManager.find(Abilita.class, nome);
 	}
 
 	/**
-	 * Controlla la sintassi dell'indirizzo email passato come parametro
-	 * @param email da verificare
-	 * @return true se l'email è sintatticamente corretta, false altrimenti
+	 * Metodo che controlla la sintassi dell'indirizzo email passato come parametro
+	 * @param Sgtring email, l'email da controllare
+	 * @return <b>true</b> se l'email è sintatticamente corretta, <b>false</b> altrimenti
 	 */
 	private boolean emailCorretta(String email){
 		//Settiamo il pattern per il confronto
@@ -133,9 +144,9 @@ public class GestioneRegistrazione implements GestioneRegistrazioneLocal, Gestio
 	}
 
 	/**
-	 * Controlla che la mail passata come parametro non sia già stata usata per un'altra registrazione
-	 * @param email
-	 * @return true se la mail non è già stata utilizzata da un altro utente, false altrimenti
+	 * Metodo che controlla che la mail passata come parametro non sia già stata usata per un'altra registrazione
+	 * @param String email
+	 * @return <b>true</b> se la mail non è già stata utilizzata da un altro utente, <b>false</b> altrimenti
 	 */
 	private boolean emailNonAncoraUtilizzata(String email){
 		return entityManager.find(Utente.class, email)==null;
