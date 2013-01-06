@@ -17,10 +17,11 @@
 		<br>
 	</c:if>
 	<c:if test="${empty nonCiSonoCollaborazioniDaTerminare}">
-		<c:out value="Collaborazioni da terminare:"></c:out>
+		<c:out value="Collaborazioni in corso:"></c:out>
 		<br>
-		<br> 
-		<table id="tabellaCollaborazioniDaTerminare" style="border-width: medium; border-style: solid;">
+		<br>
+		<table id="tabellaCollaborazioniInCorso"
+			style="border-width: medium; border-style: solid;">
 			<tr>
 				<th>Utente Collaborante</th>
 				<th>Nome Collaborazione</th>
@@ -28,49 +29,48 @@
 			</tr>
 			<c:forEach items="${collaborazioniDaTerminare}" var="collaborazione">
 				<tr>
-					<td><c:out value="${collaborazione.utenteRicevente.nome}" />&nbsp;<c:out value="${collaborazione.utenteRicevente.cognome}" /></td>
-					<td><a href="../azioni/CollaborazioneDettagliata?idCollaborazione=<c:out value="${collaborazione.id}" />"><c:out
+					<td><c:out value="${collaborazione.utenteRicevente.nome}" />&nbsp;<c:out
+							value="${collaborazione.utenteRicevente.cognome}" /></td>
+					<td><a
+						href="../azioni/CollaborazioneDettagliata?idCollaborazione=<c:out value="${collaborazione.id}" />"><c:out
 								value="${collaborazione.nome}" /></a></td>
-					<td><c:out value="Termina Collaborazione"></c:out>
+					<td><c:out value="Termina"></c:out>
 				</tr>
 			</c:forEach>
 		</table>
-		<div id="pageNavPosition1"></div>
-
-		<%-- <script type="text/javascript">
-			var pager = new Pager('tabellaCollaborazioniDaTerminare', 5);
-			pager.init();
-			pager.showPageNav('pager', 'pageNavPosition1');
-			pager.showPage(1);
-		</script>--%>
+	<c:if test="${!empty erroreGetCollaborazioniSenzaFeedback}">
+		<c:out value="${erroreGetCollaborazioniSenzaFeedback}"></c:out>
+		<br>
+	</c:if>
+	<c:if test="${!empty nonCiSonoCollaborazioniSenzaFeedback}">
+		<c:out value="${nonCiSonoCollaborazioniDaTerminare}"></c:out>
+		<br>
+	</c:if>
 	</c:if>
 	<c:if test="${empty nonCiSonoCollaborazioniSenzaFeedback}">
 		<c:out value="Collaborazioni senza feedback:"></c:out>
 		<br>
-		<br> 
-		<table id="tabellaCollaborazioniSenzaFeedBack" style="border-width: medium; border-style: solid;">
+		<br>
+		<table id="tabellaCollaborazioniSenzaFeedBack"
+			style="border-width: medium; border-style: solid;">
 			<tr>
 				<th>Utente Collaborante</th>
 				<th>Nome Collaborazione</th>
 				<th>Azione</th>
 			</tr>
-	<c:forEach items="${collaborazioniDaRilasciareFeedBack}" var="collaborazioneFeedBack">
+			<c:forEach items="${collaborazioniDaRilasciareFeedBack}"
+				var="collaborazioneFeedBack">
 				<tr>
-					<td><c:out value="${collaborazioneFeedBack.utenteRicevente.nome}" />&nbsp;<c:out value="${collaborazioneFeedBack.utenteRicevente.cognome}" /></td>
-					<td><a href="../azioni/CollaborazioneDettagliata?idCollaborazione=<c:out value="${collaborazioneFeedBack.id}" />"><c:out
+					<td><c:out
+							value="${collaborazioneFeedBack.utenteRicevente.nome}" />&nbsp;<c:out
+							value="${collaborazioneFeedBack.utenteRicevente.cognome}" /></td>
+					<td><a
+						href="../azioni/CollaborazioneDettagliata?idCollaborazione=<c:out value="${collaborazioneFeedBack.id}" />"><c:out
 								value="${collaborazioneFeedBack.nome}" /></a></td>
 					<td><c:out value="Aggiungi FeedBack"></c:out>
 				</tr>
 			</c:forEach>
 		</table>
-		<div id="pageNavPosition1"></div>
-
-		<%-- <script type="text/javascript">
-			var pager = new Pager('tabellaCollaborazioniSenzaFeedBack', 5);
-			pager.init();
-			pager.showPageNav('pager', 'pageNavPosition1');
-			pager.showPage(1);
-		</script>--%>
 	</c:if>
 	<a href="../profilo">Torna al profilo</a>
 

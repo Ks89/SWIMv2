@@ -55,14 +55,11 @@ public class CollaborazioniServlet extends HttpServlet {
 			List<Collaborazione> collaborazioniDaTerminare = gestioneCollab.getCollaborazioniDaTerminare(emailUtenteCollegato);
 
 			if(collaborazioniDaTerminare==null) { //TODO attenzione PERCHE' l'ho scritto qui????????????????????????????????????
-				request.setAttribute("erroreGetCollaborazioniDaTerminare", "Impossibile ottenere le richieste di aiuto");
-				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/collaborazioni.jsp").forward(request, response);
-				return;
+				request.setAttribute("erroreGetCollaborazioniDaTerminare", "Impossibile ottenere le collaborazioni");
 			}
 			if(collaborazioniDaTerminare.size()>=1) {
-				request.setAttribute("collaborazionDaTerminare", collaborazioniDaTerminare);
-			} else {
 				request.setAttribute("collaborazioniDaTerminare", collaborazioniDaTerminare);
+			} else {
 				request.setAttribute("nonCiSonoCollaborazioniDaTerminare", "Non ci sono collaborazioni in corso");
 			}
 		} catch (LoginException e) {
@@ -74,7 +71,7 @@ public class CollaborazioniServlet extends HttpServlet {
 			List<Collaborazione> collaborazioniDaRilasciareFeedBack = gestioneCollab.getCollaborazioniCreateFeedbackNonRilasciato(emailUtenteCollegato);
 
 			if(collaborazioniDaRilasciareFeedBack==null) { //TODO attenzione PERCHE' l'ho scritto qui????????????????????????????????????
-				request.setAttribute("erroreGetCollaborazioniSenzaFeedback", "Impossibile ottenere le richieste di aiuto");
+				request.setAttribute("erroreGetCollaborazioniSenzaFeedback", "Impossibile ottenere le collaborazioni senza feedback");
 				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/collaborazioni.jsp").forward(request, response);
 				return;
 			}
