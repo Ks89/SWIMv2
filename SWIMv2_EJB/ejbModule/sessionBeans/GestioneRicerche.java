@@ -25,8 +25,12 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 	@PersistenceContext(unitName = "SWIMdb")
 	private EntityManager entityManager;
 	
-	/* (non-Javadoc)
-	 * @see sessionBeans.GestioneRicercheInterface#ricercaAiuto(java.util.List)
+	/**
+	 * Metodo per ottenere il risultato della ricerca aiuto per utenti registrati, in base alle abilita scelte
+	 * @param abilita= lista di abilita che l'utente ricercato deve avere
+	 * @param email= String rappresentante l'email dell'utente che ha richiesto la ricerca
+	 * @return <b>risultatoRicerca</b> una lista di utenti che possiede tutte le abilita selezionate, <b>null</b> se la ricerca non ha prodotto risultati
+	 * @throws RicercheException con causa ALCUNIPARAMETRINULLIVUOTI
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -41,8 +45,11 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 		return risultatoRicerca;
 	}
 	
-	/* (non-Javadoc)
-	 * @see sessionBeans.GestioneRicercheInterface#ricercaAiuto(java.util.List)
+	/**
+	 * Metodo per ottenere il risultato della ricerca aiuto per visitatori, in base alle abilita scelte
+	 * @param abilita= lista di abilita che l'utente ricercato deve avere
+	 * @return <b>risultatoRicerca</b> una lista di utenti che possiede tutte le abilita selezionate, <b>null</b> se la ricerca non ha prodotto risultati
+	 * @throws RicercheException con causa ALCUNIPARAMETRINULLIVUOTI
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -56,8 +63,12 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 		return risultatoRicerca;
 	}
 	
-	/* (non-Javadoc)
-	 * @see sessionBeans.GestioneRicercheInterface#ricercaUtenti(java.lang.String, java.lang.String)
+	/**
+	 * Metodo per ottenere una lista di utenti ricercati per nome e cognome
+	 * @param nome= String rappresentante il nome dell'utente ricercato
+	 * @param cognome= String rappresentante il cognome dell'utente ricercato
+	 * @return <b>risultatoRicerca</b> una lista di utenti aventi nome e cognome uguali a quelli passati come parametro, <b>null</b> se la ricerca non ha prodotto risultati
+	 * @throws RicercheException con causa ALCUNIPARAMETRINULLIVUOTI
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -72,6 +83,10 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 		return risultatoRicerca;
 	}
 	
+	/**
+	 * Metodo per ottenere la lista completa delle abilita generali selezionabili dal singolo utente
+	 * @return <b>insiemeAbilita</b> lista di abilita, <b>null</b> se nel sistema non sono presento abilita
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Abilita> insiemeAbilitaGenerali(){
 		Query query = entityManager.createNamedQuery("Abilita.getInsiemeAbilitaGenerali");
@@ -79,6 +94,12 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 		return insiemeAbilita;
 	}
 	
+	/**
+	 * Metodo per ottenere la lista delle abilita personali dell'utente passato come parametro
+	 * @param emailUtente= String rappresentante la mail dell'utente di cui si vogliono conoscere le abilita
+	 * @return <b>insiemeAbilita</b> lista di abilita, <b>null</b> se l'utente non ha abilita
+	 * @throws RicercheException con causa ALCUNIPARAMETRINULLIVUOTI
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Abilita> insiemeAbilitaPersonaliUtente(String emailUtente)throws RicercheException{
 		if(emailUtente==null || emailUtente.length()==0)
@@ -90,7 +111,12 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 
 	}
 	
-	
+	/**
+	 * Metodo per ottenere l'utente conoscendo il suo indirizzo email
+	 * @param emailUtente= String rappresentante la mail dell'utente
+	 * @return <b>Utente</b> avente la mail uguale a quella passata come parametro, <b>null</b> se non esiste un utente con quella mail
+	 * @throws RicercheException con causa ALCUNIPARAMETRINULLIVUOTI
+	 */
 	public Utente getUtenteByEmail(String email){
 		return entityManager.find(Utente.class, email);
 	}
