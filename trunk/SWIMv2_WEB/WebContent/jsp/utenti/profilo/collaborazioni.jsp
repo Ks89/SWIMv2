@@ -20,32 +20,37 @@
 		<c:out value="Collaborazioni in corso:"></c:out>
 		<br>
 		<br>
-		<table id="tabellaCollaborazioniInCorso"
-			style="border-width: medium; border-style: solid;">
-			<tr>
-				<th>Utente Collaborante</th>
-				<th>Nome Collaborazione</th>
-				<th>Azione</th>
-			</tr>
-			<c:forEach items="${collaborazioniDaTerminare}" var="collaborazione">
+		<form id="collaborazioniInCorso" action="collaborazioni"
+			method="POST">
+			<input type="hidden" name="tipo" />
+			<table id="tabellaCollaborazioniInCorso"
+				style="border-width: medium; border-style: solid;">
 				<tr>
-					<td><c:out value="${collaborazione.utenteRicevente.nome}" />&nbsp;<c:out
-							value="${collaborazione.utenteRicevente.cognome}" /></td>
-					<td><a
-						href="../azioni/CollaborazioneDettagliata?idCollaborazione=<c:out value="${collaborazione.id}" />"><c:out
-								value="${collaborazione.nome}" /></a></td>
-					<td><c:out value="Termina"></c:out>
+					<th>Utente Collaborante</th>
+					<th>Nome Collaborazione</th>
+					<th>Azione</th>
 				</tr>
-			</c:forEach>
-		</table>
-	<c:if test="${!empty erroreGetCollaborazioniSenzaFeedback}">
-		<c:out value="${erroreGetCollaborazioniSenzaFeedback}"></c:out>
-		<br>
-	</c:if>
-	<c:if test="${!empty nonCiSonoCollaborazioniSenzaFeedback}">
-		<c:out value="${nonCiSonoCollaborazioniDaTerminare}"></c:out>
-		<br>
-	</c:if>
+				<c:forEach items="${collaborazioniDaTerminare}" var="collaborazione">
+					<tr>
+						<td><c:out value="${collaborazione.utenteRicevente.nome}" />&nbsp;<c:out
+								value="${collaborazione.utenteRicevente.cognome}" /></td>
+						<td><a
+							href="../azioni/CollaborazioneDettagliata?idCollaborazione=<c:out value="${collaborazione.id}" />"><c:out
+									value="${collaborazione.nome}" /></a></td>
+						<td><input type="button" value="Termina"
+							onclick="collaborazioniInCorso.elements['tipo'].value=${collaborazione.id}; collaborazioniInCorso.submit();" />
+					</tr>
+				</c:forEach>
+			</table>
+		</form>
+		<c:if test="${!empty erroreGetCollaborazioniSenzaFeedback}">
+			<c:out value="${erroreGetCollaborazioniSenzaFeedback}"></c:out>
+			<br>
+		</c:if>
+		<c:if test="${!empty nonCiSonoCollaborazioniSenzaFeedback}">
+			<c:out value="${nonCiSonoCollaborazioniDaTerminare}"></c:out>
+			<br>
+		</c:if>
 	</c:if>
 	<c:if test="${empty nonCiSonoCollaborazioniSenzaFeedback}">
 		<c:out value="Collaborazioni senza feedback:"></c:out>
