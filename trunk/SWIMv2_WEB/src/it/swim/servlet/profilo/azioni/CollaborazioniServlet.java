@@ -1,6 +1,5 @@
 package it.swim.servlet.profilo.azioni;
 
-import it.swim.servlet.RicercaPerVisitatoriServlet;
 import it.swim.util.UtenteCollegatoUtil;
 
 import java.io.IOException;
