@@ -70,7 +70,7 @@
 							value="${collaborazioneFeedBack.utenteRicevente.nome}" />&nbsp;<c:out
 							value="${collaborazioneFeedBack.utenteRicevente.cognome}" /></td>
 					<td><a
-						href="../azioni/dettaglioCollaborazione?idCollaborazione=<c:out value="${collaborazioneFeedBack.id}" />"><c:out
+						href="../azioni/dettaglioCollaborazione?idCollaborazione=<c:out value="${collaborazioneFeedBack.id}&terminata=si" />"><c:out
 								value="${collaborazioneFeedBack.nome}" /></a></td>
 					<td><c:out value="Aggiungi FeedBack"></c:out>
 				</tr>
@@ -103,7 +103,7 @@
 							value="${collaborazioneTerminateConFeedBack.utenteRicevente.nome}" />&nbsp;<c:out
 							value="${collaborazioneTerminateConFeedBack.utenteRicevente.cognome}" /></td>
 					<td><a
-						href="../azioni/dettaglioCollaborazione?idCollaborazione=<c:out value="${collaborazioneTerminateConFeedBack.id}" />"><c:out
+						href="../azioni/dettaglioCollaborazione?idCollaborazione=<c:out value="${collaborazioneTerminateConFeedBack.id}&terminata=si&conFeedBack=si" />"><c:out
 								value="${collaborazioneTerminateConFeedBack.nome}" /></a></td>
 				</tr>
 			</c:forEach>
