@@ -1,10 +1,8 @@
 package it.swim.servlet.profilo.azioni;
 
-import it.swim.servlet.profilo.azioni.notifiche.DettagliAltroUtenteServlet;
 import it.swim.util.UtenteCollegatoUtil;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -15,15 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 
 import entityBeans.Collaborazione;
-import exceptions.LoginException;
-
-import lombok.extern.slf4j.Slf4j;
+import exceptions.CollaborazioneException;
 
 
 /**
  * Servlet implementation class DettaglioCollaborazione
  */
-@Slf4j
 public class DettaglioCollaborazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@EJB
@@ -52,7 +47,7 @@ public class DettaglioCollaborazioneServlet extends HttpServlet {
 		}
 		try {
 			collaborazione= gestioneCollab.getCollaborazione(id);
-		} catch (LoginException e) {
+		} catch (CollaborazioneException e) {
 			request.setAttribute("erroreRicercaCollaborazione", "Impossibile ottenere le collaborazione");
 			getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/dettaglioCollaborazione.jsp").forward(request, response);
 			return;

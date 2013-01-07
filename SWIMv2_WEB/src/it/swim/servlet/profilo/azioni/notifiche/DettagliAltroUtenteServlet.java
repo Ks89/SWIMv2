@@ -3,7 +3,6 @@ package it.swim.servlet.profilo.azioni.notifiche;
 import it.swim.util.UtenteCollegatoUtil;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -13,14 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
-import entityBeans.Collaborazione;
 import exceptions.CollaborazioneException;
-import exceptions.LoginException;
 
 import sessionBeans.localInterfaces.GestioneAmicizieLocal;
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
@@ -70,7 +62,7 @@ public class DettagliAltroUtenteServlet extends HttpServlet {
 		request.setAttribute("utente", ricerche.getUtenteByEmail(email));
 		try {
 			request.setAttribute("punteggioFeedback", gestCollaborazioni.getPunteggioFeedback(email));
-		} catch (LoginException e) {
+		} catch (CollaborazioneException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -103,9 +95,6 @@ public class DettagliAltroUtenteServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				request.setAttribute("messageCollaborazione","Devi compilare tutti i campi.");
-			} catch (LoginException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 		request.setAttribute("amiciziaGiaInoltrata",amicizie.amiciziaInoltrata(emailUtenteCollegato, utenteRicercato));

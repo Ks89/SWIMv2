@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 
 import entityBeans.Collaborazione;
-import exceptions.LoginException;
+import exceptions.CollaborazioneException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -71,7 +71,7 @@ public class DettaglioRichiestaAiutoServlet extends HttpServlet {
 			} else {
 
 			}
-		} catch (LoginException e) {
+		} catch (CollaborazioneException e) {
 			log.error(e.toString(), e);
 		}
 
@@ -109,7 +109,7 @@ public class DettaglioRichiestaAiutoServlet extends HttpServlet {
 			} else {
 				request.setAttribute("erroreDettaglioRichiestaAiuto", "Errore durante in rifuto della richiesta di aiuto");
 			}
-		} catch (LoginException e) {
+		} catch (CollaborazioneException e) {
 			request.setAttribute("erroreDettaglioRichiestaAiuto", "Errore durante in rifuto della richiesta di aiuto");
 			log.error(e.toString(), e);
 		}
@@ -124,7 +124,7 @@ public class DettaglioRichiestaAiutoServlet extends HttpServlet {
 			} else {
 				request.setAttribute("erroreDettaglioRichiestaAiuto", "Errore nella conferma della richiesta di aiuto");
 			}
-		} catch (LoginException e) {
+		} catch (CollaborazioneException e) {
 			request.setAttribute("erroreDettaglioRichiestaAiuto", "Errore nella conferma della richiesta di aiuto");
 			log.error(e.toString(), e);
 		}
@@ -146,7 +146,7 @@ public class DettaglioRichiestaAiutoServlet extends HttpServlet {
 				request.setAttribute("richiesteAiuto", collaborazioni);
 				request.setAttribute("nonCiSonoRichiesteAiuto", "Non ci sono nuove richieste di aiuto");
 			}
-		} catch (LoginException e) {
+		} catch (CollaborazioneException e) {
 			log.error(e.getMessage(), e);
 			request.setAttribute("erroreGetNotificheRichiesteAiuto", "Impossibile ottenere le richieste di amicizia");
 		}

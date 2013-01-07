@@ -8,7 +8,7 @@
 </head>
 <body>
 	Foto: 
-	<img src="foto" />
+	<img src="../../foto?emailUtente=${utente.email}" />
 	<br>
 	<br /> Nome:
 	<c:out value="${utente.nome}"></c:out>

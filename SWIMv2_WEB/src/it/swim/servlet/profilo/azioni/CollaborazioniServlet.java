@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 
 import entityBeans.Collaborazione;
-import exceptions.LoginException;
+import exceptions.CollaborazioneException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -61,7 +61,7 @@ public class CollaborazioniServlet extends HttpServlet {
 			} else {
 				request.setAttribute("nonCiSonoCollaborazioniDaTerminare", "Non ci sono collaborazioni in corso");
 			}
-		} catch (LoginException e) {
+		} catch (CollaborazioneException e) {
 			log.error(e.getMessage(), e);
 			request.setAttribute("erroreGetCollaborazioniDaTerminare", "Impossibile ottenere le collaborazioni in corso");
 		}
@@ -80,7 +80,7 @@ public class CollaborazioniServlet extends HttpServlet {
 				request.setAttribute("collaborazioniDaRilasciareFeedBack", collaborazioniDaRilasciareFeedBack);
 				request.setAttribute("nonCiSonoCollaborazioniSenzaFeedback", "Non ci sono collaborazioni senza feedback");
 			}
-		} catch (LoginException e) {
+		} catch (CollaborazioneException e) {
 			log.error(e.getMessage(), e);
 			request.setAttribute("erroreGetCollaborazioniSenzaFeedback", "Impossibile ottenere le collaborazioni senza feedback");
 		}
@@ -99,7 +99,7 @@ public class CollaborazioniServlet extends HttpServlet {
 				request.setAttribute("collaborazioniTerminateConFeedBack", collaborazioniTerminateConFeedBack);
 				request.setAttribute("nonCiSonoCollaborazioniTerminateConFeedBack", "Non ci sono collaborazioni terminate con feedback");
 			}
-		} catch (LoginException e) {
+		} catch (CollaborazioneException e) {
 			log.error(e.getMessage(), e);
 			request.setAttribute("erroreGetCollaborazioniSenzaFeedback", "Impossibile ottenere le collaborazioni terminate con feedback");
 		}
@@ -118,7 +118,7 @@ public class CollaborazioniServlet extends HttpServlet {
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (LoginException e) {
+		} catch (CollaborazioneException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -142,7 +142,7 @@ public class CollaborazioniServlet extends HttpServlet {
 			} else {
 				request.setAttribute("nonCiSonoCollaborazioniDaTerminare", "Non ci sono collaborazioni in corso");
 			}
-		} catch (LoginException e) {
+		} catch (CollaborazioneException e) {
 			log.error(e.getMessage(), e);
 			request.setAttribute("erroreGetCollaborazioniDaTerminare", "Impossibile ottenere le collaborazioni in corso");
 		}
@@ -161,7 +161,7 @@ public class CollaborazioniServlet extends HttpServlet {
 				request.setAttribute("collaborazioniDaRilasciareFeedBack", collaborazioniDaRilasciareFeedBack);
 				request.setAttribute("nonCiSonoCollaborazioniSenzaFeedback", "Non ci sono collaborazioni senza feedback");
 			}
-		} catch (LoginException e) {
+		} catch (CollaborazioneException e) {
 			log.error(e.getMessage(), e);
 			request.setAttribute("erroreGetCollaborazioniSenzaFeedback", "Impossibile ottenere le collaborazioni senza feedback");
 		}
