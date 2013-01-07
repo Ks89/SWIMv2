@@ -23,14 +23,14 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Servlet implementation class CollborazioneDettagliata
  */
-public class DettaglioCollaborazioneServelet extends HttpServlet {
+public class DettaglioCollaborazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@EJB
 	private GestioneCollaborazioniLocal gestioneCollab;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DettaglioCollaborazioneServelet() {
+    public DettaglioCollaborazioneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
