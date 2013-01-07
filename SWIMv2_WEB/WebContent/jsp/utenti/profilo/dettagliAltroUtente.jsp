@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Foto: ?
+	Foto: 
+	<img src="foto" />
+	<br>
 	<br /> Nome:
 	<c:out value="${utente.nome}"></c:out>
 	<br /> Cognome:

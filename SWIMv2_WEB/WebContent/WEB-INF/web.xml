@@ -252,6 +252,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>NotificheDiRispostaServlet</display-name>
+    <servlet-name>NotificheDiRispostaServlet</servlet-name>
+    <servlet-class>it.swim.servlet.profilo.azioni.notificheDiRisposta.NotificheDiRispostaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NotificheDiRispostaServlet</servlet-name>
+    <url-pattern>/profilo/azioni/notificheDiRisposta/notificheDiRisposta</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>CollborazioneDettagliata</display-name>
     <servlet-name>CollborazioneDettagliata</servlet-name>
     <servlet-class>it.swim.servlet.profilo.azioni.CollborazioneDettagliata</servlet-class>
@@ -259,5 +269,15 @@
   <servlet-mapping>
     <servlet-name>CollborazioneDettagliata</servlet-name>
     <url-pattern>/CollborazioneDettagliata</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SuggerimentiAlRichiedenteServlet</display-name>
+    <servlet-name>SuggerimentiAlRichiedenteServlet</servlet-name>
+    <servlet-class>it.swim.servlet.profilo.azioni.notificheDiRisposta.SuggerimentiAlRichiedenteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SuggerimentiAlRichiedenteServlet</servlet-name>
+    <url-pattern>/profilo/azioni/notificheDiRisposta/suggerimentiAlRichiedente</url-pattern>
   </servlet-mapping>
 </web-app>

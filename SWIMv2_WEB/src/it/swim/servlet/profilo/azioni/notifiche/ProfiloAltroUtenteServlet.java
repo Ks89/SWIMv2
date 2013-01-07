@@ -59,14 +59,10 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 
 		String emailUtenteRichiedente = (String) request.getParameter("emailUtenteRichiedente");
 
-		log.debug(" ------------------------------------------------------->   " + emailUtenteRichiedente);
-
 		// ottengo utente collegato con riferimento al vero oggetto Utente
 		Utente utenteRichiedente;
 		try {
 			utenteRichiedente = gestioneAmicizie.getUtenteByEmail(emailUtenteRichiedente);
-			log.debug(" ------------------------------------------------------->   " + utenteRichiedente);
-
 
 			// mando sulla request i dati dell'utente tramite il setAttribute, e li
 			// contraddistinguo dai 2 parametri passati come string
@@ -133,12 +129,6 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 				//---se e' diretta faccio cio' che segue
 				//Visto che ho accettato la richiesta di amicizia visualizzo i suggerimenti di amicizia
 				List<Utente> suggeriti = gestioneAmicizie.getSuggerimenti(emailRichiedente, emailUtenteCollegato);
-
-				log.debug("----------:::::::;;;;:_:;_;_:;_:;:_;_:;_:;_:;:_:_;_:;_:;:_;:_;:_;_;:*********;;;");
-				for(Utente u : suggeriti) {
-					log.debug("----------:::::::;;;;:_:;_;_:;_:;:_;_:;_:;_:;:_:_;_:;_:;:_;:_;:_;_;:*********;;;:  " + u);
-				}
-
 
 				if(suggeriti.size()>=1) {
 					request.setAttribute("amiciSuggeriti", suggeriti);

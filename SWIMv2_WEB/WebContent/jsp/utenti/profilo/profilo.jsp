@@ -25,9 +25,13 @@
 
 </head>
 <body>
-	
+
 	<%-- Si usa sessionScope solo per ottenere l'email dell'utente collegato. 
 		Tutto il resto lo si ottiene semplicemente col nome dell'attributo settato nella servlet  --%>
+
+	<br>
+	<br>
+	<a href="azioni/notificheDiRisposta/notificheDiRisposta?emailUtente=${sessionScope.utenteCollegato}" >Ci sono nuove risposte degli utenti</a>
 
 	<br> Profilo di:
 	<c:out value="${nomeUtenteCollegato}">
@@ -36,7 +40,8 @@
 	<br>
 	<br> Foto:
 	<br>
-	<img src="foto" /> <%-- mostra immagine prelevata dalla servlet con attributo foto --%>
+	<img src="foto" />
+	<%-- mostra immagine prelevata dalla servlet con attributo foto --%>
 	<br>
 	<br> Email:
 	<c:out value="${sessionScope.utenteCollegato}"></c:out>
