@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
-import exceptions.LoginException;
+import exceptions.CollaborazioneException;
 
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 
@@ -47,10 +47,11 @@ public class FotoServlet extends HttpServlet {
 			response.sendRedirect("home");
 			return;
 		}
+		
+		String emailUtente = request.getParameter("emailUtente");
+		log.debug("--------------------_______________________-----------------________________-------> " + emailUtente);
 		try {
-			//TODO attenzione devo fare questa servlet che preleva dalla request l'email dell'utente che richiede la foto e poi 
-			//il resto va tutto bene cosi' com'e', almeno penso
-			Blob blob = gestioneCollaborazioni.getUtenteByEmail(emailUtenteCollegato).getFotoProfilo();
+			Blob blob = gestioneCollaborazioni.getUtenteByEmail(emailUtente).getFotoProfilo();
 			if(blob!=null) {
 				byte[] foto = blob.getBytes(1, (int)blob.length());
 				response.setContentType("image/jpg");
@@ -58,7 +59,7 @@ public class FotoServlet extends HttpServlet {
 			}
 		} catch(SQLException e) {
 			log.error(e.getMessage(), e);
-		} catch (LoginException e) {
+		} catch (CollaborazioneException e) {
 			log.error(e.getMessage(), e);
 		}
 	}

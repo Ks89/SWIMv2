@@ -19,7 +19,7 @@ import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 import entityBeans.Amicizia;
 import entityBeans.Utente;
 import exceptions.AmiciziaException;
-import exceptions.LoginException;
+import exceptions.CollaborazioneException;
 
 /**
  * Servlet implementation class ProfiloAltroUtenteServlet
@@ -80,7 +80,7 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 			}
 			log.debug("punteggioUtenteCollegato:" + feedback);
 			request.setAttribute("punteggioFeedback", feedback);
-		} catch (LoginException e) {
+		} catch (CollaborazioneException e) {
 			log.error(e.getMessage(), e);
 		}
 
@@ -111,7 +111,7 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 
 			try {
 				Amicizia amiciziaAccettata = gestioneAmicizie.accettaAmicizia(emailRichiedente, emailUtenteCollegato);
-				
+
 				log.debug("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{ : " +
 						"" + amiciziaAccettata);
 
@@ -129,14 +129,20 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 				//---se e' diretta faccio cio' che segue
 				//Visto che ho accettato la richiesta di amicizia visualizzo i suggerimenti di amicizia
 				List<Utente> suggeriti = gestioneAmicizie.getSuggerimenti(emailRichiedente, emailUtenteCollegato);
-
-				if(suggeriti.size()>=1) {
-					request.setAttribute("amiciSuggeriti", suggeriti);
-
-					//					this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
-				} else {
-					//se non ci sono suggerimenti disponibili setto un messaggio d'avvio
+				
+				
+				//TODO possibile bug che esce quando suggeriti e' null, allora aggiungo la condizione if ==null
+				if(suggeriti==null) {
 					request.setAttribute("noSuggDisponibili", "Non ci sono suggerimenti d'amicizia");
+				} else {
+					if(suggeriti.size()>=1) {
+						request.setAttribute("amiciSuggeriti", suggeriti);
+
+						//					this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
+					} else {
+						//se non ci sono suggerimenti disponibili setto un messaggio d'avvio
+						request.setAttribute("noSuggDisponibili", "Non ci sono suggerimenti d'amicizia");
+					}
 				}
 				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/profiloAltroUtente.jsp").forward(request, response);
 				return;
