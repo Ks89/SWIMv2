@@ -20,7 +20,7 @@
 		<c:out value="Collaborazioni in corso:"></c:out>
 		<br>
 		<br>
-		<form id="collaborazioniInCorso" action="collaborazioni"
+		<form id="collaborazioniInCorso" action="POST"
 			method="POST">
 			<input type="hidden" name="tipo" />
 			<table id="tabellaCollaborazioniInCorso"
@@ -37,7 +37,7 @@
 						<td><a
 							href="../azioni/dettaglioCollaborazione?idCollaborazione=<c:out value="${collaborazione.id}" />"><c:out
 									value="${collaborazione.nome}" /></a></td>
-						<td><input type="button" value="Termina"
+						<td><input type="sumbi" value="Termina"
 							onclick="collaborazioniInCorso.elements['tipo'].value=${collaborazione.id}; collaborazioniInCorso.submit();" />
 					</tr>
 				</c:forEach>
@@ -72,7 +72,9 @@
 					<td><a
 						href="../azioni/dettaglioCollaborazione?idCollaborazione=<c:out value="${collaborazioneFeedBack.id}&terminata=si" />"><c:out
 								value="${collaborazioneFeedBack.nome}" /></a></td>
-					<td><c:out value="Aggiungi FeedBack"></c:out>
+					<td><a
+						href="../azioni/rilasciaFeedBack?idCollaborazione=<c:out value="${collaborazioneFeedBack.id}" />"><c:out
+								value="Aggiungi Feedback" /></a></td>
 				</tr>
 			</c:forEach>
 		</table>

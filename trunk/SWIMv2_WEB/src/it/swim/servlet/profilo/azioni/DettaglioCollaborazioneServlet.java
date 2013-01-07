@@ -21,13 +21,14 @@ import lombok.extern.slf4j.Slf4j;
 
 
 /**
- * Servlet implementation class CollborazioneDettagliata
+ * Servlet implementation class DettaglioCollaborazione
  */
 @Slf4j
 public class DettaglioCollaborazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@EJB
 	private GestioneCollaborazioniLocal gestioneCollab;
+	
 	private String terminata,conFeedBack;
     /**
      * @see HttpServlet#HttpServlet()
@@ -44,16 +45,16 @@ public class DettaglioCollaborazioneServlet extends HttpServlet {
 		
 		String emailUtenteCollegato = (String) UtenteCollegatoUtil.getEmailUtenteCollegato(request);
 		Collaborazione collaborazione=new Collaborazione();
-		
+		Long id = Long.parseLong(request.getParameter("idCollaborazione"));
 		if (emailUtenteCollegato == null) {
 			response.sendRedirect("../home");
 			return;
 		}
-		
 		try {
-			collaborazione= gestioneCollab.getCollaborazione((Long) request.getAttribute("collaborazione"));
+			collaborazione= gestioneCollab.getCollaborazione(id);
 		} catch (LoginException e) {
 			request.setAttribute("erroreRicercaCollaborazione", "Impossibile ottenere le collaborazione");
+			getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/dettaglioCollaborazione.jsp").forward(request, response);
 			return;
 		}
 		terminata = request.getParameter("terminata");
