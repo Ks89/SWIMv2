@@ -92,13 +92,6 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 		request.setAttribute("listaUtentiConSuggerimenti", listaUtentiConSugg);
 
 		
-		//ora mi occupo delle risposte all'accettazione delle collaborazioni
-		try {
-			List<Collaborazione> collabLista = collaborazioni.getNotificheCollaborazioniAccettateDaUtentiRiceventi(emailUtenteCollegato);
-		} catch (CollaborazioneException e) {
-			log.error(e.getMessage(), e);
-		}
-		
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notificheDiRisposta.jsp").forward(request, response);
 	}
 
