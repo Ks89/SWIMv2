@@ -280,4 +280,14 @@
     <servlet-name>SuggerimentiAlRichiedenteServlet</servlet-name>
     <url-pattern>/profilo/azioni/notificheDiRisposta/suggerimentiAlRichiedente</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RilasciaFeedBackServlet</display-name>
+    <servlet-name>RilasciaFeedBackServlet</servlet-name>
+    <servlet-class>it.swim.servlet.profilo.azioni.RilasciaFeedBackServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RilasciaFeedBackServlet</servlet-name>
+    <url-pattern>/profilo/azioni/rilasciaFeedBack</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -9,7 +9,6 @@
 	Dettagliata</title>
 </head>
 <body>
-	<c:out value="aiuto"></c:out>
 	<c:if test="${!empty erroreRicercaCollaborazione}">
 		<c:out value="${erroreRicercaCollaborazione}"></c:out>
 		<br>
@@ -21,7 +20,7 @@
 	<c:out value="${collaborazione.utenteRicevente.nome}" />&nbsp;<c:out
 								value="${collaborazione.utenteRicevente.cognome}" />
 	<br /> Data di inizio collaborazione:
-	<c:out value="${collaborazione.dataAccettazione}"></c:out>
+	<c:out value="${collaborazione.dataStipula}"></c:out>
 	</c:if>
 	<c:if test="${!empty terminata}">
 	<br /> Data di fine collaborazione:
@@ -33,9 +32,10 @@
 	<c:out value="${collaborazione.punteggioFeedback}"></c:out>
 	<br />
 	<br /> Commenti sul collaboratore:
+	<br>
 	<c:out value="${collaborazione.commentoFeedback}"></c:out>
 	<br />
 	</c:if>
-	
+	<a href="../azioni/collaborazioni">Torna alla lista di collaborazioni</a>
 </body>
 </html>
