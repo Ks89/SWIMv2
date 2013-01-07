@@ -113,7 +113,7 @@ public class CollaborazioniServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			gestioneCollab.terminaCollaborazione(Long.valueOf(request.getParameter("tipo")));
+			gestioneCollab.terminaCollaborazione(Long.valueOf(request.getParameter("idCollaborazione")));
 			
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
