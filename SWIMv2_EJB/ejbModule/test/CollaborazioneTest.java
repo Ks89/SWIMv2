@@ -16,7 +16,6 @@ import org.junit.Test;
 import utililies.sessionRemote.GestioneCollaborazioniRemote;
 import entityBeans.Collaborazione;
 import exceptions.CollaborazioneException;
-import exceptions.LoginException;
 
 public class CollaborazioneTest {
 
@@ -68,8 +67,6 @@ public class CollaborazioneTest {
 					&& collaborazioneDaDb2.getUtenteRichiedente().getEmail().equals(collaborazioneAppenaInserita2.getUtenteRichiedente().getEmail()));
 		} catch (CollaborazioneException e) {
 			fail(e.getCausa().name());
-		} catch (LoginException e) {
-			fail(e.getCausa().name());
 		}
 	}
 
@@ -90,8 +87,6 @@ public class CollaborazioneTest {
 
 			assertTrue(collaborazioneDaDbAccettata.getDataStipula() != null);
 		} catch (CollaborazioneException e) {
-			fail(e.getCausa().name());
-		} catch (LoginException e) {
 			fail(e.getCausa().name());
 		}
 	}
@@ -125,8 +120,6 @@ public class CollaborazioneTest {
 			assertTrue(collaborazioneDaDb2.getCommentoFeedback() != null && collaborazioneDaDb2.getPunteggioFeedback() == 3);
 		} catch (CollaborazioneException e) {
 			fail(e.getCausa().name());
-		} catch (LoginException e) {
-			fail(e.getCausa().name());
 		}
 	}
 
@@ -147,8 +140,6 @@ public class CollaborazioneTest {
 
 			assertTrue(rimossa == null);
 		} catch (CollaborazioneException e) {
-			fail(e.getCausa().name());
-		} catch (LoginException e) {
 			fail(e.getCausa().name());
 		}
 	}
@@ -192,8 +183,6 @@ public class CollaborazioneTest {
 			assertTrue(punteggio == 2.6667);
 		} catch (CollaborazioneException e) {
 			fail(e.getCausa().name());
-		} catch (LoginException e) {
-			fail(e.getCausa().name());
 		}
 	}
 
@@ -225,8 +214,6 @@ public class CollaborazioneTest {
 			assertTrue(collaborazioni.size() >= 2);
 		} catch (CollaborazioneException e) {
 			fail(e.getCausa().name());
-		} catch (LoginException e) {
-			fail(e.getCausa().name());
 		}
 	}
 
@@ -245,8 +232,6 @@ public class CollaborazioneTest {
 			List<Collaborazione> collaborazioni = gestioneCollaborazioni.getCollaborazioniCreate(MAIL_PEPPINO);
 			assertTrue(collaborazioni.size() >= 2);
 		} catch (CollaborazioneException e) {
-			fail(e.getCausa().name());
-		} catch (LoginException e) {
 			fail(e.getCausa().name());
 		}
 	}
@@ -280,8 +265,6 @@ public class CollaborazioneTest {
 			// perche' la query dara' un solo elemento (o piu' nel caso esegua piu' volte i test)
 			assertTrue(collaborazioni.size() >= 1); 
 		} catch (CollaborazioneException e) {
-			fail(e.getCausa().name());
-		} catch (LoginException e) {
 			fail(e.getCausa().name());
 		}
 	}
