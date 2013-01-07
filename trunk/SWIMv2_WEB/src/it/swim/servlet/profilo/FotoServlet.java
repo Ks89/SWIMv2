@@ -25,8 +25,10 @@ import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 public class FotoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	//uso gestione collaborazione perche' tanto contiene un metodo per ottenere l'utente, data l'email
+	//tale metodo e' presente anche nelle amicizie ecc... non fa differenza
 	@EJB
-	private GestioneCollaborazioniLocal gestioneCollaborazioni;
+	private GestioneCollaborazioniLocal gestioneCollaborazioni; 
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -46,6 +48,8 @@ public class FotoServlet extends HttpServlet {
 			return;
 		}
 		try {
+			//TODO attenzione devo fare questa servlet che preleva dalla request l'email dell'utente che richiede la foto e poi 
+			//il resto va tutto bene cosi' com'e', almeno penso
 			Blob blob = gestioneCollaborazioni.getUtenteByEmail(emailUtenteCollegato).getFotoProfilo();
 			if(blob!=null) {
 				byte[] foto = blob.getBytes(1, (int)blob.length());

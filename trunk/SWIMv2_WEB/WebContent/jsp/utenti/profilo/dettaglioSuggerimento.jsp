@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<br>Foto:
-	<%-- ><img src="foto" /> <%-- mostra immagine prelevata dalla servlet con attributo foto --%>
-	--%
+	Foto: 
+	<img src="foto" />
+	<br>
 	<br>
 	<br> Nome:
 	<c:out value="${nomeSuggerito}"></c:out>
@@ -26,7 +26,7 @@
 	</form>
 
 	<br>
-	<a href="../azioni/notifiche">Torna alle notifiche</a>
+	<a href="../notifiche">Torna alle notifiche</a>
 
 </body>
 </html>

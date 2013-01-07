@@ -10,8 +10,9 @@
 
 	<c:choose>
 		<c:when test="${empty amiciSuggeriti}">
-			<br>Foto:
-			<%-- ><img src="foto" /> <%-- mostra immagine prelevata dalla servlet con attributo foto --%> --%
+			Foto: 
+			<img src="foto" />
+			<br>
 			<br>
 			<br> Nome:
 			<c:out value="${nomeRichiedente}"></c:out>
@@ -31,7 +32,7 @@
 				</form>
 			</c:if>
 			<br>
-			<a href="../notifiche">Torna alle notifiche</a>
+			<a href="../azioni/notifiche">Torna alle notifiche</a>
 		</c:when>
 		<c:otherwise>
 			<br>
@@ -43,12 +44,9 @@
 				</tr>
 				<c:forEach items="${amiciSuggeriti}" var="utenteSuggerito">
 					<tr>
-						<%-- 						<td><a href="../azioni/dettaglioSuggerimento?emailUtenteSuggerito=<c:out value="${utenteSuggerito.email}" />"> <c:out --%>
-						<%-- 									value="${utenteSuggerito.nome}" />&nbsp;<c:out value="${utenteSuggerito.cognome}" /></a></td> --%>
 						<td><c:out value="${utenteSuggerito.nome}" />&nbsp;<c:out value="${utenteSuggerito.cognome}" /></td>
 						<td><form id="accettaSuggerimentoForm" action="profiloAltroUtente" method="POST">
-								<input type="hidden" name="emailSuggAccettato" value="${utenteSuggerito.email}"></input> 
-								<input id="submit" type="submit" />
+								<input type="hidden" name="emailSuggAccettato" value="${utenteSuggerito.email}"></input> <input id="submit" type="submit" />
 							</form></td>
 					</tr>
 				</c:forEach>
