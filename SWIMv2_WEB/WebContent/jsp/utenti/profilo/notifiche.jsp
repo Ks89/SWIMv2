@@ -60,7 +60,7 @@
 			<c:forEach items="${richiesteAiuto}" var="richiestaAiuto">
 				<tr>
 					<td><c:out value="${richiestaAiuto.utenteRichiedente.nome}" />&nbsp;<c:out value="${richiestaAiuto.utenteRichiedente.cognome}" /></td>
-					<td><a href="../azioni/dettaglioRichiestaAiuto?idCollaborazione=<c:out value="${richiestaAiuto.id}" />"><c:out
+					<td><a href="profilo/azioni/dettaglioRichiestaAiuto?idCollaborazione=<c:out value="${richiestaAiuto.id}" />"><c:out
 								value="${richiestaAiuto.nome}" /></a></td>
 				</tr>
 			</c:forEach>
@@ -86,7 +86,7 @@
 			</tr>
 			<c:forEach items="${utentiCheRichidonoAmicizia}" var="utenteCheRichiedeAmicizia">
 				<tr>
-					<td><a href="../azioni/profiloAltroUtente?emailUtenteRichiedente=<c:out value="${utenteCheRichiedeAmicizia.email}" />"> <c:out
+					<td><a href="profilo/azioni/profiloAltroUtente?emailUtenteRichiedente=<c:out value="${utenteCheRichiedeAmicizia.email}" />"> <c:out
 								value="${utenteCheRichiedeAmicizia.nome}" />&nbsp;<c:out value="${utenteCheRichiedeAmicizia.cognome}" /></a></td>
 				</tr>
 			</c:forEach>
@@ -102,5 +102,4 @@
 	</c:if>
 
 	<br>
-	<a href="../profilo">Torna al profilo</a>
 <jsp:include page="../../layoutInferiore.jsp"></jsp:include>
