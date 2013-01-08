@@ -31,7 +31,7 @@
 
 	<br>
 	<br>
-	<a href="azioni/notificheDiRisposta/notificheDiRisposta" >Ci sono nuove risposte degli utenti</a>
+	<a href="azioni/notificheDiRisposta/notificheDiRisposta?emailUtente=${sessionScope.utenteCollegato}" >Ci sono nuove risposte degli utenti</a>
 
 	<br> Profilo di:
 	<c:out value="${nomeUtenteCollegato}">
@@ -40,8 +40,8 @@
 	<br>
 	<br> Foto:
 	<br>
-	<%-- mostra immagine prelevata dalla servlet foto --%>
-	<img src="foto?emailUtente=${sessionScope.utenteCollegato}" />
+	<img src="foto" />
+	<%-- mostra immagine prelevata dalla servlet con attributo foto --%>
 	<br>
 	<br> Email:
 	<c:out value="${sessionScope.utenteCollegato}"></c:out>

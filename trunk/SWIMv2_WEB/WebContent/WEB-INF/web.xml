@@ -68,6 +68,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>UploadServlet</display-name>
+    <servlet-name>UploadServlet</servlet-name>
+    <servlet-class>it.swim.servlet.profilo.UploadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadServlet</servlet-name>
+    <url-pattern>/profilo/upload</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>UtenteCollegatoUtil</display-name>
     <servlet-name>UtenteCollegatoUtil</servlet-name>
     <servlet-class>it.swim.util.UtenteCollegatoUtil</servlet-class>

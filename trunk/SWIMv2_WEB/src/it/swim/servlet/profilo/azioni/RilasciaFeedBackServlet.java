@@ -16,9 +16,10 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import exceptions.CollaborazioneException;
+import exceptions.LoginException;
 
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
+import sessionBeans.localInterfaces.GestioneRegistrazioneLocal;
 
 /**
  * Servlet implementation class RilasciaFeedBackServlet
@@ -111,7 +112,7 @@ public class RilasciaFeedBackServlet extends HttpServlet {
 		}
 		try {
 			collab.rilasciaFeedback(idCollaborazione, punteggioFeedBack, commento);
-		} catch (CollaborazioneException e) {
+		} catch (LoginException e) {
 			// TODO Auto-generated catch block
 			request.setAttribute("erroreNelPunteggio", "Collaborazione a cui aggiungere il feedBack non trovata");
 			getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/rilascioFeedBack.jsp").forward(request, response);
