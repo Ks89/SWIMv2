@@ -1,14 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<jsp:include page="../../layoutSuperioreUp.jsp"></jsp:include>
 <title>Insert title here</title>
-</head>
-<body>
+<jsp:include page="../../layoutSuperioreDown.jsp"></jsp:include>
 	Foto: 
-	<img src="../foto?emailUtente=${utente.email}" />
+	<img src="profilo/foto?emailUtente=${utente.email}" />
 	<br>
 	<br /> Nome:
 	<c:out value="${utente.nome}"></c:out>
@@ -36,5 +30,4 @@
 	<c:if test="${tipoRicerca=='aiuto'}">
 		<a href="ricerchePerUtentiLoggati?tipoRicerca=aiuto">Torna alla ricerca aiuto</a>
 	</c:if>
-</body>
-</html>
+<jsp:include page="../../layoutInferiore.jsp"></jsp:include>

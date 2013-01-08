@@ -66,7 +66,6 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// ottengo l'email dell'utente collegato dalla sessione, appoggiandomi
 		// ad una classe di utilita'
-		log.info("<--------------------------Vacca merda-------------->");
 		String emailUtenteCollegato = (String) UtenteCollegatoUtil.getEmailUtenteCollegato(request);
 		this.tipoRicerca=request.getParameter("tipoRicerca");
 		// se e' null e' perche' l'utente non e' collegato e allora devo fare il
@@ -82,7 +81,6 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 		}
 		//ricerca aiuto per visitatori
 		else if (emailUtenteCollegato == null && tipoRicerca.equals("aiuto")) {
-			log.info("<--------------------------Vacca merda-------------->");
 			tipoRicerca="aiutoVisitatore";
 			request.setAttribute("abilita", gestioneRicerche.insiemeAbilitaGenerali());
 			request.setAttribute("tipoRicerca", tipoRicerca);

@@ -1,54 +1,26 @@
+<jsp:include page="../../layoutSuperioreUp.jsp"></jsp:include>
+<title>SWIM - Profilo</title>
+<jsp:include page="../../layoutSuperioreDown.jsp"></jsp:include>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>SWIM - Profilo</title>
-<style type="text/css">
-.pg-normal {
-	color: black;
-	font-weight: normal;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.pg-selected {
-	color: black;
-	font-weight: bold;
-	text-decoration: underline;
-	cursor: pointer;
-}
-</style>
-
-<script type="text/javascript" src="../js/paging.js"></script>
-
-</head>
-<body>
-
-	<%-- Si usa sessionScope solo per ottenere l'email dell'utente collegato. 
-		Tutto il resto lo si ottiene semplicemente col nome dell'attributo settato nella servlet  --%>
-
-	<br>
-	<br>
 	<a href="azioni/notificheDiRisposta/notificheDiRisposta?emailUtente=${sessionScope.utenteCollegato}" >Ci sono nuove risposte degli utenti</a>
 
-	<br> Profilo di:
+	<%-- <br> Profilo di:
 	<c:out value="${nomeUtenteCollegato}">
 	</c:out>
 	<c:out value="${cognomeUtenteCollegato}"></c:out>
 	<br>
 	<br> Foto:
-	<br>
+	<br>--%>
 	<%-- mostra immagine prelevata dalla servlet foto --%>
-	<img src="foto?emailUtente=${sessionScope.utenteCollegato}" />
+	<%--<img src="foto?emailUtente=${sessionScope.utenteCollegato}" /> --%>
 	<br>
 	<br> Email:
 	<c:out value="${sessionScope.utenteCollegato}"></c:out>
-	<br> Nome:
+	<%--<br> Nome:
 	<c:out value="${nomeUtenteCollegato}"></c:out>
 	<br> Cognome:
-	<c:out value="${cognomeUtenteCollegato}"></c:out>
+	<c:out value="${cognomeUtenteCollegato}"></c:out> --%>
 	<br> Punteggio feedback:
 	<c:out value="${punteggioUtenteCollegato}" />
 
@@ -62,7 +34,7 @@
 
 	<br>
 	<br>
-	<a href="azioni/ricerchePerUtentiLoggati?tipoRicerca=utente">Ricerca utenti</a>
+	<%--<a href="azioni/ricerchePerUtentiLoggati?tipoRicerca=utente">Ricerca utenti</a>
 	<br>
 	<br>
 	<a href="azioni/ricerchePerUtentiLoggati?tipoRicerca=aiuto">Ricerca aiuto</a>
@@ -77,7 +49,49 @@
 	<a href="azioni/proposteAbilita">Proponi una nuova abilita</a>
 	<br>
 	<br>
-	<a href="azioni/modificaProfilo">Modifica il profilo</a>
+	<a href="azioni/modificaProfilo">Modifica il profilo</a> --%>
+	<br>
+	<br>
+	<br>
+	<br><br>
+	<br>
+	<br>
+	<br>
+	
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<br>
 	<br>
 	<%-- href fa sempre riferimento alla servlet in modo relativo, mai con link assoluti.
@@ -88,5 +102,4 @@
 	<!--  non cancellare tutta la parte che c'e' qui sotto per nessun motivo!!!!! -->
 	<!--  	<option value="<c:out value="${item.nome}" />">   e' l'esempio di un menu a tendina, non rimuoverlo
 				<c:out value="${item.descrizione}" /> </option>-->
-</body>
-</html>
+<jsp:include page="../../layoutInferiore.jsp"></jsp:include>
