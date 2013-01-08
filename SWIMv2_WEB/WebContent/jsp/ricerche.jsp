@@ -1,15 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<jsp:include page="layoutSuperioreUp.jsp"></jsp:include>
 <title>SWIM - Profilo - Ricerche</title>
-</head>
-<body>
+<jsp:include page="layoutSuperioreDown.jsp"></jsp:include>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%-- Questa jsp conterra' con un choose 3 casi possibili, cioe' ricerca per visitatori, ricerca aiuto e ricerca utenti --%>
-<form action="ricerchePerUtentiLoggati" method="POST" enctype="multipart/form-data">
+<form action="profilo/azioni/ricerchePerUtentiLoggati" method="POST" enctype="multipart/form-data">
 	<c:choose>
 		<c:when test="${tipoRicerca=='aiuto'}">
 			<%--<c:out value="Aiuto per utenti loggati"></c:out>--%>
@@ -30,7 +25,7 @@
 						<tr>
 							<td><c:out value="${utente.nome}" /></td>
 							<td><c:out value="${utente.cognome}" /></td>
-							<td><a href="../azioni/dettagliAltroUtente?utente=${utente.email}&tipoRicerca=aiuto"><c:out value="${utente.email}" /></a></td>
+							<td><a href="profilo/azioni/dettagliAltroUtente?utente=${utente.email}&tipoRicerca=aiuto"><c:out value="${utente.email}" /></a></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -74,7 +69,7 @@
 						<tr>
 							<td><c:out value="${utente.nome}" /></td>
 							<td><c:out value="${utente.cognome}" /></td>
-							<td><a href="../azioni/dettagliAltroUtente?utente=${utente.email}&tipoRicerca=utente"><c:out value="${utente.email}" /></a></td>
+							<td><a href="profilo/azioni/dettagliAltroUtente?utente=${utente.email}&tipoRicerca=utente"><c:out value="${utente.email}" /></a></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -83,5 +78,4 @@
 	</c:choose>
 </form>
 <a href="../profilo">Torna al profilo</a>
-</body>
-</html>
+<jsp:include page="layoutInferiore.jsp"></jsp:include>
