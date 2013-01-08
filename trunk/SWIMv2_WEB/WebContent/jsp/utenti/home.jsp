@@ -1,5 +1,16 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 <jsp:include page="../layoutSuperioreUp.jsp"></jsp:include>
 <title>SWIM</title>
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Login Form</title>
+ 
+  <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
 <jsp:include page="../layoutSuperioreDownVisitatore.jsp"></jsp:include>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -8,21 +19,41 @@
 	Si è verificato un errore: <c:out value="${erroreLoginFallito}"></c:out><br>
 	</c:if>
 
-	Homepage utente
 	<br>
-
+	<br>
+	<br>
 	<!--  uso una choose per stabilire quale form mostrare. Se l'utente e' collegato 
 	mostro le funzioni di ricerca ecc... altrimenti la form di login e registrazione -->
 	<c:if test="${sessionScope.utenteCollegato == null}">
-	<form id="loginForm" action="login" method="POST">
-				Email: <input id="emailUtente" type="text" name="emailUtente"></input> Password: <input id="password" type="password" name="password"></input> <input
-					id="submit" type="submit" /> <br> <a href="registrazione">Registrazione</a>
-			</form>
-			
-			<br><br>
-			<%-- href fa sempre riferimento alla servlet in modo relativo, mai con link assoluti --%>
-			<a href="profilo/azioni/ricerchePerUtentiLoggati?tipoRicerca=aiuto">Ricerca utenti per visitatori</a>
+	<section class="container">
+    <div class="login">
+      <h1>Login to SWIMv2</h1>
+      <form method="post" action="login" id="loginForm">
+        <p><input type="text" id="emailUtente" name="emailUtente" value="" placeholder="Username or Email"></p>
+        <p><input type="password" id="password" name="password" value="" placeholder="Password"></p>
+        <p class="remember_me">
+          <label>
+            <input type="checkbox" name="remember_me" id="remember_me">
+            Remember me on this computer
+          </label>
+        </p>
+        <p class="submit"><input id="submit" type="submit" name="commit" value="Login"></p>
+      </form>
+    </div>
+    Non sei ancora registrato? <a href="registrazione">Registrati</a>
+  </section>
+	
 	</c:if>
+	<%--
+	<c:if test="${sessionScope.utenteCollegato == null}">
+	<form id="loginForm" action="login" method="POST">
+		Email: <input id="emailUtente" type="text" name="emailUtente"></input> 
+		Password: <input id="password" type="password" name="password"></input>
+		<input id="submit" type="submit" /><br>
+	</form>
+			<%-- href fa sempre riferimento alla servlet in modo relativo, mai con link assoluti --%>
+		<%--<br><a href="profilo/azioni/ricerchePerUtentiLoggati?tipoRicerca=aiuto">Ricerca utenti per visitatori</a>
+	</c:if> --%>
 	
 	<%-- Esempio che mostra come mostrare dei pezzi di pagina quando l'utente e' connesso oppure non lo e' --%>
 <%-- 	<c:choose> --%>
