@@ -7,7 +7,6 @@
 <title>SWIM - Profilo - Notifiche</title>
 </head>
 <body>
-	<%-- if che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
 	<%-- Richieste aiuto --%>
 	<c:if test="${!empty erroreGetNotificheRichiesteAiuto}">
 		<c:out value="${erroreGetNotificheRichiesteAiuto}"></c:out>
@@ -25,6 +24,7 @@
 		<c:out value="${nonCiSonoRichiesteAiuto}"></c:out>
 		<br>
 	</c:if>
+	
 	<%-- Richieste amicizia --%>
 	<c:if test="${!empty erroreGetNotificheRichiesteAmicizia}">
 		<c:out value="${erroreGetNotificheRichiesteAmicizia}"></c:out>
@@ -50,6 +50,8 @@
 		<c:out value="${noSuggDisponibili}"></c:out>
 		<br>
 	</c:if>
+
+
 
 	<c:if test="${empty nonCiSonoRichiesteAiuto}">
 		<br>
