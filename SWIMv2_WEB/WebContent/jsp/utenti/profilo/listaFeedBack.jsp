@@ -22,7 +22,7 @@
 		<c:out value="Nome collaborazione: "></c:out>
 		<c:out value="${collaborazione.nome}" />
 		<br>
-		<c:out value="Nome Utente che ha rilasciato il feedback: "></c:out>
+		<c:out value="Nome utente che ha rilasciato il feedback: "></c:out>
 		<c:out value="${collaborazione.utenteRichiedente.nome}" />&nbsp;<c:out
 			value="${collaborazione.utenteRichiedente.cognome}" />
 		<br>
@@ -37,6 +37,8 @@
 </c:if>
 <br>
 <br>
+
 <a href="../profilo">Torna al profilo</a>
+
 
 <jsp:include page="../../layoutInferiore.jsp"></jsp:include>

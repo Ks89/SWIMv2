@@ -51,8 +51,10 @@ public class FeedBackServelet extends HttpServlet {
 			return;
 		}
 		
+		String email= request.getParameter("emailUtente");
+		request.setAttribute("email",email);
 		try {
-			List<Collaborazione> collaborazioni = gestioneCollab.getCollaborazioniRiceventeConFeedBack(emailUtenteCollegato);
+			List<Collaborazione> collaborazioni = gestioneCollab.getCollaborazioniRiceventeConFeedBack(email);
 
 			if(collaborazioni==null) { //TODO attenzione PERCHE' l'ho scritto qui????????????????????????????????????
 				request.setAttribute("erroreGetCollaborazioni", "Impossibile ottenere le collaborazioni");

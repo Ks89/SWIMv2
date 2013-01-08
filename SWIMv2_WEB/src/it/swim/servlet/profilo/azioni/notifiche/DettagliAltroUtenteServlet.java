@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import exceptions.CollaborazioneException;
 import exceptions.LoginException;
+import exceptions.RicercheException;
 
 import sessionBeans.localInterfaces.GestioneAmicizieLocal;
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
@@ -66,6 +67,12 @@ public class DettagliAltroUtenteServlet extends HttpServlet {
 		} catch (LoginException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		try {
+			request.setAttribute("listaAbilita", ricerche.insiemeAbilitaPersonaliUtente(email));
+		} catch (RicercheException e) {
+			// TODO Auto-generated catch block
+						e.printStackTrace();
 		}
 		request.setAttribute("amiciziaGiaInoltrata",amicizie.amiciziaInoltrata(emailUtenteCollegato, utenteRicercato));
 		request.setAttribute("tipoRicerca", tipoRicerca);
