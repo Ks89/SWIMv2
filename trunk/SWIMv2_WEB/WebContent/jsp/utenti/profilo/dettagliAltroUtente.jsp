@@ -15,6 +15,17 @@
 	<br /> Punteggio feedback:
 	<c:out value="${punteggioFeedback}"></c:out>
 	<br />
+	<%-- Lista puntata delle abilita dell'utente fatta con ul e poi li per ogni voce della lista --%>
+	<br>Abilita' dell'utente:
+	<c:forEach items="${listaAbilita}" var="abilita">
+		<ul>
+			<li><c:out value="${abilita.nome}" />
+		</ul>
+	</c:forEach>
+	<br />
+	<a href="profilo/azioni/feedbackUtente?emailUtente=${utente.email}" >Visualizza i feedback di questo utente</a>
+	<br>
+	<br>
 	<form id="dettagliAltroUtente" action="profilo/azioni/dettagliAltroUtente" method="POST">
 		<input type="hidden" name="tipo" />
 		<c:if test="${amiciziaGiaInoltrata==false}">
