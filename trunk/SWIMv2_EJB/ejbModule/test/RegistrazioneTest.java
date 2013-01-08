@@ -15,6 +15,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import entityBeans.Abilita;
+import entityBeans.Utente;
 import exceptions.HashingException;
 import exceptions.ProposteException;
 import exceptions.RegistrazioneException;
@@ -28,7 +29,6 @@ public class RegistrazioneTest {
 	private static final String MAIL_GIOVANNINO = "giovannino@gmail.com";
 	private static final String MAIL_DAVIDE = "davide@gmail.com";
 	private static final String MAIL_JACOPO = "bulla.jacopo@gmail.com";
-	private static final String MAIL_TOMMASO = "tommaso.ganelli@gmail.com";
 	private static final String PASSWORD = "pippo";
 	private static final String MAIL_ADMIN = "admin@swim.it";
 
@@ -68,15 +68,15 @@ public class RegistrazioneTest {
 			//svuota DB
 			testUtils.svuotaDatabase();
 			//aggiunge amministratore
-			gestioneRegistrazione.registrazioneAmministratore(MAIL_ADMIN,PASSWORD);
+			gestioneRegistrazione.registrazioneAmministratore("admin@swim.it","pippo");
 			//Inserisce due abilità nel DB
 			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN, "1ab","prima Abilita");
 			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN, "2ab","seconda Abilita");
 			List<Abilita> abilita = new ArrayList<Abilita>();
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("1ab"));
-			gestioneRegistrazione.registrazioneUtente(MAIL_PEPPINO, PASSWORD, "peppino", "peppo", null, abilita);
-			gestioneRegistrazione.registrazioneUtente(MAIL_DAVIDE, PASSWORD, "Davide", "Caio", null, abilita);
-			gestioneRegistrazione.registrazioneUtente(MAIL_GIOVANNINO, PASSWORD, "Giovanni", "gio", null, abilita);
+			gestioneRegistrazione.registrazioneUtente("peppino@gmail.com", "pippo", "peppino", "peppo", null, abilita);
+			gestioneRegistrazione.registrazioneUtente("davide@gmail.com", "pippo", "Davide", "Caio", null, abilita);
+			gestioneRegistrazione.registrazioneUtente("giovannino@gmail.com", "pippo", "Giovanni", "gio", null, abilita);
 		} catch (HashingException e) {
 			fail("HashingException: " + e);
 		} catch (ProposteException e) {
@@ -88,6 +88,7 @@ public class RegistrazioneTest {
 	@Test
 	public void eseguiRegistrazioneUtente(){
 		try {
+			Utente utente=new Utente();
 			List<Abilita> abilita = new ArrayList<Abilita>();
 			//Per eseguire questo test dovete inserire due abilita nel db. Una nome=1ab Descrizione=prima Abilita l'altra=2ab Descrizione=seconda Abilita 
 			//Non ci si puo' registrare senza almeno una abilita
@@ -129,10 +130,10 @@ public class RegistrazioneTest {
 				Assert.assertTrue(true);
 			}
 			//Registrazione a buon fine con una abilita
-			Assert.assertTrue(gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "jacopo", "Bulla", null, abilita).equals(gestioneRicerche.getUtenteByEmail("bulla.jacopo@gmail.com")));
+			Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "jacopo", "Bulla", null, abilita).equals(gestioneRicerche.getUtenteByEmail("bulla.jacopo@gmail.com")));
 			//Non ci possono essere due utenti con la stessa mail
 			try{
-				gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "Andrea", "Bazzi", null, abilita);
+				gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "Andrea", "Bazzi", null, abilita);
 				fail();
 			}
 			catch(RegistrazioneException ex)
@@ -142,7 +143,7 @@ public class RegistrazioneTest {
 
 			//Registrazione a buon fine con due abilita
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("2ab"));
-			Assert.assertTrue(gestioneRegistrazione.registrazioneUtente(MAIL_TOMMASO, PASSWORD, "Tommaso", "Ganelli", null, abilita).equals(gestioneRicerche.getUtenteByEmail("tommaso.ganelli@gmail.com")));
+			Assert.assertTrue(gestioneRegistrazione.registrazioneUtente("tommaso.ganelli@gmail.com", "pippo", "Tommaso", "Ganelli", null, abilita).equals(gestioneRicerche.getUtenteByEmail("tommaso.ganelli@gmail.com")));
 		} catch (HashingException e) {
 			
 			fail("HashingException: " + e);
