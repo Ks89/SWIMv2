@@ -11,7 +11,7 @@
 	<c:choose>
 		<c:when test="${empty amiciSuggeriti}">
 			Foto: 
-			<img src="foto" />
+			<img src="../foto?emailUtente=${emailRichiedente}" />
 			<br>
 			<br>
 			<br> Nome:

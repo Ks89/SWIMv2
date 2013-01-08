@@ -15,9 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
+import entityBeans.Collaborazione;
 import entityBeans.Utente;
+import exceptions.CollaborazioneException;
 
 import sessionBeans.localInterfaces.GestioneAmicizieLocal;
+import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 
 /**
  * Servlet implementation class NotificheDiRispostaServlet
@@ -28,6 +31,9 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 
 	@EJB
 	private GestioneAmicizieLocal amicizie;
+	
+	@EJB
+	private GestioneCollaborazioniLocal collaborazioni;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -52,13 +58,11 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 			return;
 		}
 
-		String emailUtente = request.getParameter("emailUtente");
+		//ottengo utenti che hanno accettato le mie richieste, separandoli in diretti e indiretti (ottenuti con suggerimento)
+		List<Utente> utentiAccettatiDiretti = amicizie.getUtentiCheHannoAccettatoLaRichiestaDiretti(emailUtenteCollegato);
+		List<Utente> utentiAccettatiIndiretti = amicizie.getUtentiCheHannoAccettatoLaRichiestaIndiretti(emailUtenteCollegato);
 
-		//ottengo utenti che hanno accettato le mie richieste, reparandoli in diretti e indiretti (ottenuti con suggerimento)
-		List<Utente> utentiAccettatiDiretti = amicizie.getUtentiCheHannoAccettatoLaRichiestaDiretti(emailUtente);
-		List<Utente> utentiAccettatiIndiretti = amicizie.getUtentiCheHannoAccettatoLaRichiestaIndiretti(emailUtente);
-
-		List<UtenteConSuggerimenti> utenteSugg = new ArrayList<UtenteConSuggerimenti>();
+		List<UtenteConSuggerimenti> listaUtentiConSugg = new ArrayList<UtenteConSuggerimenti>();
 		
 		//metto come attributo quelli indiretti, tanto non devo lavorarci sopra, mi basta leggere la lista e stamparli nella jsp
 		request.setAttribute("utentiAccettatiIndiretti", utentiAccettatiIndiretti);
@@ -68,10 +72,10 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 		//riceve le notifiche di accettazione delle sue richieste fatte ad altri utenti che le hanno accettate
 		for(Utente utente: utentiAccettatiDiretti) {
 			//uso una classe di appoggio per inserire utente e la lista dei suggerimenti estratti da quell'utente
-			UtenteConSuggerimenti u = new UtenteConSuggerimenti();
-			u.setUtente(utente);
-			u.setSuggerimenti(amicizie.getSuggerimenti(utente.getEmail(), emailUtenteCollegato));
-			utenteSugg.add(u);
+			UtenteConSuggerimenti utenteConSugg = new UtenteConSuggerimenti();
+			utenteConSugg.setUtente(utente);
+			utenteConSugg.setSuggerimenti(amicizie.getSuggerimenti(utente.getEmail(), emailUtenteCollegato));
+			listaUtentiConSugg.add(utenteConSugg);
 			log.debug("utentediretto: " + utente);
 			amicizie.setAmiciziaNotificata(emailUtenteCollegato, utente.getEmail());
 		}
@@ -84,14 +88,10 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 		//quindi ora ho negli attributi utentiAccettatiIndiretti gli utenti che hanno accettato le mie richieste,
 		//ma non ho ancora i suggerimenti presi da quelli utentiAccettatiDiretti, degli indiretti non mi interessano, perche' da loro non devo
 		//ricevere suggerimenti
-
-//		for(UtenteConSuggerimenti utenteConSuggerimenti: utenteSugg) {
-//			log.debug("utenteConSuggerimenti: " + utenteConSuggerimenti);
-//		}
-		
 		//a questo punto setto come attributo la lista degli utenti con suggerimenti, cioe' passo la lista di classe UtenteConSuggerimenti
-		request.setAttribute("listaUtentiConSuggerimenti", utenteSugg);
+		request.setAttribute("listaUtentiConSuggerimenti", listaUtentiConSugg);
 
+		
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notificheDiRisposta.jsp").forward(request, response);
 	}
 
@@ -99,7 +99,5 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
-
 }
