@@ -136,7 +136,9 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 				log.debug("---------______________--------------_____________--------------___________><>>>>>>>> " + suggeriti);
 				
 				if(suggeriti==null) {
-					request.setAttribute("noSuggDisponibili", "Non ci sono suggerimenti d'amicizia");
+					request.setAttribute("noSuggDisponibili", "Amicizia stretta! Non ci sono suggerimenti d'amicizia");
+					getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
+					return;
 				} else {
 					if(suggeriti.size()>=1) {
 						request.setAttribute("amiciSuggeriti", suggeriti);
