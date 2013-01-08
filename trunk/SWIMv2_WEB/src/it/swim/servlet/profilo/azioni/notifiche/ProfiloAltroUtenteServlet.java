@@ -111,7 +111,7 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 
 			try {
 				Amicizia amiciziaAccettata = gestioneAmicizie.accettaAmicizia(emailRichiedente, emailUtenteCollegato);
-				
+
 				log.debug("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{ : " +
 						"" + amiciziaAccettata);
 
@@ -129,14 +129,25 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 				//---se e' diretta faccio cio' che segue
 				//Visto che ho accettato la richiesta di amicizia visualizzo i suggerimenti di amicizia
 				List<Utente> suggeriti = gestioneAmicizie.getSuggerimenti(emailRichiedente, emailUtenteCollegato);
-
-				if(suggeriti.size()>=1) {
-					request.setAttribute("amiciSuggeriti", suggeriti);
-
-					//					this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
-				} else {
-					//se non ci sono suggerimenti disponibili setto un messaggio d'avvio
+				
+				
+				//TODO possibile bug che esce quando suggeriti e' null, allora aggiungo la condizione if ==null
+				
+				log.debug("---------______________--------------_____________--------------___________><>>>>>>>> " + suggeriti);
+				
+				if(suggeriti==null) {
 					request.setAttribute("noSuggDisponibili", "Non ci sono suggerimenti d'amicizia");
+				} else {
+					if(suggeriti.size()>=1) {
+						request.setAttribute("amiciSuggeriti", suggeriti);
+
+						//					this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
+					} else {
+						//se non ci sono suggerimenti disponibili setto un messaggio d'avvio
+						request.setAttribute("noSuggDisponibili", "Amicizia stretta! Non ci sono suggerimenti d'amicizia disponibili");
+						getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
+						return;
+					}
 				}
 				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/profiloAltroUtente.jsp").forward(request, response);
 				return;

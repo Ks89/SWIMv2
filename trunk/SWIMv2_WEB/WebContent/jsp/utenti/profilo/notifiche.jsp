@@ -46,7 +46,10 @@
 		<c:out value="${suggAccettato}"></c:out>
 		<br>
 	</c:if>
-
+	<c:if test="${!empty noSuggDisponibili}">
+		<c:out value="${noSuggDisponibili}"></c:out>
+		<br>
+	</c:if>
 
 	<c:if test="${empty nonCiSonoRichiesteAiuto}">
 		<br>

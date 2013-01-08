@@ -40,8 +40,8 @@
 	<br>
 	<br> Foto:
 	<br>
-	<img src="foto" />
-	<%-- mostra immagine prelevata dalla servlet con attributo foto --%>
+	<%-- mostra immagine prelevata dalla servlet foto --%>
+	<img src="foto?emailUtente=${sessionScope.utenteCollegato}" />
 	<br>
 	<br> Email:
 	<c:out value="${sessionScope.utenteCollegato}"></c:out>
