@@ -60,5 +60,4 @@
 
 	<br>
 	<br>
-	<a href="../../profilo">Torna indietro</a>
 <jsp:include page="../../layoutInferiore.jsp"></jsp:include>

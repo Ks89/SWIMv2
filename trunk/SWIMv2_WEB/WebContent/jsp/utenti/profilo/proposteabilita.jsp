@@ -24,5 +24,4 @@
 	<br>
 	<%-- href fa sempre riferimento alla servlet in modo relativo, mai con link assoluti. Usando il ../ torno indietro di un livello nella
 		gerarchi. Se facessi ../../ tornerei indietro di 2 livelli e cosi' via--%>
-	<a href="../profilo">Torna al profilo</a>
 <jsp:include page="../../layoutInferiore.jsp"></jsp:include>

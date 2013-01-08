@@ -76,7 +76,7 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 		}*/
 		//i visitatori non possono fare la ricerca utenti
 		if (emailUtenteCollegato == null && tipoRicerca.equals("utente")) {
-			response.sendRedirect("../home");
+			response.sendRedirect("../../home");
 			return;
 		}
 		//ricerca aiuto per visitatori

@@ -30,12 +30,15 @@
 		<li>
 			<a href="profilo/azioni/modificaProfilo" class="item7"><span>modifica profilo</span></a>
 		</li>
-		<a id="logout" href="login?esci=true" style="float: right;">Logout</a>
+		<li>
+			<a href="profilo/azioni/feedbackUtente?emailUtente=${sessionScope.utenteCollegato}" class="item8"><span>visualizza feedback</span></a>
+		</li>
 	</ul>
 </div>
 </div>
 <div class="content">
 <div class="col1"><img id="imgUtente" src="profilo/foto?emailUtente=${sessionScope.utenteCollegato}" /> <br/>
-<c:out value="${nomeUtenteCollegato}"/> <c:out value="${cognomeUtenteCollegato}"/><br/>
+<c:out value="${sessionScope.nomeUtenteCollegato}"/> <c:out value="${sessionScope.cognomeUtenteCollegato}"/><br/>
+<a  style="text-align: center;" href="login?esci=true" style="float: right;">Logout</a>
 </div>
 <div class="col2">
