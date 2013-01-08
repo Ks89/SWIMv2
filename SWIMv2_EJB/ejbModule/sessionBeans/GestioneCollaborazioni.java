@@ -303,12 +303,32 @@ public class GestioneCollaborazioni implements GestioneCollaborazioniRemote, Ges
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Collaborazione> getCollaborazioniTerminateConFeedBack(String emailRichiedente) throws LoginException {
-		//if(emailRichiedente==null || emailRichiedente.equals("")) {
-		//	throw new LoginException(LoginException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
-		//}
+		if(emailRichiedente==null || emailRichiedente.equals("")) {
+		throw new LoginException(LoginException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		}
 		
 		Query query = entityManager.createNamedQuery("Collaborazione.getCollaborazioniTerminateConFeedBack");
 		query.setParameter("emailRichiedente", emailRichiedente);
+		return (List<Collaborazione>)query.getResultList();	
+	}
+	
+	/**
+	 * Metodo che fornisce la lista delle collaborazioni dove l'utente corrispondente alla mail passata come parametro
+	 * è l'utente ricevente, ed è stato rilasciato un feedback relativo a quella collaborazione.
+	 * @param emailUtente = String che rappresenta l'email dell'utente di cui si vuole ottenere le collaborazioni
+	 * @return <b>lista delle collaborazioni</b>, ovvero una List<Collaborazione> che rappresenta le 
+	 * collaborazioni non ancora terminate. Se non e' possibile ottenere tale lista, reistituisce <b>null</b>.
+	 * @throws LoginException con causa ALCUNIPARAMETRINULLIOVUOTI
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Collaborazione> getCollaborazioniRiceventeConFeedBack(String emailUtente) throws LoginException {
+		if(emailUtente==null || emailUtente.equals("")) {
+			throw new LoginException(LoginException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		}
+		
+		Query query = entityManager.createNamedQuery("Collaborazione.getCollaborazioniRichiesteConFeedBack");
+		query.setParameter("emailUtente", emailUtente);
 		return (List<Collaborazione>)query.getResultList();	
 	}
 	
