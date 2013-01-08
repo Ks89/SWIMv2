@@ -15,7 +15,7 @@
 	<br /> Punteggio feedback:
 	<c:out value="${punteggioFeedback}"></c:out>
 	<br />
-	<form id="dettagliAltroUtente" action="dettagliAltroUtente" method="POST">
+	<form id="dettagliAltroUtente" action="profilo/azioni/dettagliAltroUtente" method="POST">
 		<input type="hidden" name="tipo" />
 		<c:if test="${amiciziaGiaInoltrata==false}">
 			<input type="button" value="Richiedi amicizia" onclick="dettagliAltroUtente.elements['tipo'].value='amicizia'; dettagliAltroUtente.submit();" />
