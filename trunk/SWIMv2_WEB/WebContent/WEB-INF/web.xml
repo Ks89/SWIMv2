@@ -290,4 +290,14 @@
     <servlet-name>RilasciaFeedBackServlet</servlet-name>
     <url-pattern>/profilo/azioni/rilasciaFeedBack</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FeedBackServelet</display-name>
+    <servlet-name>FeedBackServelet</servlet-name>
+    <servlet-class>it.swim.servlet.profilo.azioni.FeedBackServelet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FeedBackServelet</servlet-name>
+    <url-pattern>/profilo/azioni/feedbackUtente</url-pattern>
+  </servlet-mapping>
 </web-app>
