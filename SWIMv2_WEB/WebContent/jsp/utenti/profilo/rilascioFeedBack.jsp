@@ -27,7 +27,7 @@
 		<c:out value="${feedBackRilasciato}"></c:out>
 	</c:if>
 	<br>
-	<a href="../azioni/collaborazioni">Torna alla lista di
+	<a href="profilo/azioni/collaborazioni">Torna alla lista di
 		collaborazioni</a>
 </body>
 </html>

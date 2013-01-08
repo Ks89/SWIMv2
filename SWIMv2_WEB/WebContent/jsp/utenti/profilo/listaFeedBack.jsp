@@ -35,10 +35,6 @@
 	</c:forEach>
 
 </c:if>
-<br>
-<br>
-
-<a href="../profilo">Torna al profilo</a>
 
 
 <jsp:include page="../../layoutInferiore.jsp"></jsp:include>

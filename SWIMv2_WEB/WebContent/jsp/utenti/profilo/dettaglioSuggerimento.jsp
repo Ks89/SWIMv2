@@ -26,7 +26,7 @@
 	</form>
 
 	<br>
-	<a href="../notifiche">Torna alle notifiche</a>
+	<a href="profilo/azioni/notifiche">Torna alle notifiche</a>
 
 </body>
 </html>

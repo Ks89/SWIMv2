@@ -1,12 +1,8 @@
+<jsp:include page="../../layoutSuperioreUp.jsp"></jsp:include>
+<title>SWIM - Profilo - Richiesta d'aiuto</title>
+<jsp:include page="../../layoutSuperioreDown.jsp"></jsp:include>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>SWIM - Profilo - Richiesta d'aiuto</title>
-</head>
-<body>
 	<c:if test="${!empty confermaRichiestaAiuto}">
 		<c:out value="${confermaRichiestaAiuto}"></c:out>
 		<br>
@@ -26,15 +22,14 @@
 	<c:out value="${descrizioneCollaborazione}"></c:out>
 
 	<c:if test="${empty confermaRichiestaAiuto and empty erroreConfermaRichiestaAiuto}">
-		<form id="dettaglioRichiestaAiuto" action="dettaglioRichiestaAiuto" method="POST">
+		<form id="dettaglioRichiestaAiuto" action="profilo/azioni/notifiche/dettaglioRichiestaAiuto" method="POST">
 			<input type="hidden" name="tipo" /> 
 			<input type="hidden" name="idCollaborazione" value="${idCollaborazione}">
-			<input type="button" value="conferma" onclick="dettaglioRichiestaAiuto.elements['tipo'].value='CONFERMA'; dettaglioRichiestaAiuto.submit();" /> <input 
-				type="button" value="rifiuta" onclick="dettaglioRichiestaAiuto.elements['tipo'].value='RIFIUTA'; dettaglioRichiestaAiuto.submit();" />
+			<input type="button" value="conferma" onclick="dettaglioRichiestaAiuto.elements['tipo'].value='CONFERMA'; dettaglioRichiestaAiuto.submit();" /> 
+			<input type="button" value="rifiuta" onclick="dettaglioRichiestaAiuto.elements['tipo'].value='RIFIUTA'; dettaglioRichiestaAiuto.submit();" />
 		</form>
 	</c:if>
 
 	<br>
-	<a href="../azioni/notifiche">Torna alle notifiche</a>
-</body>
-</html>
+	<a href="profilo/azioni/notifiche">Torna alle notifiche</a>
+<jsp:include page="../../layoutInferiore.jsp"></jsp:include>

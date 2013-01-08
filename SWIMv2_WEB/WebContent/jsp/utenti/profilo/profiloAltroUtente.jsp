@@ -61,7 +61,7 @@
 			</script>
 			<br> *e' possibile accettare solo un dei suggerimenti
 			<br>
-			<a href="../azioni/notifiche">Torna indietro</a>
+			<a href="profilo/azioni/notifiche">Torna indietro</a>
 		</c:otherwise>
 	</c:choose>
 </body>

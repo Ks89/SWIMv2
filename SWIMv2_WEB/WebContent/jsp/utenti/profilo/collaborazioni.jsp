@@ -16,7 +16,7 @@
 		<c:out value="Collaborazioni in corso:"></c:out>
 		<br>
 		<br>
-		<form id="collaborazioniInCorso" action="collaborazioni"
+		<form id="collaborazioniInCorso" action="profilo/azioni/collaborazioni"
 			method="POST">
 			<input type="hidden" name="tipo" />
 			<table id="tabellaCollaborazioniInCorso"
@@ -31,7 +31,7 @@
 						<td><c:out value="${collaborazione.utenteRicevente.nome}" />&nbsp;<c:out
 								value="${collaborazione.utenteRicevente.cognome}" /></td>
 						<td><a
-							href="../azioni/CollaborazioneDettagliata?idCollaborazione=<c:out value="${collaborazione.id}" />"><c:out
+							href="profilo/azioni/dettaglioCollaborazione?idCollaborazione=<c:out value="${collaborazione.id}" />"><c:out
 									value="${collaborazione.nome}" /></a></td>
 						<td><input type="button" value="Termina"
 							onclick="collaborazioniInCorso.elements['tipo'].value=${collaborazione.id}; collaborazioniInCorso.submit();" />
@@ -66,10 +66,10 @@
 							value="${collaborazioneFeedBack.utenteRicevente.nome}" />&nbsp;<c:out
 							value="${collaborazioneFeedBack.utenteRicevente.cognome}" /></td>
 					<td><a
-						href="../azioni/dettaglioCollaborazione?idCollaborazione=<c:out value="${collaborazioneFeedBack.id}&terminata=si" />"><c:out
+						href="profilo/azioni/dettaglioCollaborazione?idCollaborazione=<c:out value="${collaborazioneFeedBack.id}&terminata=si" />"><c:out
 								value="${collaborazioneFeedBack.nome}" /></a></td>
 					<td><a
-						href="../azioni/rilasciaFeedBack?idCollaborazione=<c:out value="${collaborazioneFeedBack.id}" />"><c:out
+						href="profilo/azioni/rilasciaFeedBack?idCollaborazione=<c:out value="${collaborazioneFeedBack.id}" />"><c:out
 								value="Aggiungi Feedback" /></a></td>
 				</tr>
 			</c:forEach>
@@ -101,12 +101,11 @@
 							value="${collaborazioneTerminateConFeedBack.utenteRicevente.nome}" />&nbsp;<c:out
 							value="${collaborazioneTerminateConFeedBack.utenteRicevente.cognome}" /></td>
 					<td><a
-						href="../azioni/dettaglioCollaborazione?idCollaborazione=<c:out value="${collaborazioneTerminateConFeedBack.id}&terminata=si&conFeedBack=si" />"><c:out
+						href="profilo/azioni/dettaglioCollaborazione?idCollaborazione=<c:out value="${collaborazioneTerminateConFeedBack.id}&terminata=si&conFeedBack=si" />"><c:out
 								value="${collaborazioneTerminateConFeedBack.nome}" /></a></td>
 				</tr>
 			</c:forEach>
 		</table>
 	</c:if>
-	<a href="../profilo">Torna al profilo</a>
 
 <jsp:include page="../../layoutInferiore.jsp"></jsp:include>

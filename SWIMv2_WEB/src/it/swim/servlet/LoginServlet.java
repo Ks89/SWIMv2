@@ -12,6 +12,7 @@ import exceptions.HashingException;
 import exceptions.LoginException;
 
 import sessionBeans.localInterfaces.GestioneLoginLocal;
+import sessionBeans.localInterfaces.GestioneRicercheLocal;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,6 +26,8 @@ public class LoginServlet extends HttpServlet {
 	@EJB
 	private GestioneLoginLocal login;
 
+	@EJB
+	private GestioneRicercheLocal ricerche;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -69,7 +72,6 @@ public class LoginServlet extends HttpServlet {
 		String emailUtente = request.getParameter("emailUtente");
 		String password = request.getParameter("password");
 		log.debug(emailUtente + " - " + password);
-
 		// esego il login e vedo il risultato
 		boolean logineEseguitoCorrettamente = false;
 		try {
@@ -80,6 +82,8 @@ public class LoginServlet extends HttpServlet {
 				// se il login riesce setto nella sessione l'email dell'utente che
 				// si e' loggato
 				request.getSession().setAttribute("utenteCollegato", emailUtente);
+				request.getSession().setAttribute("nomeUtenteCollegato", ricerche.getUtenteByEmail(emailUtente).getNome());
+				request.getSession().setAttribute("cognomeUtenteCollegato", ricerche.getUtenteByEmail(emailUtente).getCognome());
 				// processata la request, uso la response per fare il redirect alla pagina del profilo dell'utente
 				response.sendRedirect("profilo/profilo");
 			} else {

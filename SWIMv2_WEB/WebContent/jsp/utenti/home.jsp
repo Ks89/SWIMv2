@@ -1,12 +1,8 @@
+<jsp:include page="../layoutSuperioreUp.jsp"></jsp:include>
+<title>SWIM</title>
+<jsp:include page="../layoutSuperioreDownVisitatore.jsp"></jsp:include>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>SWIM</title>
-</head>
-<body>
 	<%-- if che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
 	<c:if test="${!empty erroreLoginFallito}">
 	Si è verificato un errore: <c:out value="${erroreLoginFallito}"></c:out><br>
@@ -51,5 +47,4 @@
 <!-- 			<a href="profilo/azioni/ricerche?utenti=pervisitatori">Ricerca utenti per visitatori</a> -->
 <%-- 		</c:otherwise> --%>
 <%-- 	</c:choose> --%>
-</body>
-</html>
+<jsp:include page="../layoutInferiore.jsp"></jsp:include>

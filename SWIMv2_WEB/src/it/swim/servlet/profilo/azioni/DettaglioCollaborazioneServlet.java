@@ -47,7 +47,7 @@ public class DettaglioCollaborazioneServlet extends HttpServlet {
 		Collaborazione collaborazione=new Collaborazione();
 		Long id = Long.parseLong(request.getParameter("idCollaborazione"));
 		if (emailUtenteCollegato == null) {
-			response.sendRedirect("../home");
+			response.sendRedirect("../../home");
 			return;
 		}
 		try {
