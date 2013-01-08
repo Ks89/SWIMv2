@@ -3,6 +3,7 @@ package it.swim.servlet.profilo;
 import it.swim.util.UtenteCollegatoUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -16,8 +17,9 @@ import sessionBeans.localInterfaces.GestioneRicercheLocal;
 
 import lombok.extern.slf4j.Slf4j;
 import entityBeans.Abilita;
+import entityBeans.Collaborazione;
 import entityBeans.Utente;
-import exceptions.CollaborazioneException;
+import exceptions.LoginException;
 import exceptions.RicercheException;
 
 /**
@@ -76,7 +78,7 @@ public class ProfiloServlet extends HttpServlet {
 			}
 			log.debug("punteggioUtenteCollegato:" + feedback);
 			request.setAttribute("punteggioUtenteCollegato", feedback);
-		} catch (CollaborazioneException e) {
+		} catch (LoginException e) {
 			log.error(e.getMessage(), e);
 		}
 

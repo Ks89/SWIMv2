@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>SWIM - Profilo - Notifiche - Profilo utente</title>
+<title>Insert title here</title>
 </head>
 <body>
 
 	<c:choose>
 		<c:when test="${empty amiciSuggeriti}">
 			Foto: 
-			<img src="../foto?emailUtente=${emailRichiedente}" />
+			<img src="foto" />
 			<br>
 			<br>
 			<br> Nome:

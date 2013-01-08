@@ -16,7 +16,7 @@ import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 
 import entityBeans.Collaborazione;
 import entityBeans.Utente;
-import exceptions.CollaborazioneException;
+import exceptions.LoginException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -88,7 +88,7 @@ public class NotificheServlet extends HttpServlet {
 				request.setAttribute("richiesteAiuto", collaborazioni);
 				request.setAttribute("nonCiSonoRichiesteAiuto", "Non ci sono nuove richieste di aiuto");
 			}
-		} catch (CollaborazioneException e) {
+		} catch (LoginException e) {
 			log.error(e.getMessage(), e);
 			request.setAttribute("erroreGetNotificheRichiesteAiuto", "Impossibile ottenere le richieste di aiuto");
 		}

@@ -8,7 +8,7 @@
 </head>
 <body>
 	Foto: 
-	<img src="../../foto?emailUtente=${emailSuggerito}" />
+	<img src="foto" />
 	<br>
 	<br>
 	<br> Nome:

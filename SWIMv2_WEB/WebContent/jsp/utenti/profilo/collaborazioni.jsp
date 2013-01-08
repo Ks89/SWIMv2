@@ -20,6 +20,9 @@
 		<c:out value="Collaborazioni in corso:"></c:out>
 		<br>
 		<br>
+		<form id="collaborazioniInCorso" action="collaborazioni"
+			method="POST">
+			<input type="hidden" name="tipo" />
 			<table id="tabellaCollaborazioniInCorso"
 				style="border-width: medium; border-style: solid;">
 				<tr>
@@ -32,19 +35,19 @@
 						<td><c:out value="${collaborazione.utenteRicevente.nome}" />&nbsp;<c:out
 								value="${collaborazione.utenteRicevente.cognome}" /></td>
 						<td><a
-							href="../azioni/dettaglioCollaborazione?idCollaborazione=<c:out value="${collaborazione.id}" />"><c:out value="${collaborazione.nome}" /></a></td>
-						<td><form id="collaborazioniInCorso" action="collaborazioniInCorso" method="POST">
-								<input type="hidden" name="idCollaborazione" value="${idCollaborazione}">
-								<input type="submit" value="Termina"/>
-							</form>
+							href="../azioni/CollaborazioneDettagliata?idCollaborazione=<c:out value="${collaborazione.id}" />"><c:out
+									value="${collaborazione.nome}" /></a></td>
+						<td><input type="button" value="Termina"
+							onclick="collaborazioniInCorso.elements['tipo'].value=${collaborazione.id}; collaborazioniInCorso.submit();" />
 					</tr>
 				</c:forEach>
 			</table>
+		</form>
 		<c:if test="${!empty erroreGetCollaborazioniSenzaFeedback}">
 			<c:out value="${erroreGetCollaborazioniSenzaFeedback}"></c:out>
 			<br>
 		</c:if>
-		<c:if test="${!empty nonCiSonoCollaborazioniSenzaFeedback}"> <%-- che senso ha mettere le 2 variabili diverse? --%>
+		<c:if test="${!empty nonCiSonoCollaborazioniSenzaFeedback}">
 			<c:out value="${nonCiSonoCollaborazioniDaTerminare}"></c:out>
 			<br>
 		</c:if>
