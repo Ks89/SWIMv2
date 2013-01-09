@@ -9,7 +9,7 @@ public class FotoException extends Exception {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static enum Causa {NONRICONOSCIUTACOMEFOTO}; 
+	public static enum Causa {NONRICONOSCIUTACOMEFOTO,FILETROPPOGRANDE}; 
 	private Causa causa;
 
 	/**

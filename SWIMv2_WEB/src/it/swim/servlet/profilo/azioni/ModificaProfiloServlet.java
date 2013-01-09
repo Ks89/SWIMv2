@@ -43,6 +43,9 @@ public class ModificaProfiloServlet extends HttpServlet {
 	//--------------scegliere qui la dimensione della foto profilo--------------
 	private static final int LUNGHEZZA = 186, ALTEZZA = 249; 
 	
+	//---------------dimensione massima in MB del file uploadato----------------
+	private static final int DIMMB = 6;
+	
 	@EJB
 	private GestioneRegistrazioneLocal registrazione;
 
@@ -136,8 +139,15 @@ public class ModificaProfiloServlet extends HttpServlet {
 					// String filename = item.getName();
 					// InputStream filecontent = item.getInputStream();
 					try {
-						blob = ConvertitoreFotoInBlob.getBlobFromFileItem(item, LUNGHEZZA, ALTEZZA);
+						blob = ConvertitoreFotoInBlob.getBlobFromFileItem(item, LUNGHEZZA, ALTEZZA, DIMMB);
 					} catch (FotoException e) {
+						if(e.getCausa().equals(FotoException.Causa.FILETROPPOGRANDE)) {
+							//TODO mostrare messaggio d'errore
+						} else {
+							if(e.getCausa().equals(FotoException.Causa.NONRICONOSCIUTACOMEFOTO)) {
+								//TODO mostrare messaggio d'errore
+							}
+						}
 						//in questo caso uploada una foto predefinita
 						//TODO METTERE QUI CHIAMATA AL METODO
 					}
