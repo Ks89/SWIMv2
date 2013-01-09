@@ -1,17 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<jsp:include page="../../layoutSuperioreUp.jsp"></jsp:include>
 <title>Insert title here</title>
-</head>
-<body>
+<jsp:include page="../../layoutSuperioreDown.jsp"></jsp:include>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<c:if test="${empty feedBackRilasciato}">
 	Compila i campi per rilasciare il FeedBack!
 	<br>
-		<form action="rilasciaFeedBack" method="POST"
+		<form action="profilo/azioni/rilasciaFeedBack" method="POST"
 			enctype="multipart/form-data">
 			<c:if test="${!empty erroreNelPunteggio}">
 				<c:out value="${erroreNelPunteggio}"></c:out>
@@ -29,5 +24,4 @@
 	<br>
 	<a href="profilo/azioni/collaborazioni">Torna alla lista di
 		collaborazioni</a>
-</body>
-</html>
+<jsp:include page="../../layoutInferiore.jsp"></jsp:include>

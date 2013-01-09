@@ -25,11 +25,13 @@
 				  <th>Descrizione</th>
 				</tr>
 				<c:forEach items="${abilita}" var="item"  varStatus="num">
-					<c:if test="${num.count%2!=0}">
-						<tr>
-					</c:if>
-					<c:if test="${num.count%2==0}">
-						<tr class="alt">
+					<c:if test="${num.count>0}">
+						<c:if test="${num.count%2!=0}">
+							<tr>
+						</c:if>
+						<c:if test="${num.count%2==0}">
+							<tr class="alt">
+						</c:if>
 					</c:if>
 						<td><input type="checkbox" name="abilita" value='<c:out value="${item.nome}"/>' /></td>
 						<td><c:out value="${item.nome}" /></td>
