@@ -52,6 +52,7 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 	private String tipoRicerca;
 	//questa variabile mi serve per sapere se la servlet è stata richiamata da un pulsante submit o no
 	private boolean ricerca=false;
+	private boolean ricercaGiaEffettuata=false;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -112,7 +113,7 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 		String cognome = new String();
 		List<Abilita> abilitaRicercate = new ArrayList<Abilita>();
 		List<Utente> risultatoRicerca = new ArrayList<Utente>();
-		ricerca=true;
+		ricerca=false;
 			try {
 				items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 				for (FileItem item : items) {
@@ -145,9 +146,13 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				ricercaGiaEffettuata=true;
 				request.setAttribute("abilita", gestioneRicerche.insiemeAbilitaGenerali());
 				request.setAttribute("utenti", risultatoRicerca);
+				if(risultatoRicerca.size()>0)
+					ricerca=true;
 				request.setAttribute("risultatoRicerca", ricerca);
+				request.setAttribute("ricercaGiaEffettuata", ricercaGiaEffettuata);
 				request.setAttribute("tipoRicerca", tipoRicerca);
 			}
 			else if(tipoRicerca.equals("aiutoVisitatore"))
@@ -158,9 +163,13 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				ricercaGiaEffettuata=true;
 				request.setAttribute("abilita", gestioneRicerche.insiemeAbilitaGenerali());
 				request.setAttribute("utenti", risultatoRicerca);
+				if(risultatoRicerca.size()>0)
+					ricerca=true;
 				request.setAttribute("risultatoRicerca", ricerca);
+				request.setAttribute("ricercaGiaEffettuata", ricercaGiaEffettuata);
 				request.setAttribute("tipoRicerca", tipoRicerca);
 			}
 			else
@@ -171,9 +180,13 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				ricercaGiaEffettuata=true;
 				request.setAttribute("utenti", risultatoRicerca);
+				if(risultatoRicerca.size()>0)
+					ricerca=true;
 				request.setAttribute("risultatoRicerca", ricerca);
 				request.setAttribute("tipoRicerca", tipoRicerca);
+				request.setAttribute("ricercaGiaEffettuata", ricercaGiaEffettuata);
 			}
 			getServletConfig().getServletContext().getRequestDispatcher("/jsp/ricerche.jsp").forward(request, response);
 	}

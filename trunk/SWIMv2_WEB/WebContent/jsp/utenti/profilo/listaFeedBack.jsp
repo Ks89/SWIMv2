@@ -14,26 +14,27 @@
 	<br>
 </c:if>
 <c:if test="${empty nonCiSonoCollaborazioni}">
-	<c:out value="Collaborazioni: "></c:out>
-	<br>
-	<c:forEach items="${collaborazioni}" var="collaborazione">
-		<br>
-		<br>
-		<c:out value="Nome collaborazione: "></c:out>
-		<c:out value="${collaborazione.nome}" />
-		<br>
-		<c:out value="Nome utente che ha rilasciato il feedback: "></c:out>
-		<c:out value="${collaborazione.utenteRichiedente.nome}" />&nbsp;<c:out
-			value="${collaborazione.utenteRichiedente.cognome}" />
-		<br>
-		<c:out value="Punteggio ottenuto: "></c:out>
-		<c:out value="${collaborazione.punteggioFeedback}" />
-		<br>
-		<c:out value="Commento: "></c:out>
-		<br>
-		<c:out value="${collaborazione.commentoFeedback}" />
-	</c:forEach>
-
+	<h1><c:out value="Collaborazioni"></c:out></h1>
+	<br><br>
+	<div align="center">
+		<c:forEach items="${collaborazioni}" var="collaborazione">
+			<table id="tabellaFeedback">
+				<tr>
+				  <th>Nome</th>
+				  <th>Chi ha rilasciato il feedback</th>
+				  <th>Punteggio</th>
+				  <th>Commento</th>
+				</tr>
+				<tr>
+					<td ><c:out value="${collaborazione.nome}" /></td>
+					<td><c:out value="${collaborazione.utenteRichiedente.nome}" />&nbsp;<c:out value="${collaborazione.utenteRichiedente.cognome}" /></td>
+					<td ><c:out value="${collaborazione.punteggioFeedback}" /></td>
+					<td style="text-align: justify;"><c:out value="${collaborazione.commentoFeedback}" /></td>
+				</tr>
+			</table>
+			<br><br>
+		</c:forEach>
+	</div>
 </c:if>
 
 

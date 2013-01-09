@@ -10,7 +10,6 @@
 
 	<c:choose>
 		<c:when test="${empty amiciSuggeriti}">
-			Foto: 
 			<img src="../foto?emailUtente=${emailRichiedente}" />
 			<br>
 			<br>
@@ -61,7 +60,6 @@
 			</script>
 			<br> *e' possibile accettare solo un dei suggerimenti
 			<br>
-			<a href="profilo/azioni/notifiche">Torna indietro</a>
 		</c:otherwise>
 	</c:choose>
 </body>

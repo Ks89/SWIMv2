@@ -233,12 +233,14 @@ background-color:#297ACC;
 {
 font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
 width:auto;
-text-align: center;
+text-align: left;
+border-collapse: collapse;
+width: 600px;
 }
 #tabellaRigheAlterne td, #tabellaRigheAlterne th 
 {
 font-size:1em;
-border:1px solid #0095ff;
+border:0px solid #0095ff;
 padding:3px 7px 2px 7px;
 }
 #tabellaRigheAlterne th 
@@ -251,6 +253,44 @@ background-color:#4ca6ef;
 color:#ffffff;
 }
 #tabellaRigheAlterne tr.alt td 
+{
+color:#000000;
+background-color:#d1dfef;
+}
+
+#tabellaFeedback
+{
+font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+width:auto;
+text-align: left;
+border-collapse: collapse;
+width: 600px;
+}
+#tabellaFeedback td
+{
+width:150px;
+font-size:1em;
+border:0px solid #0095ff;
+padding:3px 7px 2px 7px;
+}
+
+#tabellaFeedback th 
+{
+font-size:1em;
+border:0px solid #0095ff;
+padding:3px 7px 2px 7px;
+}
+
+#tabellaFeedback th 
+{
+font-size:1.1em;
+text-align:center;
+padding-top:5px;
+padding-bottom:4px;
+background-color:#4ca6ef;
+color:#ffffff;
+}
+#tabellaFeedback tr.alt td 
 {
 color:#000000;
 background-color:#d1dfef;
@@ -381,6 +421,28 @@ input[type=text]:focus, input[type=password]:focus {
   outline-offset: 0;
 }
 
+#button{
+	padding: 0 18px;
+  height: 29px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #527881;
+  text-shadow: 0 1px #e3f1f1;
+  background: #cde5ef;
+  border: 1px solid;
+  border-color: #b4ccce #b3c0c8 #9eb9c2;
+  
+  outline: 0;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  background-image: -webkit-linear-gradient(top, #edf5f8, #cde5ef);
+  background-image: -moz-linear-gradient(top, #edf5f8, #cde5ef);
+  background-image: -o-linear-gradient(top, #edf5f8, #cde5ef);
+  background-image: linear-gradient(to bottom, #edf5f8, #cde5ef);
+  -webkit-box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
+}
 input[type=submit] {
   padding: 0 18px;
   height: 29px;

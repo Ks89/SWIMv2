@@ -16,9 +16,18 @@
 	<%-- tramite post manda richiesta alla dopost della proposteAbilitaServlet e passa i valori.
 		Visto che uso il type submit mando tutto il contenuto della form--%>
 	<form id="proponiAbilitaForm" action="profilo/azioni/proposteAbilita" method="POST">
-		Nome abilita proposta: <input id="nomeAbilita" type="text" name="nomeAbilita"></input> 
-		Motivo: <input id="descrizioneAbilita" type="text" name="descrizioneAbilita"></input>
-		<input id="submit" type="submit" />
+		<div align="center">
+			<table id="formInserimentoParametri">
+				<tr>
+					<td>Nome abilita proposta: </td><td><input id="nomeAbilita" type="text" name="nomeAbilita"></input></td>
+				</tr> 
+				<tr>
+					<td>Motivo: </td><td><input id="descrizioneAbilita" type="text" name="descrizioneAbilita"></input></td>
+				<tr>
+					<td colspan="2" style="text-align: center;"><input id="submit" type="submit" /></td>
+				</tr>
+			</table>
+		</div>
 	</form>
 
 	<br>

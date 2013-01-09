@@ -5,24 +5,53 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%-- Questa jsp conterra' con un choose 3 casi possibili, cioe' ricerca per visitatori, ricerca aiuto e ricerca utenti --%>
 <form action="profilo/azioni/ricerchePerUtentiLoggati" method="POST" enctype="multipart/form-data">
-	<c:choose>
+	<div align="center">
+		<c:if test="${!risultatoRicerca and ricercaGiaEffettuata}">
+			<c:out value="La ricerca non ha ottenuto risultati"></c:out>
+		</c:if><br><br>
+		<c:choose>
+		
 		<c:when test="${tipoRicerca=='aiuto'}">
-			<%--<c:out value="Aiuto per utenti loggati"></c:out>--%>
-			<c:forEach items="${abilita}" var="item">
-				<input type="checkbox" name="abilita" value='<c:out value="${item.nome}"/>' />
-				<c:out value="${item.nome}" />
-				<br>
+			<h2><c:out value="Seleziona le abilità di cui sei alla ricerca"></c:out></h2><br>
+			<table id="tabellaRigheAlterne">
+				<tr>
+				  <th></th>
+				  <th>Abilità</th>
+				  <th>Descrizione</th>
+				</tr>
+				
+			<c:forEach items="${abilita}" var="item" varStatus="num">
+				<c:if test="${num.count>0}">
+					<c:if test="${num.count%2!=0}">
+						<tr>
+					</c:if>
+					<c:if test="${num.count%2==0}">
+						<tr class="alt">
+					</c:if>
+				</c:if>
+				<td><input type="checkbox" name="abilita" value='<c:out value="${item.nome}"/>' /></td>
+				<td><c:out value="${item.nome}" /></td>
+				<td style="text-align: justify;"><c:out value="${item.descrizione}" /></td>
 			</c:forEach>
+			</table><br>
 			 <input id="Cerca" type="submit" value="Cerca"/>
+			 <br><br>
 			 <c:if test="${risultatoRicerca}">
-			 	<table id="tabellaRichiesteAiuto" style="border-width: medium; border-style: solid;">
+			 	<table id="tabellaRigheAlterne">
 					<tr>
 						<th>Nome</th>
 						<th>Cognome</th>
 						<th>Indirizzo Email</th>
 					</tr>
-					<c:forEach items="${utenti}" var="utente">
-						<tr>
+					<c:forEach items="${utenti}" var="utente" varStatus="num">
+						<c:if test="${num.count>0}">
+							<c:if test="${num.count%2!=0}">
+								<tr>
+							</c:if>
+							<c:if test="${num.count%2==0}">
+								<tr class="alt">
+							</c:if>
+						</c:if>
 							<td><c:out value="${utente.nome}" /></td>
 							<td><c:out value="${utente.cognome}" /></td>
 							<td><a href="profilo/azioni/dettagliAltroUtente?utente=${utente.email}&tipoRicerca=aiuto"><c:out value="${utente.email}" /></a></td>
@@ -31,21 +60,47 @@
 				</table>
 			 </c:if>
 		</c:when>
+		
 		<c:when test="${tipoRicerca=='aiutoVisitatore'}">
-			<c:forEach items="${abilita}" var="item">
-				<input type="checkbox" name="abilita" value='<c:out value="${item.nome}"/>' />
-				<c:out value="${item.nome}" />
-				<br>
+			<h2><c:out value="Seleziona le abilità di cui sei alla ricerca"></c:out></h2><br>
+			<table id="tabellaRigheAlterne">
+				<tr>
+				  <th></th>
+				  <th>Abilità</th>
+				  <th>Descrizione</th>
+				</tr>
+				
+			<c:forEach items="${abilita}" var="item" varStatus="num">
+				<c:if test="${num.count>0}">
+					<c:if test="${num.count%2!=0}">
+						<tr>
+					</c:if>
+					<c:if test="${num.count%2==0}">
+						<tr class="alt">
+					</c:if>
+				</c:if>
+				<td><input type="checkbox" name="abilita" value='<c:out value="${item.nome}"/>' /></td>
+				<td><c:out value="${item.nome}" /></td>
+				<td style="text-align: justify;"><c:out value="${item.descrizione}" /></td>
 			</c:forEach>
+			</table><br>
 			 <input id="Cerca" type="submit" value="Cerca"/>
+			 <br><br>
 			  <c:if test="${risultatoRicerca}">
-			 	<table id="tabellaRichiesteAiuto" style="border-width: medium; border-style: solid;">
+			 	<table id="tabellaRigheAlterne">
 					<tr>
 						<th>Nome</th>
 						<th>Cognome</th>
 					</tr>
-					<c:forEach items="${utenti}" var="utente">
-						<tr>
+					<c:forEach items="${utenti}" var="utente" varStatus="num">
+						<c:if test="${num.count>0}">
+							<c:if test="${num.count%2!=0}">
+								<tr>
+							</c:if>
+							<c:if test="${num.count%2==0}">
+								<tr class="alt">
+							</c:if>
+						</c:if>
 							<td><c:out value="${utente.nome}" /></td>
 							<td><c:out value="${utente.cognome}" /></td>
 						</tr>
@@ -53,6 +108,7 @@
 				</table>
 			 </c:if>
 		</c:when>
+		
 		<c:otherwise>
 			Nome:<input type="text" name="nomeUtente"></input>
 			Cognome:<input type="text" name="cognomeUtente"></input>
@@ -60,7 +116,7 @@
 			<br><br>
 			<c:if test="${risultatoRicerca}">
 			 	<div align="center">
-			 	<table id="tabellaRigheAlterne" style="border-width: medium; border-style: solid;">
+			 	<table id="tabellaRigheAlterne">
 					<tr>
 						<th>Nome</th>
 						<th>Cognome</th>
@@ -85,5 +141,6 @@
 			 </c:if>
 		</c:otherwise>
 	</c:choose>
+	</div>
 </form>
 <jsp:include page="layoutInferiore.jsp"></jsp:include>
