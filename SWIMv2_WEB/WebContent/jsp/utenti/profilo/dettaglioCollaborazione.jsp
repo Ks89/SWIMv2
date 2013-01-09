@@ -3,32 +3,43 @@
 <jsp:include page="../../layoutSuperioreDown.jsp"></jsp:include>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<div align="center">
+	<h2>Dettagglio della collaborazione</h2>
 	<c:if test="${!empty erroreRicercaCollaborazione}">
 		<c:out value="${erroreRicercaCollaborazione}"></c:out>
 		<br>
 	</c:if>
-	<c:if test="${empty erroreRicercaCollaborazione}">
-		<br /> Nome:
-	<c:out value="${collaborazione.nome}"></c:out>
-	<br /> Utente richiesto:
-	<c:out value="${collaborazione.utenteRicevente.nome}" />&nbsp;<c:out
-								value="${collaborazione.utenteRicevente.cognome}" />
-	<br /> Data di inizio collaborazione:
-	<c:out value="${collaborazione.dataStipula}"></c:out>
-	</c:if>
-	<c:if test="${!empty terminata}">
-	<br /> Data di fine collaborazione:
-	<c:out value="${collaborazione.dataTermine}"></c:out>
-	<br />
-	</c:if>
-	<c:if test="${!empty conFeedBack}">
-	<br /> Punteggio del feedback rilasciato:
-	<c:out value="${collaborazione.punteggioFeedback}"></c:out>
-	<br />
-	<br /> Commenti sul collaboratore:
+	<table id="tabellaFeedback">
+		<tr>
+		  <th>Nome</th>
+		  <th>Utente richiesto</th>
+		  <th>Data Inizio</th>
+		  <th>Data Termine</th>
+		</tr>
+		<tr>
+			<c:if test="${empty erroreRicercaCollaborazione}">
+				<td><c:out value="${collaborazione.nome}"></c:out></td>
+				<td><c:out value="${collaborazione.utenteRicevente.nome}" />&nbsp;<c:out value="${collaborazione.utenteRicevente.cognome}" /></td>
+				<td><c:out value="${collaborazione.dataStipula}"></c:out></td>
+				</c:if>
+				<c:if test="${!empty terminata}">
+				<td><c:out value="${collaborazione.dataTermine}"></c:out></td>
+			</c:if>
+		</tr>
+	</table>
 	<br>
-	<c:out value="${collaborazione.commentoFeedback}"></c:out>
-	<br />
-	</c:if>
+	<table id="tabellaFeedback">
+		<tr>
+		  <th>Punteggio feedback</th>
+		  <th>Commenti sul collaboratore:</th>
+		</tr>
+		<tr>
+		<c:if test="${!empty conFeedBack}">
+		<td><c:out value="${collaborazione.punteggioFeedback}"></c:out></td>
+		<td><c:out value="${collaborazione.commentoFeedback}"></c:out></tr>
+		</c:if>
+		</tr>
+	</table><br>
 	<a href="profilo/azioni/collaborazioni">Torna alla lista di collaborazioni</a>
+</div>
 <jsp:include page="../../layoutInferiore.jsp"></jsp:include>
