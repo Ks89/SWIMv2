@@ -108,6 +108,18 @@ public class DettagliAltroUtenteServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		try {
+			request.setAttribute("listaAbilita", ricerche.insiemeAbilitaPersonaliUtente(utenteRicercato));
+		} catch (RicercheException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			request.setAttribute("punteggioFeedback", gestCollaborazioni.getPunteggioFeedback(utenteRicercato));
+		} catch (LoginException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		request.setAttribute("amiciziaGiaInoltrata",amicizie.amiciziaInoltrata(emailUtenteCollegato, utenteRicercato));
 		log.info("<---------------------------"+amicizie.amiciziaInoltrata(emailUtenteCollegato, utenteRicercato)+"---------------------------->");
 		request.setAttribute("tipoRicerca", tipoRicerca);
