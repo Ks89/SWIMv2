@@ -53,6 +53,7 @@ public class FeedBackServelet extends HttpServlet {
 		
 		String email= request.getParameter("emailUtente");
 		request.setAttribute("email",email);
+		request.setAttribute("tipoRicerca", request.getParameter("tipoRicerca"));
 		try {
 			List<Collaborazione> collaborazioni = gestioneCollab.getCollaborazioniRiceventeConFeedBack(email);
 
@@ -67,6 +68,9 @@ public class FeedBackServelet extends HttpServlet {
 		} catch (LoginException e) {
 			log.error(e.getMessage(), e);
 			request.setAttribute("erroreGetCollaborazioniDaTerminare", "Impossibile ottenere le collaborazioni");
+		}
+		if(!(emailUtenteCollegato.equals(email))){
+			request.setAttribute("altroUtente",email);
 		}
 		
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/listaFeedBack.jsp").forward(request, response);
