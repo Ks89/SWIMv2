@@ -45,7 +45,7 @@
 			</c:forEach>
 		</table>
 		<br>
-		<a href="profilo/azioni/feedbackUtente?emailUtente=${utente.email}" >Visualizza i feedback di questo utente</a>
+		<a href="profilo/azioni/feedbackUtente?emailUtente=${utente.email}&tipoRicerca=${tipoRicerca}" >Visualizza i feedback di questo utente</a>
 		<br>
 		<br>
 		<form id="dettagliAltroUtente" action="profilo/azioni/dettagliAltroUtente" method="POST">
