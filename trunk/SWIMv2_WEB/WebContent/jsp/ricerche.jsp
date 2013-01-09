@@ -10,9 +10,8 @@
 			<c:out value="La ricerca non ha ottenuto risultati"></c:out>
 		</c:if><br><br>
 		<c:choose>
-		
 		<c:when test="${tipoRicerca=='aiuto'}">
-			<h2><c:out value="Seleziona le abilità di cui sei alla ricerca"></c:out></h2><br>
+			<h2><c:out value="Seleziona le abilità di cui sei alla ricerca"></c:out></h2>
 			<table id="tabellaRigheAlterne">
 				<tr>
 				  <th></th>
@@ -34,10 +33,10 @@
 				<td style="text-align: justify;"><c:out value="${item.descrizione}" /></td>
 			</c:forEach>
 			</table><br>
+			 <br>
+			 <br>
 			 <input type="checkbox" name="soloAmici" value="Ricerca solo tra gli amici" />
-			 Ricerca solo tra gli amici
-			 <br>
-			 <br>
+			 Ricerca solo tra gli amici&nbsp;
 			 <input id="Cerca" type="submit" value="Cerca"/>
 			 <br><br>
 			 <c:if test="${risultatoRicerca}">
@@ -66,7 +65,7 @@
 		</c:when>
 		
 		<c:when test="${tipoRicerca=='aiutoVisitatore'}">
-			<h2><c:out value="Seleziona le abilità di cui sei alla ricerca"></c:out></h2><br>
+			<h2><c:out value="Seleziona le abilità di cui sei alla ricerca"></c:out></h2>
 			<table id="tabellaRigheAlterne">
 				<tr>
 				  <th></th>
@@ -114,6 +113,7 @@
 		</c:when>
 		
 		<c:otherwise>
+		<h2><c:out value="Ricerca utenti per nome"></c:out></h2>
 			Nome:<input type="text" name="nomeUtente"></input>
 			Cognome:<input type="text" name="cognomeUtente"></input>
 			<input id="Cerca" type="submit" value="Cerca"/>

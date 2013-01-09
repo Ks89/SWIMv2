@@ -48,17 +48,24 @@
 	</c:if>
 
 
-
+	<div align="center">
 	<c:if test="${empty nonCiSonoRichiesteAiuto}">
 		<br>
-		<br> Richieste di aiuto, inviate dagli utenti:
-		<table id="tabellaRichiesteAiuto" style="border-width: medium; border-style: solid;">
+		<h2> Richieste di aiuto, inviate dagli utenti:</h2>
+		<table id="tabellaRigheAlterne">
 			<tr>
 				<th>Utente richiedente</th>
 				<th>Nome richiesta aiuto</th>
 			</tr>
-			<c:forEach items="${richiesteAiuto}" var="richiestaAiuto">
-				<tr>
+			<c:forEach items="${richiesteAiuto}" var="richiestaAiuto"  varStatus="num">
+				<c:if test="${num.count>0}">
+						<c:if test="${num.count%2!=0}">
+							<tr>
+						</c:if>
+						<c:if test="${num.count%2==0}">
+							<tr class="alt">
+						</c:if>
+				</c:if>
 					<td><c:out value="${richiestaAiuto.utenteRichiedente.nome}" />&nbsp;<c:out value="${richiestaAiuto.utenteRichiedente.cognome}" /></td>
 					<td><a href="profilo/azioni/dettaglioRichiestaAiuto?idCollaborazione=<c:out value="${richiestaAiuto.id}" />"><c:out
 								value="${richiestaAiuto.nome}" /></a></td>
@@ -79,15 +86,22 @@
 	
 	<c:if test="${empty nonCiSonoRichiesteAmicizia}">
 		<br>
-		<br> Richieste di amicizia:
-	<table id="tabellaRichiesteAmicizia" style="border-width: medium; border-style: solid;">
+		<h2>Richieste di amicizia:</h2>
+	<table id="tabellaRigheAlterne">
 			<tr>
 				<th>Utente richiedente</th>
 			</tr>
-			<c:forEach items="${utentiCheRichidonoAmicizia}" var="utenteCheRichiedeAmicizia">
-				<tr>
-					<td><a href="profilo/azioni/profiloAltroUtente?emailUtenteRichiedente=<c:out value="${utenteCheRichiedeAmicizia.email}" />"> <c:out
-								value="${utenteCheRichiedeAmicizia.nome}" />&nbsp;<c:out value="${utenteCheRichiedeAmicizia.cognome}" /></a></td>
+			<c:forEach items="${utentiCheRichidonoAmicizia}" var="utenteCheRichiedeAmicizia"  varStatus="num">
+				<c:if test="${num.count>0}">
+						<c:if test="${num.count%2!=0}">
+							<tr>
+						</c:if>
+						<c:if test="${num.count%2==0}">
+							<tr class="alt">
+						</c:if>
+				</c:if>
+					<td><a href="profilo/azioni/profiloAltroUtente?emailUtenteRichiedente=<c:out value="${utenteCheRichiedeAmicizia.email}" />"> 
+					<c:out value="${utenteCheRichiedeAmicizia.nome}" />&nbsp;<c:out value="${utenteCheRichiedeAmicizia.cognome}" /></a></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -100,6 +114,6 @@
 			pager.showPage(1);
 		</script>
 	</c:if>
-
+</div>
 	<br>
 <jsp:include page="../../layoutInferiore.jsp"></jsp:include>

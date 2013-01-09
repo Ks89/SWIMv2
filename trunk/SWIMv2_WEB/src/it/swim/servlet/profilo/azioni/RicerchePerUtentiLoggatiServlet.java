@@ -148,7 +148,6 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 			if(tipoRicerca.equals("aiuto"))
 			{
 				try {
-					log.info("<---------------------------"+(String) UtenteCollegatoUtil.getEmailUtenteCollegato(request)+"----------------------------->");
 					risultatoRicerca=gestioneRicerche.ricercaAiuto(abilitaRicercate,(String) UtenteCollegatoUtil.getEmailUtenteCollegato(request));
 					if(soloAmici==true){
 						List<Utente> amiciUtente = gestioneAmicizie.getAmici(emailUtenteCollegato);

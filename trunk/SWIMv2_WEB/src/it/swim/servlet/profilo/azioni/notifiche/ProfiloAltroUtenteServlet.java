@@ -53,7 +53,7 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 		// se e' null e' perche' l'utente non e' collegato e allora devo fare il
 		// redirect alla home
 		if (emailUtenteCollegato == null) {
-			response.sendRedirect("../../..home");
+			response.sendRedirect("../../home");
 			return;
 		}
 

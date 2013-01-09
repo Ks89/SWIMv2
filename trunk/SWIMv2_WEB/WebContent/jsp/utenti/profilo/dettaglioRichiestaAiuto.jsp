@@ -3,33 +3,38 @@
 <jsp:include page="../../layoutSuperioreDown.jsp"></jsp:include>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	<c:if test="${!empty confermaRichiestaAiuto}">
-		<c:out value="${confermaRichiestaAiuto}"></c:out>
+	<div align="center">
+		<c:if test="${!empty confermaRichiestaAiuto}">
+			<c:out value="${confermaRichiestaAiuto}"></c:out>
+			<br>
+		</c:if>
+		<c:if test="${!empty erroreConfermaRichiestaAiuto}">
+			<c:out value="${erroreConfermaRichiestaAiuto}"></c:out>
+			<br>
+		</c:if>
+		<h2>Richiesta d'aiuto</h2>
+		<table id="tabellaFeedback">
+			<tr>
+			  <th>Utente</th>
+			  <th>Nome collaborazione</th>
+			  <th>Descrizione</th>
+			</tr>
+			<tr>
+				<td><c:out value="${nomeRichiedeAiuto}"></c:out>&nbsp;<c:out value="${cognomeRichiedeAiuto}"></c:out></td>
+				<td><c:out value="${nomeCollaborazione}"></c:out></td>
+				<td><c:out value="${descrizioneCollaborazione}"></c:out></td>
+			</tr>
+		<c:if test="${empty confermaRichiestaAiuto and empty erroreConfermaRichiestaAiuto}">
+			<tr><td colspan="3" style="text-align: center;">
+			<form id="dettaglioRichiestaAiuto" action="profilo/azioni/dettaglioRichiestaAiuto" method="POST">
+				<input type="hidden" name="tipo" /> 
+				<input type="hidden" name="idCollaborazione" value="${idCollaborazione}">
+				<input type="button" value="conferma" id="button" onclick="dettaglioRichiestaAiuto.elements['tipo'].value='CONFERMA'; dettaglioRichiestaAiuto.submit();" /> 
+				<input type="button" value="rifiuta" id="button" onclick="dettaglioRichiestaAiuto.elements['tipo'].value='RIFIUTA'; dettaglioRichiestaAiuto.submit();" />
+			</form></td></tr>
+		</c:if>
+		</table>
 		<br>
-	</c:if>
-	<c:if test="${!empty erroreConfermaRichiestaAiuto}">
-		<c:out value="${erroreConfermaRichiestaAiuto}"></c:out>
-		<br>
-	</c:if>
-
-	<br>Richiesta d'aiuto: 
-	<br> Utente: 
-	<c:out value="${nomeRichiedeAiuto}"></c:out>
-	<c:out value="${cognomeRichiedeAiuto}"></c:out>
-	<br> Nome collaborazione:
-	<c:out value="${nomeCollaborazione}"></c:out>
-	<br> Descrizione:
-	<c:out value="${descrizioneCollaborazione}"></c:out>
-
-	<c:if test="${empty confermaRichiestaAiuto and empty erroreConfermaRichiestaAiuto}">
-		<form id="dettaglioRichiestaAiuto" action="profilo/azioni/dettaglioRichiestaAiuto" method="POST">
-			<input type="hidden" name="tipo" /> 
-			<input type="hidden" name="idCollaborazione" value="${idCollaborazione}">
-			<input type="button" value="conferma" onclick="dettaglioRichiestaAiuto.elements['tipo'].value='CONFERMA'; dettaglioRichiestaAiuto.submit();" /> 
-			<input type="button" value="rifiuta" onclick="dettaglioRichiestaAiuto.elements['tipo'].value='RIFIUTA'; dettaglioRichiestaAiuto.submit();" />
-		</form>
-	</c:if>
-
-	<br>
-	<a href="profilo/azioni/notifiche">Torna alle notifiche</a>
+		<a href="profilo/azioni/notifiche">Torna alle notifiche</a>
+	</div>
 <jsp:include page="../../layoutInferiore.jsp"></jsp:include>
