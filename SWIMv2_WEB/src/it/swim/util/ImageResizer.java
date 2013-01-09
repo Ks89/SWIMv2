@@ -34,7 +34,6 @@ public final class ImageResizer {
 	public static BufferedImage ridimensionaImmagine(BufferedImage originale, int lunghezzaRidim, int altezzaRidim) {
 		BufferedImage ridimensionata = new BufferedImage(lunghezzaRidim, altezzaRidim, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2d = ridimensionata.createGraphics();
-		System.out.println(" dasdfhasfgaskjhfgasjhfgajhsfgjahsgfajsgfajshfgjas  " + originale.getWidth() + " - " + originale.getHeight());
 		affineTransform = AffineTransform.getScaleInstance((double)(lunghezzaRidim)/
 				originale.getWidth(),(double)(altezzaRidim)/originale.getHeight());
 		g2d.drawRenderedImage(originale,affineTransform);
