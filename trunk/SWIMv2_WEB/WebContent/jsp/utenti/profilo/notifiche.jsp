@@ -38,8 +38,8 @@
 		<c:out value="${nonCiSonoRichiesteAmicizia}"></c:out>
 		<br>
 	</c:if>
-	<c:if test="${!empty suggAccettato}">
-		<c:out value="${suggAccettato}"></c:out>
+	<c:if test="${!empty suggAccettati}">
+		<c:out value="${suggAccettati}"></c:out>
 		<br>
 	</c:if>
 	<c:if test="${!empty noSuggDisponibili}">
