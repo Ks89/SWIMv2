@@ -47,6 +47,9 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 	private GestioneRicercheLocal gestioneRicerche;
 	
 	@EJB
+	private GestioneAmicizieLocal gestioneAmicizie;
+	
+	@EJB
 	private GestioneCollaborazioniLocal gestioneCollaborazioni;
 	
 	private String tipoRicerca;
@@ -111,8 +114,10 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 		List<FileItem> items;
 		String nome = new String();
 		String cognome = new String();
+		String emailUtenteCollegato = (String) UtenteCollegatoUtil.getEmailUtenteCollegato(request);
 		List<Abilita> abilitaRicercate = new ArrayList<Abilita>();
 		List<Utente> risultatoRicerca = new ArrayList<Utente>();
+		boolean soloAmici=false;
 		ricerca=false;
 			try {
 				items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
@@ -130,6 +135,9 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 						if(item.getFieldName().equals("abilita")){
 							abilitaRicercate.add(registrazione.getAbilitaByNome(item.getString()));
 						}
+						if(item.getFieldName().equals("soloAmici")){
+							soloAmici=true;
+						}
 					}
 				}
 			} 
@@ -142,6 +150,16 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 				try {
 					log.info("<---------------------------"+(String) UtenteCollegatoUtil.getEmailUtenteCollegato(request)+"----------------------------->");
 					risultatoRicerca=gestioneRicerche.ricercaAiuto(abilitaRicercate,(String) UtenteCollegatoUtil.getEmailUtenteCollegato(request));
+					if(soloAmici==true){
+						List<Utente> amiciUtente = gestioneAmicizie.getAmici(emailUtenteCollegato);
+						for(int i=0; i<risultatoRicerca.size(); i++){
+							if(!(amiciUtente.contains(risultatoRicerca.get(i)))){
+								risultatoRicerca.remove(i);
+								i--;
+							}
+						}
+						
+					}
 				} catch (RicercheException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
