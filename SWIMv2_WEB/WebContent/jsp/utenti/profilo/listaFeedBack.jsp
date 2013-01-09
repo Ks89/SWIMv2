@@ -20,8 +20,8 @@
 		<c:forEach items="${collaborazioni}" var="collaborazione">
 			<table id="tabellaFeedback">
 				<tr>
-				  <th>Nome</th>
-				  <th>Chi ha rilasciato il feedback</th>
+				  <th>Collaborazione</th>
+				  <th>Collaborante</th>
 				  <th>Punteggio</th>
 				  <th>Commento</th>
 				</tr>
