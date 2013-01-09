@@ -4,6 +4,7 @@
 <!--<link rel="stylesheet" href="../../css/global.css" type="text/css"/> -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<div align="center">
 	<c:if test="${!empty erroreGetCollaborazioniDaTerminare}">
 		<c:out value="${erroreGetCollaborazioniDaTerminare}"></c:out>
 		<br>
@@ -13,32 +14,37 @@
 		<br>
 	</c:if>
 	<c:if test="${empty nonCiSonoCollaborazioniDaTerminare}">
-		<c:out value="Collaborazioni in corso:"></c:out>
-		<br>
-		<br>
+		<h2><c:out value="Collaborazioni in corso:"></c:out></h2>
 		<form id="collaborazioniInCorso" action="profilo/azioni/collaborazioni"
 			method="POST">
 			<input type="hidden" name="tipo" />
-			<table id="tabellaCollaborazioniInCorso"
-				style="border-width: medium; border-style: solid;">
+			<table id="tabellaRigheAlterne">
 				<tr>
 					<th>Utente Collaborante</th>
 					<th>Nome Collaborazione</th>
 					<th>Azione</th>
 				</tr>
-				<c:forEach items="${collaborazioniDaTerminare}" var="collaborazione">
-					<tr>
+				<c:forEach items="${collaborazioniDaTerminare}" var="collaborazione" varStatus="num">
+					<c:if test="${num.count>0}">
+						<c:if test="${num.count%2!=0}">
+							<tr>
+						</c:if>
+						<c:if test="${num.count%2==0}">
+							<tr class="alt">
+						</c:if>
+					</c:if>
 						<td><c:out value="${collaborazione.utenteRicevente.nome}" />&nbsp;<c:out
 								value="${collaborazione.utenteRicevente.cognome}" /></td>
 						<td><a
 							href="profilo/azioni/dettaglioCollaborazione?idCollaborazione=<c:out value="${collaborazione.id}" />"><c:out
 									value="${collaborazione.nome}" /></a></td>
-						<td><input type="button" value="Termina"
+						<td><input id="button" type="button" value="Termina"
 							onclick="collaborazioniInCorso.elements['tipo'].value=${collaborazione.id}; collaborazioniInCorso.submit();" />
 					</tr>
 				</c:forEach>
 			</table>
 		</form>
+		<br><br>
 		<c:if test="${!empty erroreGetCollaborazioniSenzaFeedback}">
 			<c:out value="${erroreGetCollaborazioniSenzaFeedback}"></c:out>
 			<br>
@@ -49,19 +55,22 @@
 		</c:if>
 	</c:if>
 	<c:if test="${empty nonCiSonoCollaborazioniSenzaFeedback}">
-		<c:out value="Collaborazioni senza feedback:"></c:out>
-		<br>
-		<br>
-		<table id="tabellaCollaborazioniSenzaFeedBack"
-			style="border-width: medium; border-style: solid;">
+		<h2><c:out value="Collaborazioni senza feedback:"></c:out></h2>
+		<table id="tabellaRigheAlterne">
 			<tr>
 				<th>Utente Collaborante</th>
 				<th>Nome Collaborazione</th>
 				<th>Azione</th>
 			</tr>
-			<c:forEach items="${collaborazioniDaRilasciareFeedBack}"
-				var="collaborazioneFeedBack">
-				<tr>
+			<c:forEach items="${collaborazioniDaRilasciareFeedBack}" var="collaborazioneFeedBack" varStatus="num">
+				<c:if test="${num.count>0}">
+						<c:if test="${num.count%2!=0}">
+							<tr>
+						</c:if>
+						<c:if test="${num.count%2==0}">
+							<tr class="alt">
+						</c:if>
+					</c:if>
 					<td><c:out
 							value="${collaborazioneFeedBack.utenteRicevente.nome}" />&nbsp;<c:out
 							value="${collaborazioneFeedBack.utenteRicevente.cognome}" /></td>
@@ -75,7 +84,7 @@
 			</c:forEach>
 		</table>
 	</c:if>
-	
+	<br><br>
 	<c:if test="${!empty erroreGetCollaborazioniTerminateConFeedBack}">
 			<c:out value="${erroreGetCollaborazioniTerminateConFeedBack}"></c:out>
 			<br>
@@ -85,18 +94,21 @@
 			<br>
 		</c:if>
 	<c:if test="${empty nonCiSonoCollaborazioniTerminateConFeedBack}">
-		<c:out value="Storico collaborazioni:"></c:out>
-		<br>
-		<br>
-		<table id="tabellaStoricoCollaborazioni"
-			style="border-width: medium; border-style: solid;">
+		<h2><c:out value="Storico collaborazioni:"></c:out></h2>
+		<table id="tabellaRigheAlterne">
 			<tr>
 				<th>Utente Collaborante</th>
 				<th>Nome Collaborazione</th>
 			</tr>
-			<c:forEach items="${collaborazioniTerminateConFeedBack}"
-				var="collaborazioneTerminateConFeedBack">
-				<tr>
+			<c:forEach items="${collaborazioniTerminateConFeedBack}" var="collaborazioneTerminateConFeedBack" varStatus="num">
+				<c:if test="${num.count>0}">
+						<c:if test="${num.count%2!=0}">
+							<tr>
+						</c:if>
+						<c:if test="${num.count%2==0}">
+							<tr class="alt">
+						</c:if>
+					</c:if>
 					<td><c:out
 							value="${collaborazioneTerminateConFeedBack.utenteRicevente.nome}" />&nbsp;<c:out
 							value="${collaborazioneTerminateConFeedBack.utenteRicevente.cognome}" /></td>
@@ -107,5 +119,5 @@
 			</c:forEach>
 		</table>
 	</c:if>
-
+</div>
 <jsp:include page="../../layoutInferiore.jsp"></jsp:include>
