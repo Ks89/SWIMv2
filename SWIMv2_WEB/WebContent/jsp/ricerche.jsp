@@ -34,6 +34,10 @@
 				<td style="text-align: justify;"><c:out value="${item.descrizione}" /></td>
 			</c:forEach>
 			</table><br>
+			 <input type="checkbox" name="soloAmici" value="Ricerca solo tra gli amici" />
+			 Ricerca solo tra gli amici
+			 <br>
+			 <br>
 			 <input id="Cerca" type="submit" value="Cerca"/>
 			 <br><br>
 			 <c:if test="${risultatoRicerca}">
