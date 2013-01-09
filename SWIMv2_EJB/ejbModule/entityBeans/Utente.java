@@ -21,7 +21,15 @@ import org.hibernate.validator.Pattern;
 	@NamedQuery(name = "Utente.getUtentiByNomeCognome", 
 			query = "SELECT u " +
 					"FROM Utente u " +
-					"WHERE u.nome = :nomeUtente AND u.cognome = :cognomeUtente AND u.email!=:emailUtente")
+					"WHERE u.nome = :nomeUtente AND u.cognome = :cognomeUtente AND u.email!=:emailUtente"),
+	@NamedQuery(name = "Utente.getUtentiByNome", 
+			query = "SELECT u " +
+					"FROM Utente u " +
+					"WHERE u.nome = :nomeUtente AND u.email!=:emailUtente"),
+	@NamedQuery(name = "Utente.getUtentiByCognome", 
+			query = "SELECT u " +
+					"FROM Utente u " +
+					"WHERE u.cognome = :cognomeUtente AND u.email!=:emailUtente")
 	})
 @Data
 @EqualsAndHashCode(of={"email"})
