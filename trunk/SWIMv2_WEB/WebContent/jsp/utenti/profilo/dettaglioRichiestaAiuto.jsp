@@ -22,7 +22,7 @@
 	<c:out value="${descrizioneCollaborazione}"></c:out>
 
 	<c:if test="${empty confermaRichiestaAiuto and empty erroreConfermaRichiestaAiuto}">
-		<form id="dettaglioRichiestaAiuto" action="profilo/azioni/notifiche/dettaglioRichiestaAiuto" method="POST">
+		<form id="dettaglioRichiestaAiuto" action="profilo/azioni/dettaglioRichiestaAiuto" method="POST">
 			<input type="hidden" name="tipo" /> 
 			<input type="hidden" name="idCollaborazione" value="${idCollaborazione}">
 			<input type="button" value="conferma" onclick="dettaglioRichiestaAiuto.elements['tipo'].value='CONFERMA'; dettaglioRichiestaAiuto.submit();" /> 
