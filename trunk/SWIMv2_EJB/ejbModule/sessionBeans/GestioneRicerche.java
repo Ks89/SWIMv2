@@ -73,12 +73,29 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Utente> ricercaUtenti(String nome, String cognome, String email)throws RicercheException{
-		if(nome == null || cognome==null || nome.length()==0 || cognome.length()==0)
+		Query query;
+		if(nome == null && cognome==null)
 			throw new RicercheException(RicercheException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
-		Query query = entityManager.createNamedQuery("Utente.getUtentiByNomeCognome");
-		query.setParameter("nomeUtente", nome);
-		query.setParameter("cognomeUtente", cognome);
-		query.setParameter("emailUtente", email);
+		if(nome!=null && cognome!=null && !nome.equals("") && !cognome.equals(""))
+		{	
+			query = entityManager.createNamedQuery("Utente.getUtentiByNomeCognome");
+			query.setParameter("nomeUtente", nome);
+			query.setParameter("cognomeUtente", cognome);
+			query.setParameter("emailUtente", email);
+		}
+		else if(nome!=null && (cognome==null || cognome.equals("")))
+		{	
+			query = entityManager.createNamedQuery("Utente.getUtentiByNome");
+			query.setParameter("nomeUtente", nome);
+			query.setParameter("emailUtente", email);
+		}
+		else
+		{
+			query = entityManager.createNamedQuery("Utente.getUtentiByCognome");
+			query.setParameter("cognomeUtente", cognome);
+			query.setParameter("emailUtente", email);
+		}
+		
 		List<Utente> risultatoRicerca = (List<Utente>)query.getResultList();
 		return risultatoRicerca;
 	}
