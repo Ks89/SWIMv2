@@ -2,6 +2,7 @@ package it.swim.servlet.profilo.azioni;
 
 import it.swim.util.ConvertitoreFotoInBlob;
 import it.swim.util.UtenteCollegatoUtil;
+import it.swim.util.exceptions.FotoException;
 
 import java.io.IOException;
 import java.sql.Blob;
@@ -134,8 +135,12 @@ public class ModificaProfiloServlet extends HttpServlet {
 					// String fieldname = item.getFieldName();
 					// String filename = item.getName();
 					// InputStream filecontent = item.getInputStream();
-
-					blob = ConvertitoreFotoInBlob.getBlobFromFileItem(item, LUNGHEZZA, ALTEZZA);
+					try {
+						blob = ConvertitoreFotoInBlob.getBlobFromFileItem(item, LUNGHEZZA, ALTEZZA);
+					} catch (FotoException e) {
+						//in questo caso uploada una foto predefinita
+						//TODO METTERE QUI CHIAMATA AL METODO
+					}
 				}
 			}
 
