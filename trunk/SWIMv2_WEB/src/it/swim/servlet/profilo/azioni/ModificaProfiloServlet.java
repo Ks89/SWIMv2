@@ -1,9 +1,9 @@
 package it.swim.servlet.profilo.azioni;
 
+import it.swim.util.ConvertitoreFotoInBlob;
 import it.swim.util.UtenteCollegatoUtil;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
 import org.apache.commons.fileupload.FileItem;
@@ -38,6 +37,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ModificaProfiloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	//--------------------------------IMPORTANTE--------------------------------
+	//--------------scegliere qui la dimensione della foto profilo--------------
+	private static final int LUNGHEZZA = 186, ALTEZZA = 249; 
 	
 	@EJB
 	private GestioneRegistrazioneLocal registrazione;
@@ -126,17 +129,13 @@ public class ModificaProfiloServlet extends HttpServlet {
 						abilitaDaAggiungereAllePersonali.add(registrazione.getAbilitaByNome(item.getString()));
 					}
 				} else {
+					//non cancellare questi commenti, potranno tornare utili
 					// Process form file field (input type="file").
 					// String fieldname = item.getFieldName();
 					// String filename = item.getName();
-					InputStream filecontent = item.getInputStream();
-					byte[] b = new byte[filecontent.available()];
-					log.debug("inputstream blob: " + filecontent.available());
-					if(filecontent.available()>0) {
-						filecontent.read(b);
-						blob = new SerialBlob(b);
-					}
-					filecontent.close();
+					// InputStream filecontent = item.getInputStream();
+
+					blob = ConvertitoreFotoInBlob.getBlobFromFileItem(item, LUNGHEZZA, ALTEZZA);
 				}
 			}
 
