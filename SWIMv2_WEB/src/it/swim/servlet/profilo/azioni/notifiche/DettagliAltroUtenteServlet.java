@@ -64,7 +64,8 @@ public class DettagliAltroUtenteServlet extends HttpServlet {
 		request.setAttribute("utente", ricerche.getUtenteByEmail(email));
 		try {
 			request.setAttribute("punteggioFeedback", gestCollaborazioni.getPunteggioFeedback(email));
-			request.setAttribute("feedback", Integer.valueOf(gestCollaborazioni.getPunteggioFeedback(email).intValue()));
+			if(gestCollaborazioni.getPunteggioFeedback(email)!=null)
+				request.setAttribute("feedback", Integer.valueOf(gestCollaborazioni.getPunteggioFeedback(email).intValue()));
 		} catch (LoginException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

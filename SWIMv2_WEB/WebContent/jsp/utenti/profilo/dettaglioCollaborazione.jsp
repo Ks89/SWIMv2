@@ -34,11 +34,28 @@
 		  <th>Commenti sul collaboratore:</th>
 		</tr>
 		<tr>
-		<c:if test="${!empty conFeedBack}">
-		<td><c:out value="${collaborazione.punteggioFeedback}"></c:out></td>
-		<td><c:out value="${collaborazione.commentoFeedback}"></c:out></tr>
+			<c:if test="${!empty conFeedBack}">
+			<td>
+			
+					<div id="STAR_RATING" align="center">
+						<ul>
+							<c:forEach begin="1" end="5" varStatus="num">
+								<c:if test="${num.count <= feedback}">
+									<li id="star_${num.count}" class="on"></li>
+								</c:if>
+								<c:if test="${num.count > feedback}">
+									<li id="star_${num.count}"></li>
+								</c:if>
+							</c:forEach>
+							<li style="background-image: none;">&nbsp;<c:out value="${collaborazione.punteggioFeedback}"></c:out></li>
+						</ul>
+					</div>
+			
+			</td>
+		<td><c:out value="${collaborazione.commentoFeedback}"></c:out></td>
 		</c:if>
 		</tr>
+		
 	</table><br>
 	<a href="profilo/azioni/collaborazioni">Torna alla lista di collaborazioni</a>
 </div>
