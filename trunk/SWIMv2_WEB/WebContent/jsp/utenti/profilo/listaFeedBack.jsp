@@ -28,7 +28,24 @@
 				<tr>
 					<td ><c:out value="${collaborazione.nome}" /></td>
 					<td><c:out value="${collaborazione.utenteRichiedente.nome}" />&nbsp;<c:out value="${collaborazione.utenteRichiedente.cognome}" /></td>
-					<td ><c:out value="${collaborazione.punteggioFeedback}" /></td>
+					<td >
+					
+						<div id="STAR_RATING" align="center">
+							<ul>
+								<c:forEach begin="1" end="5" varStatus="num">
+									<c:if test="${num.count <= collaborazione.punteggioFeedback}">
+										<li id="star_${num.count}" class="on"></li>
+									</c:if>
+									<c:if test="${num.count > collaborazione.punteggioFeedback}">
+										<li id="star_${num.count}"></li>
+									</c:if>
+								</c:forEach>
+								<%--<li style="background-image: none;">&nbsp;<c:out value="${collaborazione.punteggioFeedback}" /></li>--%>
+							</ul>
+						</div>
+				
+					
+					</td>
 					<td style="text-align: justify;"><c:out value="${collaborazione.commentoFeedback}" /></td>
 				</tr>
 			</table>

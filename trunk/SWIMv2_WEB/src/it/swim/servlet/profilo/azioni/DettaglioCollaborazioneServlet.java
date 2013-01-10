@@ -60,6 +60,8 @@ public class DettaglioCollaborazioneServlet extends HttpServlet {
 		terminata = request.getParameter("terminata");
 		conFeedBack=request.getParameter("conFeedBack");
 		request.setAttribute("collaborazione", collaborazione);
+		if(conFeedBack!=null)
+			request.setAttribute("feedback", Integer.valueOf(collaborazione.getPunteggioFeedback().intValue()));
 		request.setAttribute("terminata", terminata);
 		request.setAttribute("conFeedBack", conFeedBack);
 		

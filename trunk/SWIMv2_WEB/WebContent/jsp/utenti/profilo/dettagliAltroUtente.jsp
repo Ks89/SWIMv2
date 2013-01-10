@@ -32,7 +32,7 @@
 										<li id="star_${num.count}"></li>
 									</c:if>
 								</c:forEach>
-								<li style="background-image: none;">&nbsp;<c:out value="${punteggioFeedback}"/></li>
+								<%--<li style="background-image: none;">&nbsp;<c:out value="${punteggioFeedback}"/></li> --%>
 							</ul>
 						</div>
 					</c:if>
@@ -67,9 +67,10 @@
 		<form id="dettagliAltroUtente" action="profilo/azioni/dettagliAltroUtente" method="POST">
 			<input type="hidden" name="tipo" />
 			<c:if test="${amiciziaGiaInoltrata==false}">
-				<input type="button" value="Richiedi amicizia" onclick="dettagliAltroUtente.elements['tipo'].value='amicizia'; dettagliAltroUtente.submit();" />
+				<input type="button" id="button" value="Richiedi amicizia" onclick="dettagliAltroUtente.elements['tipo'].value='amicizia'; dettagliAltroUtente.submit(); " />
 				<br />
 			</c:if>
+			<br>
 			Nome:<input type="text" name="nomeCollaborazione"></input> 
 			Descrizione:<input type="text" name="descrizioneCollaborazione"></input><br><br>
 			<input type="button" id="button" value="Richiedi collaborazione" onclick="dettagliAltroUtente.elements['tipo'].value='collaborazione'; dettagliAltroUtente.submit();" />
