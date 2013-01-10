@@ -75,9 +75,12 @@ public class ProfiloServlet extends HttpServlet {
 				feedback = new String("Non disponibile");
 			} else {
 				feedback = Double.toString(punteggio);
+				request.setAttribute("feedback", Integer.valueOf(punteggio.intValue()));
 			}
 			log.debug("punteggioUtenteCollegato:" + feedback);
 			request.setAttribute("punteggioUtenteCollegato", feedback);
+			
+			
 		} catch (LoginException e) {
 			log.error(e.getMessage(), e);
 		}

@@ -19,10 +19,10 @@
 		<div align="center">
 			<table id="formInserimentoParametri">
 				<tr>
-					<td>Nome abilita proposta: </td><td><input id="nomeAbilita" type="text" name="nomeAbilita"></input></td>
+					<td>Nome abilita proposta: </td><td><input id="nomeAbilita" type="text" name="nomeAbilita" placeholder="Nome dell'abilita"></input></td>
 				</tr> 
 				<tr>
-					<td>Motivo: </td><td><input id="descrizioneAbilita" type="text" name="descrizioneAbilita"></input></td>
+					<td>Motivo: </td><td><input id="descrizioneAbilita" type="text" name="descrizioneAbilita" placeholder="Motivo della proposta"></input></td>
 				<tr>
 					<td colspan="2" style="text-align: center;"><input id="submit" type="submit" /></td>
 				</tr>

@@ -114,8 +114,8 @@
 		
 		<c:otherwise>
 		<h2><c:out value="Ricerca utenti per nome"></c:out></h2>
-			Nome:<input type="text" name="nomeUtente"></input>
-			Cognome:<input type="text" name="cognomeUtente"></input>
+			<input type="text" name="nomeUtente" placeholder="Il nome dell'utente"></input>&nbsp;
+			<input type="text" name="cognomeUtente" placeholder="Il cognome dell'utente"></input>
 			<input id="Cerca" type="submit" value="Cerca"/>
 			<br><br>
 			<c:if test="${risultatoRicerca}">
