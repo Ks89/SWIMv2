@@ -64,6 +64,7 @@ public class DettagliAltroUtenteServlet extends HttpServlet {
 		request.setAttribute("utente", ricerche.getUtenteByEmail(email));
 		try {
 			request.setAttribute("punteggioFeedback", gestCollaborazioni.getPunteggioFeedback(email));
+			request.setAttribute("feedback", Integer.valueOf(gestCollaborazioni.getPunteggioFeedback(email).intValue()));
 		} catch (LoginException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,6 +117,7 @@ public class DettagliAltroUtenteServlet extends HttpServlet {
 		}
 		try {
 			request.setAttribute("punteggioFeedback", gestCollaborazioni.getPunteggioFeedback(utenteRicercato));
+			request.setAttribute("feedback", Integer.valueOf(gestCollaborazioni.getPunteggioFeedback(utenteRicercato).intValue()));
 		} catch (LoginException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
