@@ -20,7 +20,23 @@
 			</tr>
 			<tr>
 				<td>Punteggio feedback: </td>
-				<td><c:out value="${punteggioFeedback}"></c:out></td>
+				<td>
+					<c:if test="${!empty punteggioFeedback}">
+						<div id="STAR_RATING" align="center">	
+							<ul>
+								<c:forEach begin="1" end="5" varStatus="num">
+									<c:if test="${num.count <= feedback}">
+										<li id="star_${num.count}" class="on"></li>
+									</c:if>
+									<c:if test="${num.count > feedback}">
+										<li id="star_${num.count}"></li>
+									</c:if>
+								</c:forEach>
+								<li style="background-image: none;">&nbsp;<c:out value="${punteggioFeedback}"/></li>
+							</ul>
+						</div>
+					</c:if>
+				</td>
 			</tr>
 		</table>
 		<br>

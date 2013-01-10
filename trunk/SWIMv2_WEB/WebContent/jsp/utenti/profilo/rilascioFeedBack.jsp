@@ -14,8 +14,8 @@
 				<br>
 			</c:if>
 			<table id="formInserimentoParametri">
-				<tr><td>Inserisci un punteggio (da 1 a 5): </td><td><input id="punteggio" type="text" name="punteggioFeedBack"></input></td></tr>
-				<tr><td>Commento (opzionale): </td><td><input id="commento" type="text" name="commentoFeedBack"></input></td></tr>
+				<tr><td>Inserisci un punteggio (da 1 a 5): </td><td><input id="punteggio" type="text" name="punteggioFeedBack" placeholder="Punteggio"></input></td></tr>
+				<tr><td>Commento (opzionale): </td><td><input id="commento" type="text" name="commentoFeedBack" placeholder="Lascia un commento"></input></td></tr>
 				<tr><td colspan="2" style="text-align: center;"><input id="submit" type="submit" /></td></tr>
 			</table>
 		</form>
