@@ -15,10 +15,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<%-- if che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
-	<c:if test="${!empty erroreLoginFallito}">
-	Si è verificato un errore: <c:out value="${erroreLoginFallito}"></c:out><br>
-	</c:if>
-
+	<div align="center">
+		<c:if test="${!empty erroreLoginFallito}">
+			<div class="alert">
+				<p>
+					Si è verificato un errore (<c:out value="${erroreLoginFallito}"></c:out>)
+				</p>
+			</div>
+		</c:if>
+	</div>
 	<br>
 	<br>
 	<br>
@@ -44,6 +49,7 @@
   </section>
 	
 	</c:if>
+		
 	<%--
 	<c:if test="${sessionScope.utenteCollegato == null}">
 	<form id="loginForm" action="login" method="POST">
