@@ -12,12 +12,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 @NamedQueries({
-	/*@NamedQuery(name = "PossiedePK.getUtenteByAbilita", query = "SELECT u FROM Utente u WHERE u.email IN " +
-	"(SELECT DISTINCT p.utente " +
-	"FROM PossiedePK p " +
-	"WHERE p.abilita IN :insiemeAbilita and (SELECT COUNT(pk) " +
-											"FROM PossiedePK pk " +
-											"WHERE pk.abilita IN :insiemeAbilita and pk.utente=p.utente) = :numAbilita )"),*/
 			@NamedQuery(name = "Possiede.getUtenteByAbilita",
 					query = "SELECT DISTINCT p.possiedePK.utente FROM Possiede p WHERE p.possiedePK.abilita IN (:insiemeAbilita) AND " +
 							"(SELECT COUNT(pk.possiedePK.utente) FROM Possiede pk " +

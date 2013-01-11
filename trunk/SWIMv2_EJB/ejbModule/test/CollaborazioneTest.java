@@ -1,5 +1,6 @@
 package test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -281,6 +282,15 @@ public class CollaborazioneTest {
 			assertTrue(collaborazioni.size() >= 1); 
 		} catch (CollaborazioneException e) {
 			fail(e.getCausa().name());
+		} catch (LoginException e) {
+			fail(e.getCausa().name());
+		}
+	}
+	
+	@Test
+	public void testCollaborazioniDaTerminare(){
+		try {
+			assertEquals(2,gestioneCollaborazioni.getCollaborazioniDaTerminare(MAIL_PEPPINO).size());
 		} catch (LoginException e) {
 			fail(e.getCausa().name());
 		}

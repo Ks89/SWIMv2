@@ -43,18 +43,16 @@ public class Utente implements Serializable  {
 
 	@Id
 	@Column(name = "Email", nullable = false, length=100)
-	@Pattern(regex=".+@.+\\..+", message="Inserisci un indirizzo email corretto")
+	@Pattern(regex=".+@.+\\.[a-z]+")
 	private String email;
 
 	@Column(name = "Password", nullable = false, length=64) //solo 64 perche' lo sha256 fa solo a 64 caratteri
 	private String password;
 
 	@Column(name = "Cognome", nullable = false, length=100)
-	@Pattern(regex="[a-zA-z ]*", message="Il cognome contiene caratteri non validi")
 	private String cognome;
 
 	@Column(name = "Nome", nullable = false, length=100)
-	@Pattern(regex="[a-zA-z ]*", message="Il nome contiene caratteri non validi")
 	private String nome;
 
 	@Column(name = "FotoProfilo", nullable = true)

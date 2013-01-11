@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.hibernate.validator.Pattern;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,6 +23,7 @@ public class Amministratore implements Serializable {
 
 	@Id
 	@Column(name = "Email", unique = true, nullable = false, length=100)
+	@Pattern(regex=".+@.+\\.[a-z]+")
 	private String email;
 
 	@Column(name = "Password", nullable = false, length=100)

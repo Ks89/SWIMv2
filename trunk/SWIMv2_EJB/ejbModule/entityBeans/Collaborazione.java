@@ -21,7 +21,6 @@ import lombok.EqualsAndHashCode;
 
 import org.hibernate.validator.Max;
 import org.hibernate.validator.Min;
-import org.hibernate.validator.Pattern;
 
 @NamedQueries({
 		@NamedQuery(name = "Collaborazione.getCollaborazioniCreateByEmail", query = "SELECT c "
@@ -76,7 +75,6 @@ public class Collaborazione implements Serializable {
 	private Utente utenteRichiedente;
 
 	@Column(name = "Nome", nullable = false)
-	@Pattern(regex = "[a-zA-z0-9 ]*", message = "Il nome contiene caratteri non validi")
 	private String nome;
 
 	@Column(name = "DataStipula", nullable = true)
@@ -88,7 +86,6 @@ public class Collaborazione implements Serializable {
 	private Date dataTermine;
 
 	@Column(name = "Descrizione", nullable = true, length = 500)
-	@Pattern(regex = "[a-zA-z0-9 ]*", message = "Il nome contiene caratteri non validi")
 	private String descrizione;
 
 	@Column(name = "PunteggioFeedback", nullable = true)

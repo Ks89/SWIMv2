@@ -2,15 +2,10 @@ package sessionBeans;
 
 import java.util.List;
 
-import javassist.expr.Cast;
-
 import javax.ejb.Stateless;
-import javax.faces.convert.IntegerConverter;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import org.jboss.security.xacml.sunxacml.attr.IntegerAttribute;
 
 import entityBeans.Abilita;
 import entityBeans.Utente;

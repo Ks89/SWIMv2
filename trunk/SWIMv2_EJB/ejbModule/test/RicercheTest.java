@@ -30,6 +30,9 @@ public class RicercheTest {
 	private static final String MAIL_GIOVANNINO = "giovannino@gmail.com";
 	private static final String MAIL_DAVIDE = "davide@gmail.com";
 	private static final String MAIL_JACOPO = "bulla.jacopo@gmail.com";
+	private static final String MAIL_GANELLI = "tommaso.ganelli@gmail.com";
+	private static final String MAIL_TOMMASO = "tommaso.ficcanaso@gmail.com";
+	private static final String MAIL_CIPCIOP = "cip.ciop@gmail.com";
 	private static final String MAIL_ADMIN = "admin@swim.it";
 	private static final String PASSWORD = "pippo";
 
@@ -38,16 +41,14 @@ public class RicercheTest {
 	private GestioneProposteRemote gestioneProposte;
 	private GestioneRegistrazioneRemote gestioneRegistrazione;
 	private List<Abilita> abilita = new ArrayList<Abilita>();
-	
+
 	public RicercheTest() throws NamingException, RegistrazioneException {
 		Properties env = new Properties();
 		env.setProperty("java.naming.factory.initial","org.jnp.interfaces.NamingContextFactory");
 		env.setProperty("java.naming.provider.url", "localhost:1099");
 		env.setProperty("java.naming.factory.url.pkgs", "org.jboss.naming");
-		
 
-		//non cancellarla, da tenere per quando sistemiamo i progetti e li mettiamo su google code
-		//	 	Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneCollaborazioni/remote-utililies.sessionRemote.GestioneCollaborazioniRemote");
+
 		try{
 			Object obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneRicerche/remote-utililies.sessionRemote.GestioneRicercheRemote");
 			gestioneRicerche = (GestioneRicercheRemote) PortableRemoteObject.narrow(obj, GestioneRicercheRemote.class);
@@ -57,7 +58,7 @@ public class RicercheTest {
 
 			obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneProposte/remote-utililies.sessionRemote.GestioneProposteRemote");
 			gestioneProposte = (GestioneProposteRemote) PortableRemoteObject.narrow(obj, GestioneProposteRemote.class);
-			
+
 			obj = (new InitialContext(env)).lookup("SWIMv2_EAR/GestioneRegistrazione/remote-utililies.sessionRemote.GestioneRegistrazioneRemote");
 			gestioneRegistrazione = (GestioneRegistrazioneRemote) PortableRemoteObject.narrow(obj, GestioneRegistrazioneRemote.class);
 
@@ -71,7 +72,7 @@ public class RicercheTest {
 			//svuota DB
 			testUtils.svuotaDatabase();
 			//aggiunge amministratore
-			gestioneRegistrazione.registrazioneAmministratore("admin@swim.it","pippo");
+			gestioneRegistrazione.registrazioneAmministratore(MAIL_ADMIN,PASSWORD);
 			//Inserisce due abilità nel DB
 			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN, "1ab","Descrizione");
 			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN,"2ab","Descrizione");
@@ -83,24 +84,24 @@ public class RicercheTest {
 			gestioneProposte.inserisciAbilitaAutonomamente(MAIL_ADMIN,"8ab","Descrizione");
 			//aggiunge due utenti nel DB
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("1ab"));
-			gestioneRegistrazione.registrazioneUtente("peppino@gmail.com", "pippo", "peppino", "peppo", null, abilita);
-			gestioneRegistrazione.registrazioneUtente("davide@gmail.com", "pippo", "Davide", "Caio", null, abilita);
-			gestioneRegistrazione.registrazioneUtente("giovannino@gmail.com", "pippo", "Giovanni", "gio", null, abilita);
-			gestioneRegistrazione.registrazioneUtente("bulla.jacopo@gmail.com", "pippo", "jacopo", "Bulla", null, abilita);
+			gestioneRegistrazione.registrazioneUtente(MAIL_PEPPINO, PASSWORD, "peppino", "peppo", null, abilita);
+			gestioneRegistrazione.registrazioneUtente(MAIL_DAVIDE, PASSWORD, "Davide", "Caio", null, abilita);
+			gestioneRegistrazione.registrazioneUtente(MAIL_GIOVANNINO, PASSWORD, "Giovanni", "gio", null, abilita);
+			gestioneRegistrazione.registrazioneUtente(MAIL_JACOPO, PASSWORD, "jacopo", "Bulla", null, abilita);
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("2ab"));
-			gestioneRegistrazione.registrazioneUtente("tommaso.ganelli@gmail.com", "pippo", "Tommaso", "Ganelli", null, abilita);
-			gestioneRegistrazione.registrazioneUtente("tommaso.ficcanaso@gmail.com", "pippo", "tommy", "gigio", null, abilita);
+			gestioneRegistrazione.registrazioneUtente(MAIL_GANELLI, PASSWORD, "Tommaso", "Ganelli", null, abilita);
+			gestioneRegistrazione.registrazioneUtente(MAIL_TOMMASO, PASSWORD, "tommy", "gigio", null, abilita);
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("3ab"));
 			abilita.add(gestioneRegistrazione.getAbilitaByNome("5ab"));
-			gestioneRegistrazione.registrazioneUtente("cip.ciop@gmail.com", "pippo", "cip", "cioppo", null, abilita);
-			
+			gestioneRegistrazione.registrazioneUtente(MAIL_CIPCIOP, PASSWORD, "cip", "cioppo", null, abilita);
+
 		} catch (HashingException e) {
 			fail("HashingException: " + e);
 		} catch (ProposteException e) {
 			fail("ProposteException: " + e);
 		}
 	}
-	
+
 	@Test
 	public void elencoAbilitaGenerali(){
 		List<Abilita> ab = new ArrayList<Abilita>();
@@ -116,17 +117,17 @@ public class RicercheTest {
 			Assert.assertTrue(gestioneRicerche.insiemeAbilitaGenerali().contains(abilita));
 		}
 		Assert.assertTrue(gestioneRicerche.insiemeAbilitaGenerali().size()==ab.size());
-		
+
 	}
-	
+
 	@Test
 	public void ricercaUtenti() throws RicercheException
 	{
-		Utente u=gestioneRicerche.getUtenteByEmail("peppino@gmail.com");
-		Assert.assertTrue(gestioneRicerche.ricercaUtenti("Peppino", "Peppo","bulla.jacopo@gmail.com").contains(u));
-		Assert.assertFalse(gestioneRicerche.ricercaUtenti("Jacopo", "Bulla","bulla.jacopo@gmail.com").contains(u));
+		Utente u=gestioneRicerche.getUtenteByEmail(MAIL_PEPPINO);
+		Assert.assertTrue(gestioneRicerche.ricercaUtenti("Peppino", "Peppo",MAIL_JACOPO).contains(u));
+		Assert.assertFalse(gestioneRicerche.ricercaUtenti("Jacopo", "Bulla",MAIL_JACOPO).contains(u));
 		try{
-			gestioneRicerche.ricercaUtenti("", "Peppo","bulla.jacopo@gmail.com");
+			gestioneRicerche.ricercaUtenti("", "Peppo",MAIL_JACOPO);
 			Assert.assertTrue(false);
 		}
 		catch(RicercheException ex)
@@ -134,7 +135,7 @@ public class RicercheTest {
 			Assert.assertTrue(true);
 		}
 		try{
-			gestioneRicerche.ricercaUtenti("Peppino", "","bulla.jacopo@gmail.com");
+			gestioneRicerche.ricercaUtenti("Peppino", "",MAIL_JACOPO);
 			Assert.assertTrue(false);
 		}
 		catch(RicercheException ex)
@@ -142,7 +143,7 @@ public class RicercheTest {
 			Assert.assertTrue(true);
 		}
 		try{
-			gestioneRicerche.ricercaUtenti("", "","bulla.jacopo@gmail.com");
+			gestioneRicerche.ricercaUtenti("", "",MAIL_JACOPO);
 			Assert.assertTrue(false);
 		}
 		catch(RicercheException ex)
@@ -150,15 +151,15 @@ public class RicercheTest {
 			Assert.assertTrue(true);
 		}
 	}
-	
+
 	@Test
 	public void elencoAbilitaPersonaliUtente() throws RicercheException
 	{
 		List<Abilita> ab = new ArrayList<Abilita>();
 		ab.add(new Abilita("1ab","Descrizione"));
 		ab.add(new Abilita("2ab","Descrizione"));
-		Assert.assertTrue(gestioneRicerche.insiemeAbilitaPersonaliUtente("tommaso.ganelli@gmail.com").contains(ab.get(0)));
-		Assert.assertTrue(gestioneRicerche.insiemeAbilitaPersonaliUtente("tommaso.ganelli@gmail.com").contains(ab.get(1)));
+		Assert.assertTrue(gestioneRicerche.insiemeAbilitaPersonaliUtente(MAIL_GANELLI).contains(ab.get(0)));
+		Assert.assertTrue(gestioneRicerche.insiemeAbilitaPersonaliUtente(MAIL_GANELLI).contains(ab.get(1)));
 		try{
 			gestioneRicerche.insiemeAbilitaPersonaliUtente("");
 			Assert.assertTrue(false);
@@ -168,7 +169,7 @@ public class RicercheTest {
 			Assert.assertTrue(true);
 		}
 	}
-	
+
 	@Test
 	public void elencoUtentiByAbilita() throws RicercheException
 	{
@@ -176,9 +177,9 @@ public class RicercheTest {
 		ab.add(new Abilita("1ab","Descrizione"));
 		ab.add(new Abilita("2ab","Descrizione"));
 		List<Utente> utenti= new ArrayList<Utente>();
-		utenti.add(gestioneRicerche.getUtenteByEmail("tommaso.ganelli@gmail.com"));
-		utenti.add(gestioneRicerche.getUtenteByEmail("tommaso.ficcanaso@gmail.com"));
-		utenti.add(gestioneRicerche.getUtenteByEmail("cip.ciop@gmail.com"));
+		utenti.add(gestioneRicerche.getUtenteByEmail(MAIL_GANELLI));
+		utenti.add(gestioneRicerche.getUtenteByEmail(MAIL_TOMMASO));
+		utenti.add(gestioneRicerche.getUtenteByEmail(MAIL_CIPCIOP));
 		Assert.assertTrue(gestioneRicerche.ricercaAiutoVisitatore(ab).contains(utenti.get(0)));
 		Assert.assertTrue(gestioneRicerche.ricercaAiutoVisitatore(ab).contains(utenti.get(1)));
 		Assert.assertTrue(gestioneRicerche.ricercaAiutoVisitatore(ab).contains(utenti.get(2)));
@@ -200,5 +201,4 @@ public class RicercheTest {
 			Assert.assertTrue(true);
 		}
 	}
-	
 }
