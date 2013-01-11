@@ -89,6 +89,11 @@ public class RegistrazioneServlet extends HttpServlet {
 
 		List<Abilita> abilitaPersonaliRegistrazione = new ArrayList<Abilita>();
 
+		//nel caso ci siano errori e devo tornare alla stessa jsp, preparo subito la lista delle abilita' da rivisualizzare
+		// Ottengo abilita dall'insieme generale e le metto nella request
+		List<Abilita> abilitaInsiemeGenerale = ricerche.insiemeAbilitaGenerali();
+		request.setAttribute("abilita", abilitaInsiemeGenerale);
+
 		try {
 			items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 
@@ -122,15 +127,22 @@ public class RegistrazioneServlet extends HttpServlet {
 					try {
 						blob = ConvertitoreFotoInBlob.getBlobFromFileItem(item, LUNGHEZZA, ALTEZZA, DIMMB);
 					} catch (FotoException e) {
-						if(e.getCausa().equals(FotoException.Causa.FILETROPPOGRANDE)) {
-							//TODO mostrare messaggio d'errore
-						} else {
-							if(e.getCausa().equals(FotoException.Causa.NONRICONOSCIUTACOMEFOTO)) {
-								//TODO mostrare messaggio d'errore
+						try {
+							if(e.getCausa().equals(FotoException.Causa.FILETROPPOGRANDE)) {
+								blob = ConvertitoreFotoInBlob.getBlobFromDefaultImage();
+								request.setAttribute("erroreFileTroppoGrande", "Errore, file troppo grande! E' stata impostata la foto di profilo predefinita");
+							} else {
+								if(e.getCausa().equals(FotoException.Causa.NONRICONOSCIUTACOMEFOTO)) {
+									blob = ConvertitoreFotoInBlob.getBlobFromDefaultImage();
+									request.setAttribute("erroreNonFoto", "Errore, foto non riconosciuta! E' stata impostata la foto di profilo predefinita");
+								}
 							}
+							//in questo caso uploada una foto predefinita
+							blob = ConvertitoreFotoInBlob.getBlobFromDefaultImage();
+							request.setAttribute("erroreFotoSconosciuto", "Errore durante il caricamento della foto! E' stata impostata la foto di profilo predefinita");
+						} catch (FotoException e1) {
+							request.setAttribute("erroreFotoSconosciuto", "Errore durante il caricamento della foto! E' stata impostata la foto di profilo predefinita");
 						}
-						//in questo caso uploada una foto predefinita
-						//TODO METTERE QUI CHIAMATA AL METODO
 					}
 				}
 			}
@@ -141,12 +153,23 @@ public class RegistrazioneServlet extends HttpServlet {
 			log.debug("cognome: " + cognome );
 			log.debug("Lista abilita passate in registrazione: " +  Arrays.toString(abilitaPersonaliRegistrazione.toArray()));
 
+			if(blob==null) {
+				try {
+					blob = ConvertitoreFotoInBlob.getBlobFromDefaultImage();
+				} catch (FotoException e) {
+					request.setAttribute("erroreFotoPredefinita", "Errore durante il caricamento della foto predefinita. Nessun file caricato!");
+				}
+			}
+			
 		} catch (FileUploadException e) {
 			log.error(e.getMessage(), e);
+			request.setAttribute("erroreFotoIrreversibile", "Errore durante il caricamento della foto! Non e' stata impostata nessuna foto di profilo");
 		} catch (SerialException e) {
 			log.error(e.getMessage(), e);
+			request.setAttribute("erroreFotoIrreversibile", "Errore durante il caricamento della foto! Non e' stata impostata nessuna foto di profilo");
 		} catch (SQLException e) {
 			log.error(e.getMessage(), e);
+			request.setAttribute("erroreFotoIrreversibile", "Errore durante il caricamento della foto! Non e' stata impostata nessuna foto di profilo");
 		}
 
 
@@ -161,15 +184,21 @@ public class RegistrazioneServlet extends HttpServlet {
 
 				request.getSession().setAttribute("utenteCollegato", email);
 
-				response.sendRedirect("profilo/profilo");
+				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/profilo.jsp").forward(request, response);
+
 			} else {
 				log.debug("Errore registrazione");
+				request.setAttribute("erroreRegistrazione", "Errore durante la registrazione");
 				getServletConfig().getServletContext().getRequestDispatcher("/jsp/visitatore/registrazione.jsp").forward(request, response);
 			}
 		} catch (HashingException e) {
 			log.error(e.getMessage(), e);
+			request.setAttribute("erroreHashing", "Errore hashing durante la registrazione");
+			getServletConfig().getServletContext().getRequestDispatcher("/jsp/visitatore/registrazione.jsp").forward(request, response);
 		} catch (RegistrazioneException e) {
 			log.error(e.getMessage(), e);
+			request.setAttribute("erroreSconosciutoRegistrazione", "Errore sconosciuto durante la registrazione");
+			getServletConfig().getServletContext().getRequestDispatcher("/jsp/visitatore/registrazione.jsp").forward(request, response);
 		}
 	}
 }

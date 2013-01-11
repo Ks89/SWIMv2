@@ -19,14 +19,12 @@ import exceptions.LoginException;
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 
 /**
- * Servlet implementation class FotoServlet
+ * Servlet per gestire le foto del profilo
  */
 @Slf4j
 public class FotoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	//uso gestione collaborazione perche' tanto contiene un metodo per ottenere l'utente, data l'email
-	//tale metodo e' presente anche nelle amicizie ecc... non fa differenza
 	@EJB
 	private GestioneCollaborazioniLocal gestioneCollaborazioni; 
 
@@ -49,7 +47,6 @@ public class FotoServlet extends HttpServlet {
 		}
 		
 		String emailUtente = request.getParameter("emailUtente");
-		log.debug("--------------------_______________________-----------------________________-------> " + emailUtente);
 		try {
 			Blob blob = gestioneCollaborazioni.getUtenteByEmail(emailUtente).getFotoProfilo();
 			if(blob!=null) {
