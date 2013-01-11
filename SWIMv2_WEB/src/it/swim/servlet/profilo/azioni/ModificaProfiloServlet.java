@@ -38,14 +38,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ModificaProfiloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	//--------------------------------IMPORTANTE--------------------------------
 	//--------------scegliere qui la dimensione della foto profilo--------------
 	private static final int LUNGHEZZA = 186, ALTEZZA = 249; 
-	
+
 	//---------------dimensione massima in MB del file uploadato----------------
 	private static final int DIMMB = 6;
-	
+
 	@EJB
 	private GestioneRegistrazioneLocal registrazione;
 
@@ -82,6 +82,7 @@ public class ModificaProfiloServlet extends HttpServlet {
 			request.setAttribute("abilita", this.getListaAbilitaAggiungibili(emailUtenteCollegato));
 		} catch (RicercheException e) {
 			log.error(e.getMessage(), e);
+			request.setAttribute("erroreGelListaAbilitaAggiungibili", "Errore caricamento abilita' modificabili dall'utente");
 		}
 
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/modificaProfilo.jsp").forward(request, response);
@@ -142,14 +143,14 @@ public class ModificaProfiloServlet extends HttpServlet {
 						blob = ConvertitoreFotoInBlob.getBlobFromFileItem(item, LUNGHEZZA, ALTEZZA, DIMMB);
 					} catch (FotoException e) {
 						if(e.getCausa().equals(FotoException.Causa.FILETROPPOGRANDE)) {
-							//TODO mostrare messaggio d'errore
+							request.setAttribute("erroreFileTroppoGrande", "Errore, file troppo grande! La foto attuale del profilo non e' stata modificata");
 						} else {
 							if(e.getCausa().equals(FotoException.Causa.NONRICONOSCIUTACOMEFOTO)) {
-								//TODO mostrare messaggio d'errore
+								request.setAttribute("erroreNonFoto", "Errore, foto non riconosciuta! La foto attuale del profilo non e' stata modificata");
 							}
 						}
 						//in questo caso uploada una foto predefinita
-						//TODO METTERE QUI CHIAMATA AL METODO
+						request.setAttribute("erroreFotoSconosciuto", "Errore durante il caricamento della foto! La foto attuale del profilo non e' stata modificata");
 					}
 				}
 			}
@@ -192,13 +193,14 @@ public class ModificaProfiloServlet extends HttpServlet {
 				request.setAttribute("erroreInserimentoFoto", "Errore nel caricamento della nuova foto del profilo");
 			}
 		}
-		
+
 		try {
 			request.setAttribute("abilita", this.getListaAbilitaAggiungibili(emailUtenteCollegato));
 		} catch (RicercheException e) {
 			log.error(e.getMessage(), e);
+			request.setAttribute("erroreGelListaAbilitaAggiungibili", "Errore caricamento abilita' modificabili dall'utente");
 		}
-		
+
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/modificaProfilo.jsp").forward(request, response);
 	}
 

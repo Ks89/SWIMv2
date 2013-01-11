@@ -4,6 +4,22 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<div align="center">
+	
+	
+	<%-- Per gestire i vari errori durante l'upload della foto profilo --%>
+	<c:choose>
+		<c:when test="${!empty erroreFileTroppoGrande}"> <c:out value="${erroreFileTroppoGrande}"></c:out><br>
+		</c:when>
+		<c:when test="${!empty erroreNonFoto}"> <c:out value="${erroreNonFoto}"></c:out><br>
+		</c:when>
+		<c:when test="${!empty erroreFotoSconosciuto}"> <c:out value="${erroreFotoSconosciuto}"></c:out><br>
+		</c:when>
+		<c:when test="${!empty erroreFotoIrreversibile}"> <c:out value="${erroreFotoIrreversibile}"></c:out><br>
+		</c:when>
+	</c:choose>
+	
+	
+	
 	<h1>Il mio profilo</h1><br>
 	<table id="formInserimentoParametri">
 	<tr><td>Email:</td><td><c:out value="${sessionScope.utenteCollegato}"></c:out></td>

@@ -3,19 +3,29 @@
 <jsp:include page="../../layoutSuperioreDown.jsp"></jsp:include>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	<%-- if che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
-	<c:if test="${!empty erroreInserimentoFoto}">
-		<c:out value="${erroreInserimentoFoto}"></c:out>
-	</c:if>
-	<c:if test="${!empty erroreInserimentoProposta}">
-		<c:out value="${erroreInserimentoProposta}"></c:out>
-	</c:if>
-	<c:if test="${!empty modificaAbilitaRiuscitaConSuccesso}">
-		<c:out value="${modificaAbilitaRiuscitaConSuccesso}"></c:out>
-	</c:if>
-	<c:if test="${!empty modificaFotoRiuscitaConSuccesso}">
-		<c:out value="${modificaFotoRiuscitaConSuccesso}"></c:out>
-	</c:if>
+	<%-- choose che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
+	<c:choose>
+		<c:when test="${!empty erroreFileTroppoGrande}"> <c:out value="${erroreFileTroppoGrande}"></c:out><br>
+		</c:when>
+		<c:when test="${!empty erroreNonFoto}"> <c:out value="${erroreNonFoto}"></c:out><br>
+		</c:when>
+		<c:when test="${!empty erroreFotoSconosciuto}"> <c:out value="${erroreFotoSconosciuto}"></c:out><br>
+		</c:when>
+		<c:when test="${!empty erroreFotoIrreversibile}"> <c:out value="${erroreFotoIrreversibile}"></c:out><br>
+		</c:when>
+		<c:when test="${!empty erroreInserimentoFoto}"> <c:out value="${erroreInserimentoFoto}"></c:out><br>
+		</c:when>
+		<c:when test="${!empty erroreInserimentoProposta}"> <c:out value="${erroreInserimentoProposta}"></c:out><br>
+		</c:when>
+		<c:when test="${!empty modificaAbilitaRiuscitaConSuccesso}"> <c:out value="${modificaAbilitaRiuscitaConSuccesso}"></c:out><br>
+		</c:when>
+		<c:when test="${!empty modificaFotoRiuscitaConSuccesso}"> <c:out value="${modificaFotoRiuscitaConSuccesso}"></c:out><br>
+		</c:when>
+		<c:when test="${!empty erroreGelListaAbilitaAggiungibili}"> <c:out value="${erroreGelListaAbilitaAggiungibili}"></c:out><br>
+		</c:when>
+	</c:choose>
+	
+
 	<%-- Form della modifica del profilo --%>
 	<%-- Form che permette di inviare sia file allegati sia dati prelevati dalle input text.
 		Essendo una post verra' intercettata dalla doPost della servlet specificata in action="modificaProfilo" --%>

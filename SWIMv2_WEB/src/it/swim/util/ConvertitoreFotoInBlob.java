@@ -44,11 +44,11 @@ public class ConvertitoreFotoInBlob {
 			filecontent.read(b); //metto i dati nell'array b che uso nei metodi successivi
 
 			log.debug("       ------------            " + b.length);
-			
+
 			if(b.length>dimensioneMaxInMB*1024*1024) { //se file piu' grande di dimensioneMaxInMB lancia eccezione
 				throw new FotoException(FotoException.Causa.FILETROPPOGRANDE);
 			}
-			
+
 			//per poter ridimensionare l'immagine ho bisogno dia vere un BufferedImage, allora converto il byte[] in BufferedImage
 			BufferedImage bufferedImage = ImageResizer.convertiByteArrayInBufferedImage(b);
 
@@ -62,11 +62,40 @@ public class ConvertitoreFotoInBlob {
 				//ora riconverto la bufferedImage in byte[]
 				byte[] ridottaConvertita = ImageResizer.convertiBufferedImageInByteArray(ridimensionata);
 
-				//infine converto l'immagine in byte[] in un Blob per salvarlo sul database
+				//infine converto l'immagine in byte[] in un Blob per salvarlo sul database, non in questo metodo pero'
 				blob = new SerialBlob(ridottaConvertita);
 			}
 		}
 		filecontent.close();
+		return blob;
+	}
+
+
+
+
+	/**
+	 * Metodo per caricare la foto del profilo di default
+	 * @return <b>blob</b> che rappresenta l'oggetto pronto per essere salvato sul database
+	 * @throws IOException errore durante il ridimensionamento oppure nella conversione in Blob
+	 * @throws SerialException errore nella conversione in Blob
+	 * @throws SQLException errore nella conversione in Blob
+	 * @throws FotoException errore con causa: ERROREFOTODEFAULT se non e' stata letta la foto di default dal disco
+	 */
+	public static Blob getBlobFromDefaultImage() throws IOException, SerialException, SQLException, FotoException {
+		Blob blob = null;
+
+		//per poter caricare l'immagine ho bisogno di leggere dal disco una BufferedImage
+		BufferedImage bufferedImage = FotoProfiloDefault.getInstance().getFotoProfiloDefault();
+
+		if(!FotoProfiloDefault.getInstance().isErrore() && bufferedImage!=null) {
+			//ora converto la bufferedImage in byte[]
+			byte[] ridottaConvertita = ImageResizer.convertiBufferedImageInByteArray(bufferedImage);
+
+			//infine converto l'immagine in byte[] in un Blob per salvarlo sul database, non in questo metodo pero'
+			blob = new SerialBlob(ridottaConvertita);
+		} else {
+			throw new FotoException(FotoException.Causa.ERROREFOTODEFAULT);
+		}
 		return blob;
 	}
 }
