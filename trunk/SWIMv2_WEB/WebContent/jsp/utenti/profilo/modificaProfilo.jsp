@@ -69,7 +69,7 @@
 		<%-- input di tipo file per uploadare il file e poi il submit per mandare la form --%>
 		<br>
 		<table id="formInserimentoParametri">
-		<tr><td>Cambia l'immagine del profilo: </td><td><input id="file" name="file" type="file" /></td></tr>
+		<tr><td>Cambia l'immagine del profilo: </td><td><input id="file" name="file" type="file" accept="image/*" /></td></tr>
 		<tr><td colspan="2" style="text-align: center;"><input id="submit" type="submit" /></td></tr>
 		</table>
 	</form>
