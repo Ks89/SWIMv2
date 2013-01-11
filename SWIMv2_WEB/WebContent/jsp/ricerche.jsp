@@ -7,8 +7,12 @@
 <form action="profilo/azioni/ricerchePerUtentiLoggati" method="POST" enctype="multipart/form-data">
 	<div align="center">
 		<c:if test="${!risultatoRicerca and ricercaGiaEffettuata}">
-			<c:out value="La ricerca non ha ottenuto risultati"></c:out>
-		</c:if><br><br>
+			<div class="alert">
+				<p>
+					<c:out value="La ricerca non ha ottenuto risultati"></c:out>
+				</p>
+			</div>
+		</c:if>
 		<c:choose>
 		<c:when test="${tipoRicerca=='aiuto'}">
 			<h2><c:out value="Seleziona le abilità di cui sei alla ricerca"></c:out></h2>

@@ -230,6 +230,24 @@ background-color:#297ACC;
 	padding: 5px;
 }
 
+/*Messaggio errore*/
+.alert {
+   background: #fff6bf url('../img/alert/exclamation.png') 15px center no-repeat;
+   text-align: left;
+   padding: 10px 20px 10px 50px;
+   border-top: 2px solid #ffd324;
+   border-bottom: 2px solid #ffd324;
+   width:400px;
+   
+}
+
+.alert p{
+	font-size: 14px;
+	margin-top: 0px;
+	width: auto;
+	margin: auto;
+	text-align: left;
+}
 /* CSS per tabelle con righe a 2 colori*/
 #tabellaRigheAlterne
 {
