@@ -127,22 +127,6 @@ public class RicercheTest {
 		Assert.assertTrue(gestioneRicerche.ricercaUtenti("Peppino", "Peppo",MAIL_JACOPO).contains(u));
 		Assert.assertFalse(gestioneRicerche.ricercaUtenti("Jacopo", "Bulla",MAIL_JACOPO).contains(u));
 		try{
-			gestioneRicerche.ricercaUtenti("", "Peppo",MAIL_JACOPO);
-			Assert.assertTrue(false);
-		}
-		catch(RicercheException ex)
-		{
-			Assert.assertTrue(true);
-		}
-		try{
-			gestioneRicerche.ricercaUtenti("Peppino", "",MAIL_JACOPO);
-			Assert.assertTrue(false);
-		}
-		catch(RicercheException ex)
-		{
-			Assert.assertTrue(true);
-		}
-		try{
 			gestioneRicerche.ricercaUtenti("", "",MAIL_JACOPO);
 			Assert.assertTrue(false);
 		}

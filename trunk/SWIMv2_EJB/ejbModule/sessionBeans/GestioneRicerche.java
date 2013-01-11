@@ -69,7 +69,7 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 	@SuppressWarnings("unchecked")
 	public List<Utente> ricercaUtenti(String nome, String cognome, String email)throws RicercheException{
 		Query query;
-		if(nome == null && cognome==null)
+		if((nome == null || nome.equals("")) && (cognome==null || cognome.equals("")))
 			throw new RicercheException(RicercheException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
 		if(nome!=null && cognome!=null && !nome.equals("") && !cognome.equals(""))
 		{	
