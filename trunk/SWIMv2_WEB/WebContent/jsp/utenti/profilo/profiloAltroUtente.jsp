@@ -36,7 +36,7 @@
 		<c:otherwise>
 			<br>
 			<br> Amici suggeriti:
-			<form id="accettaSuggerimentoForm" action="profiloAltroUtente" method="POST">
+			<form action="profiloAltroUtente" method="POST">
 				<table id="tabellaSuggerimenti" style="border-width: medium; border-style: solid;">
 					<tr>
 						<th></th>
@@ -49,18 +49,18 @@
 						</tr>
 					</c:forEach>
 				</table>
-				<br>
-				<input id="submit" type="submit"/>
-			</form>
-			<div id="pageNavPosition2"></div>
 
-			<script type="text/javascript">
-				var pager = new Pager('tabellaSuggerimenti', 5);
-				pager.init();
-				pager.showPageNav('pager', 'pageNavPosition2');
-				pager.showPage(1);
+				<div id="pageNavPosition2"></div>
+
+				<script type="text/javascript">
+ 				var pager = new Pager('tabellaSuggerimenti', 5);
+ 				pager.init();
+ 				pager.showPageNav('pager', 'pageNavPosition2');
+ 				pager.showPage(1);
 			</script>
-			<br>
+
+				<input id="submit" type="submit" value="Accetta suggerimenti" />
+			</form>
 		</c:otherwise>
 	</c:choose>
 </body>

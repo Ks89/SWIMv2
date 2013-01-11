@@ -15,12 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
-import entityBeans.Collaborazione;
 import entityBeans.Utente;
-import exceptions.CollaborazioneException;
 
 import sessionBeans.localInterfaces.GestioneAmicizieLocal;
-import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 
 /**
  * Servlet implementation class NotificheDiRispostaServlet
@@ -32,9 +29,6 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 	@EJB
 	private GestioneAmicizieLocal amicizie;
 	
-	@EJB
-	private GestioneCollaborazioniLocal collaborazioni;
-
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */

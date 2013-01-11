@@ -272,13 +272,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>SuggerimentiAlRichiedenteServlet</display-name>
-    <servlet-name>SuggerimentiAlRichiedenteServlet</servlet-name>
-    <servlet-class>it.swim.servlet.profilo.azioni.notificheDiRisposta.SuggerimentiAlRichiedenteServlet</servlet-class>
+    <display-name>SuggAlRichiedenteServlet</display-name>
+    <servlet-name>SuggAlRichiedenteServlet</servlet-name>
+    <servlet-class>it.swim.servlet.profilo.azioni.notificheDiRisposta.SuggAlRichiedenteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>SuggerimentiAlRichiedenteServlet</servlet-name>
-    <url-pattern>/profilo/azioni/notificheDiRisposta/suggerimentiAlRichiedente</url-pattern>
+    <servlet-name>SuggAlRichiedenteServlet</servlet-name>
+    <url-pattern>/profilo/azioni/notificheDiRisposta/suggAlRichiedente</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
