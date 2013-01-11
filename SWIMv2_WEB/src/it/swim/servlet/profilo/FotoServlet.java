@@ -1,6 +1,8 @@
 package it.swim.servlet.profilo;
 
+import it.swim.util.ConvertitoreFotoInBlob;
 import it.swim.util.UtenteCollegatoUtil;
+import it.swim.util.exceptions.FotoException;
 
 import java.io.IOException;
 import java.sql.Blob;
@@ -11,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.rowset.serial.SerialException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,10 +48,29 @@ public class FotoServlet extends HttpServlet {
 			response.sendRedirect("home");
 			return;
 		}
-		
+
 		String emailUtente = request.getParameter("emailUtente");
+
+		Blob blob = null;
+
 		try {
-			Blob blob = gestioneCollaborazioni.getUtenteByEmail(emailUtente).getFotoProfilo();
+			if(emailUtente==null || emailUtente.equals("")) {
+				try {
+					blob = ConvertitoreFotoInBlob.getBlobFromDefaultImage();
+				} catch (SerialException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (FotoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				blob = gestioneCollaborazioni.getUtenteByEmail(emailUtente).getFotoProfilo();
+			}
+			
 			if(blob!=null) {
 				byte[] foto = blob.getBytes(1, (int)blob.length());
 				response.setContentType("image/jpg");

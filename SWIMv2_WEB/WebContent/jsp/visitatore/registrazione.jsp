@@ -58,7 +58,7 @@
 			</tr>
 				<%-- input di tipo file per uploadare il file e poi il submit per mandare la form --%>
 				<tr><td>
-				<input id="file" name="file" type="file" /></td></tr><tr>
+				<input id="file" name="file" type="file" accept="image/*"/></td></tr><tr>
 				<td style="text-align: center"><input id="submit" type="submit"/></td>
 				</tr>
 			</table>
