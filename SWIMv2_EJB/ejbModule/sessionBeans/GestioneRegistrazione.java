@@ -10,8 +10,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.hibernate.loader.custom.Return;
-
 import sessionBeans.localInterfaces.GestioneRegistrazioneLocal;
 import utililies.PasswordHasher;
 import utililies.sessionRemote.GestioneRegistrazioneRemote;
@@ -23,7 +21,6 @@ import entityBeans.PossiedePK;
 import entityBeans.Utente;
 import exceptions.HashingException;
 import exceptions.RegistrazioneException;
-import exceptions.RicercheException;
 
 @Stateless
 public class GestioneRegistrazione implements GestioneRegistrazioneLocal, GestioneRegistrazioneRemote {
