@@ -21,11 +21,12 @@ public class Amministratore implements Serializable {
 
 	private static final long serialVersionUID = -3872222525432211531L;
 
+	//la lunghezza e' elevata per garantire che si possa registrare anche con mail lunghissime
 	@Id
-	@Column(name = "Email", unique = true, nullable = false, length=100)
+	@Column(name = "Email", unique = true, nullable = false, length=100) 
 	@Pattern(regex=".+@.+\\.[a-z]+")
 	private String email;
 
-	@Column(name = "Password", nullable = false, length=100)
+	@Column(name = "Password", nullable = false, length=64) //perche' 64 e' la lunghezza massima di una password hashata con SHA256
 	private String password;
 }

@@ -29,6 +29,6 @@ public class Abilita implements Serializable {
 	@Column(name = "Nome", unique = true, nullable = false, length=100)
 	private String nome;
 	
-	@Column(name = "Descrizione", unique = false, nullable = true, length=500)
+	@Column(name = "Descrizione", unique = false, nullable = true, length=100)
 	private String descrizione;
 }
