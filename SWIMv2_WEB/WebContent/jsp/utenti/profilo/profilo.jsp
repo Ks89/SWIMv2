@@ -6,8 +6,9 @@
 	<div align="center">
 	
 	
-	<%-- Per gestire i vari errori durante l'upload della foto profilo --%>
+	
 	<c:choose>
+		<%-- Per gestire i vari errori durante l'upload della foto del profilo --%>
 		<c:when test="${!empty erroreFileTroppoGrande}"> <c:out value="${erroreFileTroppoGrande}"></c:out><br>
 		</c:when>
 		<c:when test="${!empty erroreNonFoto}"> <c:out value="${erroreNonFoto}"></c:out><br>
@@ -16,8 +17,15 @@
 		</c:when>
 		<c:when test="${!empty erroreFotoIrreversibile}"> <c:out value="${erroreFotoIrreversibile}"></c:out><br>
 		</c:when>
+		
+		<%-- Messaggi della servlet SuggAlRichiedente --%>
+		<c:when test="${!empty nessunSuggAccettato}"> <c:out value="${nessunSuggAccettato}"></c:out><br>
+		</c:when>
+		<c:when test="${!empty suggAccettato}"> <c:out value="${suggAccettato}"></c:out><br>
+		</c:when>
+		<c:when test="${!empty suggAccettati}"> <c:out value="${suggAccettati}"></c:out><br>
+		</c:when>
 	</c:choose>
-	
 	
 	
 	<h1>Il mio profilo</h1><br>

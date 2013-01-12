@@ -25,7 +25,6 @@ import lombok.extern.slf4j.Slf4j;
 public class SuggAlRichiedenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	@EJB
 	private GestioneAmicizieLocal amicizie;
 
@@ -57,34 +56,37 @@ public class SuggAlRichiedenteServlet extends HttpServlet {
 		// se e' null e' perche' l'utente non e' collegato e allora devo fare il
 		// redirect alla home
 		if (emailUtenteCollegato == null) {
-			response.sendRedirect("../../home");
+			response.sendRedirect("../../../home");
 			return;
 		}
 
+		if(request.getParameter("suggeritoAlRichiedenteCheckbox")!=null) {
 
-		if(request.getParameter("amicoSuggeritoAlRichiedente")!=null) {
-
-			List<Amicizia> amiciziaSuggeriteDaRichiedere  = new ArrayList<Amicizia>();
+			List<Amicizia> amiciziaSuggeritaRichiesta  = new ArrayList<Amicizia>();
 			Amicizia amiciziaRichiesta;
 
-			for(String emailSuggerimentoAlRichiedente : request.getParameterValues("amicoSuggeritoAlRichiedente")) {
-				log.debug("    -- - - - --      : " + emailSuggerimentoAlRichiedente);
+			for(String emailSuggerimentoAlRichiedente : request.getParameterValues("suggeritoAlRichiedenteCheckbox")) {
+				log.debug("emailSuggerimentoAlRichiedente : " + emailSuggerimentoAlRichiedente);
 
 				//se l'amicizia non e' gia' stata inoltrata in precedenza, la richiedo, altrimenti no
 				if(!amicizie.amiciziaInoltrata(emailUtenteCollegato, emailSuggerimentoAlRichiedente)) {
 					amiciziaRichiesta = amicizie.richiediAmicizia(emailUtenteCollegato, emailSuggerimentoAlRichiedente, false );
 					if(amiciziaRichiesta!=null) {
-						amiciziaSuggeriteDaRichiedere.add(amiciziaRichiesta);
+						amiciziaSuggeritaRichiesta.add(amiciziaRichiesta);
 					}
 				}
 			}
 
-			if(amiciziaSuggeriteDaRichiedere.size()>=1) {
-				request.setAttribute("suggAccettati","Hai stretto amicizia con gli utenti suggeriti");
-			} else {
-				//TODO gestire errore nel caso in cui nn arrivino suggerimenti
+			if(amiciziaSuggeritaRichiesta.size()==0) {
+				request.setAttribute("nessunSuggAccettato","Nessun ssuggerimento scelto. Amicizie non inoltrate");
+			} else if(amiciziaSuggeritaRichiesta.size()==1) {
+				request.setAttribute("suggAccettato","Hai stretto amicizia con l'utente scelto");
+			} else if(amiciziaSuggeritaRichiesta.size()>1) {
+				request.setAttribute("suggAccettati","Hai stretto amicizia con gli utenti scelti");
 			}
+		} else {
+			request.setAttribute("nessunSuggAccettato","Nessun ssuggerimento scelto. Amicizie non inoltrate");
 		}
-		response.sendRedirect("../../profilo");
+		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/profilo.jsp").forward(request, response);
 	}
 }

@@ -19,7 +19,6 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import exceptions.LoginException;
 
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
-import sessionBeans.localInterfaces.GestioneRegistrazioneLocal;
 
 /**
  * Servlet implementation class RilasciaFeedBackServlet

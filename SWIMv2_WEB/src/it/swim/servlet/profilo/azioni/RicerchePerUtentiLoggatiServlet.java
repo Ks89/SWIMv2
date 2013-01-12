@@ -1,11 +1,8 @@
 package it.swim.servlet.profilo.azioni;
 
-import it.swim.servlet.RicercaPerVisitatoriServlet;
 import it.swim.util.UtenteCollegatoUtil;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.rowset.serial.SerialBlob;
-import javax.sql.rowset.serial.SerialException;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -27,16 +22,12 @@ import entityBeans.Utente;
 import exceptions.RicercheException;
 
 import sessionBeans.localInterfaces.GestioneAmicizieLocal;
-import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 import sessionBeans.localInterfaces.GestioneRegistrazioneLocal;
 import sessionBeans.localInterfaces.GestioneRicercheLocal;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Servlet implementation class RicerchePerUtentiLoggatiServlet
  */
-@Slf4j
 public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -48,9 +39,6 @@ public class RicerchePerUtentiLoggatiServlet extends HttpServlet {
 	
 	@EJB
 	private GestioneAmicizieLocal gestioneAmicizie;
-	
-	@EJB
-	private GestioneCollaborazioniLocal gestioneCollaborazioni;
 	
 	private String tipoRicerca;
 	//questa variabile mi serve per sapere se la servlet è stata richiamata da un pulsante submit o no

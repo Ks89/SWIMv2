@@ -15,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import sessionBeans.localInterfaces.GestioneAmicizieLocal;
 
 import entityBeans.Utente;
-import exceptions.LoginException;
 
 
 /**
@@ -49,7 +48,7 @@ public class DettaglioServlet extends HttpServlet {
 		// se e' null e' perche' l'utente non e' collegato e allora devo fare il
 		// redirect alla home
 		if (emailUtenteCollegato == null) {
-			response.sendRedirect("../../home");
+			response.sendRedirect("../../../home");
 			return;
 		}
 
@@ -57,7 +56,7 @@ public class DettaglioServlet extends HttpServlet {
 
 		Utente utenteSuggerito;
 		utenteSuggerito = gestioneAmicizie.getUtenteByEmail(emailUtenteSuggerito);
-		log.debug(" ---------------------dsdssdsd--------------------->   " + utenteSuggerito);
+		log.debug(" ---------------------utente suggerito--------------------->   " + utenteSuggerito);
 
 
 		// mando sulla request i dati dell'utente tramite il setAttribute, e li
