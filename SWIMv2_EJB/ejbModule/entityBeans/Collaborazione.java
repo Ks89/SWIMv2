@@ -74,7 +74,7 @@ public class Collaborazione implements Serializable {
 	@JoinColumn(name = "EmailRichiedente", referencedColumnName = "Email", nullable = false)
 	private Utente utenteRichiedente;
 
-	@Column(name = "Nome", nullable = false)
+	@Column(name = "Nome", nullable = false, length=100)
 	private String nome;
 
 	@Column(name = "DataStipula", nullable = true)
@@ -93,7 +93,7 @@ public class Collaborazione implements Serializable {
 	@Max(value = 5, message = "Il punteggio deve essere inferiore a 6")
 	private Integer punteggioFeedback;
 
-	@Column(name = "CommentoFeedback", nullable = true, length = 250)
+	@Column(name = "CommentoFeedback", nullable = true, length = 200)
 	private String commentoFeedback;
 
 	@Column(name = "NotificaAlRichiedente", nullable = false)
