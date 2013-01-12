@@ -173,7 +173,7 @@ public class ModificaProfiloServlet extends HttpServlet {
 		log.debug("abilitaDaAggiungereAllePersonali : " + Arrays.toString(abilitaDaAggiungereAllePersonali.toArray()));
 
 		if(abilitaDaAggiungereAllePersonali.size()>=1) {
-			boolean modificaInsiemePersonaleAbilita = modificaProfilo.modificaSetAbilita(emailUtenteCollegato, abilitaDaAggiungereAllePersonali);
+			boolean modificaInsiemePersonaleAbilita = modificaProfilo.modificaInsiemePersonaleAbilita(emailUtenteCollegato, abilitaDaAggiungereAllePersonali);
 			log.debug("modificaInsiemePersonaleAbilita: " + modificaInsiemePersonaleAbilita );
 			if(modificaInsiemePersonaleAbilita) {
 				request.setAttribute("modificaAbilitaRiuscitaConSuccesso", "Modifica eseguita correttamente");

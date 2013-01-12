@@ -1,10 +1,8 @@
 package it.swim.servlet.profilo.azioni;
 
-import it.swim.servlet.profilo.azioni.notifiche.DettagliAltroUtenteServlet;
 import it.swim.util.UtenteCollegatoUtil;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -17,13 +15,9 @@ import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 import entityBeans.Collaborazione;
 import exceptions.LoginException;
 
-import lombok.extern.slf4j.Slf4j;
-
-
 /**
  * Servlet implementation class DettaglioCollaborazione
  */
-@Slf4j
 public class DettaglioCollaborazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@EJB

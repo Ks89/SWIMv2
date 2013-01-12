@@ -3,17 +3,11 @@ package it.swim.servlet;
 import it.swim.util.UtenteCollegatoUtil;
 
 import java.io.IOException;
-import java.util.List;
 
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import sessionBeans.localInterfaces.GestioneRicercheLocal;
-
-import entityBeans.Abilita;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,9 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	@EJB
-	private GestioneRicercheLocal ricerche;
 
 	/**
 	 * @see HttpServlet#HttpServlet()

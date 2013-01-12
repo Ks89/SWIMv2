@@ -58,7 +58,7 @@ public class DettagliAltroUtenteServlet extends HttpServlet {
 		// se e' null e' perche' l'utente non e' collegato e allora devo fare il
 		// redirect alla home
 		if (emailUtenteCollegato == null) {
-			response.sendRedirect("../../home");
+			response.sendRedirect("../../../home");
 			return;
 		}
 		request.setAttribute("utente", ricerche.getUtenteByEmail(email));
@@ -88,8 +88,6 @@ public class DettagliAltroUtenteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String nomeCollaborazione="";
-		String descrizioneCollaborazione="";
 		String emailUtenteCollegato = (String) UtenteCollegatoUtil.getEmailUtenteCollegato(request);
 		if(request.getParameter("tipo").equals("amicizia"))
 		{
