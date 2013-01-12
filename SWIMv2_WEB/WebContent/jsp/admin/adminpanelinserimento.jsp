@@ -19,9 +19,9 @@
 	Inserisci la nuova abilità
 	<form id="aggiuntaAbilitaForm" action="aggiuntaAbilita" method="POST">
 		<br>Nome abilità: 
-		<input id="nuovoNomeAbilitaAggiunta" type="text" name="nuovoNomeAbilitaAggiunta"></input>
+		<input id="nuovoNomeAbilitaAggiunta" type="text" name="nuovoNomeAbilitaAggiunta" maxlength="100"></input>
 		<br>Descrizione abilità: 
-		<input id="descrizioneAbilitaAggiunta" type="text" name="descrizioneAbilitaAggiunta"></input>
+		<input id="descrizioneAbilitaAggiunta" type="text" name="descrizioneAbilitaAggiunta" maxlength="100"></input>
 		<br>
 		<input id="submit" type="submit" /><br>
 	</form>

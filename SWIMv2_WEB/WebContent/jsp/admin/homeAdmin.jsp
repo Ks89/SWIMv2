@@ -28,8 +28,8 @@
 		<c:otherwise>
 			<br>Pagina di login per l'amministratore<br>
 			<form id="adminLoginForm" action="admin/adminLogin" method="POST">
-				Email: <input id="emailAdmin" type="text" name="emailAdmin"></input> Password: 
-				<input id="passwordAdmin"  type="password" name="passwordAdmin"></input> <input id="submit"  type="submit" /> <br>
+				Email: <input id="emailAdmin" type="text" name="emailAdmin" maxlength="100"></input> Password: 
+				<input id="passwordAdmin"  type="password" name="passwordAdmin" maxlength="64"></input> <input id="submit"  type="submit" /> <br>
 			</form>
 		</c:otherwise>
 	</c:choose>

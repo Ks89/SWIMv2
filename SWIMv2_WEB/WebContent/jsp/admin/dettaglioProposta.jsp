@@ -22,9 +22,9 @@
 	<br>
 	<form id="dettaglioPropostaForm" action="dettaglioProposta" method="POST">
 		<input type="hidden" name="idProposta" value="${idProposta}"></input>
-		<input id="nuovoNomeAbilitaProposta" type="text" name="nuovoNomeAbilitaProposta"></input><br>
+		<input id="nuovoNomeAbilitaProposta" type="text" name="nuovoNomeAbilitaProposta" maxlength="100"></input><br>
 		<br>
-		<input id="descrizioneAbilitaProposta" type="text" name="descrizioneAbilitaProposta"></input>
+		<input id="descrizioneAbilitaProposta" type="text" name="descrizioneAbilitaProposta" maxlength="100"></input>
 		<br>
 		<input id="submit" type="submit" /><br>
 	</form>
