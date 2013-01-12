@@ -70,6 +70,7 @@ public class GestioneCollaborazioni implements GestioneCollaborazioniRemote, Ges
 		collaborazione.setUtenteRicevente(utenteRicevente);
 		collaborazione.setNome(nome);
 		collaborazione.setDescrizione(descrizione);
+		collaborazione.setNotificaAlRichiedente(false);
 
 		entityManager.persist(collaborazione);
 		entityManager.flush();
@@ -97,6 +98,29 @@ public class GestioneCollaborazioni implements GestioneCollaborazioniRemote, Ges
 		Collaborazione collaborazione = entityManager.find(Collaborazione.class, id);
 		if(collaborazione!=null) {
 			collaborazione.setDataStipula(calendar.getTime());
+			entityManager.persist(collaborazione);
+			entityManager.flush();
+		}
+		return collaborazione;
+	}
+	
+	
+	/**
+	 * Metodo per impostare la collaborazione come già notificata al richiedente
+	 * @param id = Long che rappresenta l'id univoco della collaborazione
+	 * @return <b>collaborazione</b> con l'id specificato, se accettata correttamente, <b>null</b> altrimenti
+	 * @throws LoginException con causa ALCUNIPARAMETRINULLIOVUOTI
+	 */
+	@Override
+	public Collaborazione notificaAvvenuta(Long id) throws LoginException {
+		
+		if(id==null) {
+			throw new LoginException(LoginException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		}
+		
+		Collaborazione collaborazione = entityManager.find(Collaborazione.class, id);
+		if(collaborazione!=null) {
+			collaborazione.setNotificaAlRichiedente(true);
 			entityManager.persist(collaborazione);
 			entityManager.flush();
 		}
@@ -209,6 +233,26 @@ public class GestioneCollaborazioni implements GestioneCollaborazioniRemote, Ges
 		}
 		
 		Query query = entityManager.createNamedQuery("Collaborazione.getCollaborazioniCreateFeedbackNonRilasciatoByEmail");
+		query.setParameter("emailRichiedente", emailRichiedente);
+		return (List<Collaborazione>)query.getResultList();
+	}
+	
+	
+	/**
+	 * Metodo per ottenere la lista delle collaborazioni create dall'utente richiedente, di cui bisogna notificarne l'avvenuta conferma.
+	 * @param emailRichiedente = String che rappresenta l'email dell'utente richiedente della richiesta di aiuto (collaborazione)
+	 * @return <b>lista delle collaborazioni</b>, cioe' una List<Collaborazione> che rappresenta le collaborazioni, ancora senza feedback. 
+	 * Se non e' possibile ottenere tale lista, reistituisce <b>null</b>.
+	 * @throws LoginException con causa ALCUNIPARAMETRINULLIOVUOTI
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Collaborazione> getCollaborazioniDaNotificare(String emailRichiedente) throws LoginException {
+		if(emailRichiedente==null || emailRichiedente.equals("")) {
+			throw new LoginException(LoginException.Causa.ALCUNIPARAMETRINULLIOVUOTI);
+		}
+		
+		Query query = entityManager.createNamedQuery("Collaborazione.getCollaborazioniDaNotificare");
 		query.setParameter("emailRichiedente", emailRichiedente);
 		return (List<Collaborazione>)query.getResultList();
 	}

@@ -130,7 +130,12 @@ public interface GestioneCollaborazioniInterface {
 	public List<Collaborazione> getCollaborazioniTerminateConFeedBack(
 			String emailRichiedente) throws LoginException;
 
-	List<Collaborazione> getCollaborazioniRiceventeConFeedBack(
+	public List<Collaborazione> getCollaborazioniRiceventeConFeedBack(
 			String emailUtente) throws LoginException;
+
+	public Collaborazione notificaAvvenuta(Long id) throws LoginException;
+
+	public List<Collaborazione> getCollaborazioniDaNotificare(String emailRichiedente)
+			throws LoginException;
 
 }
