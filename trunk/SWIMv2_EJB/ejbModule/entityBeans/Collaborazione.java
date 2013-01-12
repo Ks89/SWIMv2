@@ -30,6 +30,10 @@ import org.hibernate.validator.Min;
 		@NamedQuery(name = "Collaborazione.getCollaborazioniAccettateByEmail", query = "SELECT c "
 				+ "FROM Collaborazione c "
 				+ "WHERE c.utenteRicevente.email = :emailRicevente AND c.dataStipula IS NOT NULL"),
+				
+		@NamedQuery(name = "Collaborazione.getCollaborazioniDaNotificare", query = "SELECT c "
+				+ "FROM Collaborazione c "
+				+ "WHERE c.utenteRicevente.email = :emailRicevente AND c.dataStipula IS NOT NULL AND c.notificaAlRichiedente=FALSE"),
 
 		@NamedQuery(name = "Collaborazione.getNotificheRichiesteAiuto", query = "SELECT c "
 				+ "FROM Collaborazione c "
