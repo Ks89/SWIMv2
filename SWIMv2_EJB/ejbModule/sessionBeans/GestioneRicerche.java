@@ -127,7 +127,6 @@ public class GestioneRicerche implements GestioneRicercheLocal, GestioneRicerche
 	 * Metodo per ottenere l'utente conoscendo il suo indirizzo email
 	 * @param emailUtente= String rappresentante la mail dell'utente
 	 * @return <b>Utente</b> avente la mail uguale a quella passata come parametro, <b>null</b> se non esiste un utente con quella mail
-	 * @throws RicercheException con causa ALCUNIPARAMETRINULLIVUOTI
 	 */
 	public Utente getUtenteByEmail(String email){
 		return entityManager.find(Utente.class, email);

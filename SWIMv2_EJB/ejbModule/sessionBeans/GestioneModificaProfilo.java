@@ -12,12 +12,11 @@ import entityBeans.Possiede;
 import entityBeans.PossiedePK;
 import entityBeans.Utente;
 
-import sessionBeans.interfaces.GestioneModificaProfiloInterface;
 import sessionBeans.localInterfaces.GestioneModificaProfiloLocal;
 import utililies.sessionRemote.GestioneModificaProfiloRemote;
 
 @Stateless
-public class GestioneModificaProfilo implements GestioneModificaProfiloLocal, GestioneModificaProfiloRemote, GestioneModificaProfiloInterface {
+public class GestioneModificaProfilo implements GestioneModificaProfiloLocal, GestioneModificaProfiloRemote {
 
 	@PersistenceContext(unitName = "SWIMdb")
 	private EntityManager entityManager;
@@ -39,7 +38,7 @@ public class GestioneModificaProfilo implements GestioneModificaProfiloLocal, Ge
 	}
 	
 	@Override
-	public boolean modificaSetAbilita (String emailUtente, List<Abilita> abilita){
+	public boolean modificaInsiemePersonaleAbilita (String emailUtente, List<Abilita> abilita){
 		Utente utente;
 		
 		utente=this.getUtenteByEmail(emailUtente);
@@ -65,8 +64,7 @@ public class GestioneModificaProfilo implements GestioneModificaProfiloLocal, Ge
 	
 	@Override
 	public Utente getUtenteByEmail(String email) {
-		Utente utente = entityManager.find(Utente.class, email);
-		return utente;
+		return entityManager.find(Utente.class, email);
 	}
 	
 }
