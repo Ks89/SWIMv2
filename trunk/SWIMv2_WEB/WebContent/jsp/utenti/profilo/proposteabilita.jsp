@@ -22,7 +22,7 @@
 					<td>Nome abilita proposta: </td><td><input id="nomeAbilita" type="text" name="nomeAbilita" placeholder="Nome dell'abilita"></input></td>
 				</tr> 
 				<tr>
-					<td>Motivo: </td><td><input id="descrizioneAbilita" type="text" name="descrizioneAbilita" placeholder="Motivo della proposta"></input></td>
+					<td>Motivo: </td><td><textarea name="descrizioneAbilita" rows="3" cols="22" maxlength="100" placeholder="Motivo della proposta" ></textarea></td>
 				<tr>
 					<td colspan="2" style="text-align: center;"><input id="submit" type="submit" /></td>
 				</tr>
