@@ -75,7 +75,7 @@ public class ProposteAbilitaServlet extends HttpServlet {
 		try {
 			PropostaAbilita propostaAbilita = gestioneProposte.inserisciPropostaUtente(emailUtenteCollegato, nomeAbilita, descrizioneAbilita);
 			if(propostaAbilita!=null) {
-				request.setAttribute("inserimentoPropostaAvvenuto", "Inserimento proposta con abilita " + propostaAbilita.getAbilitaProposta() + " avvenuto con successo!");
+				request.setAttribute("inserimentoPropostaAvvenuto", "La tua proposta e' stata inviata!");
 			} else {
 				request.setAttribute("erroreInserimentoProposta", "Errore inserimento proposta di abilita");
 			}
