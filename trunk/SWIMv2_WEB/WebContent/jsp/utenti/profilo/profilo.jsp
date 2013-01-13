@@ -75,8 +75,5 @@
 	</table>
 	<br>
 	<h2><a href="profilo/azioni/notificheDiRisposta/notificheDiRisposta?emailUtente=${sessionScope.utenteCollegato}" >Ci sono nuove risposte degli utenti</a></h2>
-	<!--  non cancellare tutta la parte che c'e' qui sotto per nessun motivo!!!!! -->
-	<!--  	<option value="<c:out value="${item.nome}" />">   e' l'esempio di un menu a tendina, non rimuoverlo
-				<c:out value="${item.descrizione}" /> </option>-->
 </div>
 <jsp:include page="../../layoutInferiore.jsp"></jsp:include>

@@ -1,5 +1,5 @@
 <jsp:include page="../../layoutSuperioreUp.jsp"></jsp:include>
-<title>Insert title here</title>
+<title>SWIM - Rilascio feedback</title>
 <jsp:include page="../../layoutSuperioreDown.jsp"></jsp:include>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -14,7 +14,17 @@
 				<br>
 			</c:if>
 			<table id="formInserimentoParametri">
-				<tr><td>Inserisci un punteggio (da 1 a 5): </td><td><input id="punteggio" type="text" name="punteggioFeedBack" placeholder="Punteggio"></input></td></tr>
+				<tr><td>Inserisci un punteggio (da 1 a 5): </td><td>
+								
+				<select id="punteggio" name="punteggioFeedBack">
+  					<option value="1">1</option>
+  					<option value="2">2</option>
+  					<option value="3">3</option>
+  					<option value="4">4</option>
+  					<option value="5">5</option>
+				</select>
+				
+				</td></tr>
 				<tr><td>Commento (opzionale): </td><td><input id="commento" type="text" name="commentoFeedBack" placeholder="Lascia un commento"></input></td></tr>
 				<tr><td colspan="2" style="text-align: center;"><input id="submit" type="submit" /></td></tr>
 			</table>
