@@ -6,7 +6,11 @@
 <div align="center">
 	<h2>Dettagglio della collaborazione</h2>
 	<c:if test="${!empty erroreRicercaCollaborazione}">
-		<c:out value="${erroreRicercaCollaborazione}"></c:out>
+		<div class="alert">
+			<p>
+				<c:out value="${erroreRicercaCollaborazione}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
 	<table id="tabellaFeedback">

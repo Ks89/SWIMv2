@@ -7,13 +7,33 @@
 	
 	<%-- Gestione messaggi d'errore --%>
 	<c:choose>
-		<c:when test="${!empty erroreRegistrazione}"> <c:out value="${erroreRegistrazione}"></c:out><br>
+		<c:when test="${!empty erroreRegistrazione}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${erroreRegistrazione}"></c:out><br>
+			</p>
+		</div>
 		</c:when>
-		<c:when test="${!empty erroreHashing}"> <c:out value="${erroreHashing}"></c:out><br>
+		<c:when test="${!empty erroreHashing}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${erroreHashing}"></c:out><br>
+			</p>
+		</div>
 		</c:when>
-		<c:when test="${!empty erroreSconosciutoRegistrazione}"> <c:out value="${erroreSconosciutoRegistrazione}"></c:out><br>
+		<c:when test="${!empty erroreSconosciutoRegistrazione}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${erroreSconosciutoRegistrazione}"></c:out><br>
+			</p>
+		</div>
 		</c:when>
-		<c:when test="${!empty erroreFotoPredefinita}"> <c:out value="${erroreFotoPredefinita}"></c:out><br>
+		<c:when test="${!empty erroreFotoPredefinita}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${erroreFotoPredefinita}"></c:out><br>
+			</p>
+		</div>
 		</c:when>
 	</c:choose>
 		

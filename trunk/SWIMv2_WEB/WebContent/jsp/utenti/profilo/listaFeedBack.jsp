@@ -6,11 +6,19 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:if test="${!empty erroreGetCollaborazioni}">
-	<c:out value="${erroreGetCollaborazioni}"></c:out>
+	<div class="alert">
+		<p>
+			<c:out value="${erroreGetCollaborazioni}"></c:out>
+		</p>
+	</div>
 	<br>
 </c:if>
 <c:if test="${!empty nonCiSonoCollaborazioni}">
-	<c:out value="${nonCiSonoCollaborazioni}"></c:out>
+	<div class="alert">
+		<p>
+			<c:out value="${nonCiSonoCollaborazioni}"></c:out>
+		</p>
+	</div>
 	<br>
 </c:if>
 <c:if test="${empty nonCiSonoCollaborazioni}">

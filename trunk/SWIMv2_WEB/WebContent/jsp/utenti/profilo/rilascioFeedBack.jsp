@@ -10,7 +10,11 @@
 		<form action="profilo/azioni/rilasciaFeedBack" method="POST"
 			enctype="multipart/form-data">
 			<c:if test="${!empty erroreNelPunteggio}">
-				<c:out value="${erroreNelPunteggio}"></c:out>
+				<div class="alert">
+					<p>
+						<c:out value="${erroreNelPunteggio}"></c:out>
+					</p>
+				</div>
 				<br>
 			</c:if>
 			<table id="formInserimentoParametri">

@@ -5,11 +5,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<%-- if che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
 	<c:if test="${!empty erroreInserimentoProposta}">
-		<c:out value="${erroreInserimentoProposta}"></c:out>
+		<div class="alert">
+			<p>
+				<c:out value="${erroreInserimentoProposta}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
 	<c:if test="${!empty inserimentoPropostaAvvenuto}">
-		<c:out value="${inserimentoPropostaAvvenuto}"></c:out>
+		<div class="alert">
+			<p>
+				<c:out value="${inserimentoPropostaAvvenuto}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
 	

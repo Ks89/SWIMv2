@@ -232,11 +232,11 @@ background-color:#297ACC;
 
 /*Messaggio errore*/
 .alert {
-   background: #fff6bf url('../img/alert/exclamation.png') 15px center no-repeat;
+   background: #febcbc url('../img/alert/exclamation.png') 15px center no-repeat;
    text-align: left;
    padding: 10px 20px 10px 50px;
-   border-top: 2px solid #ffd324;
-   border-bottom: 2px solid #ffd324;
+   border-top: 2px solid #e95137;
+   border-bottom: 2px solid #e95137;
    width:400px;
    
 }
