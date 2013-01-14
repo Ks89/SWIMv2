@@ -5,45 +5,85 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<%-- Richieste aiuto --%>
 	<c:if test="${!empty erroreGetNotificheRichiesteAiuto}">
-		<c:out value="${erroreGetNotificheRichiesteAiuto}"></c:out>
+		<div class="alert">
+			<p>
+				<c:out value="${erroreGetNotificheRichiesteAiuto}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
 	<c:if test="${!empty okDettaglioRichiestaAiuto}">
-		<c:out value="${okDettaglioRichiestaAiuto}"></c:out>
+		<div class="alert">
+			<p>
+				<c:out value="${okDettaglioRichiestaAiuto}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
 	<c:if test="${!empty erroreDettaglioRichiestaAiuto}">
-		<c:out value="${erroreDettaglioRichiestaAiuto}"></c:out>
+		<div class="alert">
+			<p>
+				<c:out value="${erroreDettaglioRichiestaAiuto}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
 	<c:if test="${!empty nonCiSonoRichiesteAiuto}">
-		<c:out value="${nonCiSonoRichiesteAiuto}"></c:out>
+		<div class="alert">
+			<p>
+				<c:out value="${nonCiSonoRichiesteAiuto}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
 	
 	<%-- Richieste amicizia --%>
 	<c:if test="${!empty erroreGetNotificheRichiesteAmicizia}">
-		<c:out value="${erroreGetNotificheRichiesteAmicizia}"></c:out>
+		<div class="alert">
+			<p>
+				<c:out value="${erroreGetNotificheRichiesteAmicizia}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
 	<c:if test="${!empty okProfiloAltroUtente}">
-		<c:out value="${okProfiloAltroUtente}"></c:out>
+		<div class="alert">
+			<p>
+				<c:out value="${okProfiloAltroUtente}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
 	<c:if test="${!empty erroreProfiloAltroUtente}">
-		<c:out value="${erroreProfiloAltroUtente}"></c:out>
+		<div class="alert">
+			<p>
+				<c:out value="${erroreProfiloAltroUtente}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
 	<c:if test="${!empty nonCiSonoRichiesteAmicizia}">
-		<c:out value="${nonCiSonoRichiesteAmicizia}"></c:out>
+		<div class="alert">
+			<p>
+				<c:out value="${nonCiSonoRichiesteAmicizia}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
 	<c:if test="${!empty suggAccettati}">
-		<c:out value="${suggAccettati}"></c:out>
+		<div class="alert">
+			<p>
+				<c:out value="${suggAccettati}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
 	<c:if test="${!empty noSuggDisponibili}">
-		<c:out value="${noSuggDisponibili}"></c:out>
+		<div class="alert">
+			<p>
+				<c:out value="${noSuggDisponibili}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
 

@@ -6,11 +6,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<div align="center">
 	<c:if test="${!empty erroreGetCollaborazioniDaTerminare}">
-		<c:out value="${erroreGetCollaborazioniDaTerminare}"></c:out>
+		<div class="alert">
+			<p>
+				<c:out value="${erroreGetCollaborazioniDaTerminare}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
 	<c:if test="${!empty nonCiSonoCollaborazioniDaTerminare}">
-		<c:out value="${nonCiSonoCollaborazioniDaTerminare}"></c:out>
+		<div class="alert">
+			<p>
+				<c:out value="${nonCiSonoCollaborazioniDaTerminare}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
 	<c:if test="${empty nonCiSonoCollaborazioniDaTerminare}">

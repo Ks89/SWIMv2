@@ -5,11 +5,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<div align="center">
 		<c:if test="${!empty confermaRichiestaAiuto}">
-			<c:out value="${confermaRichiestaAiuto}"></c:out>
+			<div class="alert">
+				<p>
+					<c:out value="${confermaRichiestaAiuto}"></c:out>
+				</p>
+			</div>
 			<br>
 		</c:if>
 		<c:if test="${!empty erroreConfermaRichiestaAiuto}">
-			<c:out value="${erroreConfermaRichiestaAiuto}"></c:out>
+			<div class="alert">
+				<p>
+					<c:out value="${erroreConfermaRichiestaAiuto}"></c:out>
+				</p>
+			</div>
 			<br>
 		</c:if>
 		<h2>Richiesta d'aiuto</h2>

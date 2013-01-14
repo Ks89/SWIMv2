@@ -9,21 +9,56 @@
 	
 	<c:choose>
 		<%-- Per gestire i vari errori durante l'upload della foto del profilo --%>
-		<c:when test="${!empty erroreFileTroppoGrande}"> <c:out value="${erroreFileTroppoGrande}"></c:out><br>
+		<c:when test="${!empty erroreFileTroppoGrande}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${erroreFileTroppoGrande}"></c:out><br>
+			</p>
+		</div>
 		</c:when>
-		<c:when test="${!empty erroreNonFoto}"> <c:out value="${erroreNonFoto}"></c:out><br>
+		<c:when test="${!empty erroreNonFoto}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${erroreNonFoto}"></c:out><br>
+			</p>
+		</div>
 		</c:when>
-		<c:when test="${!empty erroreFotoSconosciuto}"> <c:out value="${erroreFotoSconosciuto}"></c:out><br>
+		<c:when test="${!empty erroreFotoSconosciuto}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${erroreFotoSconosciuto}"></c:out><br>
+			</p>
+		</div>
 		</c:when>
-		<c:when test="${!empty erroreFotoIrreversibile}"> <c:out value="${erroreFotoIrreversibile}"></c:out><br>
+		<c:when test="${!empty erroreFotoIrreversibile}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${erroreFotoIrreversibile}"></c:out><br>
+			</p>
+		</div>
 		</c:when>
 		
 		<%-- Messaggi della servlet SuggAlRichiedente --%>
-		<c:when test="${!empty nessunSuggAccettato}"> <c:out value="${nessunSuggAccettato}"></c:out><br>
+		<c:when test="${!empty nessunSuggAccettato}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${nessunSuggAccettato}"></c:out><br>
+			</p>
+		</div>
 		</c:when>
-		<c:when test="${!empty suggAccettato}"> <c:out value="${suggAccettato}"></c:out><br>
+		<c:when test="${!empty suggAccettato}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${suggAccettato}"></c:out><br>
+			</p>
+		</div>
 		</c:when>
-		<c:when test="${!empty suggAccettati}"> <c:out value="${suggAccettati}"></c:out><br>
+		<c:when test="${!empty suggAccettati}">
+		<div class="alert">
+			<p>
+				<c:out value="${suggAccettati}"></c:out><br>
+			</p>
+		</div>
 		</c:when>
 	</c:choose>
 	
