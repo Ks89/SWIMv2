@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<h1>Registrazione a SWIMv2</h1>
-	
+		<div align="center">	
 	<%-- Gestione messaggi d'errore --%>
 	<c:choose>
 		<c:when test="${!empty erroreRegistrazione}"> 
@@ -42,7 +42,6 @@
 	<%-- Form che permette di inviare sia file allegati sia dati prelevati dalle input text.
 		Essendo una post verra' intercettata dalla doPost della servlet specificata in action="registrazione" --%>
 	<form action="registrazione" method="POST" enctype="multipart/form-data">
-		<div align="center">
 			<table id="formInserimentoParametri">
 				<tr><td>Email*: </td><td><input type="text" name="emailUtente"></input><td></tr> 
 				<tr><td>Password*: </td><td><input type="password" name="password"></input><td></tr> 

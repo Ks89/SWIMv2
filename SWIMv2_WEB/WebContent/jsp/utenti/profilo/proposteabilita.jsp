@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<%-- if che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
+	<div align="center">
 	<c:if test="${!empty erroreInserimentoProposta}">
 		<div class="alert">
 			<p>
@@ -37,7 +38,7 @@
 			</table>
 		</div>
 	</form>
-
+</div>
 	<br>
 	<%-- href fa sempre riferimento alla servlet in modo relativo, mai con link assoluti. Usando il ../ torno indietro di un livello nella
 		gerarchi. Se facessi ../../ tornerei indietro di 2 livelli e cosi' via--%>
