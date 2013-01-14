@@ -34,7 +34,6 @@
 			</c:forEach>
 		</ul>
 		<br>
-
 		<c:if test="${empty nonCiSonoSuggerimenti}">
 			<br>Suggerimenti di amiciza:
 			<br><br>
@@ -58,12 +57,36 @@
 					</c:forEach>
 				</table>
 				<input id="submit" type="submit" />
-			</form>
-		</c:if>
+			</form>		
 		<br>
+		</c:if>
 		<br>Ricaricando la pagina, queste notifiche non saranno mostrate nuovamente.
 	</c:otherwise>
 </c:choose>
+<br><br>
+		<c:if test="${!empty erroreCollaborazioni}">
+			<c:out value="${erroreCollaborazioni}"></c:out>
+		</c:if>
+		<c:if test="${empty erroreCollaborazioni}">
+			<c:if test="${!empty noCollaborazioni }">
+				<c:out value="Non ci sono collaborazioni da notificare"></c:out>
+			</c:if>
+			<c:if test="${empty noCollaborazioni }">
+			Le seguenti collaborazioni richieste sono state confermate:
+			<br>
+			<br>
+				<c:forEach items="${listaCollaborazioni}" var="collaborazione">
+					<br>
+					<br>
+					<br>
+					Nome collaborazione:
+					<c:out value="${collaborazione.nome}"></c:out>
+					<br>
+					Collaboratore:
+					<c:out value="${collaborazione.utenteRicevente.nome}" />&nbsp;<c:out value="${collaborazione.utenteRicevente.cognome}" />
+				</c:forEach>
+			</c:if>
+		</c:if>
 <br>
 <br>
 </div>

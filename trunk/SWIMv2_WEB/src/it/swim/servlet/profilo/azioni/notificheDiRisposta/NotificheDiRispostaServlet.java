@@ -15,9 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
+import entityBeans.Collaborazione;
 import entityBeans.Utente;
+import exceptions.LoginException;
 
 import sessionBeans.localInterfaces.GestioneAmicizieLocal;
+import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 
 /**
  * Servlet implementation class NotificheDiRispostaServlet
@@ -28,6 +31,9 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 
 	@EJB
 	private GestioneAmicizieLocal amicizie;
+	
+	@EJB
+	private GestioneCollaborazioniLocal collab;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -59,12 +65,38 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 		//ottengo utenti che hanno accettato le mie richieste, separandoli in diretti e indiretti (ottenuti con suggerimento)
 		List<Utente> utentiAccettatiDiretti = amicizie.getUtentiCheHannoAccettatoLaRichiestaDiretti(emailUtenteCollegato);
 		List<Utente> utentiAccettatiIndiretti = amicizie.getUtentiCheHannoAccettatoLaRichiestaIndiretti(emailUtenteCollegato);
-
+		List<Collaborazione> collaborazioniAccettate=new ArrayList<Collaborazione>();
+		//ottengo tutte le collaborazioni da me create,che sono state accettate.
+		try {
+			collaborazioniAccettate=collab.getCollaborazioniDaNotificare(emailUtenteCollegato);
+		} catch (LoginException e) {
+			// TODO Auto-generated catch block
+			request.setAttribute("erroreCollaborazioni","Impossibile accedere alle collaborazioni, riprovare");
+		}
+		
 		List<UtenteConSuggerimenti> listaUtentiConSugg = new ArrayList<UtenteConSuggerimenti>();
 
 		//metto come attributo quelli indiretti, tanto non devo lavorarci sopra, mi basta leggere la lista e stamparli nella jsp
 		request.setAttribute("utentiAccettatiIndiretti", utentiAccettatiIndiretti);
 
+		//metto come attributo le collaborazioni
+		if(collaborazioniAccettate.size()==0){
+			request.setAttribute("noCollaborazioni","true");
+		}
+		else{
+			request.setAttribute("listaCollaborazioni", collaborazioniAccettate);
+		}
+		
+		
+		//setto tutte le collaborazioni nella lista come notificate al richiedente
+		for(Collaborazione collaborazione: collaborazioniAccettate){
+			try {
+				collab.notificaAvvenuta(collaborazione.getId());
+			} catch (LoginException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		//segno come viste le notifiche di accettazione delle richieste dell'utente con emailUtenteCollegato,
 		//o meglio metto l'attributo notificaAlRichiedente=true perche' appunto, in questo momento il richiedente
 		//riceve le notifiche di accettazione delle sue richieste fatte ad altri utenti che le hanno accettate
