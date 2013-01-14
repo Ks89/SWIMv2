@@ -5,6 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<div align="center">
 <c:if test="${!empty erroreGetCollaborazioni}">
 	<div class="alert">
 		<p>
@@ -24,7 +25,6 @@
 <c:if test="${empty nonCiSonoCollaborazioni}">
 	<h1><c:out value="Collaborazioni"></c:out></h1>
 	<br><br>
-	<div align="center">
 		<c:forEach items="${collaborazioni}" var="collaborazione">
 			<table id="tabellaFeedback">
 				<tr>
