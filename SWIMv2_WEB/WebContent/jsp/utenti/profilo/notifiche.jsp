@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<%-- Richieste aiuto --%>
+	<div align="center">
 	<c:if test="${!empty erroreGetNotificheRichiesteAiuto}">
 		<div class="alert">
 			<p>
@@ -87,8 +88,6 @@
 		<br>
 	</c:if>
 
-
-	<div align="center">
 	<c:if test="${empty nonCiSonoRichiesteAiuto}">
 		<br>
 		<h2> Richieste di aiuto, inviate dagli utenti:</h2>
