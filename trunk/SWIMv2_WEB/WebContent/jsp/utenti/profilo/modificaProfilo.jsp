@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<%-- choose che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
+	<div align="center">
 	<c:choose>
 		<c:when test="${!empty erroreFileTroppoGrande}"> 
 		<div class="alert">
@@ -12,12 +13,12 @@
 			</p>
 		</div>
 		</c:when>
+		<c:when test="${!empty erroreNonFoto}">
 		<div class="alert">
-			<p>
-				<c:when test="${!empty erroreNonFoto}">
+			<p> 
+				<c:out value="${erroreNonFoto}"></c:out><br>
 			</p>
-		</div> 
-		<c:out value="${erroreNonFoto}"></c:out><br>
+		</div>
 		</c:when>
 		<c:when test="${!empty erroreFotoSconosciuto}"> 
 		<div class="alert">
@@ -76,7 +77,7 @@
 		Essendo una post verra' intercettata dalla doPost della servlet specificata in action="modificaProfilo" --%>
 	<h2>Modifica il profilo</h2>
 	<br>
-	<div align="center">
+	
 	<form action="profilo/azioni/modificaProfilo" method="POST" enctype="multipart/form-data">
 <!-- 		Nuova password: <input id="nuovaPassword" type="password" name="nuovaPassword"></input><br> Nuovo nome: <input id="nuovoNome" type="text" -->
 <!-- 			name="nuovoNome"></input><br> Nuovo cognome: <input id="nuovoCognome" type="text" name="nuovoCognome"></input> -->
