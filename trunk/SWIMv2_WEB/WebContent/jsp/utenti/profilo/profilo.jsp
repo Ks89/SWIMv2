@@ -6,7 +6,7 @@
 	<div align="center">
 	
 	
-	
+	<div align="center">
 	<c:choose>
 		<%-- Per gestire i vari errori durante l'upload della foto del profilo --%>
 		<c:when test="${!empty erroreFileTroppoGrande}"> 
@@ -110,5 +110,6 @@
 	</table>
 	<br>
 	<h2><a href="profilo/azioni/notificheDiRisposta/notificheDiRisposta?emailUtente=${sessionScope.utenteCollegato}" >Ci sono nuove risposte degli utenti</a></h2>
+</div>
 </div>
 <jsp:include page="../../layoutInferiore.jsp"></jsp:include>
