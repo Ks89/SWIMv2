@@ -3,6 +3,7 @@ package it.swim.servlet.profilo.azioni.notificheDiRisposta;
 import it.swim.util.UtenteCollegatoUtil;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +13,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entityBeans.Abilita;
 import entityBeans.Amicizia;
+import entityBeans.Utente;
+import exceptions.LoginException;
+import exceptions.RicercheException;
 
 import sessionBeans.localInterfaces.GestioneAmicizieLocal;
+import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
+import sessionBeans.localInterfaces.GestioneRicercheLocal;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,7 +34,13 @@ public class SuggAlRichiedenteServlet extends HttpServlet {
 
 	@EJB
 	private GestioneAmicizieLocal amicizie;
-
+	
+	@EJB
+	private GestioneCollaborazioniLocal gestCollaborazioni;
+	
+	@EJB
+	private GestioneRicercheLocal ricerche;
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -48,7 +61,7 @@ public class SuggAlRichiedenteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.debug("Entrato nella doPost di SuggerimentiAlRichiedente");
-		
+
 		// ottengo l'email dell'utente collegato dalla sessione, appoggiandomi
 		// ad una classe di utilita'
 		String emailUtenteCollegato = (String) UtenteCollegatoUtil.getEmailUtenteCollegato(request);
@@ -87,6 +100,49 @@ public class SuggAlRichiedenteServlet extends HttpServlet {
 		} else {
 			request.setAttribute("nessunSuggAccettato","Nessun ssuggerimento scelto. Amicizie non inoltrate");
 		}
+		
+		//per far si che la pagina profilo mostri anche il feedback, le abilita' ecc... devo rigenerare i dati e metterli nella request
+		//questo lo devo fare perche' dopo vado alla profilo.jsp in modo diretto e non con una redirect, quindi non entro nella doGet della servlet.
+		this.rigeneraProfiloUtenteCollegato(emailUtenteCollegato, request, response);
+		
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/profilo.jsp").forward(request, response);
 	}
+
+	private void rigeneraProfiloUtenteCollegato(String emailUtenteCollegato, HttpServletRequest request, HttpServletResponse response) {
+
+		// ottengo utente collegato con riferimento al vero oggetto Utente
+		Utente utenteCollegato;
+		try {
+			utenteCollegato = gestCollaborazioni.getUtenteByEmail(emailUtenteCollegato);
+			// mando sulla request i dati dell'utente tramite il setAttribute, e li
+			// contraddistinguo dai 2 parametri passati come string
+			request.setAttribute("cognomeUtenteCollegato", utenteCollegato.getCognome());
+			request.setAttribute("nomeUtenteCollegato", utenteCollegato.getNome());
+
+			// ottengo punteggio di feedback dell'utente
+			Double punteggio = gestCollaborazioni.getPunteggioFeedback(emailUtenteCollegato);
+			String feedback;
+			if(punteggio==null) {
+				feedback = new String("Non disponibile");
+			} else {
+				DecimalFormat df = new DecimalFormat("#.##");
+				feedback = df.format(punteggio);
+				request.setAttribute("feedback", punteggio.intValue() + "");
+			}
+			request.setAttribute("punteggioUtenteCollegato", feedback);
+			log.debug("Sugg al richiedente: punteggioUtenteCollegato:" + feedback);
+
+		} catch (LoginException e) {
+			log.error(e.getMessage(), e);
+		}
+
+		List<Abilita> abilitaInsiemePersonale;
+		try {
+			abilitaInsiemePersonale = ricerche.insiemeAbilitaPersonaliUtente(emailUtenteCollegato);
+			request.setAttribute("abilita", abilitaInsiemePersonale);
+		} catch (RicercheException e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+
 }
