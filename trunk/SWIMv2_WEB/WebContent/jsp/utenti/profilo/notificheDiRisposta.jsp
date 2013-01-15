@@ -3,7 +3,9 @@
 <jsp:include page="../../layoutSuperioreDown.jsp"></jsp:include>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div align="center">
+<h1>Notifiche di risposta</h1>
+	<section>
+<div align="center" class="alignCenter">
 <c:choose>
 	<c:when test="${empty utentiAccettatiIndiretti}">
 		<c:out value=""></c:out>
@@ -22,7 +24,11 @@
 
 <c:choose>
 	<c:when test="${empty listaUtentiConSuggerimenti}">
-		<br>Non ci sono utenti che hanno accettato recentemente le tue richieste di amicizia
+		<div class="alert">
+			<p>
+				Non ci sono utenti che hanno accettato recentemente le tue richieste di amicizia
+			</p>
+		</div>
 	</c:when>
 	<c:otherwise>
 		<br>
