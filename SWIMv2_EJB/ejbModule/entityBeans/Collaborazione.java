@@ -42,6 +42,10 @@ import org.hibernate.validator.Min;
 		@NamedQuery(name = "Collaborazione.getCollaborazioniDaTerminare", query = "SELECT c "
 				+ "FROM Collaborazione c "
 				+ "WHERE c.utenteRichiedente.email = :emailRichiedente AND c.dataStipula IS NOT NULL AND c.dataTermine 	IS NULL"),
+				
+		@NamedQuery(name = "Collaborazione.getCollaborazioniRifiutate", query = "SELECT c "
+				+ "FROM Collaborazione c "
+				+ "WHERE c.utenteRichiedente.email = :emailRichiedente AND c.dataStipula IS NULL AND c.dataTermine 	IS NOT NULL"),
 
 		@NamedQuery(name = "Collaborazione.getCollaborazioniCreateFeedbackNonRilasciatoByEmail", query = "SELECT c "
 				+ "FROM Collaborazione c "

@@ -138,4 +138,9 @@ public interface GestioneCollaborazioniInterface {
 	public List<Collaborazione> getCollaborazioniDaNotificare(String emailRichiedente)
 			throws LoginException;
 
+	public List<Collaborazione> getCollaborazioniRifiutate(String emailRichiedente)
+			throws LoginException;
+
+	public boolean cancellaCollaborazioneRifiutata(Long id) throws LoginException;
+
 }
