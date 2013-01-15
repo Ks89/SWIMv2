@@ -36,8 +36,8 @@
     <div class="login">
       <h1>Login to SWIMv2</h1>
       <form method="post" action="login" id="loginForm">
-        <p><input type="text" id="emailUtente" name="emailUtente" value="" placeholder="Email"></p>
-        <p><input type="password" id="password" name="password" value="" placeholder="Password"></p>
+        <p><input type="text" id="emailUtente" name="emailUtente" maxlength="100" value="" placeholder="Email"></p>
+        <p><input type="password" id="password" name="password" maxlength="100"  value="" placeholder="Password"></p>
         <p class="remember_me">
           <label>
             <input type="checkbox" name="remember_me" id="remember_me">

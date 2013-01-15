@@ -30,7 +30,7 @@
 		<div align="center">
 			<table id="formInserimentoParametri">
 				<tr>
-					<td>Nome abilita proposta: </td><td><input id="nomeAbilita" type="text" name="nomeAbilita" placeholder="Nome dell'abilita"></input></td>
+					<td>Nome abilita proposta: </td><td><input id="nomeAbilita" type="text" name="nomeAbilita" maxlength="100" placeholder="Nome dell'abilita"></input></td>
 				</tr> 
 				<tr>
 					<td>Motivo: </td><td><textarea name="descrizioneAbilita" rows="10" cols="50" maxlength="500" style="resize:none;" placeholder="Motivo della proposta" ></textarea></td>
