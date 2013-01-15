@@ -31,7 +31,7 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 
 	@EJB
 	private GestioneAmicizieLocal amicizie;
-	
+
 	@EJB
 	private GestioneCollaborazioniLocal collab;
 
@@ -57,7 +57,9 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 			response.sendRedirect("../../../home");
 			return;
 		}
+		
 
+		//------------------------GESTIONE AMICIZIE----------------------
 		//variabile che conta il numero dei suggerimenti di tutti gli utenti che hanno accettato
 		//le richieste di amicizia, contando anche i doppioni
 		int numUtentiSuggeriti = 0; 
@@ -65,55 +67,12 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 		//ottengo utenti che hanno accettato le mie richieste, separandoli in diretti e indiretti (ottenuti con suggerimento)
 		List<Utente> utentiAccettatiDiretti = amicizie.getUtentiCheHannoAccettatoLaRichiestaDiretti(emailUtenteCollegato);
 		List<Utente> utentiAccettatiIndiretti = amicizie.getUtentiCheHannoAccettatoLaRichiestaIndiretti(emailUtenteCollegato);
-		List<Collaborazione> collaborazioniAccettate=new ArrayList<Collaborazione>();
-		List<Collaborazione> collaborazioniRespinte=new ArrayList<Collaborazione>();
-		//ottengo tutte le collaborazioni da me create,che sono state accettate.
-		try {
-			collaborazioniAccettate=collab.getCollaborazioniDaNotificare(emailUtenteCollegato);
-			collaborazioniRespinte=collab.getCollaborazioniRifiutate(emailUtenteCollegato);
-		} catch (LoginException e) {
-			// TODO Auto-generated catch block
-			request.setAttribute("erroreCollaborazioni","Impossibile accedere alle collaborazioni, riprovare");
-		}
-		
 		List<UtenteConSuggerimenti> listaUtentiConSugg = new ArrayList<UtenteConSuggerimenti>();
 
 		//metto come attributo quelli indiretti, tanto non devo lavorarci sopra, mi basta leggere la lista e stamparli nella jsp
 		request.setAttribute("utentiAccettatiIndiretti", utentiAccettatiIndiretti);
 
-		//metto come attributo le collaborazioni
-		if(collaborazioniAccettate.size()==0){
-			request.setAttribute("noCollaborazioni","true");
-		}
-		else{
-			request.setAttribute("listaCollaborazioni", collaborazioniAccettate);
-		}
-		
-		if(collaborazioniRespinte.size()==0){
-			request.setAttribute("noCollaborazioniRespinte","true");
-		}
-		else{
-			request.setAttribute("listaCollaborazioniRespinte", collaborazioniRespinte);
-		}
-		
-		
-		//setto tutte le collaborazioni nella lista come notificate al richiedente
-		for(Collaborazione collaborazione: collaborazioniAccettate){
-			try {
-				collab.notificaAvvenuta(collaborazione.getId());
-			} catch (LoginException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-		for(Collaborazione collaborazione: collaborazioniRespinte){
-			try {
-				collab.cancellaCollaborazioneRifiutata(collaborazione.getId());
-			} catch (LoginException e) {
-				e.printStackTrace();
-			}
-		}
+
 		//segno come viste le notifiche di accettazione delle richieste dell'utente con emailUtenteCollegato,
 		//o meglio metto l'attributo notificaAlRichiedente=true perche' appunto, in questo momento il richiedente
 		//riceve le notifiche di accettazione delle sue richieste fatte ad altri utenti che le hanno accettate
@@ -146,6 +105,53 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 		//per sapere se mostrare la tabella coi suggerimenti verifico se ci sono effettivamente suggerimenti,
 		if(numUtentiSuggeriti==0) {
 			request.setAttribute("nonCiSonoSuggerimenti","true");
+		}
+
+
+
+
+		//------------------------GESTIONE COLLABORAZIONI----------------------
+		List<Collaborazione> collaborazioniAccettate=new ArrayList<Collaborazione>();
+		List<Collaborazione> collaborazioniRespinte=new ArrayList<Collaborazione>();
+		//ottengo tutte le collaborazioni da me create,che sono state accettate e anche quelle respinte
+		try {
+			collaborazioniAccettate=collab.getCollaborazioniDaNotificare(emailUtenteCollegato);
+			collaborazioniRespinte=collab.getCollaborazioniRifiutate(emailUtenteCollegato);
+		} catch (LoginException e) {
+			request.setAttribute("erroreCollaborazioni","Impossibile accedere alle collaborazioni, riprovare");
+		}
+
+		//metto come attributo le collaborazioni
+		if(collaborazioniAccettate.size()==0){
+			request.setAttribute("noCollaborazioni","true");
+		}
+		else{
+			request.setAttribute("listaCollaborazioni", collaborazioniAccettate);
+		}
+
+		if(collaborazioniRespinte.size()==0){
+			request.setAttribute("noCollaborazioniRespinte","true");
+		}
+		else{
+			request.setAttribute("listaCollaborazioniRespinte", collaborazioniRespinte);
+		}
+
+
+		//setto tutte le collaborazioni nella lista come notificate al richiedente
+		for(Collaborazione collaborazione: collaborazioniAccettate){
+			try {
+				collab.notificaAvvenuta(collaborazione.getId());
+			} catch (LoginException e) {
+				log.error(e.getMessage(), e);
+			}
+		}
+
+		for(Collaborazione collaborazione: collaborazioniRespinte){
+			try {
+				collab.cancellaCollaborazioneRifiutata(collaborazione.getId());
+			} catch (LoginException e) {
+				log.error(e.getMessage(), e);
+			}
 		}
 
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notificheDiRisposta.jsp").forward(request, response);

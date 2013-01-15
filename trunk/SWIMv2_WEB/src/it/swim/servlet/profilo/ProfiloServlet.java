@@ -80,7 +80,7 @@ public class ProfiloServlet extends HttpServlet {
 			} else {
 				DecimalFormat df = new DecimalFormat("#.##");
 				feedback = df.format(punteggio);
-				request.setAttribute("feedback", punteggio.intValue() + "");
+				request.setAttribute("feedbackStelline", punteggio.intValue() + "");
 			}
 			request.setAttribute("punteggioUtenteCollegato", feedback);
 			log.debug("punteggioUtenteCollegato:" + feedback);

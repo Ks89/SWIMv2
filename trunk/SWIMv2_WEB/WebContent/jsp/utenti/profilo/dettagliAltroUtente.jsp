@@ -1,51 +1,110 @@
 <jsp:include page="../../layoutSuperioreUp.jsp"></jsp:include>
-<title>Insert title here</title>
+<title>SWIM - Profilo - DettaglioRicerca</title>
 <jsp:include page="../../layoutSuperioreDown.jsp"></jsp:include>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	<h1>Dettagli altro utente</h1>
-	<section>
+<h1>Dettagli altro utente</h1>
+<section>
 	<div align="center" class="alignCenter">
+		
+		<%-- Messaggi di errore --%>
+		<c:if test="${!empty erroreCampiVuotiCollaborazione}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${erroreCampiVuotiCollaborazione}"></c:out><br>
+			</p>
+		</div>
+		</c:if>
+		<c:if test="${!empty erroreGetUtente}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${erroreGetUtente}"></c:out><br>
+			</p>
+		</div>
+		</c:if>
+		<c:if test="${!empty erroreAmiciziaNonStretta}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${erroreAmiciziaNonStretta}"></c:out><br>
+			</p>
+		</div>
+		</c:if>
+		<c:if test="${!empty erroreCollaborazioneNonCreata}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${erroreCollaborazioneNonCreata}"></c:out><br>
+			</p>
+		</div>
+		</c:if>
+		<c:if test="${!empty erroreAmiciziaGiaInoltrata}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${erroreAmiciziaGiaInoltrata}"></c:out><br>
+			</p>
+		</div>
+		</c:if>	
+		
+		
+		<%-- Messaggi di conferma --%>
+		<c:if test="${!empty amiciziaStrettaCorrettamente}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${amiciziaStrettaCorrettamente}"></c:out><br>
+			</p>
+		</div>
+		</c:if>	
+		<c:if test="${!empty collaborazioneCreataCorrettamente}"> 
+		<div class="alert">
+			<p>
+				<c:out value="${collaborazioneCreataCorrettamente}"></c:out><br>
+			</p>
+		</div>
+		</c:if>			
+		
+		
 		<img src="profilo/foto?emailUtente=${utente.email}" />
 		<table id="formInserimentoParametri">
 			<tr>
-				 <td>Nome: </td>
-				 <td><c:out value="${utente.nome}"></c:out></td>
+				<td>Nome:</td>
+				<td><c:out value="${utente.nome}"></c:out></td>
 			</tr>
 			<tr>
-				<td>Cognome: </td>
+				<td>Cognome:</td>
 				<td><c:out value="${utente.cognome}"></c:out></td>
 			</tr>
 			<tr>
-				<td>Email: </td>
+				<td>Email:</td>
 				<td><c:out value="${utente.email}"></c:out></td>
 			</tr>
 			<tr>
-				<td>Punteggio feedback: </td>
-				<td>
-					<c:if test="${!empty punteggioFeedback}">
-						<div id="STAR_RATING" align="center">	
-							<ul>
-								<c:forEach begin="1" end="5" varStatus="num">
-									<c:if test="${num.count <= feedback}">
-										<li id="star_${num.count}" class="on"></li>
-									</c:if>
-									<c:if test="${num.count > feedback}">
-										<li id="star_${num.count}"></li>
-									</c:if>
-								</c:forEach>
-								<%--<li style="background-image: none;">&nbsp;<c:out value="${punteggioFeedback}"/></li> --%>
-							</ul>
-						</div>
-					</c:if>
-				</td>
+				<td>Punteggio feedback:</td>
+				<td><c:choose>
+						<c:when test="${!empty feedbackUtenteRicercatoStelline}">
+							<div id="STAR_RATING" align="center">
+								<ul>
+									<c:forEach begin="1" end="5" varStatus="num">
+										<c:if test="${num.count <= feedbackUtenteRicercatoStelline}">
+											<li id="star_${num.count}" class="on"></li>
+										</c:if>
+										<c:if test="${num.count > feedbackUtenteRicercatoStelline}">
+											<li id="star_${num.count}"></li>
+										</c:if>
+									</c:forEach>
+									<li style="background-image: none;">&nbsp;<c:out value="${punteggioFeedback}" /></li>
+								</ul>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<c:out value="${punteggioFeedback}" />
+						</c:otherwise>
+					</c:choose></td>
 			</tr>
 		</table>
 		<br>
 		<table id="tabellaRigheAlterne">
 			<caption>Abilita' dell'utente:</caption>
-			<tr> 
-		  		<th>Abilità</th>
+			<tr>
+				<th>Abilità</th>
 				<th>Descrizione</th>
 			</tr>
 			<c:forEach items="${listaAbilita}" var="abilita" varStatus="num">
@@ -62,29 +121,30 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<br>
-		<a href="profilo/azioni/feedbackUtente?emailUtente=${utente.email}&tipoRicerca=${tipoRicerca}" >Visualizza i feedback di questo utente</a>
-		<br>
-		<br>
+		
+		<br> <a href="profilo/azioni/feedbackUtente?emailUtente=${utente.email}&tipoRicerca=${tipoRicerca}">Visualizza i feedback di questo utente</a>
+		<br> <br>
+		
 		<form id="dettagliAltroUtente" action="profilo/azioni/dettagliAltroUtente" method="POST">
 			<input type="hidden" name="tipo" />
 			<c:if test="${amiciziaGiaInoltrata==false}">
-				<input type="button" id="button" value="Richiedi amicizia" onclick="dettagliAltroUtente.elements['tipo'].value='amicizia'; dettagliAltroUtente.submit(); " />
+				<input type="button" id="button" value="Richiedi amicizia"
+					onclick="dettagliAltroUtente.elements['tipo'].value='amicizia'; dettagliAltroUtente.submit(); " />
 				<br />
 			</c:if>
+			<br> Nome:<input type="text" name="nomeCollaborazione" maxlength="100"></input> Descrizione:<input type="text"
+				name="descrizioneCollaborazione" maxlength="500"></input><br>
+			<br> <input type="button" id="button" value="Richiedi aiuto"
+				onclick="dettagliAltroUtente.elements['tipo'].value='collaborazione'; dettagliAltroUtente.submit();" /> 
 			<br>
-			Nome:<input type="text" name="nomeCollaborazione" maxlength="100"></input> 
-			Descrizione:<input type="text" name="descrizioneCollaborazione" maxlength="500"></input><br><br>
-			<input type="button" id="button" value="Richiedi collaborazione" onclick="dettagliAltroUtente.elements['tipo'].value='collaborazione'; dettagliAltroUtente.submit();" />
-			<br>
-			<c:if test="${!empty messageCollaborazione}">${messageCollaborazione}</c:if>
 		</form>
-			<br>
-			<c:if test="${tipoRicerca=='utente'}">
-				<a href="profilo/azioni/ricerchePerUtentiLoggati?tipoRicerca=utente">Torna alla ricerca utente</a>
-			</c:if>
-			<c:if test="${tipoRicerca=='aiuto'}">
-				<a href="profilo/azioni/ricerchePerUtentiLoggati?tipoRicerca=aiuto">Torna alla ricerca aiuto</a>
-			</c:if>
+
+		<br>
+		<c:if test="${tipoRicerca=='utente'}">
+			<a href="profilo/azioni/ricerchePerUtentiLoggati?tipoRicerca=utente">Torna alla ricerca utente</a>
+		</c:if>
+		<c:if test="${tipoRicerca=='aiuto'}">
+			<a href="profilo/azioni/ricerchePerUtentiLoggati?tipoRicerca=aiuto">Torna alla ricerca aiuto</a>
+		</c:if>
 	</div>
-<jsp:include page="../../layoutInferiore.jsp"></jsp:include>
+	<jsp:include page="../../layoutInferiore.jsp"></jsp:include>
