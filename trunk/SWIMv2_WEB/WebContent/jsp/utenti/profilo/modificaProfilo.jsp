@@ -4,7 +4,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<%-- choose che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
-	<div align="center">
+	<h1>Modifica profilo</h1>
+	<section>
+	<div align="center" class="alignCenter">
 	<c:choose>
 		<c:when test="${!empty erroreFileTroppoGrande}"> 
 		<div class="alert">

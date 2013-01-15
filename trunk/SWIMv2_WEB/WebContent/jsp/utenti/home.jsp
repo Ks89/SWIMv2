@@ -3,7 +3,7 @@
 <!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
-<jsp:include page="../layoutSuperioreUp.jsp"></jsp:include>
+<jsp:include page="../layoutSuperioreUp.jsp" flush="true"></jsp:include>
 <title>SWIM</title>
 <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -11,10 +11,13 @@
  
   <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-<jsp:include page="../layoutSuperioreDownVisitatore.jsp"></jsp:include>
+<jsp:include page="../layoutSuperioreDownVisitatore.jsp" flush="true"></jsp:include>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<%-- if che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
+	
+	<h1>Home</h1>
+	<section>
 	<div align="center">
 		<c:if test="${!empty erroreLoginFallito}">
 			<div class="alert">
@@ -23,14 +26,13 @@
 				</p>
 			</div>
 		</c:if>
-	</div>
 	<br>
 	<br>
 	<br>
 	<!--  uso una choose per stabilire quale form mostrare. Se l'utente e' collegato 
 	mostro le funzioni di ricerca ecc... altrimenti la form di login e registrazione -->
 	<c:if test="${sessionScope.utenteCollegato == null}">
-	<section class="container">
+	<section class="containerLogin">
     <div class="login">
       <h1>Login to SWIMv2</h1>
       <form method="post" action="login" id="loginForm">
@@ -46,10 +48,8 @@
       </form>
     </div>
     Non sei ancora registrato? <a href="registrazione">Registrati</a>
-  </section>
-	
-	</c:if>
-		
+  	</c:if>
+</div>	
 	<%--
 	<c:if test="${sessionScope.utenteCollegato == null}">
 	<form id="loginForm" action="login" method="POST">
@@ -84,4 +84,4 @@
 <!-- 			<a href="profilo/azioni/ricerche?utenti=pervisitatori">Ricerca utenti per visitatori</a> -->
 <%-- 		</c:otherwise> --%>
 <%-- 	</c:choose> --%>
-<jsp:include page="../layoutInferiore.jsp"></jsp:include>
+<jsp:include page="../layoutInferiore.jsp" flush="true"></jsp:include>

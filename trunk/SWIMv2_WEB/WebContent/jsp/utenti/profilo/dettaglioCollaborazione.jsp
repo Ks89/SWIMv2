@@ -3,7 +3,9 @@
 <jsp:include page="../../layoutSuperioreDown.jsp"></jsp:include>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div align="center">
+<h1>Dettagglio della collaborazione</h1>
+	<section>
+<div align="center" class="alignCenter">
 	<h2>Dettagglio della collaborazione</h2>
 	<c:if test="${!empty erroreRicercaCollaborazione}">
 		<div class="alert">

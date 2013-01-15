@@ -3,10 +3,16 @@
 <jsp:include page="../../layoutSuperioreDown.jsp"></jsp:include>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<h1>Rilascio feedback</h1>
+	<section>
+	<div align="center" class="alignCenter">
 	<c:if test="${empty feedBackRilasciato}">
-	<h2>Compila i campi per rilasciare il FeedBack!</h2>
+	<div class="alert">
+			<p>
+				Compila i campi per rilasciare il FeedBack!
+			</p>
+	</div>
 	<br>
-	<div align="center">
 		<form action="profilo/azioni/rilasciaFeedBack" method="POST"
 			enctype="multipart/form-data">
 			<c:if test="${!empty erroreNelPunteggio}">

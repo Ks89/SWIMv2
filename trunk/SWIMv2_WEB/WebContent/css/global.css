@@ -1,233 +1,147 @@
-body {
-background-color:white;
-font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+@import url(http://fonts.googleapis.com/css?family=Didact+Gothic);
+
+*{
+	padding:0;
+	margin:0;
+	font-family: 'Didact Gothic', sans-serif;
 }
 
-.pg-normal {
-color: black;
-font-weight: normal;
-text-decoration: none;
-cursor: pointer;
+.alignCenter
+{
+	border: 20px solid; 
+	border-color: white;"
+	align:center;
 }
 
-.pg-selected {
-color: black;
-font-weight: bold;
-text-decoration: underline;
-cursor: pointer;
+#container {
+	background:url('../img/layout/grigio.png') repeat-y;
+	padding-top:15px; /* altezza grigio sopra header da modificare a piacere*/
+	width:1032px;
+	height:100%;
+	margin:auto;
 }
 
-.main { 
-width:996px; 
-margin:auto; 
-background-color:#0095ff; 
-overflow:hidden; 
-color:#666; 
-margin-top:20px; 
-}
-
-.content {
-overflow:hidden;
-padding-bottom:10px;
-}
-
-.col1 {
-width:280px;
-float:left;
-margin-left:0px;
-margin-top:10px;
-text-align: center;
-height:inherit;
-/*padding-top:150px;*/
-position: fixed;
-top:135px;
-}
-
-.col2 {
-margin-left:280px; 
-padding-top:150px;
-padding-bottom:100px; 
-background-color:white; 
-margin-right:10px; 
-margin-top:10px; 
-padding-bottom:20px; 
-height:auto;
-min-height: 1200px;
-text-align: center;
-}
-
-
-
-h1 {
-margin:0px; 
-line-height:32px; 
-font-size:40px; 
-width:70%; 
-margin:auto;
-}
-
-p {
-width:70%; 
-margin:auto; 
-margin-top:40px; 
-font-size:24px; 
-text-align:justify;
-}
-
-.copy {
-text-align:left; 
-border-top:1px solid #fff; 
-padding-top:10px; 
-padding-left:10px; 
-clear:both; 
-background-color:#0095ff; 
-color:#fff; 
-height:64px;
-}
-
-a {
-text-decoration:none;
-color:#ccc;
-}
-
-#imgUtente{
-/*position: fixed;*/
-top: 150px;
-}
-
-#logo{
-	float:left;
-	width:256px;
-}
-
-#header{
-	z-index:2;
-padding-bottom:10px;
-background-color:#0095ff;
-position: fixed;
-top: 0px;
-width:996px;
-}
-
-#header ul{
-list-style:none;
-overflow:hidden;
-height:105px;
-margin:0;
-padding:20px 20px 0 20px;
-border-bottom:5px solid white;
-}
-
-#logout{
+header {
+	height:70px; /*altezza header da modificare a piacere*/
+	width:992px;
+	border:0;	
+	background:#024ac0 url('../img/layout/up.png') no-repeat;
+	color:white;
+	padding:20px;
 	text-align: center;
 }
 
-#header li{
-display:inline;
+nav {
+	height:50px; /*altezza blu pulsanti da modificare a piacere*/
+	margin-top:20px;/*altezza grigio sopra pulsanti da modificare a piacere*/
+	padding-top:15px;
+	width:1032px;
+	color:white;
+	background:#024ac0 url(../img/layout/up.png) no-repeat;
+	text-align:center;
+	
 }
 
-#header li a{
-display:block;
-float:left;
-width:105px;
-height:50px;
-margin:60px 2px 0 2px;
-border-top:5px solid white;
-border-right:5px solid white;
-border-left:5px solid white;
-text-decoration:none;
-text-align:center;
-text-transform:uppercase;
-font-family:arial;
-font-size:11px;
-font-weight:bold;
-color:white;
+nav li {
+	display:inline-block;
+	vertical-align:top;
+	list-style:none;
 }
 
-#header li a span{
-display:block;
-margin-top:5px;
-padding:5px;
+nav li a, nav li a:active, nav li a:visited {
+	display:block;
+	position:relative;
+	padding:3px;
+	height:44px;
+	width:114px;
+	color:white;
+	text-decoration:none;
 }
 
-#header li a b{
-display:block;
-margin-top:10px;
-font-family:"Arial Narrow";
-font-size:60px;
+nav li a:hover {
+	background:#89ade9;
+	color:white;
+	text-decoration:none;
 }
 
-#header li a:hover{
-height:110px;
-margin-top:0;
+nav li a span.una {
+	position:relative;
+	top:25%;
 }
 
-#header li a.item1{
-background-color:#FF0099;
+#space {
+	height:35px; /*altezza grigio sotto pulsanti da modificare a piacere*/
+	width:1032px;
+	color:white;
+	background:url(../img/layout/up2.png) bottom no-repeat;
 }
 
-#header li a.item2{
-background-color:#99CC00;
+#centro  {
+	position:relative;
+	width:1032px;
+	border:0;
+	background:url('../img/layout/bgcentro.png') repeat-y;
+	color:white;
 }
 
-#header li a.item3{
-background-color:#FF3300;
+aside {
+	position:absolute;
+	top:15px;
+	left:40px;
+	width: 200px;
 }
 
-#header li a.item4{
-background-color:#3399FF;
+article {
+	padding-top:15px;
+	margin-left:316px;
+	width: 708px;
+	padding-bottom:35px;
 }
 
-#header li a.item5{
-background-color:#FFB300;
+article h1 {
+	color:white;
 }
 
-#header li a.item6{
-background-color:#99CC00;
+article section{
+	min-height:400px;/*altezza minima della parte centrale da modificare a piacere*/
+	background:white;
+	width:680px;
+	margin-top:30px;
+	color:black;
 }
 
-#header li a.item7{
-background-color:#FF3300;
-}
-
-#header li a.item8{
-background-color:#3399FF;
-}
-
-#header li a.item1 span{
-background-color:#CC007A;
-}
-
-#header li a.item2 span{
-background-color:#7AA300;
-}
-
-#header li a.item3 span{
-background-color:#CC2900;
-}
-
-#header li a.item4 span{
-background-color:#297ACC;
-}
-
-#header li a.item5 span{
-background-color:#CC8F00;
-}
-
-#header li a.item6 span{
-background-color:#7AA300;
-}
-
-#header li a.item7 span{
-background-color:#CC2900;
-}
-
-#header li a.item8 span{
-background-color:#297ACC;
+footer {
+	height:50px; /*altezza footer da modificare a piacere*/
+	margin-top:50px;/* altezza grigio sopra footer da modificare a piacere*/
+	width:992px;
+	border:0;
+	background:#024ac0 url('../img/layout/up.png') no-repeat;
+	color:white;
+	padding:20px;
 }
 
 #formInserimentoParametri td{
 	padding: 5px;
+}
+
+textarea {
+  margin: 5px;
+  padding: 0 10px;
+  color: #404040;
+  background: white;
+  border: 1px solid;
+  border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+  border-radius: 2px;
+  outline: 5px solid #eff4f7;
+  -moz-outline-radius: 3px;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+textarea:focus {
+  border-color: #7dc9e2;
+  outline-color: #dceefc;
+  outline-offset: 0;
 }
 
 /*Messaggio errore*/
@@ -357,7 +271,6 @@ background-color:#d1dfef;
   float: left;
   background-image: url('../img/feedback/starOff.gif');
   background-repeat: no-repeat;
-  cursor: pointer;
 }
 #STAR_RATING li.on
 {
@@ -371,7 +284,7 @@ background-color:#d1dfef;
 }
 
 /*Da qui in poi la parte da togliere se non piace il login*/
-.container {
+.containerLogin {
   margin: 80px auto;
   width: 640px;
   z-index: 1;

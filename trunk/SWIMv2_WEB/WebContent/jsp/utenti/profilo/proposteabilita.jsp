@@ -4,7 +4,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<%-- if che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
-	<div align="center">
+	<h1>Proposte abilita</h1>
+	<section>
+	<div align="center" class="alignCenter">
 	<c:if test="${!empty erroreInserimentoProposta}">
 		<div class="alert">
 			<p>
@@ -31,7 +33,7 @@
 					<td>Nome abilita proposta: </td><td><input id="nomeAbilita" type="text" name="nomeAbilita" placeholder="Nome dell'abilita"></input></td>
 				</tr> 
 				<tr>
-					<td>Motivo: </td><td><textarea name="descrizioneAbilita" rows="3" cols="22" maxlength="100" placeholder="Motivo della proposta" ></textarea></td>
+					<td>Motivo: </td><td><textarea name="descrizioneAbilita" rows="10" cols="70" maxlength="100" style="resize:none;" placeholder="Motivo della proposta" ></textarea></td>
 				<tr>
 					<td colspan="2" style="text-align: center;"><input id="submit" type="submit" /></td>
 				</tr>
