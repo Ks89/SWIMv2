@@ -24,7 +24,7 @@
 		<input type="hidden" name="idProposta" value="${idProposta}"></input>
 		<input id="nuovoNomeAbilitaProposta" type="text" name="nuovoNomeAbilitaProposta" maxlength="100"></input><br>
 		<br>
-		<input id="descrizioneAbilitaProposta" type="text" name="descrizioneAbilitaProposta" maxlength="100"></input>
+		<input id="descrizioneAbilitaProposta" type="text" name="descrizioneAbilitaProposta" maxlength="300"></input>
 		<br>
 		<input id="submit" type="submit" /><br>
 	</form>
