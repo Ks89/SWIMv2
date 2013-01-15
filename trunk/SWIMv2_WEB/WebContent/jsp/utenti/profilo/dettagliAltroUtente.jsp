@@ -130,21 +130,37 @@
 			<c:if test="${amiciziaGiaInoltrata==false}">
 				<input type="button" id="button" value="Richiedi amicizia"
 					onclick="dettagliAltroUtente.elements['tipo'].value='amicizia'; dettagliAltroUtente.submit(); " />
-				<br />
+				<br>
 			</c:if>
-			<br> Nome:<input type="text" name="nomeCollaborazione" maxlength="100"></input> Descrizione:<input type="text"
-				name="descrizioneCollaborazione" maxlength="500"></input><br>
-			<br> <input type="button" id="button" value="Richiedi aiuto"
-				onclick="dettagliAltroUtente.elements['tipo'].value='collaborazione'; dettagliAltroUtente.submit();" /> 
 			<br>
-		</form>
+			<table id="formInserimentoParametri">
+				<caption>Compila i campi sottostanti per richiedere una collaborazione</caption>
+				<tr>
+					<td>Nome:</td><td><input type="text" name="nomeCollaborazione" maxlength="100" style="width: 271px;" placeholder="Nome della collaborazione"></input></td>
+				</tr> 
+				<tr>
+					<td>Descrizione:</td><td><textarea name="descrizioneCollaborazione" rows="10" cols="50" maxlength="500" style="resize:none;" placeholder="Descrizione della collaborazione"></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: center;"><input type="button" id="button" value="Richiedi collaborazione" onclick="dettagliAltroUtente.elements['tipo'].value='collaborazione'; dettagliAltroUtente.submit();" /></td>
+				</tr>
+			</table>
 
+		</form>
 		<br>
-		<c:if test="${tipoRicerca=='utente'}">
-			<a href="profilo/azioni/ricerchePerUtentiLoggati?tipoRicerca=utente">Torna alla ricerca utente</a>
-		</c:if>
-		<c:if test="${tipoRicerca=='aiuto'}">
-			<a href="profilo/azioni/ricerchePerUtentiLoggati?tipoRicerca=aiuto">Torna alla ricerca aiuto</a>
-		</c:if>
+		<c:if test="${!empty messageCollaborazione}">
+				<div class="alert" >
+					<p>
+						${messageCollaborazione}
+					</p>
+				</div>
+			</c:if>
+			<br>
+			<c:if test="${tipoRicerca=='utente'}">
+				<a href="profilo/azioni/ricerchePerUtentiLoggati?tipoRicerca=utente">Torna alla ricerca utente</a>
+			</c:if>
+			<c:if test="${tipoRicerca=='aiuto'}">
+				<a href="profilo/azioni/ricerchePerUtentiLoggati?tipoRicerca=aiuto">Torna alla ricerca aiuto</a>
+			</c:if>
 	</div>
 	<jsp:include page="../../layoutInferiore.jsp"></jsp:include>

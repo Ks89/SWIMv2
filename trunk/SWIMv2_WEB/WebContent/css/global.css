@@ -144,6 +144,25 @@ textarea:focus {
   outline-offset: 0;
 }
 
+/*Messagio notifica*/
+.alertNotification {
+   background: #febcbc url('../img/alert/exclamation.png') 15px center no-repeat;
+   text-align: left;
+   padding: 10px 20px 10px 50px;
+   border-top: 2px solid #e95137;
+   border-bottom: 2px solid #e95137;
+   width:400px;
+   
+}
+
+.alertNotification p{
+	font-size: 14px;
+	margin-top: 0px;
+	width: auto;
+	margin: auto;
+	text-align: left;
+}
+
 /*Messaggio errore*/
 .alert {
    background: #febcbc url('../img/alert/exclamation.png') 15px center no-repeat;

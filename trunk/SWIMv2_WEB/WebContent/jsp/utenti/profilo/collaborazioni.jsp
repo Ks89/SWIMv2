@@ -99,7 +99,7 @@
 		</table>
 	</c:if>
 	<br>
-	<c:if test="${!empty erroreGetCollaborazioniTerminateConFeedBack}">
+		<c:if test="${!empty erroreGetCollaborazioniTerminateConFeedBack}">
 			<div class="alert">
 				<p>
 					<c:out value="${erroreGetCollaborazioniTerminateConFeedBack}"></c:out>
