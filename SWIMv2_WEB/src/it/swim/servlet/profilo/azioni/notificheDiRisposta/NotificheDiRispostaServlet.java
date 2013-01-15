@@ -66,9 +66,11 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 		List<Utente> utentiAccettatiDiretti = amicizie.getUtentiCheHannoAccettatoLaRichiestaDiretti(emailUtenteCollegato);
 		List<Utente> utentiAccettatiIndiretti = amicizie.getUtentiCheHannoAccettatoLaRichiestaIndiretti(emailUtenteCollegato);
 		List<Collaborazione> collaborazioniAccettate=new ArrayList<Collaborazione>();
+		List<Collaborazione> collaborazioniRespinte=new ArrayList<Collaborazione>();
 		//ottengo tutte le collaborazioni da me create,che sono state accettate.
 		try {
 			collaborazioniAccettate=collab.getCollaborazioniDaNotificare(emailUtenteCollegato);
+			collaborazioniRespinte=collab.getCollaborazioniRifiutate(emailUtenteCollegato);
 		} catch (LoginException e) {
 			// TODO Auto-generated catch block
 			request.setAttribute("erroreCollaborazioni","Impossibile accedere alle collaborazioni, riprovare");
@@ -87,6 +89,13 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 			request.setAttribute("listaCollaborazioni", collaborazioniAccettate);
 		}
 		
+		if(collaborazioniRespinte.size()==0){
+			request.setAttribute("noCollaborazioniRespinte","true");
+		}
+		else{
+			request.setAttribute("listaCollaborazioniRespinte", collaborazioniRespinte);
+		}
+		
 		
 		//setto tutte le collaborazioni nella lista come notificate al richiedente
 		for(Collaborazione collaborazione: collaborazioniAccettate){
@@ -94,6 +103,14 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 				collab.notificaAvvenuta(collaborazione.getId());
 			} catch (LoginException e) {
 				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		for(Collaborazione collaborazione: collaborazioniRespinte){
+			try {
+				collab.cancellaCollaborazioneRifiutata(collaborazione.getId());
+			} catch (LoginException e) {
 				e.printStackTrace();
 			}
 		}
