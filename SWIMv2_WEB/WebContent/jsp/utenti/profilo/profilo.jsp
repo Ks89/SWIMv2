@@ -1,12 +1,11 @@
-<jsp:include page="../../layoutSuperioreUp.jsp"></jsp:include>
+<jsp:include page="../../layoutSuperioreUp.jsp" flush="true"></jsp:include>
 <title>SWIM - Profilo</title>
-<jsp:include page="../../layoutSuperioreDown.jsp"></jsp:include>
+<jsp:include page="../../layoutSuperioreDown.jsp" flush="true"></jsp:include>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	<div align="center">
-	
-	
-	<div align="center">
+	<h1>Dati personali</h1>
+	<section>
+		<div align="center" class="alignCenter">
 	<c:choose>
 		<%-- Per gestire i vari errori durante l'upload della foto del profilo --%>
 		<c:when test="${!empty erroreFileTroppoGrande}"> 
@@ -61,9 +60,6 @@
 		</div>
 		</c:when>
 	</c:choose>
-	
-	
-	<h1>Il mio profilo</h1><br>
 	<table id="formInserimentoParametri">
 	<tr><td>Email:</td><td><c:out value="${sessionScope.utenteCollegato}"></c:out></td>
 	<tr><td>Punteggio feedback:</td>
@@ -111,5 +107,4 @@
 	<br>
 	<h2><a href="profilo/azioni/notificheDiRisposta/notificheDiRisposta?emailUtente=${sessionScope.utenteCollegato}" >Ci sono nuove risposte degli utenti</a></h2>
 </div>
-</div>
-<jsp:include page="../../layoutInferiore.jsp"></jsp:include>
+<jsp:include page="../../layoutInferiore.jsp" flush="true"></jsp:include>

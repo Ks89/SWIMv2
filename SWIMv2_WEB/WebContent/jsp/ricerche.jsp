@@ -5,7 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%-- Questa jsp conterra' con un choose 3 casi possibili, cioe' ricerca per visitatori, ricerca aiuto e ricerca utenti --%>
 <form action="profilo/azioni/ricerchePerUtentiLoggati" method="POST" enctype="multipart/form-data">
-	<div align="center">
+	<h1>Ricerca</h1>
+	<section>
+	<div align="center" class="alignCenter">
 		<c:if test="${!risultatoRicerca and ricercaGiaEffettuata}">
 			<div class="alert">
 				<p>

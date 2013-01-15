@@ -4,6 +4,6 @@
 <html>
 <head>
 <base href="http://localhost:8080/SWIMv2_WEB/" target="_self">
-<link rel="stylesheet" href="css/global.css" type="text/css"/>
+<link rel="stylesheet" href="css/global.css" type="text/css" media="screen"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script type="text/javascript" src="js/paging.js"></script>

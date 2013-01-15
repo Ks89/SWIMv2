@@ -1,8 +1,8 @@
-<br><br><br><br>
+		</section>
+		</article>
+	</div>
+	<footer><small>Design by Jacopo Bulla - Stefano Cappa - Davide Caio</small></p></footer>
+	
 </div>
-</div>
-<div class="copy"><small>Design by Jacopo Bulla - Stefano Cappa - Davide Caio</small></p>
-</div>
-</div>
-</BODY>
-</HTML>
+</body>
+</html>
