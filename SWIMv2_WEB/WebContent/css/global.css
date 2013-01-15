@@ -181,6 +181,44 @@ textarea:focus {
 	margin: auto;
 	text-align: left;
 }
+
+/*Messaggio di conferma*/
+.conferma {
+   background: #aaeea0 url('../img/alert/exclamation_verde.png') 15px center no-repeat;
+   text-align: left;
+   padding: 10px 20px 10px 50px;
+   border-top: 2px solid #50dc3a;
+   border-bottom: 2px solid #50dc3a;
+   width:400px;
+   
+}
+
+.conferma p{
+	font-size: 14px;
+	margin-top: 0px;
+	width: auto;
+	margin: auto;
+	text-align: left;
+}
+/*Messaggio generico blu*/
+.generico {
+   background: #024ac0 url('../img/alert/exclamation_blu.png') 15px center no-repeat;
+   text-align: left;
+   padding: 10px 20px 10px 50px;
+   border-top: 2px solid #89ade9;
+   border-bottom: 2px solid #89ade9;
+   width:400px;
+   
+}
+
+.generico p{
+	font-size: 14px;
+	margin-top: 0px;
+	width: auto;
+	margin: auto;
+	text-align: left;
+}
+
 /* CSS per tabelle con righe a 2 colori*/
 #tabellaRigheAlterne
 {

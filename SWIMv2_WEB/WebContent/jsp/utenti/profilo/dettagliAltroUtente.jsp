@@ -47,14 +47,14 @@
 		
 		<%-- Messaggi di conferma --%>
 		<c:if test="${!empty richiestaAmiciziaInviata}"> 
-		<div class="alert">
-			<p>
+		<div class="conferma">
+			<p> 
 				<c:out value="${richiestaAmiciziaInviata}"></c:out><br>
 			</p>
 		</div>
 		</c:if>	
 		<c:if test="${!empty collaborazioneCreataCorrettamente}"> 
-		<div class="alert">
+		<div class="conferma">
 			<p>
 				<c:out value="${collaborazioneCreataCorrettamente}"></c:out><br>
 			</p>
