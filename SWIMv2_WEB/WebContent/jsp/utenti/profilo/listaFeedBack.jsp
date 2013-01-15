@@ -61,11 +61,11 @@
 			</table>
 			<br><br>
 		</c:forEach>
-		
+		<c:if test="${!empty altroUtente}">
+			<a href="profilo/azioni/dettagliAltroUtente?utente=${email}&tipoRicerca=${tipoRicerca}">Torna al profilo dell'utente ricercato</a>
+		</c:if>	
 	</div>
 </c:if>
-<c:if test="${!empty altroUtente}">
-			<a href="profilo/azioni/dettagliAltroUtente?utente=${email}&tipoRicerca=${tipoRicerca}">Torna al profilo dell'utente ricercato</a>
-		</c:if>
+
 
 <jsp:include page="../../layoutInferiore.jsp"></jsp:include>

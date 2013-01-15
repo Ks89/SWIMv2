@@ -61,8 +61,8 @@
 		</c:when>
 	</c:choose>
 	<table id="formInserimentoParametri">
-	<tr><td>Email:</td><td><c:out value="${sessionScope.utenteCollegato}"></c:out></td>
-	<tr><td>Punteggio feedback:</td>
+	<tr><td id="grassettoBlu">Email:</td><td><c:out value="${sessionScope.utenteCollegato}"></c:out></td>
+	<tr><td id="grassettoBlu">Punteggio feedback:</td>
 	<td>
 	<c:choose>
 		<c:when test="${!empty feedbackStelline}">
