@@ -248,6 +248,7 @@ public class GestioneCollaborazioni implements GestioneCollaborazioniRemote,
 				Collaborazione.class, id);
 		if (collaborazione != null) {
 			entityManager.remove(collaborazione);
+			entityManager.flush();
 			return true;
 		}
 		return false;
