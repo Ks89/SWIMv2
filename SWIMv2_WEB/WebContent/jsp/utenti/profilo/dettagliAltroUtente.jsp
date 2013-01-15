@@ -73,8 +73,8 @@
 				<br />
 			</c:if>
 			<br>
-			Nome:<input type="text" name="nomeCollaborazione"></input> 
-			Descrizione:<input type="text" name="descrizioneCollaborazione"></input><br><br>
+			Nome:<input type="text" name="nomeCollaborazione" maxlength="100"></input> 
+			Descrizione:<input type="text" name="descrizioneCollaborazione" maxlength="500"></input><br><br>
 			<input type="button" id="button" value="Richiedi collaborazione" onclick="dettagliAltroUtente.elements['tipo'].value='collaborazione'; dettagliAltroUtente.submit();" />
 			<br>
 			<c:if test="${!empty messageCollaborazione}">${messageCollaborazione}</c:if>

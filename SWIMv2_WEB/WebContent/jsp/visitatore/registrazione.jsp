@@ -43,10 +43,10 @@
 		Essendo una post verra' intercettata dalla doPost della servlet specificata in action="registrazione" --%>
 	<form action="registrazione" method="POST" enctype="multipart/form-data">
 			<table id="formInserimentoParametri">
-				<tr><td>Email*: </td><td><input type="text" name="emailUtente"></input><td></tr> 
-				<tr><td>Password*: </td><td><input type="password" name="password"></input><td></tr> 
-				<tr><td>Nome*: </td><td><input type="text" name="nome"></input><td></tr> 
-				<tr><td>Cognome*: </td><td><input type="text" name="cognome"></input><td></tr> 
+				<tr><td>Email*: </td><td><input type="text" name="emailUtente" maxlength="100" ></input><td></tr> 
+				<tr><td>Password*: </td><td><input type="password" name="password" maxlength="100" ></input><td></tr> 
+				<tr><td>Nome*: </td><td><input type="text" name="nome" maxlength="100" ></input><td></tr> 
+				<tr><td>Cognome*: </td><td><input type="text" name="cognome" maxlength="100" ></input><td></tr> 
 				<tr><td colspan="2">
 				Abilita' disponibili (selezionane almeno una)*:</td>
 				</tr>

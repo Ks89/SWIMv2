@@ -35,7 +35,7 @@
 				</select>
 				
 				</td></tr>
-				<tr><td>Commento (opzionale): </td><td><input id="commento" type="text" name="commentoFeedBack" placeholder="Lascia un commento"></input></td></tr>
+				<tr><td>Commento (opzionale): </td><td><input id="commento" type="text" name="commentoFeedBack" maxlength="300" placeholder="Lascia un commento"></input></td></tr>
 				<tr><td colspan="2" style="text-align: center;"><input id="submit" type="submit" /></td></tr>
 			</table>
 		</form>
