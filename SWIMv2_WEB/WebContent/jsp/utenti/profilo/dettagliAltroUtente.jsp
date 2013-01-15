@@ -46,10 +46,10 @@
 		
 		
 		<%-- Messaggi di conferma --%>
-		<c:if test="${!empty amiciziaStrettaCorrettamente}"> 
+		<c:if test="${!empty richiestaAmiciziaInviata}"> 
 		<div class="alert">
 			<p>
-				<c:out value="${amiciziaStrettaCorrettamente}"></c:out><br>
+				<c:out value="${richiestaAmiciziaInviata}"></c:out><br>
 			</p>
 		</div>
 		</c:if>	
