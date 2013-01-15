@@ -295,6 +295,17 @@ GestioneAmicizieRemote, GestioneAmicizieInterface {
 		}
 	}
 
+	
+	
+	/**
+	 * Metodo che ritorna true se esiste già una amicizia inoltrata tra i due utenti
+	 * 
+	 * @param emailUtente1
+	 * @param emailUtente2
+	 * @return <b>true</b> se esiste,<b>false</b> altrimenti
+	 */
+	
+	
 	@Override
 	public boolean amiciziaInoltrata(String emailUtente1, String emailUtente2) {
 		Utente utente1 = this.getUtenteByEmail(emailUtente1);
