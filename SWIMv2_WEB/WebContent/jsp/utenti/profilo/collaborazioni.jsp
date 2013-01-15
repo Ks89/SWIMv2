@@ -13,7 +13,6 @@
 				<c:out value="${erroreGetCollaborazioniDaTerminare}"></c:out>
 			</p>
 		</div>
-		<br>
 	</c:if>
 	<c:if test="${!empty nonCiSonoCollaborazioniDaTerminare}">
 		<div class="alert">
@@ -21,7 +20,6 @@
 				<c:out value="${nonCiSonoCollaborazioniDaTerminare}"></c:out>
 			</p>
 		</div>
-		<br>
 	</c:if>
 	<c:if test="${empty nonCiSonoCollaborazioniDaTerminare}">
 		<h2><c:out value="Collaborazioni in corso:"></c:out></h2>
@@ -54,14 +52,20 @@
 				</c:forEach>
 			</table>
 		</form>
-		<br><br>
+		<br>
 		<c:if test="${!empty erroreGetCollaborazioniSenzaFeedback}">
-			<c:out value="${erroreGetCollaborazioniSenzaFeedback}"></c:out>
-			<br>
+			<div class="alert">
+				<p>
+					<c:out value="${erroreGetCollaborazioniSenzaFeedback}"></c:out>
+				</p>
+			</div>
 		</c:if>
 		<c:if test="${!empty nonCiSonoCollaborazioniSenzaFeedback}">
-			<c:out value="${nonCiSonoCollaborazioniDaTerminare}"></c:out>
-			<br>
+			<div class="alert">
+				<p>
+					<c:out value="${nonCiSonoCollaborazioniDaTerminare}"></c:out>
+				</p>
+			</div>
 		</c:if>
 	</c:if>
 	<c:if test="${empty nonCiSonoCollaborazioniSenzaFeedback}">
@@ -94,14 +98,20 @@
 			</c:forEach>
 		</table>
 	</c:if>
-	<br><br>
+	<br>
 	<c:if test="${!empty erroreGetCollaborazioniTerminateConFeedBack}">
-			<c:out value="${erroreGetCollaborazioniTerminateConFeedBack}"></c:out>
-			<br>
+			<div class="alert">
+				<p>
+					<c:out value="${erroreGetCollaborazioniTerminateConFeedBack}"></c:out>
+				</p>
+			</div>
 		</c:if>
 		<c:if test="${!empty nonCiSonoCollaborazioniTerminateConFeedBack}">
-			<c:out value="${nonCiSonoCollaborazioniTerminateConFeedBack}"></c:out>
-			<br>
+			<div class="alert">
+				<p>
+					<c:out value="${nonCiSonoCollaborazioniTerminateConFeedBack}"></c:out>
+				</p>
+			</div>
 		</c:if>
 	<c:if test="${empty nonCiSonoCollaborazioniTerminateConFeedBack}">
 		<h2><c:out value="Storico collaborazioni:"></c:out></h2>
