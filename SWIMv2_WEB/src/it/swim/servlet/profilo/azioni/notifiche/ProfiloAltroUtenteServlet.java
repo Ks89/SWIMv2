@@ -74,7 +74,7 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 			// ottengo punteggio di feedback dell'utente
 			Double punteggio = gestioneCollab.getPunteggioFeedback(emailUtenteRichiedente);
 			String feedback;
-			if(punteggio==null) {
+			if(punteggio==null) { 
 				feedback = new String("Non disponibile");
 			} else {
 				feedback = Double.toString(punteggio);
@@ -103,8 +103,6 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 			Amicizia amiciziaRichiesta;
 
 			for(String emailSuggerimento : request.getParameterValues("amiciSuggeriti")) {
-				log.debug("    -- - - - --      : " + emailSuggerimento);
-
 				//se l'amicizia non e' gia' stata inoltrata in precedenza, la richiedo, altrimenti no
 				if(!gestioneAmicizie.amiciziaInoltrata(emailUtenteCollegato, emailSuggerimento)) {
 					amiciziaRichiesta = gestioneAmicizie.richiediAmicizia(emailUtenteCollegato, emailSuggerimento, false );
@@ -131,12 +129,6 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 			try {
 				Amicizia amiciziaAccettata = gestioneAmicizie.accettaAmicizia(emailRichiedente, emailUtenteCollegato);
 
-				log.debug("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{ : " +
-						"" + amiciziaAccettata);
-
-
-				log.debug("######################################################################################################################## : " +
-						"" + amiciziaAccettata.isDiretta());
 
 				// se l'amicizia accettata e' indiretta perche' nata da un suggerimento da parte dell'utente richiedente (emailutente1), allora
 				// non deve mostrare suggerimenti ma tornare subito alla pagina delle notifiche.
@@ -149,10 +141,6 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 				//Visto che ho accettato la richiesta di amicizia visualizzo i suggerimenti di amicizia
 				List<Utente> suggeriti = gestioneAmicizie.getSuggerimenti(emailRichiedente, emailUtenteCollegato);
 
-
-				//TODO possibile bug che esce quando suggeriti e' null, allora aggiungo la condizione if ==null
-
-				log.debug("---------______________--------------_____________--------------___________><>>>>>>>> " + suggeriti);
 
 				if(suggeriti==null) {
 					request.setAttribute("noSuggDisponibili", "Amicizia stretta! Non ci sono suggerimenti d'amicizia");

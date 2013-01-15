@@ -22,19 +22,19 @@
 			<br>
 
 			<c:if test="${empty confermaRichiestaAiuto and empty erroreConfermaRichiestaAiuto}">
-				<form id="profiloAltroUtente" action="profiloAltroUtente" method="POST">
+				<form id="profiloAltroUtente" action="profilo/azioni/profiloAltroUtente" method="POST">
 					<input type="hidden" name="tipo" /> <input type="hidden" name="emailRichiedente" value="${emailRichiedente}"> <input type="button"
 						value="conferma" onclick="profiloAltroUtente.elements['tipo'].value='CONFERMA'; profiloAltroUtente.submit();" /> <input type="button"
 						value="rifiuta" onclick="profiloAltroUtente.elements['tipo'].value='RIFIUTA'; profiloAltroUtente.submit();" />
 				</form>
 			</c:if>
-			<br>
-			<a href="../azioni/notifiche">Torna alle notifiche</a>
+			<br> 
+			<a href="profilo/azioni/notifiche">Torna alle notifiche</a>
 		</c:when>
 		<c:otherwise>
 			<br>
 			<br> Amici suggeriti:
-			<form action="profiloAltroUtente" method="POST">
+			<form action="profilo/azioni/profiloAltroUtente" method="POST">
 				<table id="tabellaSuggerimenti" style="border-width: medium; border-style: solid;">
 					<tr>
 						<th></th>
@@ -50,7 +50,7 @@
 
 				<div id="pageNavPosition2"></div>
 
-				<script type="text/javascript">
+				<script type="text/javascrip	t">
  				var pager = new Pager('tabellaSuggerimenti', 5);
  				pager.init();
  				pager.showPageNav('pager', 'pageNavPosition2');
