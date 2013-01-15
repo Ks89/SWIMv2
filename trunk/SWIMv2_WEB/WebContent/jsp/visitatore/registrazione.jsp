@@ -4,7 +4,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<h1>Registrazione a SWIMv2</h1>
-		<div align="center">	
+	<section>
+		<div align="center" class="alignCenter">	
 	<%-- Gestione messaggi d'errore --%>
 	<c:choose>
 		<c:when test="${!empty erroreRegistrazione}"> 
@@ -81,8 +82,8 @@
 				<td style="text-align: center"><input id="submit" type="submit"/></td>
 				</tr>
 			</table>
+		</form>
+		<br>
+		*campi da compilare obbligatoriamente
 		</div>
-	</form>
-	<br>
-	*campi da compilare obbligatoriamente
 <jsp:include page="../layoutInferiore.jsp"></jsp:include>
