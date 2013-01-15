@@ -24,7 +24,7 @@
 				<td><c:out value="${emailRichiedente}"></c:out></td>
 			</tr>
 			<tr>
-				<td>Punteggio feedback:<td>
+				<td>Punteggio feedback:</td>
 				<td>
 				<c:if test="${!empty punteggioFeedback}">
 						<div id="STAR_RATING" align="center">	

@@ -48,11 +48,11 @@
 			<caption>Inserisci la nuova abilità</caption>
 			<tr>
 				<td> Nome:</td>
-				<td><input id="nuovoNomeAbilitaProposta" type="text" name="nuovoNomeAbilitaProposta" maxlength="100" placeholder="Nome dell'abilita"></input></td>
+				<td><input id="nuovoNomeAbilitaProposta" type="text" name="nuovoNomeAbilitaProposta" maxlength="100" style="width: 271px;" placeholder="Nome dell'abilita"></input></td>
 			</tr>
 			<tr>
 				<td>Descrizione:</td>
-				<td><input id="descrizioneAbilitaProposta" type="text" name="descrizioneAbilitaProposta" maxlength="300" placeholder="Descrizione dell'abilita"></input></td>
+				<td><textarea id="descrizioneAbilitaProposta" name="descrizioneAbilitaProposta" maxlength="300" rows="10" cols="50" style="resize:none;" placeholder="Descrizione dell'abilita"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;"><input id="submit" type="submit" /><br></td>

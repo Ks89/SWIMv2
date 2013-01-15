@@ -112,7 +112,11 @@
 	<br>
 	
 	<c:if test="${!empty ciSonoNotificheDaMostrare}">
-		<h2><a href="profilo/azioni/notificheDiRisposta/notificheDiRisposta?emailUtente=${sessionScope.utenteCollegato}" >Ci sono nuove risposte degli utenti</a></h2>
+		<div class="alertNotification">
+			<p>
+				<a href="profilo/azioni/notificheDiRisposta/notificheDiRisposta?emailUtente=${sessionScope.utenteCollegato}" >Ci sono nuove risposte degli utenti</a>
+			</p>
+		</div>
 	</c:if>	
 
 </div>

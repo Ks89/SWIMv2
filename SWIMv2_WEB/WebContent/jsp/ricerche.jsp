@@ -15,6 +15,7 @@
 				</p>
 			</div>
 		</c:if>
+		<br>
 		<c:choose>
 		<c:when test="${tipoRicerca=='aiuto'}">
 			<h2><c:out value="Seleziona le abilità di cui sei alla ricerca"></c:out></h2>

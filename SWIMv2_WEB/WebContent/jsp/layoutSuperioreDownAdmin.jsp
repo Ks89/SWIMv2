@@ -18,6 +18,7 @@
 	<div id="centro">
 		<aside>
 			<h1>Amministratore</h1>
+			<img src="profilo/foto?emailUtente=${sessionScope.utenteCollegato}" />
 			<%--<img id="imgUtente" src="profilo/foto?emailUtente=${sessionScope.utenteCollegato}" /> <br/> --%>
 			<%--<c:out value="${sessionScope.nomeUtenteCollegato}"/> <c:out value="${sessionScope.cognomeUtenteCollegato}"/><br/> --%>
 			<a href="admin/adminLogin?adminesci=true">Logout</a>
