@@ -21,7 +21,7 @@
 		<br>Nome abilità: 
 		<input id="nuovoNomeAbilitaAggiunta" type="text" name="nuovoNomeAbilitaAggiunta" maxlength="100"></input>
 		<br>Descrizione abilità: 
-		<input id="descrizioneAbilitaAggiunta" type="text" name="descrizioneAbilitaAggiunta" maxlength="100"></input>
+		<input id="descrizioneAbilitaAggiunta" type="text" name="descrizioneAbilitaAggiunta" maxlength="300"></input>
 		<br>
 		<input id="submit" type="submit" /><br>
 	</form>
