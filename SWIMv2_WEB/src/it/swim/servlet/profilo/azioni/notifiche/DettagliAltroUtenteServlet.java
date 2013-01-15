@@ -128,7 +128,7 @@ public class DettagliAltroUtenteServlet extends HttpServlet {
 					request.setAttribute("erroreAmiciziaNonStretta", "Errore, duranta la richiesta di amicizia");
 				} else {
 					//amicizia stretta correttamente
-					request.setAttribute("amiciziaStrettaCorrettamente", "Hai stretto amicizia con " + utente.getNome() + " "  + utente.getCognome());
+					request.setAttribute("amiciziaStrettaCorrettamente", "Richiesta di amicizia inviata!");
 				}
 			} else {
 				//amicizia gia' inoltrata, quindi non richiedo amicizia di nuovo
