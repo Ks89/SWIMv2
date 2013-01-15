@@ -38,12 +38,6 @@
       <form method="post" action="login" id="loginForm">
         <p><input type="text" id="emailUtente" name="emailUtente" maxlength="100" value="" placeholder="Email"></p>
         <p><input type="password" id="password" name="password" maxlength="100"  value="" placeholder="Password"></p>
-        <p class="remember_me">
-          <label>
-            <input type="checkbox" name="remember_me" id="remember_me">
-            Remember me on this computer
-          </label>
-        </p>
         <p class="submit"><input id="submit" type="submit" name="commit" value="Login"></p>
       </form>
     </div>

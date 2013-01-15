@@ -81,6 +81,8 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 			}
 			log.debug("punteggioUtenteCollegato:" + feedback);
 			request.setAttribute("punteggioFeedback", feedback);
+			if(!feedback.equals("Non disponibile"))
+				request.setAttribute("feedback", Integer.valueOf(gestioneCollab.getPunteggioFeedback(emailUtenteRichiedente).intValue()));
 		} catch (LoginException e) {
 			log.error(e.getMessage(), e);
 		}
