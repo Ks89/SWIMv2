@@ -14,11 +14,21 @@
 		<br>
 		<br> I seguenti utenti hanno accettato le tue richieste di amicizia tramite suggerimento:
 		<br>
-		<ul>
-			<c:forEach items="${utentiAccettatiIndiretti}" var="utenteAccettatoIndiretto">
-				<li><c:out value="${utenteAccettatoIndiretto.nome}"></c:out> <c:out value="${utenteAccettatoIndiretto.cognome}"></c:out></li>
+			<table id="tabellaRigheAlterne">
+			<tr><th>Utente</th></tr>
+			<c:forEach items="${utentiAccettatiIndiretti}" var="utenteAccettatoIndiretto"  varStatus="num">
+				<c:if test="${num.count>0}">
+					<c:if test="${num.count%2!=0}">
+						<tr>
+					</c:if>
+					<c:if test="${num.count%2==0}">
+						<tr class="alt">
+					</c:if>
+				</c:if>			
+					<td><c:out value="${utenteAccettatoIndiretto.nome}"></c:out> <c:out value="${utenteAccettatoIndiretto.cognome}"></c:out></td>
+				</tr>
 			</c:forEach>
-		</ul>
+			</table>
 	</c:otherwise>
 </c:choose>
 
@@ -34,26 +44,43 @@
 		<br>
 		<br>Hai stretto amicizia con: 
 		<br>
-		<ul>
-			<c:forEach items="${listaUtentiConSuggerimenti}" var="utenteConSuggerimenti">
-				<li><c:out value="${utenteConSuggerimenti.utente.nome}"></c:out> <c:out value="${utenteConSuggerimenti.utente.cognome}"></c:out></li>
+		<table id="tabellaRigheAlterne">
+			<tr><th>Utente</th></tr>
+			<c:forEach items="${listaUtentiConSuggerimenti}" var="utenteConSuggerimenti"  varStatus="num">
+				<c:if test="${num.count>0}">
+					<c:if test="${num.count%2!=0}">
+						<tr>
+					</c:if>
+					<c:if test="${num.count%2==0}">
+						<tr class="alt">
+					</c:if>
+				</c:if>			
+					<td><c:out value="${utenteConSuggerimenti.utente.nome}"></c:out> <c:out value="${utenteConSuggerimenti.utente.cognome}"></c:out></td>
+				</tr>
 			</c:forEach>
-		</ul>
+			</table>
 		<br>
 		<c:if test="${empty nonCiSonoSuggerimenti}">
 			<br>Suggerimenti di amiciza:
-			<br><br>
+			<br>
 			<form id="suggAlRichiedenteForm" action="profilo/azioni/notificheDiRisposta/suggAlRichiedente" method="POST">
-				<table id="SuggAlRichiedenteTable" style="border-width: medium; border-style: solid;">
+				<table id="tabellaRigheAlterne">
 					<tr>
 						<th></th>
 						<th>Amico acquisito</th>
 						<th>Utente suggerito</th>
 					</tr>
-					<c:forEach items="${listaUtentiConSuggerimenti}" var="utenteConSuggerimenti">
+					<c:forEach items="${listaUtentiConSuggerimenti}" var="utenteConSuggerimenti"  varStatus="num">
 						<c:forEach items="${utenteConSuggerimenti.suggerimenti}" var="suggerimentoUtente">
 							<c:if test="${!empty utenteConSuggerimenti.suggerimenti}">
-								<tr>
+								<c:if test="${num.count>0}">
+									<c:if test="${num.count%2!=0}">
+										<tr>
+									</c:if>
+									<c:if test="${num.count%2==0}">
+										<tr class="alt">
+									</c:if>
+								</c:if>
 									<td><input type="checkbox" name="suggeritoAlRichiedenteCheckbox" value="${suggerimentoUtente.email}" /></td>
 									<td><c:out value="${utenteConSuggerimenti.utente.nome}"></c:out> <c:out value="${utenteConSuggerimenti.utente.cognome}"></c:out></td>
 									<td><c:out value="${suggerimentoUtente.nome}" />&nbsp;<c:out value="${suggerimentoUtente.cognome}" /></td>
@@ -62,7 +89,7 @@
 						</c:forEach>
 					</c:forEach>
 				</table>
-				<input id="submit" type="submit" />
+				<input id="submit" type="submit" value="Richiedi amicizia"/>
 			</form>		
 		<br>
 		</c:if>
@@ -80,17 +107,25 @@
 			<c:if test="${empty noCollaborazioni }">
 			Le seguenti collaborazioni richieste sono state confermate:
 			<br>
-			<br>
-				<c:forEach items="${listaCollaborazioni}" var="collaborazione">
-					<br>
-					<br>
-					<br>
-					Nome collaborazione:
-					<c:out value="${collaborazione.nome}"></c:out>
-					<br>
-					Collaboratore:
-					<c:out value="${collaborazione.utenteRicevente.nome}" />&nbsp;<c:out value="${collaborazione.utenteRicevente.cognome}" />
+			<table id="tabellaRigheAlterne">
+				<tr>
+				  <th>Nome collaborazione</th>
+				  <th>Collaboratore</th>
+				 </tr>
+				<c:forEach items="${listaCollaborazioni}" var="collaborazione" varStatus="num">
+					<c:if test="${num.count>0}">
+						<c:if test="${num.count%2!=0}">
+							<tr>
+						</c:if>
+						<c:if test="${num.count%2==0}">
+							<tr class="alt">
+						</c:if>
+					</c:if>
+					<td><c:out value="${collaborazione.nome}"></c:out></td>
+					<td><c:out value="${collaborazione.utenteRicevente.nome}" />&nbsp;<c:out value="${collaborazione.utenteRicevente.cognome}" /></td>
+					</tr>
 				</c:forEach>
+			</table>
 			</c:if>
 		</c:if>
 <br>
