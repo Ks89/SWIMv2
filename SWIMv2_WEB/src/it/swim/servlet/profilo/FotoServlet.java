@@ -1,7 +1,6 @@
 package it.swim.servlet.profilo;
 
 import it.swim.util.ConvertitoreFotoInBlob;
-import it.swim.util.UtenteCollegatoUtil;
 import it.swim.util.exceptions.FotoException;
 
 import java.io.IOException;
@@ -13,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.rowset.serial.SerialException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,34 +41,44 @@ public class FotoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String emailUtenteCollegato = (String) UtenteCollegatoUtil.getEmailUtenteCollegato(request);
-		if (emailUtenteCollegato == null) {
-			response.sendRedirect("home");
-			return;
-		}
+		String email = request.getParameter("emailUtente");
 
-		String emailUtente = request.getParameter("emailUtente");
+		log.debug("fotoServlet - emailUtente : " + email);
 
 		Blob blob = null;
 
+		//e' l'admin che richiede la foto, e visto che non puo' averla mostra quella predefinita
+		//uso stringa mailAdmin per indentificare se e' l'admin a richiederla
 		try {
-			if(emailUtente==null || emailUtente.equals("")) {
-				try {
-					blob = ConvertitoreFotoInBlob.getBlobFromDefaultImage();
-				} catch (SerialException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (FotoException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			if(email!=null && email.equals("mailAdmin")) {
+				blob = ConvertitoreFotoInBlob.getBlobFromDefaultImage();
+				if(blob!=null) {
+					byte[] foto = blob.getBytes(1, (int)blob.length());
+					response.setContentType("image/jpg");
+					response.getOutputStream().write(foto);
 				}
-			} else {
-				blob = gestioneCollaborazioni.getUtenteByEmail(emailUtente).getFotoProfilo();
 			}
-			
+		} catch(SQLException e) {
+			log.error(e.getMessage(), e);
+		} catch (FotoException e) {
+			log.error(e.getMessage(), e);
+		}
+
+
+		//se e' l'utente o il visitatore
+		try {
+			if(email==null || email.equals("")) {
+				log.debug("fotoServlet - mettoFotoPredefinita_1");
+				blob = ConvertitoreFotoInBlob.getBlobFromDefaultImage();
+			} else {
+				blob = gestioneCollaborazioni.getUtenteByEmail(email).getFotoProfilo();
+
+				if(blob==null) {
+					log.debug("fotoServlet - mettoFotoPredefinita_2");
+					blob = ConvertitoreFotoInBlob.getBlobFromDefaultImage();
+				}
+			}
+
 			if(blob!=null) {
 				byte[] foto = blob.getBytes(1, (int)blob.length());
 				response.setContentType("image/jpg");
@@ -79,6 +87,8 @@ public class FotoServlet extends HttpServlet {
 		} catch(SQLException e) {
 			log.error(e.getMessage(), e);
 		} catch (LoginException e) {
+			log.error(e.getMessage(), e);
+		} catch (FotoException e) {
 			log.error(e.getMessage(), e);
 		}
 	}

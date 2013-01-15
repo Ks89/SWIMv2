@@ -33,17 +33,23 @@ public class PresenzaNotificheDiRisposta {
 		List<Utente> utentiAccettatiDiretti = amicizie.getUtentiCheHannoAccettatoLaRichiestaDiretti(emailUtenteCollegato);
 		List<Utente> utentiAccettatiIndiretti = amicizie.getUtentiCheHannoAccettatoLaRichiestaIndiretti(emailUtenteCollegato);
 		
+		
 		//ottengo tutte le collaborazioni da me create,che sono state accettate.
+		//e dopo ottengo le collaborazioni da me create che pero' sono stante respinte
 		List<Collaborazione> collaborazioniAccettate=new ArrayList<Collaborazione>();
+		List<Collaborazione> collaborazioniRespinte=new ArrayList<Collaborazione>();
 		try {
-			collaborazioniAccettate=collab.getCollaborazioniDaNotificare(emailUtenteCollegato);
+			collaborazioniAccettate = collab.getCollaborazioniDaNotificare(emailUtenteCollegato);
+			collaborazioniRespinte = collab.getCollaborazioniRifiutate(emailUtenteCollegato);
 		} catch (LoginException e) {
 			log.error(e.getMessage(), e);
 		}
+		
 
 		//ritorno true se c'e' qualche cosa da notificare, altrimenti false
 		return ((utentiAccettatiIndiretti!=null && utentiAccettatiIndiretti.size()>=1) || 
-				(utentiAccettatiDiretti!=null && utentiAccettatiDiretti.size()>=1) || collaborazioniAccettate.size()>=1);
+				(utentiAccettatiDiretti!=null && utentiAccettatiDiretti.size()>=1) || collaborazioniAccettate.size()>=1
+				|| collaborazioniRespinte.size()>=1);
 	}
 }
 

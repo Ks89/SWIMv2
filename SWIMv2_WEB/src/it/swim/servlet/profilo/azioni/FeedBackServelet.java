@@ -63,7 +63,7 @@ public class FeedBackServelet extends HttpServlet {
 			if(collaborazioni.size()>=1) {
 				request.setAttribute("collaborazioni", collaborazioni);
 			} else {
-				request.setAttribute("nonCiSonoCollaborazioni", "Non è stato rilasciato nessun feedback da utenti che hai aiutato");
+				request.setAttribute("nonCiSonoCollaborazioni", "Non e' stato rilasciato nessun feedback da utenti che hai aiutato");
 			}
 		} catch (LoginException e) {
 			log.error(e.getMessage(), e);

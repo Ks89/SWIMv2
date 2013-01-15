@@ -64,21 +64,26 @@
 	<tr><td>Email:</td><td><c:out value="${sessionScope.utenteCollegato}"></c:out></td>
 	<tr><td>Punteggio feedback:</td>
 	<td>
-	<c:if test="${punteggioUtenteCollegato != 'Non disponibile'}">
-		<div id="STAR_RATING" align="center">
-			<ul>
-				<c:forEach begin="1" end="5" varStatus="num">
-					<c:if test="${num.count <= feedback}">
-						<li id="star_${num.count}" class="on"></li>
-					</c:if>
-					<c:if test="${num.count > feedback}">
-						<li id="star_${num.count}"></li>
-					</c:if>
-				</c:forEach>
-				<li style="background-image: none;">&nbsp;<c:out value="${punteggioUtenteCollegato}"/></li>
-			</ul>
-		</div>
-	</c:if>
+	<c:choose>
+		<c:when test="${!empty feedbackStelline}">
+			<div id="STAR_RATING" align="center">
+				<ul>
+					<c:forEach begin="1" end="5" varStatus="num">
+						<c:if test="${num.count <= feedbackStelline}">
+							<li id="star_${num.count}" class="on"></li>
+						</c:if>
+						<c:if test="${num.count > feedbackStelline}">
+							<li id="star_${num.count}"></li>
+						</c:if>
+					</c:forEach>
+					<li style="background-image: none;">&nbsp;<c:out value="${punteggioUtenteCollegato}"/></li>
+				</ul>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<c:out value="${punteggioUtenteCollegato}"/>
+		</c:otherwise>
+	</c:choose>
 	</td>
 	</tr>
 	</table>
