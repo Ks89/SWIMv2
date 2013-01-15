@@ -97,7 +97,7 @@ public class Collaborazione implements Serializable {
 	@Max(value = 5, message = "Il punteggio deve essere inferiore a 6")
 	private Integer punteggioFeedback;
 
-	@Column(name = "CommentoFeedback", nullable = true, length = 200)
+	@Column(name = "CommentoFeedback", nullable = true, length = 300)
 	private String commentoFeedback;
 
 	@Column(name = "NotificaAlRichiedente", nullable = false)

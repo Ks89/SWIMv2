@@ -44,7 +44,7 @@ public class PropostaAbilita implements Serializable {
 	@Column(name = "AbilitaProposta", nullable = false, length=100)
 	private String abilitaProposta;
 
-	@Column(name = "Motivazione", nullable = true, length=200)
+	@Column(name = "Motivazione", nullable = true, length=500)
 	private String motivazione;
 
 	@Column(name = "DataAccettazione", nullable = true)
