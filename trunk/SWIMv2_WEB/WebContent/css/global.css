@@ -6,6 +6,22 @@
 	font-family: 'Didact Gothic', sans-serif;
 }
 
+section a{
+	text-decoration: none;
+	color: #024ac0;
+	font-weight: bold;
+}
+#grassettoBlu{
+	
+	font-weight: bold;
+}
+
+td a{
+	text-decoration: none;
+	color: #024ac0;
+	font-weight: bold;	
+}
+
 .alignCenter
 {
 	border: 20px solid; 
@@ -142,25 +158,6 @@ textarea:focus {
   border-color: #7dc9e2;
   outline-color: #dceefc;
   outline-offset: 0;
-}
-
-/*Messagio notifica*/
-.alertNotification {
-   background: #febcbc url('../img/alert/exclamation.png') 15px center no-repeat;
-   text-align: left;
-   padding: 10px 20px 10px 50px;
-   border-top: 2px solid #e95137;
-   border-bottom: 2px solid #e95137;
-   width:400px;
-   
-}
-
-.alertNotification p{
-	font-size: 14px;
-	margin-top: 0px;
-	width: auto;
-	margin: auto;
-	text-align: left;
 }
 
 /*Messaggio errore*/

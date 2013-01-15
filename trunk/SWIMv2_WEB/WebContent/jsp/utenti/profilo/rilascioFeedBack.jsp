@@ -24,7 +24,7 @@
 				<br>
 			</c:if>
 			<table id="formInserimentoParametri">
-				<tr><td>Inserisci un punteggio (da 1 a 5): </td><td>
+				<tr><td id="grassettoBlu">Inserisci un punteggio (da 1 a 5): </td><td>
 								
 				<select id="punteggio" name="punteggioFeedBack">
   					<option value="1">1</option>
@@ -35,7 +35,7 @@
 				</select>
 				
 				</td></tr>
-				<tr><td>Commento (opzionale): </td><td><input id="commento" type="text" name="commentoFeedBack" maxlength="300" placeholder="Lascia un commento"></input></td></tr>
+				<tr><td id="grassettoBlu">Commento (opzionale): </td><td><input id="commento" type="text" name="commentoFeedBack" maxlength="300" placeholder="Lascia un commento"></input></td></tr>
 				<tr><td colspan="2" style="text-align: center;"><input id="submit" type="submit" /></td></tr>
 			</table>
 		</form>

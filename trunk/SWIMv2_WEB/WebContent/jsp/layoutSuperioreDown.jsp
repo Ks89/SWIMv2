@@ -25,6 +25,6 @@
 			<h1>Utente</h1>
 			<img id="imgUtente" src="profilo/foto?emailUtente=${sessionScope.utenteCollegato}" /> <br/>
 			<c:out value="${sessionScope.nomeUtenteCollegato}"/> <c:out value="${sessionScope.cognomeUtenteCollegato}"/><br/>
-			<a style="text-align: center;" href="login?esci=true" style="float: right;">Logout</a>	
+			<a style="text-align: center;text-decoration: none;	text-color: #024ac0;font-weight: bold;" href="login?esci=true">Logout</a>	
 		</aside>
 		<article>

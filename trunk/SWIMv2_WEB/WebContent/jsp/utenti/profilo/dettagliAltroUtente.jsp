@@ -65,19 +65,19 @@
 		<img src="profilo/foto?emailUtente=${utente.email}" />
 		<table id="formInserimentoParametri">
 			<tr>
-				<td>Nome:</td>
+				<td id="grassettoBlu">Nome:</td>
 				<td><c:out value="${utente.nome}"></c:out></td>
 			</tr>
 			<tr>
-				<td>Cognome:</td>
+				<td id="grassettoBlu">Cognome:</td>
 				<td><c:out value="${utente.cognome}"></c:out></td>
 			</tr>
 			<tr>
-				<td>Email:</td>
+				<td id="grassettoBlu">Email:</td>
 				<td><c:out value="${utente.email}"></c:out></td>
 			</tr>
 			<tr>
-				<td>Punteggio feedback:</td>
+				<td id="grassettoBlu">Punteggio feedback:</td>
 				<td><c:choose>
 						<c:when test="${!empty feedbackUtenteRicercatoStelline}">
 							<div id="STAR_RATING" align="center">
@@ -136,10 +136,10 @@
 			<table id="formInserimentoParametri">
 				<caption>Compila i campi sottostanti per richiedere una collaborazione</caption>
 				<tr>
-					<td>Nome:</td><td><input type="text" name="nomeCollaborazione" maxlength="100" style="width: 271px;" placeholder="Nome della collaborazione"></input></td>
+					<td id="grassettoBlu">Nome:</td><td><input type="text" name="nomeCollaborazione" maxlength="100" style="width: 271px;" placeholder="Nome della collaborazione"></input></td>
 				</tr> 
 				<tr>
-					<td>Descrizione:</td><td><textarea name="descrizioneCollaborazione" rows="10" cols="50" maxlength="500" style="resize:none;" placeholder="Descrizione della collaborazione"></textarea></td>
+					<td id="grassettoBlu">Descrizione:</td><td><textarea name="descrizioneCollaborazione" rows="10" cols="50" maxlength="500" style="resize:none;" placeholder="Descrizione della collaborazione"></textarea></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: center;"><input type="button" id="button" value="Richiedi collaborazione" onclick="dettagliAltroUtente.elements['tipo'].value='collaborazione'; dettagliAltroUtente.submit();" /></td>

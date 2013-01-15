@@ -12,19 +12,19 @@
 			<br>
 			<table id="formInserimentoParametri">
 			<tr>
-				<td>Nome:</td>
+				<td id="grassettoBlu">Nome:</td>
 				<td><c:out value="${nomeRichiedente}"></c:out></td>
 			</tr> 
 			<tr>
-				<td>Cognome:</td>
+				<td id="grassettoBlu">Cognome:</td>
 				<td><c:out value="${cognomeRichiedente}"></c:out></td>
 			</tr>
 			<tr>
-				<td>Email:</td>
+				<td id="grassettoBlu">Email:</td>
 				<td><c:out value="${emailRichiedente}"></c:out></td>
 			</tr>
 			<tr>
-				<td>Punteggio feedback:</td>
+				<td id="grassettoBlu">Punteggio feedback:</td>
 				<td>
 				<c:if test="${!empty punteggioFeedback}">
 						<div id="STAR_RATING" align="center">	
