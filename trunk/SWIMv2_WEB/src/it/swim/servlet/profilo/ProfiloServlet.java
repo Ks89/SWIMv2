@@ -1,5 +1,6 @@
 package it.swim.servlet.profilo;
 
+import it.swim.util.PresenzaNotificheDiRisposta;
 import it.swim.util.UtenteCollegatoUtil;
 
 import java.io.IOException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sessionBeans.localInterfaces.GestioneAmicizieLocal;
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 import sessionBeans.localInterfaces.GestioneRicercheLocal;
 
@@ -28,6 +30,9 @@ import exceptions.RicercheException;
 public class ProfiloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@EJB
+	private GestioneAmicizieLocal amicizie;
+	
 	@EJB
 	private GestioneCollaborazioniLocal gestCollaborazioni;
 
@@ -91,6 +96,15 @@ public class ProfiloServlet extends HttpServlet {
 		} catch (RicercheException e) {
 			log.error(e.getMessage(), e);
 		}
+		
+		
+		//vedo se mostrare l'avviso che sono state accettate richieste di amicizia o di collaborazione (aiuto)
+		boolean ciSonoNotificheDaMostrare = PresenzaNotificheDiRisposta.isNotificheRispostaPresenti(emailUtenteCollegato, request, 
+				response, amicizie, gestCollaborazioni);
+		if(ciSonoNotificheDaMostrare) {
+			request.setAttribute("ciSonoNotificheDaMostrare", "true");
+		}
+		
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/profilo.jsp").forward(request, response);
 	}
 

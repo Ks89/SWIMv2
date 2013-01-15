@@ -105,6 +105,10 @@
 	</c:forEach>
 	</table>
 	<br>
-	<h2><a href="profilo/azioni/notificheDiRisposta/notificheDiRisposta?emailUtente=${sessionScope.utenteCollegato}" >Ci sono nuove risposte degli utenti</a></h2>
+	
+	<c:if test="${!empty ciSonoNotificheDaMostrare}">
+		<h2><a href="profilo/azioni/notificheDiRisposta/notificheDiRisposta?emailUtente=${sessionScope.utenteCollegato}" >Ci sono nuove risposte degli utenti</a></h2>
+	</c:if>	
+
 </div>
 <jsp:include page="../../layoutInferiore.jsp" flush="true"></jsp:include>
