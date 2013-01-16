@@ -37,7 +37,7 @@ import org.hibernate.validator.Min;
 
 		@NamedQuery(name = "Collaborazione.getNotificheRichiesteAiuto", query = "SELECT c "
 				+ "FROM Collaborazione c "
-				+ "WHERE c.utenteRicevente.email = :emailRicevente AND c.dataStipula IS NULL"),
+				+ "WHERE c.utenteRicevente.email = :emailRicevente AND c.dataStipula IS NULL AND c.dataTermine IS NULL"),
 
 		@NamedQuery(name = "Collaborazione.getCollaborazioniDaTerminare", query = "SELECT c "
 				+ "FROM Collaborazione c "
