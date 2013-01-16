@@ -16,19 +16,19 @@
 	<form id="aggiuntaAbilitaForm" action="admin/aggiuntaAbilita" method="POST">
 		<table id="formInserimentoParametri">
 			<tr>
-				<td>
-					Nome abilità:
+				<td id="grassettoBlu">
+					Nome:
 				</td> 
 				<td>
-					<input id="nuovoNomeAbilitaAggiunta" type="text" name="nuovoNomeAbilitaAggiunta" maxlength="100"></input>
+					<input id="nuovoNomeAbilitaAggiunta" type="text" name="nuovoNomeAbilitaAggiunta" style="width: 271px;" maxlength="100" placeholder="Nome dell'abilita"></input>
 				</td>
 			</tr>
 			<tr>
-				<td>
-					Descrizione abilità:
+				<td id="grassettoBlu">
+					Descrizione:
 				</td>
 				<td> 
-					<input id="descrizioneAbilitaAggiunta" type="text" name="descrizioneAbilitaAggiunta" maxlength="300"></input>
+					<textarea id="descrizioneAbilitaAggiunta" name="descrizioneAbilitaAggiunta" rows="10" cols="50" maxlength="300" style="resize:none;" placeholder="Descrizione dell'abilita"></textarea>
 				</td>
 			</tr>
 			<tr>
