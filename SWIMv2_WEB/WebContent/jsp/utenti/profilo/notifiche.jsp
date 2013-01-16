@@ -69,7 +69,7 @@
 		<br>
 	</c:if>
 	<c:if test="${!empty nonCiSonoRichiesteAmicizia}">
-		<div class="alert">
+		<div class="generico">
 			<p>
 				<c:out value="${nonCiSonoRichiesteAmicizia}"></c:out>
 			</p>
