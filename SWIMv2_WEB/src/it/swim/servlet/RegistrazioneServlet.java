@@ -183,7 +183,8 @@ public class RegistrazioneServlet extends HttpServlet {
 				log.debug("Registrazione avvenuta correttamente registrazione");
 
 				request.getSession().setAttribute("utenteCollegato", email);
-
+				request.setAttribute("abilita", abilitaPersonaliRegistrazione );
+				request.setAttribute("punteggioUtenteCollegato", "Non disponibile");
 				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/profilo.jsp").forward(request, response);
 
 			} else {
