@@ -3,6 +3,7 @@ package it.swim.servlet.profilo.azioni.notifiche;
 import it.swim.util.UtenteCollegatoUtil;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,40 +66,53 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 		try {
 			utenteRichiedente = gestioneAmicizie.getUtenteByEmail(emailUtenteRichiedente);
 
-			// mando sulla request i dati dell'utente tramite il setAttribute, e li
-			// contraddistinguo dai 2 parametri passati come string
-			request.setAttribute("cognomeRichiedente", utenteRichiedente.getCognome());
-			request.setAttribute("nomeRichiedente", utenteRichiedente.getNome());
-			request.setAttribute("emailRichiedente", utenteRichiedente.getEmail());
+			if(utenteRichiedente!=null) {
+				// mando sulla request i dati dell'utente tramite il setAttribute, e li
+				// contraddistinguo dai 2 parametri passati come string
+				request.setAttribute("cognomeRichiedente", utenteRichiedente.getCognome());
+				request.setAttribute("nomeRichiedente", utenteRichiedente.getNome());
+				request.setAttribute("emailRichiedente", utenteRichiedente.getEmail());
+			} else {
+				//se non riesco a ottenere l'Utente dalla mail della persona che mi ha richiesto amicizia
+				//devo segnalare un errore
+				request.setAttribute("erroreIndividuazUtenteRichiedente", "Impossibile identificare l'utente scelto");
+			}
 
-			// ottengo punteggio di feedback dell'utente
+
+			// ottengo punteggio di feedback dell'utente richiedente
 			Double punteggio = gestioneCollab.getPunteggioFeedback(emailUtenteRichiedente);
 			String feedback;
-			if(punteggio==null) { 
+			if(punteggio==null) {
 				feedback = new String("Non disponibile");
 			} else {
-				feedback = Double.toString(punteggio);
+				DecimalFormat df = new DecimalFormat("#.##");
+				feedback = df.format(punteggio);
+				request.setAttribute("feedbackStellineRichiedente", punteggio.intValue() + "");
 			}
-			log.debug("punteggioUtenteCollegato:" + feedback);
-			request.setAttribute("punteggioFeedback", feedback);
-			if(!feedback.equals("Non disponibile"))
-				request.setAttribute("feedback", Integer.valueOf(gestioneCollab.getPunteggioFeedback(emailUtenteRichiedente).intValue()));
-		} catch (LoginException e) {
+			request.setAttribute("punteggioFeedbackRichiedente", feedback);
+			log.debug("punteggioFeedbackRichiedente:" + feedback);
+			
+		} catch(LoginException e) {
 			log.error(e.getMessage(), e);
+			//se ci fosse un errore durante il calcolo del feedback lo setto come non disponibile
+			request.setAttribute("punteggioFeedbackRichiedente", "Non disponibile");
 		}
-
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/profiloAltroUtente.jsp").forward(request, response);
 	}
 
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		log.debug("doPost del dettaglio richiesta amicizia");
+		log.debug("doPost del profilo altro altro utente, cioe' della richiesta amicizia");
 		String emailUtenteCollegato = (String) UtenteCollegatoUtil.getEmailUtenteCollegato(request);
 
 		String emailRichiedente = request.getParameter("emailRichiedente");
 
+		
+		//entro qua solo se accetto richieste di suggerimenti, cioe' dalla form di profiloAltroUtente.jsp nell'otherwise della choose
+		//amiciSuggeriti non e' altro che il nome delle checkbox
 		if(request.getParameter("amiciSuggeriti")!=null) {
 
 			List<Amicizia> amiciziaSuggeriteDaRichiedere  = new ArrayList<Amicizia>();
@@ -114,10 +128,11 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 				}
 			}
 
+			//se hai stretto amicizia con quelli selezionati
 			if(amiciziaSuggeriteDaRichiedere.size()>=1) {
 				request.setAttribute("suggAccettati","Hai stretto amicizia con gli utenti suggeriti");
 			} else {
-				//TODO gestire errore nel caso in cui nn arrivino suggerimenti
+				request.setAttribute("nonSonoStatiAccettatiSugg","Hai stretto amicizia e nessun suggerimento accettato");
 			}
 
 			this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
@@ -125,6 +140,8 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 			return;
 		}
 
+		
+		//se clicco su conferma per accettare la richiesta di amicizia
 		if((request.getParameter("tipo"))!=null && request.getParameter("tipo").equals("CONFERMA")) {
 			log.debug("accettata la richiesta");
 
@@ -135,8 +152,12 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 				// se l'amicizia accettata e' indiretta perche' nata da un suggerimento da parte dell'utente richiedente (emailutente1), allora
 				// non deve mostrare suggerimenti ma tornare subito alla pagina delle notifiche.
 				if(!amiciziaAccettata.isDiretta()) {
-					response.sendRedirect("notifiche");
+					request.setAttribute("amiciziaIndirettaStretta", "Hai stretto amicizia con un utente suggerito dal sistema!");
+					this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
+					getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
 					return;
+//					response.sendRedirect("notifiche");
+//					return;
 				}
 
 				//---se e' diretta faccio cio' che segue
@@ -146,13 +167,13 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 
 				if(suggeriti==null) {
 					request.setAttribute("noSuggDisponibili", "Amicizia stretta! Non ci sono suggerimenti d'amicizia");
+					this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
 					getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
 					return;
 				} else {
+					this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
 					if(suggeriti.size()>=1) {
 						request.setAttribute("amiciSuggeriti", suggeriti);
-
-						//					this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
 					} else {
 						//se non ci sono suggerimenti disponibili setto un messaggio d'avvio
 						request.setAttribute("noSuggDisponibili", "Amicizia stretta! Non ci sono suggerimenti d'amicizia disponibili");
@@ -160,6 +181,7 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 						return;
 					}
 				}
+				
 				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/profiloAltroUtente.jsp").forward(request, response);
 				return;
 			} catch (AmiciziaException e) {
@@ -168,15 +190,20 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 				request.setAttribute("erroreProfiloAltroUtente", "Errore nella conferma della richiesta di amicizia");
 			}
 		} else {
+			//se ho premuto su RIFIUTA
 			if((request.getParameter("tipo"))!=null && request.getParameter("tipo").equals("RIFIUTA")) {
 				log.debug("rifutare la richiesta");
 				this.rifiutaAmicizia(request, response, emailUtenteCollegato, emailRichiedente);
 			}
 		}
 
+		//in ogni caso, se arrivo qui, per sicurezza rigenero la lista delle richiste di amicizia della pagina notifiche
 		this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
 	}
+	
+	
+	
 
 	private void rifiutaAmicizia(HttpServletRequest request, HttpServletResponse response, String emailUtenteCollegato , String emailRichiedente) {
 		boolean rifiutata = gestioneAmicizie.rifiutaAmicizia(emailRichiedente, emailUtenteCollegato);
@@ -188,13 +215,17 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 	}
 
 
+	
+	
 	private void gestisciNotificheRichiesteAmicizia (HttpServletRequest request, HttpServletResponse response, String emailUtenteCollegato) throws ServletException, IOException {
 		List<Utente> utentiCheRichiedonoAmicizia = gestioneAmicizie.getUtentiCheVoglionoAmicizia(emailUtenteCollegato);
 		if(utentiCheRichiedonoAmicizia==null) {
+			log.debug("gestisciNotificheRichiesteAmicizia() : utentiCheRichiedonoAmicizia==null");
 			request.setAttribute("erroreGetNotificheRichiesteAmicizia", "Impossibile ottenere le richieste di amicizia");
 			getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
 			return;
 		}
+		
 		if(utentiCheRichiedonoAmicizia.size()>=1) {
 			request.setAttribute("utentiCheRichidonoAmicizia", utentiCheRichiedonoAmicizia);
 		} else {

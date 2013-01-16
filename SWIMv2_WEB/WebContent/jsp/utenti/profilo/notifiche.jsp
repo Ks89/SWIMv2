@@ -7,6 +7,8 @@
 	<h1>Notifiche</h1>
 	<section>
 	<div align="center" class="alignCenter">
+	
+	<%-- Richieste aiuto --%>
 	<c:if test="${!empty erroreGetNotificheRichiesteAiuto}">
 		<div class="alert">
 			<p>
@@ -40,6 +42,7 @@
 		<br>
 	</c:if>
 	
+	
 	<%-- Richieste amicizia --%>
 	<c:if test="${!empty erroreGetNotificheRichiesteAmicizia}">
 		<div class="alert">
@@ -50,7 +53,7 @@
 		<br>
 	</c:if>
 	<c:if test="${!empty okProfiloAltroUtente}">
-		<div class="alert">
+		<div class="conferma">
 			<p>
 				<c:out value="${okProfiloAltroUtente}"></c:out>
 			</p>
@@ -74,22 +77,40 @@
 		<br>
 	</c:if>
 	<c:if test="${!empty suggAccettati}">
-		<div class="alert">
+		<div class="conferma">
 			<p>
 				<c:out value="${suggAccettati}"></c:out>
 			</p>
 		</div>
 		<br>
 	</c:if>
+	<c:if test="${!empty nonSonoStatiAccettatiSugg}">
+		<div class="conferma">
+			<p>
+				<c:out value="${nonSonoStatiAccettatiSugg}"></c:out>
+			</p>
+		</div>
+		<br>
+	</c:if>
 	<c:if test="${!empty noSuggDisponibili}">
-		<div class="alert">
+		<div class="conferma">
 			<p>
 				<c:out value="${noSuggDisponibili}"></c:out>
 			</p>
 		</div>
 		<br>
 	</c:if>
+	<c:if test="${!empty amiciziaIndirettaStretta}">
+		<div class="conferma">
+			<p>
+				<c:out value="${amiciziaIndirettaStretta}"></c:out>
+			</p>
+		</div>
+		<br>
+	</c:if>
 
+
+	<%-- Visualizzazione richieste di aiuto --%>
 	<c:if test="${empty nonCiSonoRichiesteAiuto}">
 		<br>
 		<h2> Richieste di aiuto, inviate dagli utenti:</h2>
@@ -125,10 +146,11 @@
 
 	<br>
 	
+	
+	
 	<c:if test="${empty nonCiSonoRichiesteAmicizia}">
-		<br>
 		<h2>Richieste di amicizia:</h2>
-	<table id="tabellaRigheAlterne">
+		<table id="tabellaRigheAlterne" name="tabellaRichiesteAmicizia">
 			<tr>
 				<th>Utente richiedente</th>
 			</tr>

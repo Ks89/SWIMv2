@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 public class NotificheServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	@EJB
+	@EJB 
 	private GestioneCollaborazioniLocal gestioneCollab;
 
 	@EJB
@@ -97,16 +97,19 @@ public class NotificheServlet extends HttpServlet {
 
 	private void gestisciNotificheRichiesteAmicizia (HttpServletRequest request, HttpServletResponse response, String emailUtenteCollegato) throws ServletException, IOException {
 		List<Utente> utentiCheRichiedonoAmicizia = gestioneAmicizie.getUtentiCheVoglionoAmicizia(emailUtenteCollegato);
+
+		//impossibile ottenere le richieste di amicizia
 		if(utentiCheRichiedonoAmicizia==null) {
 			request.setAttribute("erroreGetNotificheRichiesteAmicizia", "Impossibile ottenere le richieste di amicizia");
-			getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
-			return;
-		}
-		if(utentiCheRichiedonoAmicizia.size()>=1) {
-			request.setAttribute("utentiCheRichidonoAmicizia", utentiCheRichiedonoAmicizia);
 		} else {
-			request.setAttribute("utentiCheRichidonoAmicizia", utentiCheRichiedonoAmicizia);
-			request.setAttribute("nonCiSonoRichiesteAmicizia", "Non ci sono nuove richieste di amicizia");
+			//se ha richieste di amicizia
+			if(utentiCheRichiedonoAmicizia.size()>=1) {
+				request.setAttribute("utentiCheRichidonoAmicizia", utentiCheRichiedonoAmicizia);
+			} else {
+				//se non ha richieste di amicizia
+				request.setAttribute("utentiCheRichidonoAmicizia", utentiCheRichiedonoAmicizia);
+				request.setAttribute("nonCiSonoRichiesteAmicizia", "Non ci sono nuove richieste di amicizia");
+			}
 		}
 	}
 }

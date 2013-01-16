@@ -6,6 +6,10 @@
 	<h1>Profilo altro utente</h1>
 	<section>
 	<div align="center" class="alignCenter">
+	
+	<%-- Mostra il profilo dell'utente che ha richiesto l'amicizia. Accedo a questa pagina
+			dal link della tabella in notifiche. 
+			Faccio il controllo su amiciSuggeriti perche' per ora e' per forza empty --%>
 	<c:choose>
 		<c:when test="${empty amiciSuggeriti}">
 			<img src="profilo/foto?emailUtente=${emailRichiedente}" />
@@ -26,24 +30,31 @@
 			<tr>
 				<td id="grassettoBlu">Punteggio feedback:</td>
 				<td>
-				<c:if test="${!empty punteggioFeedback}">
-						<div id="STAR_RATING" align="center">	
-							<ul>
-								<c:forEach begin="1" end="5" varStatus="num">
-									<c:if test="${num.count <= feedback}">
-										<li id="star_${num.count}" class="on"></li>
-									</c:if>
-									<c:if test="${num.count > feedback}">
-										<li id="star_${num.count}"></li>
-									</c:if>
-								</c:forEach>
-								<%--<li style="background-image: none;">&nbsp;<c:out value="${punteggioFeedback}"/></li> --%>
-							</ul>
-						</div>
-					</c:if>
+				<c:choose>
+						<c:when test="${!empty feedbackStellineRichiedente}">
+							<div id="STAR_RATING" align="center">
+								<ul>
+									<c:forEach begin="1" end="5" varStatus="num">
+										<c:if test="${num.count <= feedbackStellineRichiedente}">
+											<li id="star_${num.count}" class="on"></li>
+										</c:if>
+										<c:if test="${num.count > feedbackStellineRichiedente}">
+											<li id="star_${num.count}"></li>
+										</c:if>
+									</c:forEach>
+									<li style="background-image: none;">&nbsp;<c:out value="${punteggioFeedbackRichiedente}" /></li>
+								</ul>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<c:out value="${punteggioFeedbackRichiedente}" />
+						</c:otherwise>
+					</c:choose>
 				</td>
 			</tr>
 			
+			
+			<%-- Ma a cosa serve sto if??????? --%>
 			<c:if test="${empty confermaRichiestaAiuto and empty erroreConfermaRichiestaAiuto}">
 				<form id="profiloAltroUtente" action="profilo/azioni/profiloAltroUtente" method="POST">
 					<input type="hidden" name="tipo" /> <input type="hidden" name="emailRichiedente" value="${emailRichiedente}"> 
@@ -59,6 +70,9 @@
 			<br> 
 			<a href="profilo/azioni/notifiche">Torna alle notifiche</a>
 		</c:when>
+		
+		<%-- Entro nell otherwise se ho i suggerimenti, cioe' se ho accettato la richiesta di amicizia del profilo
+			che questa jsp mostra nel when di questa choose. Ovviamente se ho lista vuota ecc... se ne occupa la ProfiloAltroUtenteServlet --%>
 		<c:otherwise>
 			<br>
 			<br> Amici suggeriti:
@@ -76,17 +90,9 @@
 					</c:forEach>
 				</table>
 
-				<div id="pageNavPosition2"></div>
-
-				<script type="text/javascrip	t">
- 				var pager = new Pager('tabellaSuggerimenti', 5);
- 				pager.init();
- 				pager.showPageNav('pager', 'pageNavPosition2');
- 				pager.showPage(1);
-			</script>
-
 				<input id="submit" type="submit" value="Accetta suggerimenti" />
 			</form>
+			<a href="profilo/azioni/notifiche">Rifiuta suggerimenti e torna alle notifiche</a>
 		</c:otherwise>
 	</c:choose>
 </div>
