@@ -6,9 +6,16 @@
 <h1>Notifiche di risposta</h1>
 	<section>
 <div align="center" class="alignCenter">
+
+<c:if test="${!empty noAmicizie}">
+	<div class="generico">
+			<p>
+				Non ci sono utenti che hanno accettato recentemente le tue richieste di amicizia 
+			</p>
+	</div>
+</c:if>
 <c:choose>
 	<c:when test="${empty utentiAccettatiIndiretti}">
-		<c:out value=""></c:out>
 	</c:when>
 	<c:otherwise>
 		<br>
@@ -34,11 +41,6 @@
 
 <c:choose>
 	<c:when test="${empty listaUtentiConSuggerimenti}">
-		<div class="alert">
-			<p>
-				Non ci sono utenti che hanno accettato recentemente le tue richieste di amicizia
-			</p>
-		</div>
 	</c:when>
 	<c:otherwise>
 		<br>
@@ -102,7 +104,11 @@
 		</c:if>
 		<c:if test="${empty erroreCollaborazioni}">
 			<c:if test="${!empty noCollaborazioni }">
-				<c:out value="Non ci sono collaborazioni da notificare"></c:out>
+				<div class="generico">
+			<p>
+				Non ci sono utenti che hanno accettato recentemente le tue richieste di aiuto 
+			</p>
+		</div>
 			</c:if>
 			<c:if test="${empty noCollaborazioni }">
 			Le seguenti collaborazioni richieste sono state confermate:
@@ -132,7 +138,11 @@
 <br>
 <c:if test="${empty erroreCollaborazioni}">
 			<c:if test="${!empty noCollaborazioniRespinte }">
-				<c:out value="Non ci sono collaborazioni respinte"></c:out>
+				<div class="generico">
+			<p>
+				Non ci sono utenti che hanno respinto recentemente le tue richieste di aiuto 
+			</p>
+		</div>
 			</c:if>
 			<c:if test="${empty noCollaborazioniRespinte }">
 			Le seguenti collaborazioni richieste sono state respinte:
