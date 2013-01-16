@@ -124,23 +124,123 @@ public interface GestioneCollaborazioniInterface {
 	 */
 	public Utente getUtenteByEmail(String email) throws LoginException;
 
+	/**
+	 * Metodo che fornisce la lista delle collaborazioni non ancora terminate.
+	 * 
+	 * @param emailRichiedente
+	 *            = String che rappresenta l'email dell'utente di cui si vuole
+	 *            ottenere le collaborazioni
+	 * @return <b>lista delle collaborazioni</b>, ovvero una
+	 *         List<Collaborazione> che rappresenta le collaborazioni non ancora
+	 *         terminate. Se non e' possibile ottenere tale lista, reistituisce
+	 *         <b>null</b>.
+	 * @throws LoginException
+	 *             con causa ALCUNIPARAMETRINULLIOVUOTI
+	 */
+	
+	
 	public List<Collaborazione> getCollaborazioniDaTerminare(String emailRichiedente)
 			throws LoginException;
 
+	
+	/**
+	 * Metodo che fornisce la lista delle collaborazioni terminate con il
+	 * feedback rilasciato
+	 * 
+	 * @param emailRichiedente
+	 *            = String che rappresenta l'email dell'utente di cui si vuole
+	 *            ottenere le collaborazioni
+	 * @return <b>lista delle collaborazioni</b>, ovvero una
+	 *         List<Collaborazione> che rappresenta le collaborazioni non ancora
+	 *         terminate. Se non e' possibile ottenere tale lista, reistituisce
+	 *         <b>null</b>.
+	 * @throws LoginException
+	 *             con causa ALCUNIPARAMETRINULLIOVUOTI
+	 */
+	
 	public List<Collaborazione> getCollaborazioniTerminateConFeedBack(
 			String emailRichiedente) throws LoginException;
 
+	
+	/**
+	 * Metodo che fornisce la lista delle collaborazioni dove l'utente
+	 * corrispondente alla mail passata come parametro è l'utente ricevente, ed
+	 * è stato rilasciato un feedback relativo a quella collaborazione.
+	 * 
+	 * @param emailUtente
+	 *            = String che rappresenta l'email dell'utente di cui si vuole
+	 *            ottenere le collaborazioni
+	 * @return <b>lista delle collaborazioni</b>, ovvero una
+	 *         List<Collaborazione> che rappresenta le collaborazioni non ancora
+	 *         terminate. Se non e' possibile ottenere tale lista, reistituisce
+	 *         <b>null</b>.
+	 * @throws LoginException
+	 *             con causa ALCUNIPARAMETRINULLIOVUOTI
+	 */
+	
 	public List<Collaborazione> getCollaborazioniRiceventeConFeedBack(
 			String emailUtente) throws LoginException;
 
+	/**
+	 * Metodo per impostare la collaborazione come già notificata al richiedente
+	 * 
+	 * @param id
+	 *            = Long che rappresenta l'id univoco della collaborazione
+	 * @return <b>collaborazione</b> con l'id specificato, se accettata
+	 *         correttamente, <b>null</b> altrimenti
+	 * @throws LoginException
+	 *             con causa ALCUNIPARAMETRINULLIOVUOTI
+	 */
+	
+	
 	public Collaborazione notificaAvvenuta(Long id) throws LoginException;
 
+	/**
+	 * Metodo per ottenere la lista delle collaborazioni create dall'utente
+	 * richiedente, di cui bisogna notificarne l'avvenuta conferma.
+	 * 
+	 * @param emailRichiedente
+	 *            = String che rappresenta l'email dell'utente richiedente della
+	 *            richiesta di aiuto (collaborazione)
+	 * @return <b>lista delle collaborazioni</b>, cioe' una List<Collaborazione>
+	 *         che rappresenta le collaborazioni, ancora senza feedback. Se non
+	 *         e' possibile ottenere tale lista, reistituisce <b>null</b>.
+	 * @throws LoginException
+	 *             con causa ALCUNIPARAMETRINULLIOVUOTI
+	 */
+	
 	public List<Collaborazione> getCollaborazioniDaNotificare(String emailRichiedente)
 			throws LoginException;
 
+	/**
+	 * Metodo che fornisce la lista delle collaborazioni proposte dall'utente
+	 * che sono state rifiutate.
+	 * 
+	 * @param emailRichiedente
+	 *            = String che rappresenta l'email dell'utente di cui si vuole
+	 *            ottenere le collaborazioni
+	 * @return <b>lista delle collaborazioni</b>, ovvero una
+	 *         List<Collaborazione> che rappresenta le collaborazioni non ancora
+	 *         terminate. Se non e' possibile ottenere tale lista, reistituisce
+	 *         <b>null</b>.
+	 * @throws LoginException
+	 *             con causa ALCUNIPARAMETRINULLIOVUOTI
+	 */
+	
 	public List<Collaborazione> getCollaborazioniRifiutate(String emailRichiedente)
 			throws LoginException;
 
+	/**
+	 * Metodo di servizio per cancellare una collaborazione rifiutata
+	 * 
+	 * @param id
+	 *            = Long che rappresenta l'id univoco della collaborazione
+	 * @return <b>true</b> se la collaborazione e' stata rimossa correttamente,
+	 *         <b>false</b> altrimenti.
+	 * @throws LoginException
+	 *             con causa ALCUNIPARAMETRINULLIOVUOTI
+	 */
+	
 	public boolean cancellaCollaborazioneRifiutata(Long id) throws LoginException;
 
 }
