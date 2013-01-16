@@ -1,8 +1,13 @@
 <jsp:include page="layoutSuperioreUp.jsp"></jsp:include>
 <title>SWIM - Profilo - Ricerche</title>
-<jsp:include page="layoutSuperioreDown.jsp"></jsp:include>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:if test="${tipoRicerca=='aiutoVisitatore'}">
+	<jsp:include page="layoutSuperioreDownVisitatore.jsp"></jsp:include>
+</c:if>
+<c:if test="${tipoRicerca!='aiutoVisitatore'}">
+	<jsp:include page="layoutSuperioreDown.jsp"></jsp:include>
+</c:if>
 <%-- Questa jsp conterra' con un choose 3 casi possibili, cioe' ricerca per visitatori, ricerca aiuto e ricerca utenti --%>
 <form action="profilo/azioni/ricerchePerUtentiLoggati" method="POST" enctype="multipart/form-data">
 	<h1>Ricerca</h1>
