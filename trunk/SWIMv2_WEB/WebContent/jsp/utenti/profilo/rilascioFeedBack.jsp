@@ -7,11 +7,6 @@
 	<section>
 	<div align="center" class="alignCenter">
 	<c:if test="${empty feedBackRilasciato}">
-	<div class="alert">
-			<p>
-				Compila i campi per rilasciare il FeedBack!
-			</p>
-	</div>
 	<br>
 		<form action="profilo/azioni/rilasciaFeedBack" method="POST"
 			enctype="multipart/form-data">
@@ -42,7 +37,11 @@
 	</c:if>
 	
 	<c:if test="${!empty feedBackRilasciato}">
-		<c:out value="${feedBackRilasciato}"></c:out>
+		<div class="generico">
+				<p>
+					<c:out value="${feedBackRilasciato}"></c:out>
+				</p>
+			</div>
 	</c:if>
 	<br>
 	<a href="profilo/azioni/collaborazioni">Torna alla lista di
