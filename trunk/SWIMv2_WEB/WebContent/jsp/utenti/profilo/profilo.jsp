@@ -90,7 +90,7 @@
 	<br>
 	<%-- Lista puntata delle abilita dell'utente fatta con ul e poi li per ogni voce della lista --%>
 	<table id="tabellaRigheAlterne">
-	<caption>Abilita' dell'utente:</caption>
+	<caption id="grassettoBlu">Abilita' dell'utente:</caption>
 	<tr>
 	  <th>Abilità</th>
 	  <th>Descrizione</th>

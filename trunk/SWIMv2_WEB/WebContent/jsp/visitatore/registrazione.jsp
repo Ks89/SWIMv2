@@ -77,9 +77,12 @@
 			<table id="formInserimentoParametri">
 			</tr>
 				<%-- input di tipo file per uploadare il file e poi il submit per mandare la form --%>
-				<tr><td>
-				<input id="file" name="file" type="file" accept="image/*"/></td></tr><tr>
-				<td style="text-align: center"><input id="submit" type="submit"/></td>
+				<tr>
+					<td id="grassettoBlu">Seleziona l'immagine del profilo: </td>
+					<td><input id="file" name="file" type="file" accept="image/*"/></td>
+				</tr>
+				<tr>
+				<td style="text-align: center" colspan="2"><input id="submit" type="submit"/></td>
 				</tr>
 			</table>
 		</form>
