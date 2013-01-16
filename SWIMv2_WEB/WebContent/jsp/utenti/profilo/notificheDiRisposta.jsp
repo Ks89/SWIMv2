@@ -130,5 +130,27 @@
 		</c:if>
 <br>
 <br>
+<c:if test="${empty erroreCollaborazioni}">
+			<c:if test="${!empty noCollaborazioniRespinte }">
+				<c:out value="Non ci sono collaborazioni respinte"></c:out>
+			</c:if>
+			<c:if test="${empty noCollaborazioniRespinte }">
+			Le seguenti collaborazioni richieste sono state respinte:
+			<br>
+			<br>
+				<c:forEach items="${listaCollaborazioniRespinte}" var="collaborazione">
+					<br>
+					<br>
+					<br>
+					Nome collaborazione:
+					<c:out value="${collaborazione.nome}"></c:out>
+					<br>
+					Collaboratore:
+					<c:out value="${collaborazione.utenteRicevente.nome}" />&nbsp;<c:out value="${collaborazione.utenteRicevente.cognome}" />
+				</c:forEach>
+			</c:if>
+		</c:if>
+<br>
+<br>
 </div>
 <jsp:include page="../../layoutInferiore.jsp"></jsp:include>
