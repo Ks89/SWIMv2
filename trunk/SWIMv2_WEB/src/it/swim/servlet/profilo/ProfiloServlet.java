@@ -87,6 +87,8 @@ public class ProfiloServlet extends HttpServlet {
 			
 		} catch (LoginException e) {
 			log.error(e.getMessage(), e);
+			//se ci fosse un errore durante il calcolo del feedback lo setto come non disponibile
+//			request.setAttribute("punteggioUtenteCollegato", "Non disponibile");
 		}
 
 		List<Abilita> abilitaInsiemePersonale;

@@ -84,6 +84,8 @@ public class DettagliAltroUtenteServlet extends HttpServlet {
 			log.debug("punteggioUtenteRicercato:" + feedback);
 		} catch (LoginException e) {
 			log.error(e.getMessage(), e);
+			//se ci fosse un errore durante il calcolo del feedback lo setto come non disponibile
+//			request.setAttribute("punteggioFeedback", "Non disponibile");
 		}
 
 
