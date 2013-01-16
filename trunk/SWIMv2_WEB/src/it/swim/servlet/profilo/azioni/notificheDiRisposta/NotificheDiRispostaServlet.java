@@ -69,6 +69,9 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 		List<Utente> utentiAccettatiIndiretti = amicizie.getUtentiCheHannoAccettatoLaRichiestaIndiretti(emailUtenteCollegato);
 		List<UtenteConSuggerimenti> listaUtentiConSugg = new ArrayList<UtenteConSuggerimenti>();
 
+		if(utentiAccettatiDiretti.size()==0 && utentiAccettatiIndiretti.size()==0){
+			request.setAttribute("noAmicizie","true");
+		}
 		//metto come attributo quelli indiretti, tanto non devo lavorarci sopra, mi basta leggere la lista e stamparli nella jsp
 		request.setAttribute("utentiAccettatiIndiretti", utentiAccettatiIndiretti);
 
@@ -120,6 +123,7 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 		} catch (LoginException e) {
 			request.setAttribute("erroreCollaborazioni","Impossibile accedere alle collaborazioni, riprovare");
 		}
+		
 
 		//metto come attributo le collaborazioni
 		if(collaborazioniAccettate.size()==0){
@@ -154,6 +158,7 @@ public class NotificheDiRispostaServlet extends HttpServlet {
 			}
 		}
 
+		
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notificheDiRisposta.jsp").forward(request, response);
 	}
 
