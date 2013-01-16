@@ -16,7 +16,7 @@
 		<br>
 	</c:if>
 	<c:if test="${!empty inserimentoPropostaAvvenuto}">
-		<div class="alert">
+		<div class="conferma">
 			<p>
 				<c:out value="${inserimentoPropostaAvvenuto}"></c:out>
 			</p>
