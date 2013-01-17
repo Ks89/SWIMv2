@@ -29,7 +29,7 @@ import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 public class NotificheDiRispostaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	@EJB
+	@EJB 
 	private GestioneAmicizieLocal amicizie;
 
 	@EJB

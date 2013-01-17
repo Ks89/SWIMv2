@@ -39,21 +39,21 @@
 		
 		<%-- Messaggi della servlet SuggAlRichiedente --%>
 		<c:when test="${!empty nessunSuggAccettato}"> 
-		<div class="alert">
+		<div class="conferma">
 			<p>
 				<c:out value="${nessunSuggAccettato}"></c:out><br>
 			</p>
 		</div>
 		</c:when>
 		<c:when test="${!empty suggAccettato}"> 
-		<div class="alert">
+		<div class="conferma">
 			<p>
 				<c:out value="${suggAccettato}"></c:out><br>
 			</p>
 		</div>
 		</c:when>
 		<c:when test="${!empty suggAccettati}">
-		<div class="alert">
+		<div class="conferma">
 			<p>
 				<c:out value="${suggAccettati}"></c:out><br>
 			</p>
