@@ -19,6 +19,7 @@ import sessionBeans.localInterfaces.GestioneAmicizieLocal;
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 
 import entityBeans.Amicizia;
+import entityBeans.Collaborazione;
 import entityBeans.Utente;
 import exceptions.AmiciziaException;
 import exceptions.LoginException;
@@ -136,6 +137,7 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 			}
 
 			this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
+			this.gestisciNotificheRichiesteAiuto(request, response, emailUtenteCollegato);
 			getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
 			return;
 		}
@@ -154,6 +156,7 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 				if(!amiciziaAccettata.isDiretta()) {
 					request.setAttribute("amiciziaIndirettaStretta", "Hai stretto amicizia con un utente suggerito dal sistema!");
 					this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
+					this.gestisciNotificheRichiesteAiuto(request, response, emailUtenteCollegato);
 					getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
 					return;
 //					response.sendRedirect("notifiche");
@@ -168,10 +171,12 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 				if(suggeriti==null) {
 					request.setAttribute("noSuggDisponibili", "Amicizia stretta! Non ci sono suggerimenti d'amicizia");
 					this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
+					this.gestisciNotificheRichiesteAiuto(request, response, emailUtenteCollegato);
 					getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
 					return;
 				} else {
 					this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
+					this.gestisciNotificheRichiesteAiuto(request, response, emailUtenteCollegato);
 					if(suggeriti.size()>=1) {
 						request.setAttribute("amiciSuggeriti", suggeriti);
 					} else {
@@ -199,6 +204,7 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 
 		//in ogni caso, se arrivo qui, per sicurezza rigenero la lista delle richiste di amicizia della pagina notifiche
 		this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
+		this.gestisciNotificheRichiesteAiuto(request, response, emailUtenteCollegato);
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
 	}
 	
@@ -214,6 +220,27 @@ public class ProfiloAltroUtenteServlet extends HttpServlet {
 		}
 	}
 
+
+	private void gestisciNotificheRichiesteAiuto(HttpServletRequest request, HttpServletResponse response, String emailUtenteCollegato) throws ServletException, IOException {
+		try {
+			List<Collaborazione> collaborazioni = gestioneCollab.getNotificheRichiesteAiuto(emailUtenteCollegato);
+
+			if(collaborazioni==null) {
+				request.setAttribute("erroreGetNotificheRichiesteAiuto", "Impossibile ottenere le richieste di aiuto");
+				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
+				return;
+			}
+			if(collaborazioni.size()>=1) {
+				request.setAttribute("richiesteAiuto", collaborazioni);
+			} else {
+				request.setAttribute("richiesteAiuto", collaborazioni);
+				request.setAttribute("nonCiSonoRichiesteAiuto", "Non ci sono nuove richieste di aiuto");
+			}
+		} catch (LoginException e) {
+			log.error(e.getMessage(), e);
+			request.setAttribute("erroreGetNotificheRichiesteAiuto", "Impossibile ottenere le richieste di aiuto");
+		}
+	}
 
 	
 	

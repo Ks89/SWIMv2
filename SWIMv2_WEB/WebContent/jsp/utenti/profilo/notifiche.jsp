@@ -18,7 +18,7 @@
 		<br>
 	</c:if>
 	<c:if test="${!empty okDettaglioRichiestaAiuto}">
-		<div class="alert">
+		<div class="conferma">
 			<p>
 				<c:out value="${okDettaglioRichiestaAiuto}"></c:out>
 			</p>
@@ -34,7 +34,7 @@
 		<br>
 	</c:if>
 	<c:if test="${!empty nonCiSonoRichiesteAiuto}">
-		<div class="alert">
+		<div class="generico">
 			<p>
 				<c:out value="${nonCiSonoRichiesteAiuto}"></c:out>
 			</p>
@@ -137,7 +137,7 @@
 		<div id="pageNavPosition1"></div>
 
 		<script type="text/javascript">
-			var pager = new Pager('tabellaRichiesteAiuto', 5);
+			var pager = new Pager('tabellaRigheAlterne', 5);
 			pager.init();
 			pager.showPageNav('pager', 'pageNavPosition1');
 			pager.showPage(1);
@@ -150,7 +150,7 @@
 	
 	<c:if test="${empty nonCiSonoRichiesteAmicizia}">
 		<h2>Richieste di amicizia:</h2>
-		<table id="tabellaRigheAlterne" name="tabellaRichiesteAmicizia">
+		<table id="tabellaRigheAlterne">
 			<tr>
 				<th>Utente richiedente</th>
 			</tr>
@@ -171,7 +171,7 @@
 		<div id="pageNavPosition2"></div>
 
 		<script type="text/javascript">
-			var pager = new Pager('tabellaRichiesteAmicizia', 5);
+			var pager = new Pager('tabellaRigheAlterne', 5);
 			pager.init();
 			pager.showPageNav('pager', 'pageNavPosition2');
 			pager.showPage(1);
