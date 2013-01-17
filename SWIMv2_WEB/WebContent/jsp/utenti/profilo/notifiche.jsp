@@ -114,7 +114,7 @@
 	<c:if test="${empty nonCiSonoRichiesteAiuto}">
 		<br>
 		<h2> Richieste di aiuto, inviate dagli utenti</h2>
-		<table id="tabellaRigheAlterne">
+		<table id="tabellaRigheAlterne1" name="tabellaRigheAlterne1" class="tabellaRigheAlterne">
 			<tr>
 				<th>Utente richiedente</th>
 				<th>Nome richiesta aiuto</th>
@@ -137,10 +137,10 @@
 		<div id="pageNavPosition1"></div>
 
 		<script type="text/javascript">
-			var pager = new Pager('tabellaRigheAlterne', 5);
-			pager.init();
-			pager.showPageNav('pager', 'pageNavPosition1');
-			pager.showPage(1);
+			var pagerFirst = new Pager('tabellaRigheAlterne1', 5);
+			pagerFirst.init();
+			pagerFirst.showPageNav('pagerFirst', 'pageNavPosition1');
+			pagerFirst.showPage(1);
 		</script>
 	</c:if>
 
@@ -150,7 +150,7 @@
 	
 	<c:if test="${empty nonCiSonoRichiesteAmicizia}">
 		<h2>Richieste di amicizia</h2>
-		<table id="tabellaRigheAlterne">
+		<table id="tabellaRigheAlterne2" name="tabellaRigheAlterne2" class="tabellaRigheAlterne">
 			<tr>
 				<th>Utente richiedente</th>
 			</tr>
@@ -171,10 +171,10 @@
 		<div id="pageNavPosition2"></div>
 
 		<script type="text/javascript">
-			var pager = new Pager('tabellaRigheAlterne', 5);
-			pager.init();
-			pager.showPageNav('pager', 'pageNavPosition2');
-			pager.showPage(1);
+			var pagerSecond = new Pager('tabellaRigheAlterne2', 5);
+			pagerSecond.init();
+			pagerSecond.showPageNav('pagerSecond', 'pageNavPosition2');
+			pagerSecond.showPage(1);
 		</script>
 	</c:if>
 </div>
