@@ -99,11 +99,12 @@ public class DettaglioPropostaServlet extends HttpServlet {
 				request.setAttribute("erroreInserimentoPropostaFallito", "Errore inserimento nuova abilita con nome: " + nuovoNomeAbilitaProposta);
 			}
 
-			List<PropostaAbilita> proposteAbilita = gestioneProposte.getProposteAbilitaNonConfermate();
-			request.setAttribute("proposte", proposteAbilita);
+			
 		} catch (ProposteException e) {
 			log.error(e.getMessage(), e);
 		}
+		List<PropostaAbilita> proposteAbilita = gestioneProposte.getProposteAbilitaNonConfermate();
+		request.setAttribute("proposte", proposteAbilita);
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/adminpanelproposte.jsp").forward(request, response);
 	}
 }
