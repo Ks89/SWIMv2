@@ -81,6 +81,14 @@
 						</tr>
 					</c:forEach>
 				</table>
+				<div id="pageNavPosition"></div>
+
+				<script type="text/javascript">
+					var pager = new Pager('tabellaRigheAlterne', 5);
+					pager.init();
+					pager.showPageNav('pager', 'pageNavPosition');
+					pager.showPage(1);
+				</script>
 			 </c:if>
 		</c:when>
 		
