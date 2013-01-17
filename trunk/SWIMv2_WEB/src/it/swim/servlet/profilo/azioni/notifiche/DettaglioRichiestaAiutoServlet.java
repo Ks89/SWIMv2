@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sessionBeans.localInterfaces.GestioneAmicizieLocal;
 import sessionBeans.localInterfaces.GestioneCollaborazioniLocal;
 
 import entityBeans.Collaborazione;
+import entityBeans.Utente;
 import exceptions.LoginException;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +27,8 @@ import lombok.extern.slf4j.Slf4j;
 public class DettaglioRichiestaAiutoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@EJB
+	private GestioneAmicizieLocal gestioneAmicizie;
 	
 	@EJB
 	private GestioneCollaborazioniLocal gestioneCollab;
@@ -66,17 +70,16 @@ public class DettaglioRichiestaAiutoServlet extends HttpServlet {
 				request.setAttribute("cognomeRichiedeAiuto", collaborazione.getUtenteRichiedente().getCognome());
 				request.setAttribute("nomeCollaborazione", collaborazione.getNome());
 				request.setAttribute("descrizioneCollaborazione", collaborazione.getDescrizione());
-				getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/dettaglioRichiestaAiuto.jsp").forward(request, response);
-				return;
 			} else {
-
+				request.setAttribute("erroreCollabNull", "Errore, collaborazione non trovata"); 
 			}
+			getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/dettaglioRichiestaAiuto.jsp").forward(request, response);
 		} catch (LoginException e) {
 			log.error(e.toString(), e);
 		}
-
 	}
 
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -95,7 +98,9 @@ public class DettaglioRichiestaAiutoServlet extends HttpServlet {
 			}
 		}
 		
+		
 		this.gestisciNotificheRichiesteAiuto(request, response, emailUtenteCollegato);
+		this.gestisciNotificheRichiesteAmicizia(request, response, emailUtenteCollegato);
 		
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/notifiche.jsp").forward(request, response);
 	}
@@ -149,6 +154,26 @@ public class DettaglioRichiestaAiutoServlet extends HttpServlet {
 		} catch (LoginException e) {
 			log.error(e.getMessage(), e);
 			request.setAttribute("erroreGetNotificheRichiesteAiuto", "Impossibile ottenere le richieste di amicizia");
+		}
+	}
+	
+	
+	
+	private void gestisciNotificheRichiesteAmicizia (HttpServletRequest request, HttpServletResponse response, String emailUtenteCollegato) throws ServletException, IOException {
+		List<Utente> utentiCheRichiedonoAmicizia = gestioneAmicizie.getUtentiCheVoglionoAmicizia(emailUtenteCollegato);
+
+		//impossibile ottenere le richieste di amicizia
+		if(utentiCheRichiedonoAmicizia==null) {
+			request.setAttribute("erroreGetNotificheRichiesteAmicizia", "Impossibile ottenere le richieste di amicizia");
+		} else {
+			//se ha richieste di amicizia
+			if(utentiCheRichiedonoAmicizia.size()>=1) {
+				request.setAttribute("utentiCheRichidonoAmicizia", utentiCheRichiedonoAmicizia);
+			} else {
+				//se non ha richieste di amicizia
+				request.setAttribute("utentiCheRichidonoAmicizia", utentiCheRichiedonoAmicizia);
+				request.setAttribute("nonCiSonoRichiesteAmicizia", "Non ci sono nuove richieste di amicizia");
+			}
 		}
 	}
 }

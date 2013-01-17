@@ -7,7 +7,7 @@
 	<section>
 	<div align="center" class="alignCenter">
 		<c:if test="${!empty confermaRichiestaAiuto}">
-			<div class="alert">
+			<div class="conferma">
 				<p>
 					<c:out value="${confermaRichiestaAiuto}"></c:out>
 				</p>
@@ -22,6 +22,16 @@
 			</div>
 			<br>
 		</c:if>
+		<c:if test="${!empty erroreCollabNull}">
+			<div class="alert">
+				<p>
+					<c:out value="${erroreCollabNull}"></c:out>
+				</p>
+			</div>
+			<br>
+		</c:if>
+		
+		
 		<h2>Richiesta d'aiuto</h2>
 		<table id="tabellaFeedback">
 			<tr>
