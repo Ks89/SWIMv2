@@ -51,14 +51,14 @@
 		</div>
 		</c:when>
 		<c:when test="${!empty modificaAbilitaRiuscitaConSuccesso}"> 
-		<div class="alert">
+		<div class="conferma">
 			<p>
 				<c:out value="${modificaAbilitaRiuscitaConSuccesso}"></c:out><br>
 			</p>
 		</div>
 		</c:when>
 		<c:when test="${!empty modificaFotoRiuscitaConSuccesso}"> 
-		<div class="alert">
+		<div class="conferma">
 			<p>
 				<c:out value="${modificaFotoRiuscitaConSuccesso}"></c:out><br>
 			</p>
