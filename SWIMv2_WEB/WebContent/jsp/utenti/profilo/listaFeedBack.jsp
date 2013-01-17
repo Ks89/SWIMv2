@@ -17,7 +17,7 @@
 	<br>
 </c:if>
 <c:if test="${!empty nonCiSonoCollaborazioni}">
-	<div class="alert">
+	<div class="generico">
 		<p>
 			<c:out value="${nonCiSonoCollaborazioni}"></c:out>
 		</p>

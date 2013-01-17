@@ -44,7 +44,15 @@
 				<td><c:out value="${item.nome}" /></td>
 				<td style="text-align: justify;"><c:out value="${item.descrizione}" /></td>
 			</c:forEach>
-			</table><br>
+			</table>
+			<div id="pageNavPosition"></div>
+
+			<script type="text/javascript">
+					var pager = new Pager('tabellaRigheAlterne', 5);
+					pager.init();
+					pager.showPageNav('pager', 'pageNavPosition');
+					pager.showPage(1);
+			</script>
 			 <br>
 			 <br>
 			 <input type="checkbox" name="soloAmici" value="Ricerca solo tra gli amici" />
@@ -98,7 +106,17 @@
 				<td><c:out value="${item.nome}" /></td>
 				<td style="text-align: justify;"><c:out value="${item.descrizione}" /></td>
 			</c:forEach>
-			</table><br>
+			</table>
+			
+			<div id="pageNavPosition"></div>
+
+			<script type="text/javascript">
+					var pager = new Pager('tabellaRigheAlterne', 5);
+					pager.init();
+					pager.showPageNav('pager', 'pageNavPosition');
+					pager.showPage(1);
+			</script>
+			<br>
 			 <input id="Cerca" type="submit" value="Cerca"/>
 			 <br><br>
 			  <c:if test="${risultatoRicerca}">
