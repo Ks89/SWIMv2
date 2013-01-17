@@ -7,14 +7,14 @@
 	
 	<nav>
 		<ul>
-			<li><a href="profilo/profilo"><span class="una">home</span></a></li>
-			<li><a href="profilo/azioni/ricerchePerUtentiLoggati?tipoRicerca=utente"><span class="una">ricerca utenti</span></a></li>
-			<li><a href="profilo/azioni/ricerchePerUtentiLoggati?tipoRicerca=aiuto"><span class="una">ricerca aiuto</span></a></li>
-			<li><a href="profilo/azioni/collaborazioni"><span>visualizza collaborazioni</span></a></li>
-			<li><a href="profilo/azioni/notifiche"><span>visualizza notifiche</span></a></li>
-			<li><a href="profilo/azioni/proposteAbilita"><span>proponi nuove abilit&agrave;</span></a></li>
-			<li><a href="profilo/azioni/modificaProfilo"><span class="una">modifica profilo</span></a></li>
-			<li><a href="profilo/azioni/feedbackUtente?emailUtente=${sessionScope.utenteCollegato}"><span>visualizza feedback</span></a></li>
+			<li><a href="profilo/profilo"><span class="una">Home</span></a></li>
+			<li><a href="profilo/azioni/ricerchePerUtentiLoggati?tipoRicerca=utente"><span class="una">Ricerca utenti</span></a></li>
+			<li><a href="profilo/azioni/ricerchePerUtentiLoggati?tipoRicerca=aiuto"><span class="una">Ricerca aiuto</span></a></li>
+			<li><a href="profilo/azioni/collaborazioni"><span>Visualizza collaborazioni</span></a></li>
+			<li><a href="profilo/azioni/notifiche"><span>Visualizza notifiche</span></a></li>
+			<li><a href="profilo/azioni/proposteAbilita"><span>Proponi nuove abilit&agrave;</span></a></li>
+			<li><a href="profilo/azioni/modificaProfilo"><span class="una">Modifica profilo</span></a></li>
+			<li><a href="profilo/azioni/feedbackUtente?emailUtente=${sessionScope.utenteCollegato}"><span>Visualizza feedback</span></a></li>
 		</ul>
 	</nav>
 	

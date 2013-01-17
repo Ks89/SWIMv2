@@ -7,7 +7,7 @@
 	
 	<nav>
 		<ul>
-			<li><a href="admin"><span class="una">home</span></a></li>
+			<li><a href="admin"><span class="una">Home</span></a></li>
 			<li><a href="admin/adminPanel?operazione=1"><span class="una">Aggiungi abilita</span></a></li>
 			<li><a href="admin/adminPanel?operazione=2"><span>Visualizza proposte abilita</span></a></li>
 		</ul>
