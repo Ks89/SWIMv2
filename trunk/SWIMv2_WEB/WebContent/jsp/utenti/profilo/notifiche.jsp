@@ -113,7 +113,7 @@
 	<%-- Visualizzazione richieste di aiuto --%>
 	<c:if test="${empty nonCiSonoRichiesteAiuto}">
 		<br>
-		<h2> Richieste di aiuto, inviate dagli utenti:</h2>
+		<h2> Richieste di aiuto, inviate dagli utenti</h2>
 		<table id="tabellaRigheAlterne">
 			<tr>
 				<th>Utente richiedente</th>
@@ -149,7 +149,7 @@
 	
 	
 	<c:if test="${empty nonCiSonoRichiesteAmicizia}">
-		<h2>Richieste di amicizia:</h2>
+		<h2>Richieste di amicizia</h2>
 		<table id="tabellaRigheAlterne">
 			<tr>
 				<th>Utente richiedente</th>
