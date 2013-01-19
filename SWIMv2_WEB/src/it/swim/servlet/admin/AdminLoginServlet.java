@@ -79,25 +79,25 @@ public class AdminLoginServlet extends HttpServlet {
 		} catch (LoginException e) {
 			log.error(e.getMessage(), e);
 			if (e.getCausa() == LoginException.Causa.ALCUNIPARAMETRINULLIOVUOTI) {
-				request.setAttribute("erroreLoginAdminFallito", "LoginException: Email o password non riconosciute");
+				request.setAttribute("erroreLoginAdminFallito", "Email o password non riconosciute");
 			} else {
 				if (e.getCausa() == LoginException.Causa.ERRORESCONOSCIUTO) {
-					request.setAttribute("erroreLoginAdminFallito", "LoginException: Errore durante il login - causa sconosciuta");
+					request.setAttribute("erroreLoginAdminFallito", "Errore durante il login - causa sconosciuta");
 				} else {
-					request.setAttribute("erroreLoginAdminFallito", "LoginException: Errore durante il login - causa sconosciuta");
+					request.setAttribute("erroreLoginAdminFallito", "Errore durante il login - causa sconosciuta");
 				}
 			}
 			getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/homeAdmin.jsp").forward(request, response);
 		} catch (HashingException e) {
 			log.error(e.getMessage(), e);
 			if (e.getCausa() == HashingException.Causa.ALCUNIPARAMETRINULLIOVUOTI) {
-				request.setAttribute("erroreLoginAdminFallito", "HashingException: Errore passaggio parametri");
+				request.setAttribute("erroreLoginAdminFallito", "Errore durante il login");
 			} else {
 				if (e.getCausa() == HashingException.Causa.ERRORESCONOSCIUTO) {
-					request.setAttribute("erroreLoginAdminFallito", "HashingException: causa sconosciuta");
+					request.setAttribute("erroreLoginAdminFallito", "Errore durante il login: causa sconosciuta");
 				} else {
-					request.setAttribute("erroreLoginAdminFallito", "HashingException: ausa sconosciuta");
-				}
+					request.setAttribute("erroreLoginAdminFallito", "Errore durante il login: ausa sconosciuta");
+				} 
 			}
 			getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/homeAdmin.jsp").forward(request, response);
 		}

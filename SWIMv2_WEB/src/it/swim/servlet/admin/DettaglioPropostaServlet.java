@@ -29,6 +29,8 @@ public class DettaglioPropostaServlet extends HttpServlet {
 	@EJB
 	private GestioneProposteLocal gestioneProposte;
 
+	private Long idProposta;
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -44,7 +46,7 @@ public class DettaglioPropostaServlet extends HttpServlet {
 
 		log.debug("Entrato in dettaglio proposta abilita");
 
-		Long idProposta = Long.parseLong(request.getParameter("idProposta"));
+		idProposta = Long.parseLong(request.getParameter("idProposta"));
 
 		log.debug("Entrato in dettaglio proposta abilita con id: " + idProposta);
 
@@ -59,22 +61,10 @@ public class DettaglioPropostaServlet extends HttpServlet {
 			return;
 		}
 
+		
+		this.gestisciProposta(request, response, idProposta);
 
-		try {
-			PropostaAbilita propostaAbilita = gestioneProposte.getPropostaAbilitaById(idProposta);
-			if(propostaAbilita!=null) {
-				request.setAttribute("idProposta", propostaAbilita.getId());
-				request.setAttribute("emailProposta", propostaAbilita.getUtente().getEmail());
-				request.setAttribute("abilitaProposta", propostaAbilita.getAbilitaProposta());
-				request.setAttribute("motivazioneProposta", propostaAbilita.getMotivazione());
-				getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/dettaglioProposta.jsp").forward(request, response);
-				return;
-			} else {
-
-			}
-		} catch (ProposteException e) {
-			log.error(e.toString(), e);
-		}
+		getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/dettaglioProposta.jsp").forward(request, response);
 	}
 
 	/**
@@ -89,14 +79,22 @@ public class DettaglioPropostaServlet extends HttpServlet {
 		String nuovoNomeAbilitaProposta = request.getParameter("nuovoNomeAbilitaProposta");
 		String descrizioneAbilita = request.getParameter("descrizioneAbilitaProposta");
 
+		if(nuovoNomeAbilitaProposta!=null && nuovoNomeAbilitaProposta.equals("")) {
+			this.gestisciProposta(request, response, idProposta);
+
+			request.setAttribute("erroreInserisciNomeAbilita", "Inserisci il nome dell'abilita'");
+			getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/dettaglioProposta.jsp").forward(request, response);
+			return;
+		}
+		
 		Abilita abilitaInserita;
 		try {
 			abilitaInserita = gestioneProposte.confermaPropostaAbilitaSpecificandoAttributi(emailAdminCollegato, idPropostaAbilita, nuovoNomeAbilitaProposta, descrizioneAbilita);
 			if(abilitaInserita!=null) {
 				log.debug("nuova abilita inserita correttamente: " + abilitaInserita.getNome());
-				request.setAttribute("inserimentoPropostaCorretto", "Inserimento abilita " + abilitaInserita.getNome() + " avvenuto con successo!");
+				request.setAttribute("inserimentoPropostaCorretto", "Inserimento abilita' avvenuto con successo!");
 			} else {
-				request.setAttribute("erroreInserimentoPropostaFallito", "Errore inserimento nuova abilita con nome: " + nuovoNomeAbilitaProposta);
+				request.setAttribute("erroreInserimentoPropostaFallito", "Errore inserimento nuova abilita'");
 			}
 
 			
@@ -106,5 +104,23 @@ public class DettaglioPropostaServlet extends HttpServlet {
 		List<PropostaAbilita> proposteAbilita = gestioneProposte.getProposteAbilitaNonConfermate();
 		request.setAttribute("proposte", proposteAbilita);
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/adminpanelproposte.jsp").forward(request, response);
+	}
+	
+	
+	private void gestisciProposta(HttpServletRequest request, HttpServletResponse response, Long idProposta) {
+		try {
+			PropostaAbilita propostaAbilita = gestioneProposte.getPropostaAbilitaById(idProposta);
+			if(propostaAbilita!=null) {
+				request.setAttribute("idProposta", propostaAbilita.getId());
+				request.setAttribute("emailProposta", propostaAbilita.getUtente().getEmail());
+				request.setAttribute("abilitaProposta", propostaAbilita.getAbilitaProposta());
+				request.setAttribute("motivazioneProposta", propostaAbilita.getMotivazione());
+			} else {
+				request.setAttribute("errorePropostaNonTrovata", "Errore! Proposta non trovata");
+			}
+		} catch (ProposteException e) {
+			log.error(e.toString(), e);
+			request.setAttribute("erroreSconosciutoProposta", "Errore sconosciuto! Proposta non trovata");
+		}
 	}
 }

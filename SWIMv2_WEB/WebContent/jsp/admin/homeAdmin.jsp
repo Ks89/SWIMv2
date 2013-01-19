@@ -6,24 +6,21 @@
 	<h1>Login Amministratore</h1>
 	<section>
 	<div align="center" class="alignCenter">
+	
 	<%-- if che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
 	<c:if test="${!empty erroreLoginAdminFallito}">
-	Si è verificato un errore: <c:out value="${erroreLoginAdminFallito}"></c:out>
+		<div class="alert">
+			<p>
+				<c:out value="${erroreLoginAdminFallito}"></c:out>
+			</p>
+		</div>
+		<br>
 	</c:if>
 	
 	<%-- il choose e' come lo switch-case-default di java dove il case e' il when e il default e' l'otherwise --%>
 	<c:choose>
 		<c:when test="${sessionScope.adminCollegato != null}">
 		<h2>Login effettuato correttamente</h2>
-			<%--<!-- Link per accedere alle varie funzionalita' di amministrazione -->
-			<br>Pagina di amministrazione
-			<br><br>
-			<%-- Nota il passaggio di parametri con ? tramite una get --%>
-			<%--<a href="admin/adminPanel?operazione=1">Aggiungi abilita</a> --%>
-			<%--<br><br>
-			<a href="admin/adminPanel?operazione=2">Visualizza proposte abilita</a>
-			<br><br>
-			<a href="admin/adminLogin?adminesci=true">Logout</a> --%>
 		</c:when>
 		<c:otherwise>
 			<form id="adminLoginForm" action="admin/adminLogin" method="POST">

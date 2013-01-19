@@ -6,17 +6,26 @@
 	<h1>Proposte abilita</h1>
 	<section>
 	<div align="center" class="alignCenter">
-	<%-- if che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
+	
 	<c:if test="${!empty erroreInserimentoPropostaFallito}">
-	Si è verificato un errore: <c:out value="${erroreInserimentoPropostaFallito}"></c:out>
+		<div class="alert">
+			<p>
+				Si è verificato un errore: <c:out value="${erroreInserimentoPropostaFallito}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
 	<c:if test="${!empty inserimentoPropostaCorretto}">
-		<c:out value="${inserimentoPropostaCorretto}"></c:out>
+		<div class="conferma">
+			<p>
+				<c:out value="${inserimentoPropostaCorretto}"></c:out>
+			</p>
+		</div>
 		<br>
 	</c:if>
+	
+	<h2>Proposte di aggiunta abilita, inviate dagli utenti</h2>
 	<table id="tabellaRigheAlterne">
-		<caption>Proposte di aggiunta abilita, inviate dagli utenti:</caption>
 		<tr>
 			<th>Utente</th>
 			<th>Nome abilita</th>

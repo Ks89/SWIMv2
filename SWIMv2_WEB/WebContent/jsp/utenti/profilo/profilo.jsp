@@ -96,8 +96,8 @@
 			</tr>
 		</table>
 		<br>
+		<h2>Abilita' dell'utente</h2>
 		<table id="tabellaRigheAlterne">
-			<caption id="grassettoBlu">Abilita' dell'utente:</caption>
 			<tr>
 				<th>Abilità</th>
 				<th>Descrizione</th>
