@@ -6,13 +6,25 @@
 	<h1>Inserisci nuove abilita</h1>
 	<section>
 	<div align="center" class="alignCenter">
+	
 	<%-- if che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
 	<c:if test="${!empty erroreInserimentoAbilitaFallito}">
-	Si è verificato un errore: <c:out value="${erroreInserimentoAbilitaFallito}"></c:out><br>
+		<div class="alert">
+			<p>
+				<c:out value="${erroreInserimentoAbilitaFallito}"></c:out>
+			</p>
+		</div>
+		<br>
 	</c:if>
 	<c:if test="${!empty inserimentoAbilitaAvvenuto}">
-	<c:out value="${inserimentoAbilitaAvvenuto}"></c:out><br>
+		<div class="conferma">
+			<p>
+				<c:out value="${inserimentoAbilitaAvvenuto}"></c:out>
+			</p>
+		</div>
+		<br>
 	</c:if>
+	
 	<form id="aggiuntaAbilitaForm" action="admin/aggiuntaAbilita" method="POST">
 		<table id="formInserimentoParametri">
 			<tr>

@@ -64,14 +64,14 @@ public class AggiuntaAbilitaServlet extends HttpServlet {
 			Abilita abilitaAggiunta = gestioneProposte.inserisciAbilitaAutonomamente(emailAdminCollegato, nuovoNomeAbilitaAggiunta, descrizioneAbilita);
 			if(abilitaAggiunta!=null) {
 				log.debug("nuova abilita inserita correttamente: " + abilitaAggiunta.getNome());
-				request.setAttribute("inserimentoAbilitaAvvenuto", "Inserimento abilita " + nuovoNomeAbilitaAggiunta + " avvenuto con successo!");
+				request.setAttribute("inserimentoAbilitaAvvenuto", "Inserimento abilita' avvenuto con successo!");
 			} else {
 				log.debug("erroreInserimentoAbilitaFallito : " + nuovoNomeAbilitaAggiunta);
-				request.setAttribute("erroreInserimentoAbilitaFallito", "Errore aggiunta nuova abilita con nome: " + nuovoNomeAbilitaAggiunta);
+				request.setAttribute("erroreInserimentoAbilitaFallito", "Errore aggiunta nuova abilita'");
 			}
 		} catch (ProposteException e) {
 			log.error(e.getMessage(), e);
-			request.setAttribute("erroreInserimentoAbilitaFallito", "Errore aggiunta nuova abilita con nome: " + nuovoNomeAbilitaAggiunta);
+			request.setAttribute("erroreInserimentoAbilitaFallito", "Errore aggiunta nuova abilita con nome");
 		}
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/adminpanelinserimento.jsp").forward(request, response);
 	}
