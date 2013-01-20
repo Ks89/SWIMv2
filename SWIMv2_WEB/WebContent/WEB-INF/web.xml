@@ -300,4 +300,14 @@
     <servlet-name>FeedBackServelet</servlet-name>
     <url-pattern>/profilo/azioni/feedbackUtente</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TestInstallazioneServlet</display-name>
+    <servlet-name>TestInstallazioneServlet</servlet-name>
+    <servlet-class>it.swim.servlet.TestInstallazioneServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TestInstallazioneServlet</servlet-name>
+    <url-pattern>/testInstallazione</url-pattern>
+  </servlet-mapping>
 </web-app>
