@@ -38,7 +38,7 @@
 				<input type="hidden" name="tipo" />
 				<table id="tabellaRigheAlterne">
 					<tr>
-						<th>Utente Collaborante</th>
+						<th>Utente che collabora</th>
 						<th>Nome Collaborazione</th>
 						<th>Azione</th>
 					</tr>
@@ -78,7 +78,7 @@
 			</h2>
 			<table id="tabellaRigheAlterne">
 				<tr>
-					<th>Utente Collaborante</th>
+					<th>Utente che collabora</th>
 					<th>Nome Collaborazione</th>
 					<th>Azione</th>
 				</tr>
@@ -127,7 +127,7 @@
 			</h2>
 			<table id="tabellaRigheAlterne">
 				<tr>
-					<th>Utente Collaborante</th>
+					<th>Utente che collabora</th>
 					<th>Nome Collaborazione</th>
 				</tr>
 				<c:forEach items="${collaborazioniTerminateConFeedBack}"

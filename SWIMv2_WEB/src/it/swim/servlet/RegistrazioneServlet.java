@@ -192,13 +192,24 @@ public class RegistrazioneServlet extends HttpServlet {
 				request.setAttribute("erroreRegistrazione", "Errore durante la registrazione");
 				getServletConfig().getServletContext().getRequestDispatcher("/jsp/visitatore/registrazione.jsp").forward(request, response);
 			}
-		} catch (HashingException e) {
+		} catch (HashingException e) { 
 			log.error(e.getMessage(), e);
 			request.setAttribute("erroreHashing", "Errore hashing durante la registrazione");
 			getServletConfig().getServletContext().getRequestDispatcher("/jsp/visitatore/registrazione.jsp").forward(request, response);
 		} catch (RegistrazioneException e) {
 			log.error(e.getMessage(), e);
-			request.setAttribute("erroreSconosciutoRegistrazione", "Errore sconosciuto durante la registrazione");
+			if(e.getCausa() == RegistrazioneException.Causa.EMAILGIAUTILIZZATA) {
+				request.setAttribute("erroreEmailGiaUsata", "Errore! Indirizzo email gia' in uso");
+			}
+			if(e.getCausa() == RegistrazioneException.Causa.SINTASSIEMAILNONCORRETTA) {
+				request.setAttribute("erroreSintassiEmailNonCorretta", "Errore! Inserisci un'email valida");
+			}
+			if(e.getCausa() == RegistrazioneException.Causa.ALCUNIPARAMETRINULLIOVUOTI) {
+				request.setAttribute("erroreParametriNulliOVuoti", "Errore! Devi completare tutti i campi obbligatori");
+			}
+			if(e.getCausa() == RegistrazioneException.Causa.ERRORESCONOSCIUTO) {
+				request.setAttribute("erroreSconosciutoRegistrazione", "Errore sconosciuto durante la registrazione");
+			}
 			getServletConfig().getServletContext().getRequestDispatcher("/jsp/visitatore/registrazione.jsp").forward(request, response);
 		}
 	}

@@ -16,6 +16,14 @@
 		</div>
 		<br>
 	</c:if>
+	<c:if test="${!empty erroreAlcuniParamNulliOVuoti}">
+		<div class="alert">
+			<p>
+				<c:out value="${erroreAlcuniParamNulliOVuoti}"></c:out>
+			</p>
+		</div>
+		<br>
+	</c:if>
 	
 	<%-- il choose e' come lo switch-case-default di java dove il case e' il when e il default e' l'otherwise --%>
 	<c:choose>

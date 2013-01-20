@@ -30,7 +30,7 @@ public class DettaglioPropostaServlet extends HttpServlet {
 	private GestioneProposteLocal gestioneProposte;
 
 	private Long idProposta;
-	
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -61,7 +61,7 @@ public class DettaglioPropostaServlet extends HttpServlet {
 			return;
 		}
 
-		
+
 		this.gestisciProposta(request, response, idProposta);
 
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/dettaglioProposta.jsp").forward(request, response);
@@ -79,34 +79,54 @@ public class DettaglioPropostaServlet extends HttpServlet {
 		String nuovoNomeAbilitaProposta = request.getParameter("nuovoNomeAbilitaProposta");
 		String descrizioneAbilita = request.getParameter("descrizioneAbilitaProposta");
 
-		if(nuovoNomeAbilitaProposta!=null && nuovoNomeAbilitaProposta.equals("")) {
-			this.gestisciProposta(request, response, idProposta);
+		if((request.getParameter("tipo"))!=null && request.getParameter("tipo").equals("AGGIUNGI")) {
+			
+			if(nuovoNomeAbilitaProposta!=null && nuovoNomeAbilitaProposta.equals("")) {
+				this.gestisciProposta(request, response, idProposta);
 
-			request.setAttribute("erroreInserisciNomeAbilita", "Inserisci il nome dell'abilita'");
-			getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/dettaglioProposta.jsp").forward(request, response);
-			return;
+				request.setAttribute("erroreInserisciNomeAbilita", "Inserisci il nome dell'abilita'");
+				getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/dettaglioProposta.jsp").forward(request, response);
+				return;
+			}
+			
+			try {
+				Abilita abilitaInserita = gestioneProposte.confermaPropostaAbilitaSpecificandoAttributi(emailAdminCollegato, idPropostaAbilita, nuovoNomeAbilitaProposta, descrizioneAbilita);
+				if(abilitaInserita!=null) {
+					log.debug("nuova abilita inserita correttamente: " + abilitaInserita.getNome());
+					request.setAttribute("inserimentoPropostaCorretto", "Inserimento abilita' avvenuto con successo!");
+				} else {
+					request.setAttribute("erroreInserimentoPropostaFallito", "Errore inserimento nuova abilita'");
+				}
+			} catch (ProposteException e) {
+				log.error(e.getMessage(), e);
+				request.setAttribute("errorePropostaNonTrovata", "Errore! Proposta abilita' non trovata");
+			}
+		} else {
+			//se ho premuto su RIFIUTA
+			if((request.getParameter("tipo"))!=null && request.getParameter("tipo").equals("RIFIUTA")) {
+				log.debug("rifutare la proposta");
+				try {
+					PropostaAbilita rifiutata = gestioneProposte.rifiutaPropostaAbilita(idPropostaAbilita);
+					if(rifiutata!=null) {
+						log.debug("proposta rifiutata");
+						request.setAttribute("rifiutoPropostaCorretto", "Proposta rifiutata con successo!");
+					} else {
+						request.setAttribute("erroreRifiutoPropostaFallito", "Errore durante il rifiuto della proposta'");
+					}
+				} catch (ProposteException e) {
+					log.error(e.getMessage(), e);
+					request.setAttribute("errorePropostaNonTrovata", "Errore! Proposta abilita' non trovata");
+				}
+			}
 		}
 		
-		Abilita abilitaInserita;
-		try {
-			abilitaInserita = gestioneProposte.confermaPropostaAbilitaSpecificandoAttributi(emailAdminCollegato, idPropostaAbilita, nuovoNomeAbilitaProposta, descrizioneAbilita);
-			if(abilitaInserita!=null) {
-				log.debug("nuova abilita inserita correttamente: " + abilitaInserita.getNome());
-				request.setAttribute("inserimentoPropostaCorretto", "Inserimento abilita' avvenuto con successo!");
-			} else {
-				request.setAttribute("erroreInserimentoPropostaFallito", "Errore inserimento nuova abilita'");
-			}
-
-			
-		} catch (ProposteException e) {
-			log.error(e.getMessage(), e);
-		}
 		List<PropostaAbilita> proposteAbilita = gestioneProposte.getProposteAbilitaNonConfermate();
 		request.setAttribute("proposte", proposteAbilita);
+		
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/adminpanelproposte.jsp").forward(request, response);
 	}
-	
-	
+
+
 	private void gestisciProposta(HttpServletRequest request, HttpServletResponse response, Long idProposta) {
 		try {
 			PropostaAbilita propostaAbilita = gestioneProposte.getPropostaAbilitaById(idProposta);
