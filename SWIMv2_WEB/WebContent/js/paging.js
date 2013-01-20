@@ -60,13 +60,13 @@ function Pager(tableName, itemsPerPage) {
 		var element = document.getElementById(positionId);
 
 		var pagerHtml = '<span onclick="' + pagerName
-				+ '.prev();" class="pg-normal"> &#171 Prev </span> | ';
+				+ '.prev();" class="pg-normal"> &#171 Indietro </span> | ';
 		for ( var page = 1; page <= this.pages; page++)
 			pagerHtml += '<span id="pg' + page
 					+ '" class="pg-normal" onclick="' + pagerName
 					+ '.showPage(' + page + ');">' + page + '</span> | ';
 		pagerHtml += '<span onclick="' + pagerName
-				+ '.next();" class="pg-normal"> Next &#187;</span>';
+				+ '.next();" class="pg-normal"> Avanti &#187;</span>';
 
 		element.innerHTML = pagerHtml;
 	}
