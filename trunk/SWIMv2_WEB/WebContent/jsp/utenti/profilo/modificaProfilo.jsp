@@ -86,7 +86,7 @@
 		<%-- Form della modifica del profilo --%>
 		<%-- Form che permette di inviare sia file allegati sia dati prelevati dalle input text.
 		Essendo una post verra' intercettata dalla doPost della servlet specificata in action="modificaProfilo" --%>
-		<h2>Modifica il profilo</h2>
+		<h2>Aggiungi abilità</h2>
 
 		<form action="profilo/azioni/modificaProfilo" method="POST" enctype="multipart/form-data">
 			<%-- choose con dentro when che e' una delle condizioni e poi con otherwise tutte le altre condizioni con comprese nel when

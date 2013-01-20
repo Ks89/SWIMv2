@@ -23,6 +23,32 @@
 		</div>
 		<br>
 	</c:if>
+		<c:if test="${!empty erroreRifiutoPropostaFallito}">
+		<div class="alert">
+			<p>
+				<c:out value="${erroreRifiutoPropostaFallito}"></c:out>
+			</p>
+		</div>
+		<br>
+	</c:if>
+		<c:if test="${!empty rifiutoPropostaCorretto}">
+		<div class="conferma">
+			<p>
+				<c:out value="${rifiutoPropostaCorretto}"></c:out>
+			</p>
+		</div>
+		<br>
+	</c:if>
+		<c:if test="${!empty errorePropostaNonTrovata}">
+		<div class="alert">
+			<p>
+				<c:out value="${errorePropostaNonTrovata}"></c:out>
+			</p>
+		</div>
+		<br>
+	</c:if>
+	
+	
 	
 	<h2>Proposte di aggiunta abilita, inviate dagli utenti</h2>
 	<table id="tabellaRigheAlterne">

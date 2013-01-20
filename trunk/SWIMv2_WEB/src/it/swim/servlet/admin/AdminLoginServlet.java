@@ -84,7 +84,7 @@ public class AdminLoginServlet extends HttpServlet {
 				if (e.getCausa() == LoginException.Causa.ERRORESCONOSCIUTO) {
 					request.setAttribute("erroreLoginAdminFallito", "Errore durante il login - causa sconosciuta");
 				} else {
-					request.setAttribute("erroreLoginAdminFallito", "Errore durante il login - causa sconosciuta");
+					request.setAttribute("erroreAlcuniParamNulliOVuoti", "Errore! Compila tutti i campi");
 				}
 			}
 			getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/homeAdmin.jsp").forward(request, response);

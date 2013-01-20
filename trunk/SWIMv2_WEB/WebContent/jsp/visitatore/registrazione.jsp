@@ -3,62 +3,121 @@
 <jsp:include page="../layoutSuperioreDownVisitatore.jsp"></jsp:include>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	<h1>Registrazione a SWIMv2</h1>
-	<section>
-		<div align="center" class="alignCenter">	
-	<%-- Gestione messaggi d'errore --%>
-	<c:choose>
-		<c:when test="${!empty erroreRegistrazione}"> 
-		<div class="alert">
-			<p>
-				<c:out value="${erroreRegistrazione}"></c:out><br>
-			</p>
-		</div>
-		</c:when>
-		<c:when test="${!empty erroreHashing}"> 
-		<div class="alert">
-			<p>
-				<c:out value="${erroreHashing}"></c:out><br>
-			</p>
-		</div>
-		</c:when>
-		<c:when test="${!empty erroreSconosciutoRegistrazione}"> 
-		<div class="alert">
-			<p>
-				<c:out value="${erroreSconosciutoRegistrazione}"></c:out><br>
-			</p>
-		</div>
-		</c:when>
-		<c:when test="${!empty erroreFotoPredefinita}"> 
-		<div class="alert">
-			<p>
-				<c:out value="${erroreFotoPredefinita}"></c:out><br>
-			</p>
-		</div>
-		</c:when>
-	</c:choose>
-		
-	
-	<h2>Informazioni richieste:</h2>
-	<%-- Form che permette di inviare sia file allegati sia dati prelevati dalle input text.
+<h1>Registrazione a SWIMv2</h1>
+<section>
+	<div align="center" class="alignCenter">
+		<%-- Gestione messaggi d'errore --%>
+
+		<c:choose>
+			<c:when test="${!empty erroreEmailGiaUsata}">
+				<div class="alert">
+					<p>
+						<c:out value="${erroreEmailGiaUsata}"></c:out>
+						<br>
+					</p>
+				</div>
+			</c:when>
+			<c:when test="${!empty erroreSintassiEmailNonCorretta}">
+				<div class="alert">
+					<p>
+						<c:out value="${erroreSintassiEmailNonCorretta}"></c:out>
+						<br>
+					</p>
+				</div>
+			</c:when>
+			<c:when test="${!empty erroreParametriNulliOVuoti}">
+				<div class="alert">
+					<p>
+						<c:out value="${erroreParametriNulliOVuoti}"></c:out>
+						<br>
+					</p>
+				</div>
+			</c:when>
+			<c:when test="${!empty erroreSconosciutoRegistrazione}">
+				<div class="alert">
+					<p>
+						<c:out value="${erroreSconosciutoRegistrazione}"></c:out>
+						<br>
+					</p>
+				</div>
+			</c:when>
+			<c:when test="${!empty erroreRegistrazione}">
+				<div class="alert">
+					<p>
+						<c:out value="${erroreRegistrazione}"></c:out>
+						<br>
+					</p>
+				</div>
+			</c:when>
+
+			<c:when test="${!empty erroreHashing}">
+				<div class="alert">
+					<p>
+						<c:out value="${erroreHashing}"></c:out>
+						<br>
+					</p>
+				</div>
+			</c:when>
+			<c:when test="${!empty erroreSconosciutoRegistrazione}">
+				<div class="alert">
+					<p>
+						<c:out value="${erroreSconosciutoRegistrazione}"></c:out>
+						<br>
+					</p>
+				</div>
+			</c:when>
+			<c:when test="${!empty erroreFotoPredefinita}">
+				<div class="alert">
+					<p>
+						<c:out value="${erroreFotoPredefinita}"></c:out>
+						<br>
+					</p>
+				</div>
+			</c:when>
+		</c:choose>
+
+
+
+
+
+
+
+		<h2>Informazioni richieste:</h2>
+		<%-- Form che permette di inviare sia file allegati sia dati prelevati dalle input text.
 		Essendo una post verra' intercettata dalla doPost della servlet specificata in action="registrazione" --%>
-	<form action="registrazione" method="POST" enctype="multipart/form-data">
+		<form action="registrazione" method="POST" enctype="multipart/form-data">
 			<table id="formInserimentoParametri">
-				<tr><td id="grassettoBlu">Email*: </td><td><input type="text" name="emailUtente" maxlength="100" ></input><td></tr> 
-				<tr><td id="grassettoBlu">Password*: </td><td><input type="password" name="password" maxlength="100" ></input><td></tr> 
-				<tr><td id="grassettoBlu">Nome*: </td><td><input type="text" name="nome" maxlength="100" ></input><td></tr> 
-				<tr><td id="grassettoBlu">Cognome*: </td><td><input type="text" name="cognome" maxlength="100" ></input><td></tr> 
-				<tr><td colspan="2" id="grassettoBlu">
-				Abilita' disponibili (selezionane almeno una)*:</td>
+				<tr>
+					<td id="grassettoBlu">Email*:</td>
+					<td><input type="text" name="emailUtente" maxlength="100"></input>
+					<td>
+				</tr>
+				<tr>
+					<td id="grassettoBlu">Password*:</td>
+					<td><input type="password" name="password" maxlength="100"></input>
+					<td>
+				</tr>
+				<tr>
+					<td id="grassettoBlu">Nome*:</td>
+					<td><input type="text" name="nome" maxlength="100"></input>
+					<td>
+				</tr>
+				<tr>
+					<td id="grassettoBlu">Cognome*:</td>
+					<td><input type="text" name="cognome" maxlength="100"></input>
+					<td>
+				</tr>
+				<tr>
+					<td colspan="2" id="grassettoBlu">Abilita' disponibili (selezionane almeno una)*:</td>
 				</tr>
 			</table>
 			<table id="tabellaRigheAlterne">
 				<tr>
-				  <th></th>
-				  <th>Abilità</th>
-				  <th>Descrizione</th>
+					<th></th>
+					<th>Abilità</th>
+					<th>Descrizione</th>
 				</tr>
-				<c:forEach items="${abilita}" var="item"  varStatus="num">
+				<c:forEach items="${abilita}" var="item" varStatus="num">
 					<c:if test="${num.count>0}">
 						<c:if test="${num.count%2!=0}">
 							<tr>
@@ -67,26 +126,33 @@
 							<tr class="alt">
 						</c:if>
 					</c:if>
-						<td><input type="checkbox" name="abilita" value='<c:out value="${item.nome}"/>' /></td>
-						<td><c:out value="${item.nome}" /></td>
-						<td><c:out value="${item.descrizione}" /></td>
+					<td><input type="checkbox" name="abilita" value='<c:out value="${item.nome}"/>' /></td>
+					<td><c:out value="${item.nome}" /></td>
+					<td><c:out value="${item.descrizione}" /></td>
 					</tr>
 				</c:forEach>
 			</table>
+			<div id="pageNavPosition"></div>
+
+			<script type="text/javascript">
+				var pager = new Pager('tabellaRigheAlterne', 5);
+				pager.init();
+				pager.showPageNav('pager', 'pageNavPosition');
+				pager.showPage(1);
+			</script>
 			<br>
 			<table id="formInserimentoParametri">
-			</tr>
+				</tr>
 				<%-- input di tipo file per uploadare il file e poi il submit per mandare la form --%>
 				<tr>
-					<td id="grassettoBlu">Seleziona l'immagine del profilo: </td>
-					<td><input id="file" name="file" type="file" accept="image/*"/></td>
+					<td id="grassettoBlu">Seleziona l'immagine del profilo:</td>
+					<td><input id="file" name="file" type="file" accept="image/*" /></td>
 				</tr>
 				<tr>
-				<td style="text-align: center" colspan="2"><input id="submit" type="submit"/></td>
+					<td style="text-align: center" colspan="2"><input id="submit" type="submit" /></td>
 				</tr>
 			</table>
 		</form>
-		<br>
-		*campi da compilare obbligatoriamente
-		</div>
-<jsp:include page="../layoutInferiore.jsp"></jsp:include>
+		<br> *campi da compilare obbligatoriamente
+	</div>
+	<jsp:include page="../layoutInferiore.jsp"></jsp:include>

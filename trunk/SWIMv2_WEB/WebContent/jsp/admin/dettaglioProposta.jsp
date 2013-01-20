@@ -34,10 +34,6 @@
 
 		<table id="formInserimentoParametri">
 			<tr>
-				<td>Id proposta:</td>
-				<td><c:out value="${idProposta}"></c:out></td>
-			</tr>
-			<tr>
 				<td>Email utente:</td>
 				<td><c:out value="${emailProposta}"></c:out></td>
 			</tr>
@@ -51,8 +47,8 @@
 			</tr>
 		</table>
 		<br>
-		<form id="dettaglioPropostaForm" action="admin/dettaglioProposta" method="POST">
-			<input type="hidden" name="idProposta" value="${idProposta}"></input>
+		<form id="dettaglioProposta" action="admin/dettaglioProposta" method="POST">
+			<input type="hidden" name="idProposta" value="${idProposta}"></input> <input type="hidden" name="tipo" />
 			<table id="formInserimentoParametri">
 				<caption>Inserisci la nuova abilità</caption>
 				<tr>
@@ -66,11 +62,13 @@
 							placeholder="Descrizione dell'abilita"></textarea></td>
 				</tr>
 				<tr>
-					<td colspan="2" style="text-align: center;"><input id="submit" type="submit" /><br></td>
+					<td><input type="button" id="button" value="conferma"
+						onclick="dettaglioProposta.elements['tipo'].value='AGGIUNGI'; dettaglioProposta.submit();" /></td>
+					<td><input type="button" id="button" value="rifiuta"
+						onclick="dettaglioProposta.elements['tipo'].value='RIFIUTA'; dettaglioProposta.submit();" /></td>
 				</tr>
 			</table>
 		</form>
-
-		<a href="admin/adminPanel?operazione=2">Torna alla pagina delle proposte</a>
+		<br> <a href="admin/adminPanel?operazione=2">Torna alla pagina delle proposte</a>
 	</div>
 	<jsp:include page="../layoutInferiore.jsp"></jsp:include>
