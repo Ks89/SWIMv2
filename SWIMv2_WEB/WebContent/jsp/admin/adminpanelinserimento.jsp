@@ -50,7 +50,9 @@
 			</tr>
 		</table>
 	</form>
-	
+	<script>
+            $('input[placeholder], textarea[placeholder]').placeholder();
+      </script>
 	<br><br>
 	<a href="admin">Torna al pannello di amministrazione</a>
 </div>

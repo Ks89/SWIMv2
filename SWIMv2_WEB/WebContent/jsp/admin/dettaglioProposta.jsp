@@ -69,6 +69,9 @@
 				</tr>
 			</table>
 		</form>
+		<script>
+            $('input[placeholder], textarea[placeholder]').placeholder();
+      </script>
 		<br> <a href="admin/adminPanel?operazione=2">Torna alla pagina delle proposte</a>
 	</div>
 	<jsp:include page="../layoutInferiore.jsp"></jsp:include>

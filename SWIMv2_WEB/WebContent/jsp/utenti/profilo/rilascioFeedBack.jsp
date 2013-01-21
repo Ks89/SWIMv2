@@ -34,6 +34,9 @@
 				<tr><td colspan="2" style="text-align: center;"><input id="submit" type="submit" /></td></tr>
 			</table>
 		</form>
+		<script>
+            $('input[placeholder], textarea[placeholder]').placeholder();
+      </script>
 	</c:if>
 	
 	<c:if test="${!empty feedBackRilasciato}">

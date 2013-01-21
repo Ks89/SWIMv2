@@ -40,6 +40,9 @@
         <p><input type="password" id="password" name="password" maxlength="100"  value="" placeholder="Password"></p>
         <p class="submit"><input id="submit" type="submit" name="commit" value="Login"></p>
       </form>
+      <script>
+            $('input[placeholder], textarea[placeholder]').placeholder();
+      </script>
     </div>
     Non sei ancora registrato? <a href="registrazione">Registrati</a>
   	</c:if>
