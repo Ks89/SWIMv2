@@ -34,15 +34,15 @@
 
 		<table id="formInserimentoParametri">
 			<tr>
-				<td>Email utente:</td>
+				<td id="grassettoBlu">Email utente:</td>
 				<td><c:out value="${emailProposta}"></c:out></td>
 			</tr>
 			<tr>
-				<td>Nome abilita proposta:</td>
+				<td id="grassettoBlu">Nome abilita proposta:</td>
 				<td><c:out value="${abilitaProposta}"></c:out></td>
 			</tr>
 			<tr>
-				<td>Motivo della proposta:</td>
+				<td id="grassettoBlu">Motivo della proposta:</td>
 				<td><c:out value="${motivazioneProposta}"></c:out></td>
 			</tr>
 		</table>
@@ -52,19 +52,19 @@
 			<table id="formInserimentoParametri">
 				<caption>Inserisci la nuova abilità</caption>
 				<tr>
-					<td>Nome:</td>
+					<td id="grassettoBlu">Nome:</td>
 					<td><input id="nuovoNomeAbilitaProposta" type="text" name="nuovoNomeAbilitaProposta" maxlength="100" style="width: 271px;"
 						placeholder="Nome dell'abilita"></input></td>
 				</tr>
 				<tr>
-					<td>Descrizione:</td>
+					<td id="grassettoBlu">Descrizione:</td>
 					<td><textarea id="descrizioneAbilitaProposta" name="descrizioneAbilitaProposta" maxlength="300" rows="10" cols="50" style="resize: none;"
 							placeholder="Descrizione dell'abilita"></textarea></td>
 				</tr>
 				<tr>
-					<td><input type="button" id="button" value="conferma"
-						onclick="dettaglioProposta.elements['tipo'].value='AGGIUNGI'; dettaglioProposta.submit();" /></td>
-					<td><input type="button" id="button" value="rifiuta"
+					<td colspan="2" style="text-align: center;"><input type="button" id="button" value="Conferma"
+						onclick="dettaglioProposta.elements['tipo'].value='AGGIUNGI'; dettaglioProposta.submit();" />
+					<input type="button" id="button" value="Rifiuta"
 						onclick="dettaglioProposta.elements['tipo'].value='RIFIUTA'; dettaglioProposta.submit();" /></td>
 				</tr>
 			</table>
