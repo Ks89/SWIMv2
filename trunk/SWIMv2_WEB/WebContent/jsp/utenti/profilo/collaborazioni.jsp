@@ -9,6 +9,7 @@
 <section>
 	<div align="center" class="alignCenter">
 		<c:if test="${!empty erroreGetCollaborazioniDaTerminare}">
+			<br>
 			<div class="alert">
 				<p>
 					<c:out value="${erroreGetCollaborazioniDaTerminare}"></c:out>
@@ -16,6 +17,7 @@
 			</div>
 		</c:if>
 		<c:if test="${!empty erroreGetCollaborazioniTerminateConFeedBack}">
+			<br>
 			<div class="alert">
 				<p>
 					<c:out value="${erroreGetCollaborazioniTerminateConFeedBack}"></c:out>
@@ -23,6 +25,7 @@
 			</div>
 		</c:if>
 		<c:if test="${!empty nonCiSonoCollaborazioniDaTerminare}">
+			<br>
 			<div class="generico">
 				<p>
 					<c:out value="${nonCiSonoCollaborazioniDaTerminare}"></c:out>
@@ -30,6 +33,7 @@
 			</div>
 		</c:if>
 		<c:if test="${!empty nonCiSonoCollaborazioniSenzaFeedback}">
+			<br>
 			<div class="generico">
 				<p>
 					<c:out value="${nonCiSonoCollaborazioniSenzaFeedback}"></c:out>
@@ -37,6 +41,7 @@
 			</div>
 		</c:if>
 		<c:if test="${!empty nonCiSonoCollaborazioniTerminateConFeedBack}">
+			<br>
 			<div class="generico">
 				<p>
 					<c:out value="${nonCiSonoCollaborazioniTerminateConFeedBack}"></c:out>
@@ -44,6 +49,7 @@
 			</div>
 		</c:if>
 		<c:if test="${!empty erroreGetCollaborazioniSenzaFeedback}">
+			<br>
 			<div class="alert">
 				<p>
 					<c:out value="${erroreGetCollaborazioniSenzaFeedback}"></c:out>
