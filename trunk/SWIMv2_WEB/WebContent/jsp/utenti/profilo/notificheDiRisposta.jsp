@@ -109,6 +109,9 @@
 						</table>
 						<input id="submit" type="submit" value="Richiedi amicizia" />
 					</form>
+					<script>
+            			$('input[placeholder], textarea[placeholder]').placeholder();
+     				 </script>
 					<br>
 				</c:if>
 			</c:otherwise>

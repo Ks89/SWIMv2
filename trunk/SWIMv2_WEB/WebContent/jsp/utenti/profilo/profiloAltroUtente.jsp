@@ -64,7 +64,9 @@
 					</tr>
 				
 				</form>
-							
+				<script>
+           			 $('input[placeholder], textarea[placeholder]').placeholder();
+     			 </script>			
 			</c:if>
 			</table>
 			<br> 

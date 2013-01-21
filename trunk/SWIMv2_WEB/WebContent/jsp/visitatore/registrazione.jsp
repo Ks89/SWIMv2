@@ -153,6 +153,9 @@
 				</tr>
 			</table>
 		</form>
+		<script>
+            $('input[placeholder], textarea[placeholder]').placeholder();
+      </script>
 		<br> *campi da compilare obbligatoriamente
 	</div>
 	<jsp:include page="../layoutInferiore.jsp"></jsp:include>

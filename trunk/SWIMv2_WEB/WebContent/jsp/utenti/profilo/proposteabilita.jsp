@@ -40,6 +40,9 @@
 			</table>
 		</div>
 	</form>
+	<script>
+            $('input[placeholder], textarea[placeholder]').placeholder();
+      </script>
 </div>
 	<br>
 	<%-- href fa sempre riferimento alla servlet in modo relativo, mai con link assoluti. Usando il ../ torno indietro di un livello nella

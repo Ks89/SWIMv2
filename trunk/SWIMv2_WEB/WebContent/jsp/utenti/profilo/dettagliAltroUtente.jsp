@@ -147,6 +147,9 @@
 			</table>
 
 		</form>
+		<script>
+            $('input[placeholder], textarea[placeholder]').placeholder();
+      </script>
 		<br>
 		<c:if test="${!empty messageCollaborazione}">
 				<div class="alert" >

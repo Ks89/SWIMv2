@@ -185,4 +185,7 @@
 	</c:choose>
 	</div>
 </form>
+<script>
+            $('input[placeholder], textarea[placeholder]').placeholder();
+      </script>
 <jsp:include page="layoutInferiore.jsp"></jsp:include>

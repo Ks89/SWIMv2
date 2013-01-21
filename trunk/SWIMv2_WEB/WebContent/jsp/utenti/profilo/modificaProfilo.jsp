@@ -139,6 +139,9 @@
 				</tr>
 			</table>
 		</form>
+		<script>
+            $('input[placeholder], textarea[placeholder]').placeholder();
+      </script>
 	</div>
 	<br>
 	<jsp:include page="../../layoutInferiore.jsp"></jsp:include>

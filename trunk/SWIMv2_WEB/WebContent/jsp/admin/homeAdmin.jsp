@@ -56,6 +56,9 @@
 					</tr>
 				</table>
 			</form>
+			<script>
+            $('input[placeholder], textarea[placeholder]').placeholder();
+      </script>
 		</c:otherwise>
 	</c:choose>
 </div>
