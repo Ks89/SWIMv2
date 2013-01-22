@@ -135,7 +135,7 @@
 					<td><input id="file" name="file" type="file" accept="image/*" /></td>
 				</tr>
 				<tr>
-					<td colspan="2" style="text-align: center;"><input id="submit" type="submit" /></td>
+					<td colspan="2" style="text-align: center;"><input id="submit" type="submit" value="Invia" /></td>
 				</tr>
 			</table>
 		</form>

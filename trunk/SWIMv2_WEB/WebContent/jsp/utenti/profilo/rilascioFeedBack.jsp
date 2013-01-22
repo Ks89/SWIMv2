@@ -31,7 +31,7 @@
 				
 				</td></tr>
 				<tr><td id="grassettoBlu">Commento (opzionale): </td><td><input id="commento" type="text" name="commentoFeedBack" maxlength="300" placeholder="Lascia un commento"></input></td></tr>
-				<tr><td colspan="2" style="text-align: center;"><input id="submit" type="submit" /></td></tr>
+				<tr><td colspan="2" style="text-align: center;"><input id="submit" type="submit" value="Invia" /></td></tr>
 			</table>
 		</form>
 		<script>

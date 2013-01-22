@@ -35,7 +35,7 @@
 				<tr>
 					<td id="grassettoBlu">Motivo: </td><td><textarea name="descrizioneAbilita" rows="10" cols="50" maxlength="500" style="resize:none;" placeholder="Motivo della proposta" ></textarea></td>
 				<tr>
-					<td colspan="2" style="text-align: center;"><input id="submit" type="submit" /></td>
+					<td colspan="2" style="text-align: center;"><input id="submit" type="submit" value="Invia" /></td>
 				</tr>
 			</table>
 		</div>
