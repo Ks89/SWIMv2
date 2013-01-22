@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lombok.extern.slf4j.Slf4j;
+
 import entityBeans.Amministratore;
 import exceptions.LoginException;
 
@@ -16,6 +18,7 @@ import sessionBeans.localInterfaces.GestioneLoginLocal;
 /**
  * Servlet implementation class TestInstallazioneServlet
  */
+@Slf4j
 public class TestInstallazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,6 +42,9 @@ public class TestInstallazioneServlet extends HttpServlet {
 		
 		try {
 			Amministratore admin = login.getAmministratoreByEmail(emailAdmin);
+			
+			log.debug("-----------------------------------TEST CONNESSIONE: " + admin);
+			
 			if(admin!=null) {
 				request.setAttribute("testOk", "Test connessione al database: esito positivo");
 			} else {
