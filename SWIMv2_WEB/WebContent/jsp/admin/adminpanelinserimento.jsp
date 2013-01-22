@@ -8,6 +8,14 @@
 	<div align="center" class="alignCenter">
 	
 	<%-- if che vede se non sono vuoti dei valori passati dalla servlet per mostrare messaggi di successo e/o errore --%>
+	<c:if test="${!empty inserimentoAbilitaAvvenuto}">
+		<div class="conferma">
+			<p>
+				<c:out value="${inserimentoAbilitaAvvenuto}"></c:out>
+			</p>
+		</div>
+		<br>
+	</c:if>
 	<c:if test="${!empty erroreInserimentoAbilitaFallito}">
 		<div class="alert">
 			<p>
@@ -16,10 +24,10 @@
 		</div>
 		<br>
 	</c:if>
-	<c:if test="${!empty inserimentoAbilitaAvvenuto}">
-		<div class="conferma">
+	<c:if test="${!empty abilitaGiaPresenteColNomeSpecificato}">
+		<div class="alert">
 			<p>
-				<c:out value="${inserimentoAbilitaAvvenuto}"></c:out>
+				<c:out value="${abilitaGiaPresenteColNomeSpecificato}"></c:out>
 			</p>
 		</div>
 		<br>
