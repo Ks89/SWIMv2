@@ -59,8 +59,8 @@
 				<form id="profiloAltroUtente" action="profilo/azioni/profiloAltroUtente" method="POST">
 					<input type="hidden" name="tipo" /> <input type="hidden" name="emailRichiedente" value="${emailRichiedente}"> 
 					<tr>
-						<td><input type="button" id="button" value="conferma" onclick="profiloAltroUtente.elements['tipo'].value='CONFERMA'; profiloAltroUtente.submit();" /></td> 
-						<td><input type="button" id="button" value="rifiuta" onclick="profiloAltroUtente.elements['tipo'].value='RIFIUTA'; profiloAltroUtente.submit();" /></td>
+						<td><input type="button" id="button" value="Conferma" onclick="profiloAltroUtente.elements['tipo'].value='CONFERMA'; profiloAltroUtente.submit();" /></td> 
+						<td><input type="button" id="button" value="Rifiuta" onclick="profiloAltroUtente.elements['tipo'].value='RIFIUTA'; profiloAltroUtente.submit();" /></td>
 					</tr>
 				
 				</form>
