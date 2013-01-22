@@ -59,15 +59,24 @@ public class AggiuntaAbilitaServlet extends HttpServlet {
 
 		String nuovoNomeAbilitaAggiunta = request.getParameter("nuovoNomeAbilitaAggiunta");
 		String descrizioneAbilita = request.getParameter("descrizioneAbilitaAggiunta");
- 
+
+		Abilita giaPresente,abilitaAggiunta;
 		try {
-			Abilita abilitaAggiunta = gestioneProposte.inserisciAbilitaAutonomamente(emailAdminCollegato, nuovoNomeAbilitaAggiunta, descrizioneAbilita);
-			if(abilitaAggiunta!=null) {
-				log.debug("nuova abilita inserita correttamente: " + abilitaAggiunta.getNome());
-				request.setAttribute("inserimentoAbilitaAvvenuto", "Inserimento abilita' avvenuto con successo!");
-			} else {
-				log.debug("erroreInserimentoAbilitaFallito : " + nuovoNomeAbilitaAggiunta);
-				request.setAttribute("erroreInserimentoAbilitaFallito", "Errore aggiunta nuova abilita'");
+
+			if(nuovoNomeAbilitaAggiunta!=null && nuovoNomeAbilitaAggiunta.length()>=1) { 
+				giaPresente = gestioneProposte.getAbilitaByNome(nuovoNomeAbilitaAggiunta);
+				if(giaPresente==null) {
+					abilitaAggiunta = gestioneProposte.inserisciAbilitaAutonomamente(emailAdminCollegato, nuovoNomeAbilitaAggiunta, descrizioneAbilita);
+					if(abilitaAggiunta!=null) {
+						log.debug("nuova abilita inserita correttamente: " + abilitaAggiunta.getNome());
+						request.setAttribute("inserimentoAbilitaAvvenuto", "Inserimento abilita' avvenuto con successo!");
+					} else {
+						log.debug("erroreInserimentoAbilitaFallito : " + nuovoNomeAbilitaAggiunta);
+						request.setAttribute("erroreInserimentoAbilitaFallito", "Errore aggiunta nuova abilita'");
+					}
+				} else {
+					request.setAttribute("abilitaGiaPresenteColNomeSpecificato", "Errore! L'abilita' con il nome specificato e' gia' presente");
+				}
 			}
 		} catch (ProposteException e) {
 			log.error(e.getMessage(), e);
