@@ -49,8 +49,8 @@
 			<form id="dettaglioRichiestaAiuto" action="profilo/azioni/dettaglioRichiestaAiuto" method="POST">
 				<input type="hidden" name="tipo" /> 
 				<input type="hidden" name="idCollaborazione" value="${idCollaborazione}">
-				<input type="button" value="conferma" id="button" onclick="dettaglioRichiestaAiuto.elements['tipo'].value='CONFERMA'; dettaglioRichiestaAiuto.submit();" /> 
-				<input type="button" value="rifiuta" id="button" onclick="dettaglioRichiestaAiuto.elements['tipo'].value='RIFIUTA'; dettaglioRichiestaAiuto.submit();" />
+				<input type="button" value="Conferma" id="button" onclick="dettaglioRichiestaAiuto.elements['tipo'].value='CONFERMA'; dettaglioRichiestaAiuto.submit();" /> 
+				<input type="button" value="Rifiuta" id="button" onclick="dettaglioRichiestaAiuto.elements['tipo'].value='RIFIUTA'; dettaglioRichiestaAiuto.submit();" />
 			</form></td></tr>
 		</c:if>
 		</table>
