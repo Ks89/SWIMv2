@@ -97,7 +97,7 @@
 		</table>
 		<br>
 		<h2>Abilita' dell'utente</h2>
-		<table id="tabellaRigheAlterne">
+		<table id="tabellaRigheAlterne1" name="tabellaRigheAlterne1" class="tabellaRigheAlterne">
 			<tr>
 				<th>Abilità</th>
 				<th>Descrizione</th>
@@ -116,13 +116,13 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<div id="pageNavPosition"></div>
+		<div id="pageNavPosition1"></div>
 
 		<script type="text/javascript">
-				var pager = new Pager('tabellaRigheAlterne', 5);
-				pager.init();
-				pager.showPageNav('pager', 'pageNavPosition');
-				pager.showPage(1);
+			var pagerFirst = new Pager('tabellaRigheAlterne1', 5);
+			pagerFirst.init();
+			pagerFirst.showPageNav('pagerFirst', 'pageNavPosition1');
+			pagerFirst.showPage(1);
 		</script>
 		<br>
 
@@ -133,6 +133,39 @@
 						utenti</a>
 				</p>
 			</div>
+		</c:if>
+
+
+		<c:if test="${!empty amici}">
+			<br>
+			<h2>I tuoi amici</h2>
+			<table id="tabellaRigheAlterne2" name="tabellaRigheAlterne2" class="tabellaRigheAlterne">
+				<tr>
+					<th>Nome</th>
+					<th>Cognome</th>
+				</tr>
+				<c:forEach items="${amici}" var="amico" varStatus="num">
+					<c:if test="${num.count>0}">
+						<c:if test="${num.count%2!=0}">
+							<tr>
+						</c:if>
+						<c:if test="${num.count%2==0}">
+							<tr class="alt">
+						</c:if>
+					</c:if>
+					<td><c:out value="${amico.nome}" /></td>
+					<td><c:out value="${amico.cognome}" /></td>
+					</tr>
+				</c:forEach>
+			</table>
+			<div id="pageNavPosition2"></div>
+
+			<script type="text/javascript">
+				var pagerSecond = new Pager('tabellaRigheAlterne2', 5);
+				pagerSecond.init();
+				pagerSecond.showPageNav('pagerSecond', 'pageNavPosition2');
+				pagerSecond.showPage(1);
+			</script>
 		</c:if>
 
 	</div>

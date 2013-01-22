@@ -32,7 +32,7 @@ public class ProfiloServlet extends HttpServlet {
 
 	@EJB
 	private GestioneAmicizieLocal amicizie;
-	
+
 	@EJB
 	private GestioneCollaborazioniLocal gestCollaborazioni;
 
@@ -84,11 +84,11 @@ public class ProfiloServlet extends HttpServlet {
 			}
 			request.setAttribute("punteggioUtenteCollegato", feedback);
 			log.debug("punteggioUtenteCollegato:" + feedback);
-			
+
 		} catch (LoginException e) {
 			log.error(e.getMessage(), e);
 			//se ci fosse un errore durante il calcolo del feedback lo setto come non disponibile
-//			request.setAttribute("punteggioUtenteCollegato", "Non disponibile");
+			//			request.setAttribute("punteggioUtenteCollegato", "Non disponibile");
 		}
 
 		List<Abilita> abilitaInsiemePersonale;
@@ -98,15 +98,21 @@ public class ProfiloServlet extends HttpServlet {
 		} catch (RicercheException e) {
 			log.error(e.getMessage(), e);
 		}
-		
-		
+
+
+		List<Utente> amici = amicizie.getAmici(emailUtenteCollegato);
+		if(amici!=null && amici.size()>=1) {
+			request.setAttribute("amici", amici);
+		}
+
+
 		//vedo se mostrare l'avviso che sono state accettate richieste di amicizia o di collaborazione (aiuto)
 		boolean ciSonoNotificheDaMostrare = PresenzaNotificheDiRisposta.isNotificheRispostaPresenti(emailUtenteCollegato, request, 
 				response, amicizie, gestCollaborazioni);
 		if(ciSonoNotificheDaMostrare) {
 			request.setAttribute("ciSonoNotificheDaMostrare", "true");
 		}
-		
+
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/utenti/profilo/profilo.jsp").forward(request, response);
 	}
 
