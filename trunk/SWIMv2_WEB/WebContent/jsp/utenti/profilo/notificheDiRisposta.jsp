@@ -12,16 +12,19 @@
 				<p>Non ci sono utenti che hanno accettato recentemente le tue richieste di amicizia</p>
 			</div>
 		</c:if>
+		<br>
 		<c:if test="${!empty erroreCollaborazioni}">
 			<div class="alert">
 				<c:out value="${erroreCollaborazioni}"></c:out>
 			</div>
 		</c:if>
+		<br>
 		<c:if test="${!empty noCollaborazioniRespinte }">
 			<div class="generico">
 				<p>Non ci sono utenti che hanno respinto recentemente le tue richieste di aiuto</p>
 			</div>
 		</c:if>
+		<br>
 		<c:if test="${!empty noCollaborazioni }">
 			<div class="generico">
 				<p>Non ci sono utenti che hanno accettato recentemente le tue richieste di aiuto</p>

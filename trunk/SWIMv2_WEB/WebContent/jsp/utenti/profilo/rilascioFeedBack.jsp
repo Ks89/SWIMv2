@@ -30,7 +30,8 @@
 				</select>
 				
 				</td></tr>
-				<tr><td id="grassettoBlu">Commento (opzionale): </td><td><input id="commento" type="text" name="commentoFeedBack" maxlength="300" placeholder="Lascia un commento"></input></td></tr>
+				<tr><td id="grassettoBlu">Commento (opzionale): </td>
+				<td><textarea id="commento" name="commentoFeedBack" rows="10" cols="50" style="resize:none;" maxlength="300" placeholder="Lascia un commento"></textarea></td></tr>
 				<tr><td colspan="2" style="text-align: center;"><input id="submit" type="submit" value="Invia" /></td></tr>
 			</table>
 		</form>

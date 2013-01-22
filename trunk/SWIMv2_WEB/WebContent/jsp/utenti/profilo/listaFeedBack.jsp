@@ -2,8 +2,7 @@
 <title>SWIM - Profilo - Collaborazioni</title>
 <jsp:include page="../../layoutSuperioreDown.jsp"></jsp:include>
 <!--<link rel="stylesheet" href="../../css/global.css" type="text/css"/> -->
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <h1>Lista dei feedback</h1>
 	<section>
@@ -27,18 +26,25 @@
 <c:if test="${empty nonCiSonoCollaborazioni}">
 	<h1><c:out value="Collaborazioni"></c:out></h1>
 	<br><br>
-		<c:forEach items="${collaborazioni}" var="collaborazione">
-			<table id="tabellaFeedback">
+			<table id="tabellaRigheAlterne1" name="tabellaRigheAlterne1" class="tabellaRigheAlterne">
 				<tr>
 				  <th>Collaborazione</th>
 				  <th>Collaborante</th>
 				  <th>Punteggio</th>
 				  <th>Commento</th>
 				</tr>
-				<tr>
+				<c:forEach items="${collaborazioni}" var="collaborazione" varStatus="num">
+				<c:if test="${num.count>0}">
+					<c:if test="${num.count%2!=0}">
+						<tr>
+					</c:if>
+					<c:if test="${num.count%2==0}">
+						<tr class="alt">
+					</c:if>
+				</c:if>
 					<td ><c:out value="${collaborazione.nome}" /></td>
 					<td><c:out value="${collaborazione.utenteRichiedente.nome}" />&nbsp;<c:out value="${collaborazione.utenteRichiedente.cognome}" /></td>
-					<td >
+					<td width="95px;">
 					
 						<div id="STAR_RATING" align="center">
 							<ul>
@@ -58,9 +64,17 @@
 					</td>
 					<td style="text-align: justify;"><c:out value="${collaborazione.commentoFeedback}" /></td>
 				</tr>
+			</c:forEach>
 			</table>
+			<div id="pageNavPosition2"></div>
+
+			<script type="text/javascript">
+				var pagerSecond = new Pager('tabellaRigheAlterne1', 5);
+				pagerSecond.init();
+				pagerSecond.showPageNav('pagerSecond', 'pageNavPosition2');
+				pagerSecond.showPage(1);
+			</script>
 			<br><br>
-		</c:forEach>
 		</c:if>
 	<c:if test="${!empty altroUtente}">
 		<a href="profilo/azioni/dettagliAltroUtente?utente=${email}&tipoRicerca=${tipoRicerca}">Torna al profilo dell'utente ricercato</a>

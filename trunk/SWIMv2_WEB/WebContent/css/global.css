@@ -362,12 +362,12 @@ background-color:#d1dfef;
   height: 16px;
   display: block;
   float: left;
-  background-image: url('../img/feedback/starOff.gif');
+  background-image: url('../img/feedback/starOff.png');
   background-repeat: no-repeat;
 }
 #STAR_RATING li.on
 {
-  background-image: url('../img/feedback/starOn.gif');
+  background-image: url('../img/feedback/starOn.png');
 }
 #STAR_RATING span.output
 {
