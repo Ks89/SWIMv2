@@ -47,38 +47,4 @@
     Non sei ancora registrato? <a href="registrazione">Registrati</a>
   	</c:if>
 </div>	
-	<%--
-	<c:if test="${sessionScope.utenteCollegato == null}">
-	<form id="loginForm" action="login" method="POST">
-		Email: <input id="emailUtente" type="text" name="emailUtente"></input> 
-		Password: <input id="password" type="password" name="password"></input>
-		<input id="submit" type="submit" /><br>
-	</form>
-			<%-- href fa sempre riferimento alla servlet in modo relativo, mai con link assoluti --%>
-		<%--<br><a href="profilo/azioni/ricerchePerUtentiLoggati?tipoRicerca=aiuto">Ricerca utenti per visitatori</a>
-	</c:if> --%>
-	
-	<%-- Esempio che mostra come mostrare dei pezzi di pagina quando l'utente e' connesso oppure non lo e' --%>
-<%-- 	<c:choose> --%>
-<%-- 		<c:when test="${sessionScope.utenteCollegato != null}"> --%>
-<!-- 			<form action="ricerca" method="POST"> -->
-<!-- 				Cognome: <input type="text" name="cognome" /> <br> Abilita':<br> -->
-<%-- 				<c:forEach items="${abilita}" var="item"> --%>
-<%-- 					<input type="checkbox" name="abilita" value='<c:out value="${item.nome}"/>' /> --%>
-<%-- 					<c:out value="${item.nome}" /> --%>
-<!-- 					<br> -->
-<%-- 				</c:forEach> --%>
-<!-- 				<br> <input type="submit" /> -->
-<!-- 			</form> -->
-<!-- 			<br><br> -->
-<%-- 		</c:when> --%>
-<%-- 		<c:otherwise> --%>
-<!-- 			<form id="loginForm" action="login" method="POST"> -->
-<!-- 				Email: <input id="emailUtente" type="text" name="emailUtente"></input> Password: <input id="password" type="password" name="password"></input> <input -->
-<!-- 					id="submit" type="submit" /> <br> <a href="registrazione">Registrazione</a> -->
-<!-- 			</form> -->	
-<!-- 			<br><br> -->
-<!-- 			<a href="profilo/azioni/ricerche?utenti=pervisitatori">Ricerca utenti per visitatori</a> -->
-<%-- 		</c:otherwise> --%>
-<%-- 	</c:choose> --%>
 <jsp:include page="../layoutInferiore.jsp" flush="true"></jsp:include>
