@@ -23,6 +23,6 @@
 			<img src="profilo/foto?emailUtente" />
 			<%--<img id="imgUtente" src="profilo/foto?emailUtente=${sessionScope.utenteCollegato}" /> <br/> --%>
 			<%--<c:out value="${sessionScope.nomeUtenteCollegato}"/> <c:out value="${sessionScope.cognomeUtenteCollegato}"/><br/> --%>
-			<a style="text-align: center;text-decoration: none;	text-color: white;font-weight: bold;" href="login?esci=true" href="admin/adminLogin?adminesci=true">Logout</a>
+			<a style="text-align: center;text-decoration: none;	text-color: white;font-weight: bold;" href="admin/adminLogin?adminesci=true">Logout</a>
 		</aside>
 		<article>
