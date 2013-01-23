@@ -73,7 +73,7 @@
 				<td><c:out value="${sessionScope.utenteCollegato}"></c:out></td>
 			<tr>
 				<td id="grassettoBlu">Punteggio feedback:</td>
-				<td><c:choose>
+				<td width="95px;"><c:choose>
 						<c:when test="${!empty feedbackStelline}">
 							<div id="STAR_RATING" align="center">
 								<ul>

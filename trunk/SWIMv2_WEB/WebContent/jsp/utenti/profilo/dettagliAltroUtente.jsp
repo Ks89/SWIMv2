@@ -78,7 +78,7 @@
 			</tr>
 			<tr>
 				<td id="grassettoBlu">Punteggio feedback:</td>
-				<td><c:choose>
+				<td width="95px;"><c:choose>
 						<c:when test="${!empty feedbackUtenteRicercatoStelline}">
 							<div id="STAR_RATING" align="center">
 								<ul>

@@ -41,7 +41,7 @@
 		</tr>
 		<tr>
 			<c:if test="${!empty conFeedBack}">
-			<td>
+			<td width="95px;">
 			
 					<div id="STAR_RATING" align="center">
 						<ul>
