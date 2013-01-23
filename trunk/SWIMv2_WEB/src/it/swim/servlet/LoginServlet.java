@@ -42,19 +42,11 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// metodo che crea un login fasullo per un accesso rapido al sito
-		// durante i test (in fase di sviluppo)
-		// se il parametro che ricevo tramite get e' secretlogin=12345 permetto
-		// il login autoamtico
-		if ("12345".equals(request.getParameter("secretlogin"))) {
-			request.getSession().setAttribute("utenteCollegato", "peppino@gmail.com");
-			response.sendRedirect("profilo/profilo");
-		}
 		// se il parametro che ricevo tramite get e' esci e vale = true eseguo
 		// il logout
 		// questa condizione if sara' da tenere anche dopo perche' e' quella che
 		// permette il logout, sia di un utente vero che con login automatico
-		else if ("true".equals(request.getParameter("esci"))) {
+		if ("true".equals(request.getParameter("esci"))) {
 			log.debug("logout");
 			request.getSession().invalidate();
 			response.sendRedirect("home");
