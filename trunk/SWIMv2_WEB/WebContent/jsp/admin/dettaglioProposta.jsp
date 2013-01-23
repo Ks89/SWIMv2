@@ -57,7 +57,7 @@
 						placeholder="Nome dell'abilita"></input></td>
 				</tr>
 				<tr>
-					<td id="grassettoBlu">Descrizione:</td>
+					<td id="grassettoBlu">Descrizione (max: 300):</td>
 					<td><textarea id="descrizioneAbilitaProposta" name="descrizioneAbilitaProposta" maxlength="300" rows="10" cols="50" style="resize: none;"
 							placeholder="Descrizione dell'abilita"></textarea></td>
 				</tr>

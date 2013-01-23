@@ -45,7 +45,7 @@
 			</tr>
 			<tr>
 				<td id="grassettoBlu">
-					Descrizione:
+					Descrizione (max: 300):
 				</td>
 				<td> 
 					<textarea id="descrizioneAbilitaAggiunta" name="descrizioneAbilitaAggiunta" rows="10" cols="50" maxlength="300" style="resize:none;" placeholder="Descrizione dell'abilita"></textarea>
