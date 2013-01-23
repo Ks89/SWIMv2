@@ -31,7 +31,19 @@
 		<h2>Login effettuato correttamente</h2>
 		</c:when>
 		<c:otherwise>
-			<form id="adminLoginForm" action="admin/adminLogin" method="POST">
+			<br><br>
+			<div class="login">
+      			<h1>Login to SWIMv2</h1>
+      			<form method="post" action="admin/adminLogin" id="adminLoginForm">
+			        <p><input type="text" id="emailAdmin" name="emailAdmin" maxlength="100" value="" placeholder="Email"></p>
+			        <p><input type="password" id="passwordAdmin" name="passwordAdmin" maxlength="100"  value="" placeholder="Password"></p>
+			    	<p class="submit"><input id="submit" type="submit" name="commit" value="Login"></p>
+			    </form>
+			      <script>
+			            $('input[placeholder], textarea[placeholder]').placeholder();
+			      </script>
+    		</div>
+			<!-- <form id="adminLoginForm" action="admin/adminLogin" method="POST">
 				<table id="formInserimentoParametri">
 					<tr>
 						<td>
@@ -55,10 +67,10 @@
 						</td>
 					</tr>
 				</table>
-			</form>
+			</form> -->
 			<script>
-            $('input[placeholder], textarea[placeholder]').placeholder();
-      </script>
+            	$('input[placeholder], textarea[placeholder]').placeholder();
+     		 </script>
 		</c:otherwise>
 	</c:choose>
 </div>
