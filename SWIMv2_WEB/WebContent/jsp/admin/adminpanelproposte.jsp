@@ -50,7 +50,7 @@
 	
 	
 	
-	<h2>Proposte di aggiunta abilita, inviate dagli utenti</h2>
+	<h2>Proposte di aggiunta abilita inviate dagli utenti</h2>
 	<table id="tabellaRigheAlterne">
 		<tr>
 			<th>Utente</th>
