@@ -14,6 +14,7 @@
 				<c:out value="${erroreCampiVuotiCollaborazione}"></c:out><br>
 			</p>
 		</div>
+		<br>
 		</c:if>
 		<c:if test="${!empty erroreGetUtente}"> 
 		<div class="alert">
@@ -21,6 +22,7 @@
 				<c:out value="${erroreGetUtente}"></c:out><br>
 			</p>
 		</div>
+		<br>
 		</c:if>
 		<c:if test="${!empty erroreAmiciziaNonStretta}"> 
 		<div class="alert">
@@ -28,6 +30,7 @@
 				<c:out value="${erroreAmiciziaNonStretta}"></c:out><br>
 			</p>
 		</div>
+		<br>
 		</c:if>
 		<c:if test="${!empty erroreCollaborazioneNonCreata}"> 
 		<div class="alert">
@@ -35,6 +38,7 @@
 				<c:out value="${erroreCollaborazioneNonCreata}"></c:out><br>
 			</p>
 		</div>
+		<br>
 		</c:if>
 		<c:if test="${!empty erroreAmiciziaGiaInoltrata}"> 
 		<div class="alert">
@@ -42,6 +46,7 @@
 				<c:out value="${erroreAmiciziaGiaInoltrata}"></c:out><br>
 			</p>
 		</div>
+		<br>
 		</c:if>	
 		
 		
@@ -52,6 +57,7 @@
 				<c:out value="${richiestaAmiciziaInviata}"></c:out><br>
 			</p>
 		</div>
+		<br>
 		</c:if>	
 		<c:if test="${!empty collaborazioneCreataCorrettamente}"> 
 		<div class="conferma">
@@ -59,6 +65,7 @@
 				<c:out value="${collaborazioneCreataCorrettamente}"></c:out><br>
 			</p>
 		</div>
+		<br>
 		</c:if>			
 		
 		
