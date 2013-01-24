@@ -6,7 +6,14 @@
 <h1>Dettaglio proposta</h1>
 <section>
 	<div align="center" class="alignCenter">
-
+		<c:if test="${!empty nonHaiConfermatoInvioForm}">
+			<div class="generico">
+				<p>
+					<c:out value="${nonHaiConfermatoInvioForm}"></c:out>
+				</p>
+			</div>
+			<br>
+		</c:if>
 		<c:if test="${!empty erroreInserisciNomeAbilita}">
 			<div class="alert">
 				<p>
@@ -49,6 +56,7 @@
 		<br>
 		<form id="dettaglioProposta" action="admin/dettaglioProposta" method="POST">
 			<input type="hidden" name="idProposta" value="${idProposta}"></input> <input type="hidden" name="tipo" />
+			<input type="hidden" name="conferma" /> <%-- Usato per il messaggio in javascript --%>
 			<table id="formInserimentoParametri">
 				<caption>Inserisci la nuova abilità</caption>
 				<tr>
@@ -62,10 +70,26 @@
 							placeholder="Descrizione dell'abilita"></textarea></td>
 				</tr>
 				<tr>
-					<td colspan="2" style="text-align: center;"><input type="button" id="button" value="Conferma"
-						onclick="dettaglioProposta.elements['tipo'].value='AGGIUNGI'; dettaglioProposta.submit();" />
+					<td colspan="2" style="text-align: center;">
+					<input type="button" id="button" value="Conferma"
+						onClick="
+								if(confirm('Questa procedura non potrà essere annullata. Vuoi continuare?')) 
+								{ 
+									dettaglioProposta.elements['tipo'].value='AGGIUNGI';
+									dettaglioProposta.elements['conferma'].value='CONFERMA';
+								}
+								else {
+									dettaglioProposta.elements['conferma'].value='ANNULLA'; 
+								}
+								dettaglioProposta.submit();
+						 	"/>
 					<input type="button" id="button" value="Rifiuta"
-						onclick="dettaglioProposta.elements['tipo'].value='RIFIUTA'; dettaglioProposta.submit();" /></td>
+						onclick="
+								dettaglioProposta.elements['tipo'].value='RIFIUTA'; 
+								dettaglioProposta.elements['conferma'].value='CONFERMA';
+								dettaglioProposta.submit();
+								"/>
+					</td>
 				</tr>
 			</table>
 		</form>
