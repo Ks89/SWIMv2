@@ -110,6 +110,7 @@ public class ModificaProfiloServlet extends HttpServlet {
 		String password = new String();
 		String nome = new String();
 		String cognome = new String();
+		String confermaHiddenInput = new String();
 
 		List<Abilita> abilitaDaAggiungereAllePersonali = new ArrayList<Abilita>();
 
@@ -132,6 +133,9 @@ public class ModificaProfiloServlet extends HttpServlet {
 					}
 					if(item.getFieldName().equals("abilita")){
 						abilitaDaAggiungereAllePersonali.add(registrazione.getAbilitaByNome(item.getString()));
+					}
+					if(item.getFieldName().equals("conferma")){
+						confermaHiddenInput=item.getString();
 					}
 				} else {
 					//non cancellare questi commenti, potranno tornare utili
@@ -172,26 +176,33 @@ public class ModificaProfiloServlet extends HttpServlet {
 
 		log.debug("abilitaDaAggiungereAllePersonali : " + Arrays.toString(abilitaDaAggiungereAllePersonali.toArray()));
 
-		if(abilitaDaAggiungereAllePersonali.size()>=1) {
-			boolean modificaInsiemePersonaleAbilita = modificaProfilo.modificaInsiemePersonaleAbilita(emailUtenteCollegato, abilitaDaAggiungereAllePersonali);
-			log.debug("modificaInsiemePersonaleAbilita: " + modificaInsiemePersonaleAbilita );
-			if(modificaInsiemePersonaleAbilita) {
-				request.setAttribute("modificaAbilitaRiuscitaConSuccesso", "Modifica eseguita correttamente");
-			} else {
-				log.debug("Errore inserimento abilita");
-				request.setAttribute("erroreInserimentoProposta", "Errore nell'aggiunta di nuove abilita'");
-			}
-		}
 
-		if(blob!=null) {
-			boolean modificaFotoRiuscita = modificaProfilo.modificaFoto(emailUtenteCollegato, blob);
-			log.debug("modificaFotoRiuscita: " + modificaFotoRiuscita );
-			if(modificaFotoRiuscita) {
-				request.setAttribute("modificaFotoRiuscitaConSuccesso", "Modifica eseguita correttamente");
-			} else {
-				log.debug("Errore modifica foto");
-				request.setAttribute("erroreInserimentoFoto", "Errore nel caricamento della nuova foto del profilo");
+		if(confermaHiddenInput!=null && confermaHiddenInput.equals("CONFERMA")) {
+
+			if(abilitaDaAggiungereAllePersonali.size()>=1) {
+				boolean modificaInsiemePersonaleAbilita = modificaProfilo.modificaInsiemePersonaleAbilita(emailUtenteCollegato, abilitaDaAggiungereAllePersonali);
+				log.debug("modificaInsiemePersonaleAbilita: " + modificaInsiemePersonaleAbilita );
+				if(modificaInsiemePersonaleAbilita) {
+					request.setAttribute("modificaAbilitaRiuscitaConSuccesso", "Modifica eseguita correttamente");
+				} else {
+					log.debug("Errore inserimento abilita");
+					request.setAttribute("erroreInserimentoProposta", "Errore nell'aggiunta di nuove abilita'");
+				}
 			}
+
+			if(blob!=null) {
+				boolean modificaFotoRiuscita = modificaProfilo.modificaFoto(emailUtenteCollegato, blob);
+				log.debug("modificaFotoRiuscita: " + modificaFotoRiuscita );
+				if(modificaFotoRiuscita) {
+					request.setAttribute("modificaFotoRiuscitaConSuccesso", "Modifica eseguita correttamente");
+				} else {
+					log.debug("Errore modifica foto");
+					request.setAttribute("erroreInserimentoFoto", "Errore nel caricamento della nuova foto del profilo");
+				}
+			}
+
+		} else {
+			request.setAttribute("nonHaiConfermatoInvioForm", "Hai interrotto la procedura. Nessun dato e' stato inviato");
 		}
 
 		try {

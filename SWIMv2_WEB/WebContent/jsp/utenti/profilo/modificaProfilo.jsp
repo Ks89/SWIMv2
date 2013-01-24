@@ -83,12 +83,21 @@
 		</c:choose>
 
 
+		<c:if test="${!empty nonHaiConfermatoInvioForm}">
+			<div class="generico">
+				<p>
+					<c:out value="${nonHaiConfermatoInvioForm}"></c:out>
+				</p>
+			</div>
+			<br>
+		</c:if>
+
 		<%-- Form della modifica del profilo --%>
 		<%-- Form che permette di inviare sia file allegati sia dati prelevati dalle input text.
 		Essendo una post verra' intercettata dalla doPost della servlet specificata in action="modificaProfilo" --%>
 		<h2>Aggiungi abilità</h2>
 
-		<form action="profilo/azioni/modificaProfilo" method="POST" enctype="multipart/form-data">
+		<form id="modificaProfiloForm" action="profilo/azioni/modificaProfilo" method="POST" enctype="multipart/form-data">
 			<%-- choose con dentro when che e' una delle condizioni e poi con otherwise tutte le altre condizioni con comprese nel when
 			cioe' e' come uno switch con il default --%>
 			<c:choose>
@@ -135,13 +144,25 @@
 					<td><input id="file" name="file" type="file" accept="image/*" /></td>
 				</tr>
 				<tr>
-					<td colspan="2" style="text-align: center;"><input id="submit" type="submit" value="Invia" /></td>
+					<td colspan="2" style="text-align: center;">
+					<input type="hidden" name="conferma" /> 
+						 <input type=button value="Invia" onClick="
+								if(confirm('Questa procedura non potrà essere annullata. Vuoi continuare?')) 
+								{ 
+									modificaProfiloForm.elements['conferma'].value='CONFERMA';
+								}
+								else {
+									modificaProfiloForm.elements['conferma'].value='ANNULLA'; 
+								}
+						 		modificaProfiloForm.submit(); 
+						 	"/>
+					</td>
 				</tr>
 			</table>
 		</form>
 		<script>
-            $('input[placeholder], textarea[placeholder]').placeholder();
-      </script>
+			$('input[placeholder], textarea[placeholder]').placeholder();
+		</script>
 	</div>
 	<br>
 	<jsp:include page="../../layoutInferiore.jsp"></jsp:include>
