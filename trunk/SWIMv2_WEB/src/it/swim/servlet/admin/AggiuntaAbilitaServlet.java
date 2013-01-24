@@ -57,30 +57,39 @@ public class AggiuntaAbilitaServlet extends HttpServlet {
 			return;
 		}
 
-		String nuovoNomeAbilitaAggiunta = request.getParameter("nuovoNomeAbilitaAggiunta");
-		String descrizioneAbilita = request.getParameter("descrizioneAbilitaAggiunta");
+		String confermaHiddenInput = request.getParameter("conferma");
 
-		Abilita giaPresente,abilitaAggiunta;
-		try {
+		if(confermaHiddenInput!=null && confermaHiddenInput.equals("CONFERMA")) {
 
-			if(nuovoNomeAbilitaAggiunta!=null && nuovoNomeAbilitaAggiunta.length()>=1) { 
-				giaPresente = gestioneProposte.getAbilitaByNome(nuovoNomeAbilitaAggiunta);
-				if(giaPresente==null) {
-					abilitaAggiunta = gestioneProposte.inserisciAbilitaAutonomamente(emailAdminCollegato, nuovoNomeAbilitaAggiunta, descrizioneAbilita);
-					if(abilitaAggiunta!=null) {
-						log.debug("nuova abilita inserita correttamente: " + abilitaAggiunta.getNome());
-						request.setAttribute("inserimentoAbilitaAvvenuto", "Inserimento abilita' avvenuto con successo!");
+			String nuovoNomeAbilitaAggiunta = request.getParameter("nuovoNomeAbilitaAggiunta");
+			String descrizioneAbilita = request.getParameter("descrizioneAbilitaAggiunta");
+
+			Abilita giaPresente,abilitaAggiunta;
+			try {
+
+				if(nuovoNomeAbilitaAggiunta!=null && nuovoNomeAbilitaAggiunta.length()>=1) { 
+					giaPresente = gestioneProposte.getAbilitaByNome(nuovoNomeAbilitaAggiunta);
+					if(giaPresente==null) {
+						abilitaAggiunta = gestioneProposte.inserisciAbilitaAutonomamente(emailAdminCollegato, nuovoNomeAbilitaAggiunta, descrizioneAbilita);
+						if(abilitaAggiunta!=null) {
+							log.debug("nuova abilita inserita correttamente: " + abilitaAggiunta.getNome());
+							request.setAttribute("inserimentoAbilitaAvvenuto", "Inserimento abilita' avvenuto con successo!");
+						} else {
+							log.debug("erroreInserimentoAbilitaFallito : " + nuovoNomeAbilitaAggiunta);
+							request.setAttribute("erroreInserimentoAbilitaFallito", "Errore aggiunta nuova abilita'");
+						}
 					} else {
-						log.debug("erroreInserimentoAbilitaFallito : " + nuovoNomeAbilitaAggiunta);
-						request.setAttribute("erroreInserimentoAbilitaFallito", "Errore aggiunta nuova abilita'");
+						request.setAttribute("abilitaGiaPresenteColNomeSpecificato", "Errore! L'abilita' con il nome specificato e' gia' presente");
 					}
 				} else {
-					request.setAttribute("abilitaGiaPresenteColNomeSpecificato", "Errore! L'abilita' con il nome specificato e' gia' presente");
+					request.setAttribute("erroreNomeAbilitaVuoto", "Inserisci il nome dell'abilita'");
 				}
+			} catch (ProposteException e) {
+				log.error(e.getMessage(), e);
+				request.setAttribute("erroreInserimentoAbilitaFallito", "Errore aggiunta nuova abilita con nome");
 			}
-		} catch (ProposteException e) {
-			log.error(e.getMessage(), e);
-			request.setAttribute("erroreInserimentoAbilitaFallito", "Errore aggiunta nuova abilita con nome");
+		} else {
+			request.setAttribute("nonHaiConfermatoInvioForm", "Hai interrotto la procedura. Nessun dato e' stato inviato");
 		}
 		getServletConfig().getServletContext().getRequestDispatcher("/jsp/admin/adminpanelinserimento.jsp").forward(request, response);
 	}
