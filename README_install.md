@@ -25,10 +25,10 @@ versione-bin.jar”** per la fase successiva.
 8. Inserire la password dell’utente che sarà utilizzata in seguito per configurare il file **“SWIMdb-ds.xml”**.
 9. Mantenere i parametri predefiniti che dipendono dal sistema operativo e seguire la procedura guidata fino alla fine. A questo punto apparirà la finestra principale con la nuova istanza del server e la connessione al database.
 10. **Eseguire** tramite la “versione a linea di comando” o tramite “MySQL Workbench” (consigliato) **il file “Crea_Db-tabelle-dati.sql” per creare il database, le tabelle ed inserire alcuni dati predefiniti**. Nel caso di MySQL Workbench, seguire questa procedura:
-* Fare doppio clic su “localhost” nella sezione “SQL Development”.
-* Dal menu “File” -> “Open SQL Script...” aprire il file “Crea_Db-tabelle-dati.sql”.
-* Scegliere “Query” -> “Execute (All or Selection)”.
-Eseguendo il file .sql saranno inseriti nel database i seguenti dati:
+  * Fare doppio clic su “localhost” nella sezione “SQL Development”.
+  * Dal menu “File” -> “Open SQL Script...” aprire il file “Crea_Db-tabelle-dati.sql”.
+  * Scegliere “Query” -> “Execute (All or Selection)”.
+  Eseguendo il file .sql saranno inseriti nel database i seguenti dati:
   * Amministratore:
     * Email: “admin@swim.it”.
     * Password: “a2242ead55c94c3deb7cf2340bfef9d5bcaca22dfe66e646745ee4371c633fc8” (cioè lo SHA-256 della password “pippo”).
@@ -48,7 +48,7 @@ Eseguendo il file .sql saranno inseriti nel database i seguenti dati:
     * **PASSWORD**: password dell’utente del database (scelto in precedenza).
 12. **Per garantire il corretto funzionamento dell’upload delle foto del profilo è necessario modificare un parametro in MySQL Workbench tramite la seguente procedura**:
   * Dalla sezione “Server Administration” di MySQL Workbench, cliccare due volte sull’istanza del server creata nei punti precedenti.
-  * Dalla barra laterale, sotto la voce “CONFIGURATION”, scegliere “Option File”.
+  * Scegliere "Server" -> "Options File".
   * Nella casella “Locate option:” scrivere “max_allowed_packet” (senza virgolette) e cliccare sul pulsante “Find”.
   * Spuntare la casella sotto la sezione “Data/memory size” che si chiama "max_allowed_packet" e inserire un valore superiore ai 6MB (si consiglia 10000000 o superiore).
   * Cliccare su “Apply...” in basso a destra e per finire su “Apply” nella finestra di conferma successiva.
