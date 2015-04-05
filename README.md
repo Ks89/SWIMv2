@@ -224,27 +224,38 @@ FOTO
 Per accedere a queste funzionalità, basterà premere il pulsante Visualizza Notifiche, visualizzabile in qualunque parte del social network (fig. 3.21).
 Qui potremo confermare o rifiutare, richieste di aiuto e di amicizia che gli altri utenti ci hanno fatto.
 Selezionando il Nome della collaborazione, o il Nome dell’utente che sta richiedendo l’amicizia, si arriverà in una pagina con una piccola descrizione della collaborazione o dell’utente, e premendo sul pulsante Conferma o Rifiuta (fig. 3.22), si risponderà appunto a tali richieste.
-FOTO
+
+![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/14-richieste-aiuto.png)
+
 FOTO
 FOTO
 #### Visualizzare le risposte degli utenti alle tue richieste
 In caso di conferma di un’amicizia, e di rifiuto o conferma di una collaborazione da parte di un utente, comparirà un collegamento nella tua homepage (fig. 3.23) dove si potranno visualizzare appunto queste notifiche, e in caso di amicizia diretta, si potranno visualizzare i suggerimenti di amicizia che il social network ti propone.
 FOTO
-FOTO
+
+![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/15-risposte-utenti.png)
+
 Le notifiche di risposta saranno visualizzate solamente una volta, e da qui potrai accedere alla funzionalità di suggerimento di amicizia. Come si può notare in figura 3.24 è presente una tabella chiamata Suggerimenti di amicizia, con in una colonna l’amico che hai appena acquisito (DIRETTAMENTE) e una con un utente che è amico di questo utente e non tuo, e al quale ovviamente non hai già richiesto una amicizia. Per richiedere l’amicizia a uno o più utenti presenti in questa tabella, basterà selezionare gli utenti a cui si vuole richiedere l’amicizia (attraverso la checkbox nella prima colonna della tabella) e premere il pulsante richiedi amicizia.
 E’ possibile anche che un utente respinga la tua richiesta di aiuto, ma nella figura di esempio (3.24) non sono presenti richieste respinte, ed è segnalato dall’apposito messaggio all’inizio della pagina (con sfondo blu).
 #### Proponi abilità
 Nel caso in cui l’utente avesse una abilità che non è presente nell’insieme generale delle abilità, il sistema mette a disposizione una funzionalità che permette di inviare una richiesta all’amministratore.
 Selezionando dal menu la voce “Proponi nuove abilità”, si presenterà all’utente una pagina con due aree d’inserimento testo: una per indicare il nome dell’abilità e l’altra dove specificare il motivo per il quale si vuole che venga aggiunta. Una volta premuto il pulsante invia, la richiesta sarà inoltrata all’amministratore che deciderà se confermare o rifiutare la vostra richiesta.
-FOTO
+
+![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/16-proposta-abilita.png)
+
+
 #### Modifica profilo
 Il sistema permette all’utente di modificare le proprie informazioni personali tramite la sezione “Modifica profilo” (vedi Fig. 3.4).
-FOTO
+
+![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/17-modifica-profilo.png)
+
+
 Dalla pagina “Modifica profilo” l’utente può cambiare la sua foto del profilo, o aggiungere delle abilità, selezionandole dall’insieme generale delle abilità.
 Le modifiche sono rese effettive appena premuto il pulsante “Invia”.
 #### Visualizza feedback
 Selezionando dal menù la voce “Visualizza feedback”, è possibile visionare l’elenco di tutti i feedback che sono stati rilasciati dagli utenti con cui si è collaborato. Come si può vedere dalla figura sottostante, per ogni feedback è possibile vedere: il nome della collaborazione a cui è riferito, il nome della persona con cui si è collaborato (e che ha rilasciato il feedback), il punteggio del feedback e il commento (opzionale).
-FOTO
+![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/18-lista-feedback.png)
+
 
 
 ### Amministratore
@@ -253,17 +264,23 @@ Di seguito viene spiegato come utilizzare le funzionalità del sistema dedicate
 #### Login
 Come specificato sopra, la parte dedicata all’amministratore è separata da quella dedicata agli utenti. Proprio per rispettare questa scelta, la pagina di login dell’amministratore la si può trovare tramite il link http://localhost:8080/SWIMv2_WEB/admin.
 Una volta su questa pagina, basta inserire l’indirizzo email dell’amministratore (default: admin@swim.it) e la password (default: pippo).
-FOTO
+
+![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/19-login-amministratore.png)
+
 Una volta effettuato il login, verrete reindirizzati nella home page. La pagina home si presenta piuttosto scarna, con un menù dal quale potrete accedere a tutte le funzionalità dell’amministratore.
 FOTO
 
 #### Aggiungi abilita
 Selezionando dal menù la voce “Aggiungi abilita”, verrete reindirizzati nella seguente pagina (vedi figura sottostante).
-FOTO
+
+![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/20-inserisci-abilita.png)
+
 Da questa pagina avrete la possibilità di aggiungere abilità all’insieme generale delle abilità. Molto semplicemente basta scrivere nell’apposito spazio il nome dell’abilità, e nello spazio sottostante una breve descrizione (massimo 300 caratteri) di quello che l’abilità rappresenta.
 ####Visualizza abilità proposte
 L’altra voce del menu amministratore, vi permette di visionare tutte le abilità che gli utenti hanno proposto di aggiungere al all’insieme generale delle abilità.
-FOTO
+
+![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/21-proposte-abilita.png)
+
 Tutte le abilità proposte dagli utenti saranno visualizzate in un elenco, con indicati: il nome dell’abilità e il nome dell’utente che l’ha proposta.
 Per aggiungere una delle abilità proposte, l’amministratore deve selezionarne una dall’elenco cliccando sul nome (Esempio. L’amministratore seleziona “Docente di matematica”).
 FOTO
