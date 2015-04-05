@@ -50,13 +50,13 @@ Eseguendo il file .sql saranno inseriti nel database i seguenti dati:
   * **PASSWORD**: password dell’utente del database (scelto in precedenza).
 
 12. **Per garantire il corretto funzionamento dell’upload delle foto del profilo è necessario modificare un parametro in MySQL Workbench tramite la seguente procedura**:
-* Dalla sezione “Server Administration” di MySQL Workbench, cliccare due volte sull’istanza del server creata nei punti precedenti.
-* Dalla barra laterale, sotto la voce “CONFIGURATION”, scegliere “Option File”.
-* Nella casella “Locate option:” scrivere “max_allowed_packet” (senza virgolette) e cliccare sul pulsante “Find”.
-* Spuntare la casella sotto la sezione “Data/memory size” che si chiama "max_allowed_packet" e inserire un valore superiore ai 6MB (si consiglia 10000000 o superiore).
-* Cliccare su “Apply...” in basso a destra e per finire su “Apply” nella finestra di conferma successiva.
+  * Dalla sezione “Server Administration” di MySQL Workbench, cliccare due volte sull’istanza del server creata nei punti precedenti.
+  * Dalla barra laterale, sotto la voce “CONFIGURATION”, scegliere “Option File”.
+  * Nella casella “Locate option:” scrivere “max_allowed_packet” (senza virgolette) e cliccare sul pulsante “Find”.
+  * Spuntare la casella sotto la sezione “Data/memory size” che si chiama "max_allowed_packet" e inserire un valore superiore ai 6MB (si consiglia 10000000 o superiore).
+  * Cliccare su “Apply...” in basso a destra e per finire su “Apply” nella finestra di conferma successiva.
 15. Avviare il server JBoss.
-16. Dal browser accedere alla pagina http://localhost:8080/SWIMv2_WEB/testInstallazione?emailAdmin=admin@swim.it per verificare il corretto funzionamento dell’applicazione. (Attenzione, il collegamento riportato sopra deve essere personalizzato in base al server su cui è eseguit)o. Apparirà uno dei seguenti messaggi:
+16. Dal browser accedere alla pagina http://localhost:8080/SWIMv2_WEB/testInstallazione?emailAdmin=admin@swim.it per verificare il corretto funzionamento dell’applicazione. (Attenzione, il collegamento riportato sopra deve essere personalizzato in base al server su cui è eseguito). Apparirà uno dei seguenti messaggi:
   * “Test connessione al database: esito positivo”: nel caso sia funzionante.
   * “Test connessione al database: esito negativo”: in caso di problemi di connessione al database.
 
@@ -75,15 +75,12 @@ Presupponendo che Eclipse sia installato e che sia configurato il server JBoss 5
 4. Rimuovere eventuali progetti dal “Workspace” di Eclipse per evitare conflitti di qualunque tipo (solo a scopo precauzionale).
 5. Avviare Eclipse.
 6. Utilizzare la funzione “Import”->”Import”->”General”->”Existing Projects into workspace“.
-7. Scegliere la cartella estratta e seguire la procedura guidata per importare in Eclipse i tre progetti direttamente dalla cartella git usata per scaricare il sorgente da questa repository:
+7. Scegliere la cartella estratta e seguire la procedura guidata per importare in Eclipse i tre progetti direttamente dalla cartella git usata per scaricare il sorgente da questa repository (con “Copy projects into workspace”):
   * SWIMv2_EAR
   * SWIMv2_EJB
   * SWIMv2_WEB
-Assicurarsi di selezionare la voce: “Copy projects into workspace”.
-I tre progetti sono già pre-configurati, ma si consiglia di seguire la procedura per verificare che tutte le opzioni siano correte.
 8. Premere il tasto destro del mouse su SWIMv2_EAR, poi su “Properties”->”Server” e scegliere il server “JBoss 5” creato in precedenza.
-9. Premere il tasto destro del mouse su SWIMv2_EJB e scegliere “Properties”->”Java build Path” e importare le librerie corrette nel caso appaiano come “unbound”.
-**Per evitare possibili errori si consiglia di rimuovere la libreria JUnit4 e dalla scheda Properties”- >”Java build Path”->“Libraries” cliccare su “Add Library”->”JUnit”->”JUnit4” e confermare per reinserirla**.
+9. Premere il tasto destro del mouse su SWIMv2_EJB e scegliere “Properties”->”Java build Path” e importare le librerie corrette nel caso appaiano come “unbound”. **Per evitare possibili errori si consiglia di rimuovere la libreria JUnit4 e dalla scheda Properties”- >”Java build Path”->“Libraries” cliccare su “Add Library”->”JUnit”->”JUnit4” e confermare per reinserirla**.
 10. Premere il tasto destro del mouse su SWIMv2_WEB e scegliere “Properties”->”Java build Path” e importare le librerie corrette nel caso appaiano come “unbound”.
 11. Attenzione, **i progetti WEB e EJB** in “Properties”->”Project references” **NON devono avere caselle spuntate, invece in EAR si, entrambe le voci**, una associata al progetto WEB e l’altra all’EJB.
 12. Questa configurazione permetterà di **eseguire il progetto scegliendo “Run As”->”Run On Server” sul progetto SWIMv2_EAR. Non eseguire mai l’applicazione tramite i singoli progetti EJB e WEB**, essi non sono configurati per essere “pubblicati” sul server. Il vantaggio di questa scelta è la creazione di un unico file contenente la parte EJB, quella WEB ed infine tutte le librerie senza doverle gestire manualmente.
@@ -93,7 +90,3 @@ I tre progetti sono già pre-configurati, ma si consiglia di seguire la procedu
 Una volta che il prodotto è stato installato e configurato con successo, sarà disponibile a tutti accedendo tramite un browser all’indirizzo http://localhost:8080/SWIMv2_WEB/home. Si capisce di avere accesso al software SWIMv2 se nel browser apparirà la seguente pagina
 
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/1-homepage.png)
-
-
-
-
