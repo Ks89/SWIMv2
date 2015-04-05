@@ -53,7 +53,7 @@ versione-bin.jar”** per la fase successiva.
   * Spuntare la casella sotto la sezione “Data/memory size” che si chiama "max_allowed_packet" e inserire un valore superiore ai 6MB (si consiglia 10000000 o superiore).
   * Cliccare su “Apply...” in basso a destra e per finire su “Apply” nella finestra di conferma successiva.
 
-![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/install/c-personalizzazione-parametri.png)
+  ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/install/c-personalizzazione-parametri.png)
  
 13. Avviare il server JBoss.
 14. Dal browser accedere a [QUESTA PAGINA](http://localhost:8080/SWIMv2_WEB/testInstallazione?emailAdmin=admin@swim.it) per verificare il corretto funzionamento dell’applicazione. (Attenzione, il collegamento riportato sopra deve essere personalizzato in base al server su cui è eseguito). Apparirà uno dei seguenti messaggi:
@@ -102,3 +102,23 @@ Presupponendo che Eclipse sia installato e che sia configurato il server JBoss 5
 Una volta che il prodotto è stato installato e configurato con successo, sarà disponibile a tutti accedendo tramite un browser all’indirizzo http://localhost:8080/SWIMv2_WEB/home. Si capisce di avere accesso al software SWIMv2 se nel browser apparirà la seguente pagina
 
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/1-homepage.png)
+
+## License
+
+Copyright 2012-2015 Stefano Cappa, Jacopo Bulla, Davide Caio
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+<br/>
+**Created by Stefano Cappa, Jacopo Bulla, Davide Caio**
+
