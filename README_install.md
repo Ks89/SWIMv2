@@ -69,20 +69,32 @@ Eseguendo il file .sql saranno inseriti nel database i seguenti dati:
 
 In caso vi fossero problemi ad utilizzare il software fornito tramite il solo file .ear è possibile utilizzare Eclipse Luna EE per eseguire il prodotto. Attenzione: prima di svolgere questa fase completare tutti punti descritti poco fa senza considerare il file .ear.
 Presupponendo che Eclipse sia installato e che sia configurato il server JBoss 5.1 installato nei punti precedenti seguire la seguente procedura:
+<br>
 1. Assicurarsi che Eclipse sia chiuso.
+<br>
 2. Eseguire il file “lombok.jar” allegato al codice sorgente ed installare il plugin in Eclipse seguendo la procedura guidata.
+<br>
 3. Estrarre il file .zip contenente il codice sorgente.
+<br>
 4. Rimuovere eventuali progetti dal “Workspace” di Eclipse per evitare conflitti di qualunque tipo (solo a scopo precauzionale).
+<br>
 5. Avviare Eclipse.
+<br>
 6. Utilizzare la funzione “Import”->”Import”->”General”->”Existing Projects into workspace“.
+<br>
 7. Scegliere la cartella estratta e seguire la procedura guidata per importare in Eclipse i tre progetti direttamente dalla cartella git usata per scaricare il sorgente da questa repository (con “Copy projects into workspace”):
   * SWIMv2_EAR
   * SWIMv2_EJB
   * SWIMv2_WEB
+<br>
 8. Premere il tasto destro del mouse su SWIMv2_EAR, poi su “Properties”->”Server” e scegliere il server “JBoss 5” creato in precedenza.
+<br>
 9. Premere il tasto destro del mouse su SWIMv2_EJB e scegliere “Properties”->”Java build Path” e importare le librerie corrette nel caso appaiano come “unbound”. **Per evitare possibili errori si consiglia di rimuovere la libreria JUnit4 e dalla scheda Properties”- >”Java build Path”->“Libraries” cliccare su “Add Library”->”JUnit”->”JUnit4” e confermare per reinserirla**.
+<br>
 10. Premere il tasto destro del mouse su SWIMv2_WEB e scegliere “Properties”->”Java build Path” e importare le librerie corrette nel caso appaiano come “unbound”.
+<br>
 11. Attenzione, **i progetti WEB e EJB** in “Properties”->”Project references” **NON devono avere caselle spuntate, invece in EAR si, entrambe le voci**, una associata al progetto WEB e l’altra all’EJB.
+<br>
 12. Questa configurazione permetterà di **eseguire il progetto scegliendo “Run As”->”Run On Server” sul progetto SWIMv2_EAR. Non eseguire mai l’applicazione tramite i singoli progetti EJB e WEB**, essi non sono configurati per essere “pubblicati” sul server. Il vantaggio di questa scelta è la creazione di un unico file contenente la parte EJB, quella WEB ed infine tutte le librerie senza doverle gestire manualmente.
 
 
