@@ -24,8 +24,6 @@ versione-bin.jar”** per la fase successiva.
 
 8. Inserire la password dell’utente che sarà utilizzata in seguito per configurare il file **“SWIMdb-ds.xml”**.
 9. Mantenere i parametri predefiniti che dipendono dal sistema operativo e seguire la procedura guidata fino alla fine. A questo punto apparirà la finestra principale con la nuova istanza del server e la connessione al database.
-![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/install/c-personalizzazione-parametri.png)
-
 10. **Eseguire** tramite la “versione a linea di comando” o tramite “MySQL Workbench” (consigliato) **il file “Crea_Db-tabelle-dati.sql” per creare il database, le tabelle ed inserire alcuni dati predefiniti**. Nel caso di MySQL Workbench, seguire questa procedura:
 * Fare doppio clic su “localhost” nella sezione “SQL Development”.
 * Dal menu “File” -> “Open SQL Script...” aprire il file “Crea_Db-tabelle-dati.sql”.
@@ -40,23 +38,22 @@ Eseguendo il file .sql saranno inseriti nel database i seguenti dati:
     * Nome: “Programamtore Android”, Descrizione: “Programmatore per dispositivi android di qualunque versione”.
     * Nome: “Programmatore Java SE”, Descrizione: “Programmatore in Java Standard Edition”.
 11. Modificare il file **“SWIMdb-ds.xml”** spostato in “cartella_JBoss” e personalizzando le righe seguenti:
-* <connection-url>jdbc:mysql://**NOME_HOST:PORTA/NOME_DATABASE**</connection-url> 
-* <user-name>**NOME_UTENTE**</user-name>
-* <password>**PASSWORD**</password>
-  * NOME_HOST: indirizzo del server.
-  * PORTA: porta per connettersi al server (es: 3306)
-  * NOME_DATABASE: è il nome del database, scegliere “SWIMdb”.
-  * **NOME_UTENTE**: nome dell’utente del database (scelto in precedenza).
-  * **PASSWORD**: password dell’utente del database (scelto in precedenza).
-
+  * <connection-url>jdbc:mysql://**NOME_HOST:PORTA/NOME_DATABASE**</connection-url> 
+  * <user-name>**NOME_UTENTE**</user-name>
+  * <password>**PASSWORD**</password>
+    * NOME_HOST: indirizzo del server.
+    * PORTA: porta per connettersi al server (es: 3306)
+    * NOME_DATABASE: è il nome del database, scegliere “SWIMdb”.
+    * **NOME_UTENTE**: nome dell’utente del database (scelto in precedenza).
+    * **PASSWORD**: password dell’utente del database (scelto in precedenza).
 12. **Per garantire il corretto funzionamento dell’upload delle foto del profilo è necessario modificare un parametro in MySQL Workbench tramite la seguente procedura**:
   * Dalla sezione “Server Administration” di MySQL Workbench, cliccare due volte sull’istanza del server creata nei punti precedenti.
   * Dalla barra laterale, sotto la voce “CONFIGURATION”, scegliere “Option File”.
   * Nella casella “Locate option:” scrivere “max_allowed_packet” (senza virgolette) e cliccare sul pulsante “Find”.
   * Spuntare la casella sotto la sezione “Data/memory size” che si chiama "max_allowed_packet" e inserire un valore superiore ai 6MB (si consiglia 10000000 o superiore).
   * Cliccare su “Apply...” in basso a destra e per finire su “Apply” nella finestra di conferma successiva.
-15. Avviare il server JBoss.
-16. Dal browser accedere alla pagina http://localhost:8080/SWIMv2_WEB/testInstallazione?emailAdmin=admin@swim.it per verificare il corretto funzionamento dell’applicazione. (Attenzione, il collegamento riportato sopra deve essere personalizzato in base al server su cui è eseguito). Apparirà uno dei seguenti messaggi:
+13. Avviare il server JBoss.
+14. Dal browser accedere alla pagina http://localhost:8080/SWIMv2_WEB/testInstallazione?emailAdmin=admin@swim.it per verificare il corretto funzionamento dell’applicazione. (Attenzione, il collegamento riportato sopra deve essere personalizzato in base al server su cui è eseguito). Apparirà uno dei seguenti messaggi:
   * “Test connessione al database: esito positivo”: nel caso sia funzionante.
   * “Test connessione al database: esito negativo”: in caso di problemi di connessione al database.
 
