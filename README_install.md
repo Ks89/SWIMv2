@@ -17,10 +17,10 @@ Scaricare i seguenti software:
 versione-bin.jar”** per la fase successiva.
 5. Spostare nella cartella d’installazione di JBoss (“cartella_JBoss”**/server/default/deploy**) i file: **SWIMdb-ds.xml**, **SWIMv2_EAR.ear**. Inoltre, spostare il file **“mysql-connector-java-versione-bin.jar”** in “cartella_JBoss”**/server/default/lib**
 6. Aprire MySQL Workbench e creare una "New Server Instance"
-![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/install/a-mysql-workbench.png)
+![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/install/a-mysql-workbench_.png)
 
 7. Utilizzare i parametri standard, personalizzare “Hostname:”, “Port:”, “Username:” e scegliere una Password. Questi dati saranno utilizzati per la procedura nei punti successivi.
-![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/install/b-creazione-nuova-istanzia.png)
+![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/install/b-creazione-nuova-istanzia_.png)
 
 8. Inserire la password dell’utente che sarà utilizzata in seguito per configurare il file **“SWIMdb-ds.xml”**.
 9. Mantenere i parametri predefiniti che dipendono dal sistema operativo e seguire la procedura guidata fino alla fine. A questo punto apparirà la finestra principale con la nuova istanza del server e la connessione al database.
