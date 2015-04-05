@@ -53,7 +53,7 @@ Eseguendo il file .sql saranno inseriti nel database i seguenti dati:
   * Spuntare la casella sotto la sezione “Data/memory size” che si chiama "max_allowed_packet" e inserire un valore superiore ai 6MB (si consiglia 10000000 o superiore).
   * Cliccare su “Apply...” in basso a destra e per finire su “Apply” nella finestra di conferma successiva.
 13. Avviare il server JBoss.
-14. Dal browser accedere alla pagina http://localhost:8080/SWIMv2_WEB/testInstallazione?emailAdmin=admin@swim.it per verificare il corretto funzionamento dell’applicazione. (Attenzione, il collegamento riportato sopra deve essere personalizzato in base al server su cui è eseguito). Apparirà uno dei seguenti messaggi:
+14. Dal browser accedere a [QUESTA PAGINA](http://localhost:8080/SWIMv2_WEB/testInstallazione?emailAdmin=admin@swim.it) per verificare il corretto funzionamento dell’applicazione. (Attenzione, il collegamento riportato sopra deve essere personalizzato in base al server su cui è eseguito). Apparirà uno dei seguenti messaggi:
   * “Test connessione al database: esito positivo”: nel caso sia funzionante.
   * “Test connessione al database: esito negativo”: in caso di problemi di connessione al database.
 
