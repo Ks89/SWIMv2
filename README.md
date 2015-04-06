@@ -36,7 +36,7 @@ Può confermare/rifiutare le proposte di aggiunta all’insieme generale delle 
 
 
 
-## Usage
+## Utilizzo
 
 ### Utente non registrato
 #### Ricerca per utenti non registrati
@@ -46,6 +46,7 @@ Questa funzionalità, permette la ricerca di aiuto, tra gli utenti registrati n
 Si accederà quindi alla pagina di ricerca, dove, selezionando le abilità cercae, e premendo il pulsante Cerca, si otterrà la lista di utenti presenti nel database del sito.
 
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/3-ricerca-aiuto-nn-reg.png)
+
 Ovviamente, l’utente non registrato non potrà in alcun modo interagire con gli utenti ricercati, questo per invogliare l’utente a registrarsi.
 
 
@@ -59,17 +60,21 @@ Una volta terminate queste operazioni, premendo il tasto Invia, si eseguirà la
 
 ### Utente registrato
 Di seguito è spiegato come utilizzare le funzioni dell’utente registrato. Per comodità, è mostrata la pagina “Home” dell’utente registrato, che è la pagina a cui si viene indirizzati successivamente alla registrazione, o al Login al social network.
-![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/5-registrato.png)
+
+![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/5-registrato.png)<br>
 
 #### Login
 Per accedere al sito come utente registrato, si dovrà ovviamente eseguire un login, direttamente dalla pagina principale. Una volta inserite le credenziali, basterà premere il pulsante Login, per effettuare l’accesso al social network, e accedere così alla Home dell’utente registrato.
+
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/6-login.png)
 
 #### Ricerca Utenti
 La funzione Ricerca Utenti è accessibile premendo il pulsante Ricerca Utenti, visibile in qualsiasi pagina del sito. Una volta cliccato su questo pulsante, si verrà indirizzati alla pagina di Ricerca Utente, dove compilando i campi di testo nome e/o cognome, e premendo il pulsante Cerca si potrà accedere ai risultati della ricerca.
+
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/7-ricerca-utenti.png)
 
 Una volta visualizzati i risultati della ricerca, cliccando sull’Email dell’utente in questione, si potrà accedere alla pagina del suo profilo.
+
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/8-dettaglio-altro-utente.png)
 
 
@@ -131,6 +136,7 @@ Dalla pagina “Modifica profilo” l’utente può cambiare la sua foto del pr
 Le modifiche sono rese effettive appena premuto il pulsante “Invia”.
 #### Visualizza feedback
 Selezionando dal menù la voce “Visualizza feedback”, è possibile visionare l’elenco di tutti i feedback che sono stati rilasciati dagli utenti con cui si è collaborato. Come si può vedere dalla figura sottostante, per ogni feedback è possibile vedere: il nome della collaborazione a cui è riferito, il nome della persona con cui si è collaborato (e che ha rilasciato il feedback), il punteggio del feedback e il commento (opzionale).
+
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/18-lista-feedback.png)
 
 
