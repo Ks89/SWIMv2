@@ -134,16 +134,17 @@ Il sistema permette all’utente di modificare le proprie informazioni personali
 
 Dalla pagina “Modifica profilo” l’utente può cambiare la sua foto del profilo, o aggiungere delle abilità, selezionandole dall’insieme generale delle abilità.
 Le modifiche sono rese effettive appena premuto il pulsante “Invia”.
+
 #### Visualizza feedback
 Selezionando dal menù la voce “Visualizza feedback”, è possibile visionare l’elenco di tutti i feedback che sono stati rilasciati dagli utenti con cui si è collaborato. Come si può vedere dalla figura sottostante, per ogni feedback è possibile vedere: il nome della collaborazione a cui è riferito, il nome della persona con cui si è collaborato (e che ha rilasciato il feedback), il punteggio del feedback e il commento (opzionale).
 
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/18-lista-feedback.png)
 
 
-
 ### Amministratore
 Il team di sviluppo ha scelto una suddivisione netta delle funzionalità tra amministratore e utente. Infatti, l’amministratore, se vuole usufruire delle normali funzionalità del sistema, dovrebbe registrarsi a sua volta come utente.
 Di seguito viene spiegato come utilizzare le funzionalità del sistema dedicate all’amministratore.
+
 #### Login
 Come specificato sopra, la parte dedicata all’amministratore è separata da quella dedicata agli utenti. Proprio per rispettare questa scelta, la pagina di login dell’amministratore la si può trovare tramite il link http://localhost:8080/SWIMv2_WEB/admin.
 Una volta su questa pagina, basta inserire l’indirizzo email dell’amministratore (default: admin@swim.it) e la password (default: pippo).
@@ -159,7 +160,7 @@ Selezionando dal menù la voce “Aggiungi abilita”, avverrà il redirect nel
 
 Da questa pagina c'è la possibilità di aggiungere abilità all’insieme generale delle abilità. Molto semplicemente basta scrivere nell’apposito spazio il nome dell’abilità, mentre nello spazio sottostante una breve descrizione (massimo 300 caratteri) di quello che l’abilità rappresenta.
 
-####Visualizza abilità proposte
+#### Visualizza abilità proposte
 L’altra voce del menu amministratore, permette di visionare tutte le abilità che gli utenti hanno proposto di aggiungere al all’insieme generale delle abilità.
 
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/21-proposte-abilita.png)
