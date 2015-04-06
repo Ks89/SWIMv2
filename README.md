@@ -12,7 +12,7 @@ Vedere la procedura [QUI](https://github.com/Ks89/SWIMv2/blob/master/README_inst
 
 ## Funzionalità
 Le funzioni principali del prodotto si distinguono in base al tipo di utilizzatore: Utente, Visitatore e Amministratore.
-####Utenti
+#### Utenti
 * Devono
   * Scegliere almeno un’abilità da inserire nel proprio insieme personale, durante la registrazione.
 * Possono
@@ -25,11 +25,11 @@ Le funzioni principali del prodotto si distinguono in base al tipo di utilizzato
   * Modificare il proprio profilo.
   * Proporre all’amministratore l’aggiunta di nuovi elementi all’insieme generale delle abilità. In caso di approvazione, le modifiche saranno disponibili a tutti gli utenti del social network.
 
-####Visitatori
+#### Visitatori
 * Possono utilizzare la funzione di ricerca per i visitatori, per trovare gli utenti in base alle abilità richieste, con la limitazione di non potere accedere alle informazioni personali.
 * Possono registrarsi al sistema.
 
-####Amministratore
+#### Amministratore
 * Deve definire l’insieme delle abilità degli utenti al momento della registrazione.
 
 Può confermare/rifiutare le proposte di aggiunta all’insieme generale delle abilità
@@ -95,7 +95,7 @@ La funzione Ricerca Aiuto è accessibile premendo il pulsante Ricerca Utenti, v
 
 Esattamente come nella ricerca utenti, sarà sufficiente cliccare sull’email dell’utente a cui si vuole richiedere aiuto, per andare nella pagina del profilo di quell’utente.
 
-#### Visualizzare e gestire le collaborazioni richieste
+#### Visualizzazione e gestione delle collaborazioni richieste
 La funzione di gestione delle collaborazioni richieste è accessibile premendo il pulsate visualizza collaborazioni, visualizzabile in qualunque parte del sito. Una volta premuto il tasto si verrà reindirizzati alla pagina dove si ha accesso a tutte le collaborazioni. Se ne esistono alcune, ci saranno: la lista delle collaborazioni da terminare, delle collaborazioni terminate in cui possiamo inserire un feedback ed uno storico di tutte le altre collaborazioni.
 
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/12-collaborazioni.png)
@@ -104,7 +104,7 @@ Per terminare una collaborazione, basterà premere il pulsante termina presente
 
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/13-dettaglio-collaborazione.png)
 
-#### Visualizzare le richieste di aiuto o amicizia di altri utenti
+#### Visualizzazione delle richieste di aiuto o amicizia di altri utenti
 
 Per accedere a queste funzionalità, basterà premere il pulsante Visualizza Notifiche, visualizzabile in qualunque parte del social network. Qui potremo confermare o rifiutare, richieste di aiuto e di amicizia che gli altri utenti ci hanno fatto.
 Selezionando il Nome della collaborazione, o il Nome dell’utente che sta richiedendo l’amicizia, si arriverà in una pagina con una piccola descrizione della collaborazione o dell’utente, e premendo sul pulsante Conferma o Rifiuta, si risponderà appunto a tali richieste.
@@ -112,14 +112,14 @@ Selezionando il Nome della collaborazione, o il Nome dell’utente che sta richi
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/14-richieste-aiuto.png)
 
 
-#### Visualizzare le risposte degli utenti alle tue richieste
+#### Visualizzazione delle risposte degli utenti alle proprie richieste
 In caso di conferma di un’amicizia, e di rifiuto o conferma di una collaborazione da parte di un utente, comparirà un collegamento nella tua homepage dove si potranno visualizzare appunto queste notifiche, e in caso di amicizia diretta, si potranno visualizzare i suggerimenti di amicizia che il social network ti propone.
 
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/15-risposte-utenti.png)
 
 Le notifiche di risposta saranno visualizzate solamente una volta, e da qui potrai accedere alla funzionalità di suggerimento di amicizia. Come si può notareì è presente una tabella chiamata Suggerimenti di amicizia, con in una colonna l’amico che hai appena acquisito (DIRETTAMENTE) e una con un utente che è amico di questo utente e non tuo, e al quale ovviamente non hai già richiesto una amicizia. Per richiedere l’amicizia a uno o più utenti presenti in questa tabella, basterà selezionare gli utenti a cui si vuole richiedere l’amicizia (attraverso la checkbox nella prima colonna della tabella) e premere il pulsante richiedi amicizia. E’ possibile anche che un utente respinga la tua richiesta di aiuto. In tal caso, sarà segnalato dall’apposito messaggio all’inizio della pagina (con sfondo blu).
 
-#### Proponi abilità
+#### Proposta abilità
 Nel caso in cui l’utente avesse una abilità che non è presente nell’insieme generale delle abilità, il sistema mette a disposizione una funzionalità che permette di inviare una richiesta all’amministratore.
 Selezionando dal menu la voce “Proponi nuove abilità”, si presenterà all’utente una pagina con due aree d’inserimento testo: una per indicare il nome dell’abilità e l’altra dove specificare il motivo per il quale si vuole che venga aggiunta. Una volta premuto il pulsante invia, la richiesta sarà inoltrata all’amministratore che deciderà se confermare o rifiutare la richiesta.
 
@@ -135,7 +135,7 @@ Il sistema permette all’utente di modificare le proprie informazioni personali
 Dalla pagina “Modifica profilo” l’utente può cambiare la sua foto del profilo, o aggiungere delle abilità, selezionandole dall’insieme generale delle abilità.
 Le modifiche sono rese effettive appena premuto il pulsante “Invia”.
 
-#### Visualizza feedback
+#### Visualizzazione feedback
 Selezionando dal menù la voce “Visualizza feedback”, è possibile visionare l’elenco di tutti i feedback che sono stati rilasciati dagli utenti con cui si è collaborato. Come si può vedere dalla figura sottostante, per ogni feedback è possibile vedere: il nome della collaborazione a cui è riferito, il nome della persona con cui si è collaborato (e che ha rilasciato il feedback), il punteggio del feedback e il commento (opzionale).
 
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/18-lista-feedback.png)
@@ -153,14 +153,14 @@ Una volta su questa pagina, basta inserire l’indirizzo email dell’amministra
 
 Una volta effettuato il login, avverrà il redirect nella home page. La pagina home si presenta con un menù dal quale si può accedere a tutte le funzionalità dell’amministratore.
 
-#### Aggiungi abilita
+#### Aggiunta abilita
 Selezionando dal menù la voce “Aggiungi abilita”, avverrà il redirect nella seguente pagina:
 
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/20-inserisci-abilita.png)
 
 Da questa pagina c'è la possibilità di aggiungere abilità all’insieme generale delle abilità. Molto semplicemente basta scrivere nell’apposito spazio il nome dell’abilità, mentre nello spazio sottostante una breve descrizione (massimo 300 caratteri) di quello che l’abilità rappresenta.
 
-#### Visualizza abilità proposte
+#### Visualizzazione abilità proposte
 L’altra voce del menu amministratore, permette di visionare tutte le abilità che gli utenti hanno proposto di aggiungere al all’insieme generale delle abilità.
 
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/21-proposte-abilita.png)
