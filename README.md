@@ -1,8 +1,8 @@
-# SWIMv2: Small World Hypothesis Machine v2
+# SWIMv2
 
 ![alt tag](http://www.stefanocappa.it/publicfiles/Github_repositories_images/Swimv2/0-header.png)
 
-Il progetto consiste in un social network (chiamato SWIMv2) che permette di cercare e/o offrire aiuto per svolgere specifici lavori.
+Il progetto consiste in un social network (chiamato SWIMv2 o Small World Hypothesis Machine v2) che permette di cercare e/o offrire aiuto per svolgere specifici lavori.
 
 ## News
 - *04/05/2015* - **SWIM v2** 1.0 Public release
