@@ -5,7 +5,7 @@
 Il progetto consiste in un social network (chiamato SWIMv2 o Small World Hypothesis Machine v2) che permette di cercare e/o offrire aiuto per svolgere specifici lavori.
 
 ## News
-- *04/05/2015* - **SWIM v2** 1.0 Public release
+- *04/05/2015* - **SWIM v2** 1.0 - Public release [DOWNLOAD HERE](https://github.com/Ks89/SWIMv2/releases/tag/v1.0)
 
 ## Installazione e configurazione
 Vedere la procedura [QUI](https://github.com/Ks89/SWIMv2/blob/master/README_install.md)
